@@ -1,0 +1,987 @@
+﻿@model RBHU_DbServices.ViewModel.ProductViewModel
+@{
+    ViewData["Title"] = "Edit Product";
+    Layout = "";
+}
+
+<link rel="icon" type="image/x-icon" href="~/images/as_logo.png">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+<div class="edit-product-container">
+    <!-- Header Section -->
+    <div class="page-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="mb-1"><i class="fas fa-edit me-2"></i>Edit Product</h4>
+                <p class="text-muted mb-0 small">Update product information below</p>
+            </div>
+            <div class="d-flex gap-2">
+                <a href="@Url.Action("Details", "Product", new { id = Model.Id })" class="btn btn-sm btn-outline-info">
+                    <i class="fas fa-eye me-1"></i><span class="btn-text">View</span>
+                </a>
+                <a href="@Url.Action("Index", "Product")" class="btn btn-sm btn-outline-secondary">
+                    <i class="fas fa-list me-1"></i><span class="btn-text">Products</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Info Card -->
+    <div class="product-info-card">
+        <div class="d-flex align-items-center">
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <img src="@Model.ImageUrl" alt="@Model.Name" class="product-info-thumb" />
+            }
+            else
+            {
+                <div class="product-info-thumb-placeholder">
+                    <i class="fas fa-image"></i>
+                </div>
+            }
+            <div class="ms-3 flex-grow-1">
+                <h5 class="mb-1">@Model.Name</h5>
+                <div class="product-meta">
+                    <span class="badge bg-light text-dark">ID: @Model.Id</span>
+                    <span class="text-muted ms-2">Created: @Model.CreatedAt.ToString("dd MMM yyyy")</span>
+                    <span class="text-muted ms-2 d-none d-md-inline">Price: ₹@Model.Price.ToString("N0")</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Container -->
+    <div id="alertContainer" class="alert-container" style="display: none;">
+        <div class="alert alert-dismissible fade show" role="alert" id="alertMessage">
+            <span id="alertText"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Main Form Card -->
+    <div class="form-card">
+        <div class="form-card-header">
+            <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Product Information</h5>
+        </div>
+        <div class="form-card-body">
+            <input type="hidden" id="editProductId" value="@Model.Id" />
+            <input type="hidden" id="editCurrentImageUrl" value="@Model.ImageUrl" />
+            <input type="hidden" id="editCreatedAt" value="@Model.CreatedAt" />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="editProductName" class="form-label">
+                            Product Name <span class="required">*</span>
+                        </label>
+                        <input type="text" id="editProductName" class="form-control" value="@Model.Name" />
+                        <span class="error-message" id="editNameError"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="editCategory" class="form-label">
+                            Category <span class="required">*</span>
+                        </label>
+                        <select id="editCategory" class="form-select">
+                            <option value="">Select Category</option>
+                            @foreach (var category in Model.Categories)
+                            {
+                                <option value="@category.Id" selected="@(Model.CategoryId == category.Id ? "selected" : null)">
+                                    @category.Name
+                                </option>
+                            }
+                        </select>
+                        <span class="error-message" id="editCategoryError"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="editSubCategory1" class="form-label">SubCategory 1</label>
+                        <select id="editSubCategory1" class="form-select">
+                            <option value="">Select SubCategory 1</option>
+                            @foreach (var subCat in Model.SubCategories1)
+                            {
+                                <option value="@subCat.Id" selected="@(Model.SubCategory1Id == subCat.Id ? "selected" : null)">
+                                    @subCat.Name
+                                </option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="editSubCategory2" class="form-label">SubCategory 2</label>
+                        <select id="editSubCategory2" class="form-select">
+                            <option value="">Select SubCategory 2</option>
+                            @foreach (var subCat in Model.SubCategories2)
+                            {
+                                <option value="@subCat.Id" selected="@(Model.SubCategory2Id == subCat.Id ? "selected" : null)">
+                                    @subCat.Name
+                                </option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="editDescription" class="form-label">Description</label>
+                <textarea id="editDescription" class="form-control" rows="3">@Model.Description</textarea>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="editPrice" class="form-label">
+                            Regular Price <span class="required">*</span>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">₹</span>
+                            <input type="number" step="0.01" id="editPrice" class="form-control" value="@Model.Price" />
+                        </div>
+                        <span class="error-message" id="editPriceError"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="editOfferPrice" class="form-label">Offer Price</label>
+                        <div class="input-group">
+                            <span class="input-group-text">₹</span>
+                            <input type="number" step="0.01" id="editOfferPrice" class="form-control" value="@(Model.OfferPrice > 0 ? Model.OfferPrice : "")" />
+                        </div>
+                        <span class="error-message" id="editOfferPriceError"></span>
+                        <small class="form-text">Leave empty if no offer</small>
+                    </div>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <div class="form-group" id="currentImageContainer">
+                    <label class="form-label">Current Image</label>
+                    <div class="current-image-wrapper">
+                        <img id="currentImage" src="@Model.ImageUrl" alt="Current" class="current-image" />
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeCurrentImage()">
+                            <i class="fas fa-trash me-1"></i>Remove
+                        </button>
+                    </div>
+                </div>
+            }
+
+            <div class="form-group">
+                <label for="editImageFile" class="form-label">
+                    <span id="imageInputLabel">@(!string.IsNullOrEmpty(Model.ImageUrl) ? "Replace Image" : "Product Image")</span>
+                </label>
+                <input type="file" id="editImageFile" class="form-control" accept="image/*" />
+                <span class="error-message" id="editImageError"></span>
+                <small class="form-text">Supported: JPG, PNG, GIF. Max: 5MB</small>
+            </div>
+
+            <div class="form-group" id="editImagePreviewContainer" style="display: none;">
+                <label class="form-label">New Image Preview</label>
+                <div class="image-preview-wrapper">
+                    <img id="editImagePreview" src="#" alt="Preview" class="image-preview" />
+                    <button type="button" class="btn btn-sm btn-outline-danger mt-2" onclick="removeNewImage()">
+                        <i class="fas fa-times me-1"></i>Remove Preview
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="form-card-footer">
+            <div class="d-flex justify-content-between">
+                <button type="button" class="btn btn-outline-secondary" onclick="resetEditForm()">
+                    <i class="fas fa-undo me-1"></i>Reset
+                </button>
+                <button type="button" class="btn btn-warning" onclick="updateProduct()" id="btnUpdate">
+                    <i class="fas fa-save me-1"></i>Update Product
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    let editEncodedImageData = null;
+    let originalEditData = {};
+    let imageRemoved = false;
+
+    // Theme Management
+    function initTheme() {
+        const savedTheme = localStorage.getItem('adminTheme') || 'light';
+        applyTheme(savedTheme);
+    }
+
+    function applyTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+    }
+
+    $(document).ready(function () {
+        initTheme();
+
+        // Listen for theme changes from parent dashboard
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'THEME_CHANGE') {
+                applyTheme(event.data.theme);
+            }
+        });
+
+        storeOriginalData();
+
+        $('#editPrice, #editOfferPrice').on('input', function () {
+            validateEditPrices();
+        });
+
+        $('#editImageFile').on('change', function () {
+            handleEditImageUpload(this);
+        });
+
+        $('#editCategory').on('change', function () {
+            var categoryId = $(this).val();
+            if (categoryId) {
+                loadEditSubCategories1(categoryId);
+            } else {
+                $('#editSubCategory1').html('<option value="">Select SubCategory 1</option>');
+                $('#editSubCategory2').html('<option value="">Select SubCategory 2</option>');
+            }
+        });
+
+        $('#editSubCategory1').on('change', function () {
+            var subCategory1Id = $(this).val();
+            if (subCategory1Id) {
+                loadEditSubCategories2(subCategory1Id);
+            } else {
+                $('#editSubCategory2').html('<option value="">Select SubCategory 2</option>');
+            }
+        });
+    });
+
+    function storeOriginalData() {
+        originalEditData = {
+            id: $('#editProductId').val(),
+            name: $('#editProductName').val(),
+            description: $('#editDescription').val(),
+            price: $('#editPrice').val(),
+            offerPrice: $('#editOfferPrice').val(),
+            categoryId: $('#editCategory').val(),
+            subCategory1Id: $('#editSubCategory1').val(),
+            subCategory2Id: $('#editSubCategory2').val(),
+            imageUrl: $('#editCurrentImageUrl').val()
+        };
+    }
+
+    function loadEditSubCategories1(categoryId) {
+        $.ajax({
+            url: '@Url.Action("GetSubCategories1", "Product")',
+            type: 'GET',
+            data: { categoryId: categoryId },
+            success: function (response) {
+                var currentValue = originalEditData.subCategory1Id;
+                var options = '<option value="">Select SubCategory 1</option>';
+                if (response.success && response.data && response.data.length > 0) {
+                    response.data.forEach(function (item) {
+                        var selected = (item.id == currentValue) ? 'selected' : '';
+                        options += '<option value="' + item.id + '" ' + selected + '>' + item.name + '</option>';
+                    });
+                }
+                $('#editSubCategory1').html(options);
+
+                if (currentValue) {
+                    loadEditSubCategories2(currentValue);
+                } else {
+                    $('#editSubCategory2').html('<option value="">Select SubCategory 2</option>');
+                }
+            }
+        });
+    }
+
+    function loadEditSubCategories2(subCategory1Id) {
+        $.ajax({
+            url: '@Url.Action("GetSubCategories2", "Product")',
+            type: 'GET',
+            data: { subCategory1Id: subCategory1Id },
+            success: function (response) {
+                var currentValue = originalEditData.subCategory2Id;
+                var options = '<option value="">Select SubCategory 2</option>';
+                if (response.success && response.data && response.data.length > 0) {
+                    response.data.forEach(function (item) {
+                        var selected = (item.id == currentValue) ? 'selected' : '';
+                        options += '<option value="' + item.id + '" ' + selected + '>' + item.name + '</option>';
+                    });
+                }
+                $('#editSubCategory2').html(options);
+            }
+        });
+    }
+
+    function handleEditImageUpload(element) {
+        const file = element.files[0];
+        if (file) {
+            if (file.size > 5 * 1024 * 1024) {
+                showAlert('File size should not exceed 5MB', 'danger');
+                element.value = '';
+                $('#editImagePreviewContainer').hide();
+                editEncodedImageData = null;
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function () {
+                editEncodedImageData = reader.result;
+                $('#editImagePreview').attr('src', editEncodedImageData);
+                $('#editImagePreviewContainer').show();
+                $('#currentImageContainer').hide();
+            }
+            reader.readAsDataURL(file);
+        } else {
+            $('#editImagePreviewContainer').hide();
+            editEncodedImageData = null;
+            if (originalEditData.imageUrl && !imageRemoved) {
+                $('#currentImageContainer').show();
+            }
+        }
+    }
+
+    function removeCurrentImage() {
+        if (confirm('Are you sure you want to remove the current image?')) {
+            $('#currentImageContainer').hide();
+            $('#editCurrentImageUrl').val('');
+            $('#imageInputLabel').text('Product Image');
+            imageRemoved = true;
+        }
+    }
+
+    function removeNewImage() {
+        $('#editImageFile').val('');
+        $('#editImagePreviewContainer').hide();
+        editEncodedImageData = null;
+        if (originalEditData.imageUrl && !imageRemoved) {
+            $('#currentImageContainer').show();
+        }
+    }
+
+    function updateProduct() {
+        if (!validateEditForm()) {
+            return;
+        }
+
+        const updateBtn = $('#btnUpdate');
+        const originalText = updateBtn.html();
+        updateBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-1"></i>Updating...');
+
+        const productData = {
+            Id: parseInt($('#editProductId').val()),
+            Name: $('#editProductName').val().trim(),
+            Description: $('#editDescription').val().trim(),
+            Price: parseFloat($('#editPrice').val()) || 0,
+            OfferPrice: parseFloat($('#editOfferPrice').val()) || null,
+            CategoryId: parseInt($('#editCategory').val()),
+            SubCategory1Id: parseInt($('#editSubCategory1').val()) || 0,
+            SubCategory2Id: parseInt($('#editSubCategory2').val()) || 0,
+            ImageUrl: imageRemoved ? '' : $('#editCurrentImageUrl').val(),
+            ImageData: editEncodedImageData
+        };
+
+        $.ajax({
+            url: '@Url.Action("UpdateProduct", "Product")',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(productData),
+            success: function (response) {
+                updateBtn.prop('disabled', false).html(originalText);
+                if (response.success) {
+                    showAlert('Product updated successfully!', 'success');
+                    setTimeout(function () {
+                        window.location.href = '@Url.Action("Index", "Product")';
+                    }, 1500);
+                } else {
+                    showAlert(response.message || 'Error occurred while updating the product.', 'danger');
+                }
+            },
+            error: function (xhr, status, error) {
+                updateBtn.prop('disabled', false).html(originalText);
+                showAlert('An error occurred while updating the product.', 'danger');
+            }
+        });
+    }
+
+    function validateEditForm() {
+        let isValid = true;
+        clearEditErrors();
+
+        if (!$('#editProductName').val().trim()) {
+            showEditFieldError('editNameError', 'Product name is required');
+            $('#editProductName').addClass('is-invalid');
+            isValid = false;
+        }
+
+        if (!$('#editCategory').val()) {
+            showEditFieldError('editCategoryError', 'Please select a category');
+            $('#editCategory').addClass('is-invalid');
+            isValid = false;
+        }
+
+        const price = parseFloat($('#editPrice').val());
+        if (!price || price <= 0) {
+            showEditFieldError('editPriceError', 'Please enter a valid price');
+            $('#editPrice').addClass('is-invalid');
+            isValid = false;
+        }
+
+        if (!validateEditPrices()) {
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    function validateEditPrices() {
+        const price = parseFloat($('#editPrice').val()) || 0;
+        const offerPrice = parseFloat($('#editOfferPrice').val()) || 0;
+
+        if (offerPrice > 0 && offerPrice >= price) {
+            showEditFieldError('editOfferPriceError', 'Offer price must be less than regular price');
+            $('#editOfferPrice').addClass('is-invalid');
+            return false;
+        } else {
+            $('#editOfferPriceError').text('');
+            $('#editOfferPrice').removeClass('is-invalid');
+            return true;
+        }
+    }
+
+    function showEditFieldError(fieldId, message) {
+        $('#' + fieldId).text(message);
+    }
+
+    function clearEditErrors() {
+        $('.error-message').text('');
+        $('.form-control, .form-select').removeClass('is-invalid');
+    }
+
+    function showAlert(message, type) {
+        $('#alertText').text(message);
+        $('#alertMessage').removeClass('alert-success alert-danger alert-info alert-warning').addClass('alert-' + type);
+        $('#alertContainer').show();
+        setTimeout(function () {
+            $('#alertContainer').fadeOut('slow');
+        }, 5000);
+    }
+
+    function resetEditForm() {
+        if (originalEditData.id) {
+            $('#editProductName').val(originalEditData.name);
+            $('#editDescription').val(originalEditData.description);
+            $('#editPrice').val(originalEditData.price);
+            $('#editOfferPrice').val(originalEditData.offerPrice || '');
+            $('#editCategory').val(originalEditData.categoryId);
+            $('#editSubCategory1').val(originalEditData.subCategory1Id);
+            $('#editSubCategory2').val(originalEditData.subCategory2Id);
+            $('#editImageFile').val('');
+            $('#editImagePreviewContainer').hide();
+            editEncodedImageData = null;
+            imageRemoved = false;
+
+            if (originalEditData.imageUrl) {
+                $('#currentImage').attr('src', originalEditData.imageUrl);
+                $('#currentImageContainer').show();
+                $('#editCurrentImageUrl').val(originalEditData.imageUrl);
+                $('#imageInputLabel').text('Replace Image');
+            } else {
+                $('#currentImageContainer').hide();
+                $('#imageInputLabel').text('Product Image');
+            }
+            clearEditErrors();
+        }
+    }
+</script>
+
+<style>
+    :root {
+        --bg-primary: #f5f7fa;
+        --bg-secondary: #ffffff;
+        --bg-tertiary: #f8fafc;
+        --text-primary: #2d3748;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border-color: #e2e8f0;
+        --border-light: #f1f5f9;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --transition: all 0.3s ease;
+    }
+
+    [data-theme="dark"] {
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --bg-tertiary: #334155;
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --text-muted: #94a3b8;
+        --border-color: #334155;
+        --border-light: #475569;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+    }
+
+    .edit-product-container {
+        padding: 24px;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .page-header {
+        background: var(--bg-secondary);
+        padding: 24px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        margin-bottom: 16px;
+    }
+
+    .page-header h4 {
+        color: var(--text-primary);
+        font-weight: 700;
+        font-size: 1.5rem;
+    }
+
+    .product-info-card {
+        background: var(--bg-secondary);
+        padding: 16px 20px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        margin-bottom: 16px;
+    }
+
+    .product-info-thumb {
+        width: 60px;
+        height: 60px;
+        border-radius: 8px;
+        object-fit: cover;
+        border: 1px solid var(--border-color);
+    }
+
+    .product-info-thumb-placeholder {
+        width: 60px;
+        height: 60px;
+        border-radius: 8px;
+        background: var(--bg-tertiary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+        font-size: 1.5rem;
+    }
+
+    .product-meta {
+        font-size: 0.85rem;
+    }
+
+    .product-meta .badge {
+        font-size: 0.75rem;
+        padding: 3px 8px;
+        background: var(--bg-tertiary) !important;
+        color: var(--text-primary) !important;
+        border: 1px solid var(--border-color);
+    }
+
+    .alert-container {
+        margin-bottom: 16px;
+    }
+
+    .alert {
+        border-radius: 8px;
+        border: none;
+        padding: 12px 16px;
+        font-size: 0.9rem;
+    }
+
+    .alert-success {
+        background: #d1fae5;
+        color: #065f46;
+    }
+
+    .alert-danger {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    [data-theme="dark"] .alert-success {
+        background: #064e3b;
+        color: #d1fae5;
+    }
+
+    [data-theme="dark"] .alert-danger {
+        background: #7f1d1d;
+        color: #fecaca;
+    }
+
+    [data-theme="dark"] .btn-close {
+        filter: invert(1);
+    }
+
+    .form-card {
+        background: var(--bg-secondary);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+    }
+
+    .form-card-header {
+        padding: 20px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .form-card-header h5 {
+        color: var(--text-primary);
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    .form-card-body {
+        padding: 24px;
+    }
+
+    .form-card-footer {
+        padding: 16px 24px;
+        background: var(--bg-tertiary);
+        border-top: 1px solid var(--border-color);
+        border-radius: 0 0 12px 12px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .required {
+        color: #ef4444;
+    }
+
+    .form-control,
+    .form-select {
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 0.9rem;
+        transition: var(--transition);
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #f59e0b;
+        box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        outline: none;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+
+    .form-control.is-invalid,
+    .form-select.is-invalid {
+        border-color: #ef4444;
+    }
+
+    .form-text {
+        display: block;
+        margin-top: 4px;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+    }
+
+    .error-message {
+        display: block;
+        margin-top: 4px;
+        font-size: 0.8rem;
+        color: #ef4444;
+    }
+
+    .input-group-text {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-color);
+        color: var(--text-secondary);
+        font-weight: 600;
+        border-radius: 8px 0 0 8px;
+    }
+
+    .input-group .form-control {
+        border-left: none;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .current-image-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .current-image {
+        max-width: 120px;
+        max-height: 120px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+    }
+
+    .image-preview-wrapper {
+        text-align: center;
+    }
+
+    .image-preview {
+        max-width: 100%;
+        max-height: 200px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+    }
+
+    .btn {
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 0.9rem;
+        padding: 10px 20px;
+        transition: var(--transition);
+        border: none;
+    }
+
+    .btn-sm {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+
+    .btn-warning {
+        background: #f59e0b;
+        color: white;
+    }
+
+    .btn-warning:hover {
+        background: #d97706;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+
+    .btn-outline-secondary {
+        background: var(--bg-secondary);
+        color: var(--text-secondary);
+        border: 1px solid var(--border-color);
+    }
+
+    .btn-outline-secondary:hover {
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+        border-color: var(--text-muted);
+    }
+
+    .btn-outline-info {
+        background: var(--bg-secondary);
+        color: #06b6d4;
+        border: 1px solid #06b6d4;
+    }
+
+    .btn-outline-info:hover {
+        background: #06b6d4;
+        color: white;
+    }
+
+    .btn-outline-danger {
+        background: var(--bg-secondary);
+        color: #ef4444;
+        border: 1px solid #ef4444;
+    }
+
+    .btn-outline-danger:hover {
+        background: #ef4444;
+        color: white;
+    }
+
+    .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .text-muted {
+        color: var(--text-muted) !important;
+    }
+
+    /* Responsive - Matching Dashboard Style */
+    @@media (max-width: 768px) {
+        .edit-product-container {
+            padding: 16px 12px;
+        }
+
+        .page-header {
+            padding: 16px;
+        }
+
+        .page-header h4 {
+            font-size: 1.2rem;
+        }
+
+        .page-header h4 i {
+            display: none;
+        }
+
+        .page-header p {
+            font-size: 0.8rem;
+        }
+
+        .btn-text {
+            display: none;
+        }
+
+        .btn-sm {
+            padding: 6px 10px;
+        }
+
+        .product-info-card {
+            padding: 12px 16px;
+        }
+
+        .product-info-thumb,
+        .product-info-thumb-placeholder {
+            width: 50px;
+            height: 50px;
+        }
+
+        .product-meta {
+            font-size: 0.8rem;
+        }
+
+        .form-card-body {
+            padding: 16px;
+        }
+
+        .form-card-footer {
+            padding: 12px 16px;
+        }
+
+        .form-label {
+            font-size: 0.85rem;
+        }
+
+        .form-control,
+        .form-select {
+            font-size: 0.85rem;
+            padding: 8px 12px;
+        }
+
+        .current-image {
+            max-width: 100px;
+            max-height: 100px;
+        }
+
+        .image-preview {
+            max-height: 150px;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .edit-product-container {
+            padding: 12px;
+        }
+
+        .page-header {
+            padding: 12px;
+        }
+
+        .page-header h4 {
+            font-size: 1.1rem;
+        }
+
+        .page-header p {
+            display: none;
+        }
+
+        .product-info-card {
+            padding: 10px 12px;
+        }
+
+        .product-info-card h5 {
+            font-size: 1rem;
+        }
+
+        .product-info-thumb,
+        .product-info-thumb-placeholder {
+            width: 44px;
+            height: 44px;
+        }
+
+        .product-meta span {
+            display: block;
+            margin: 2px 0;
+        }
+
+        .product-meta .badge {
+            display: inline-block;
+            margin: 2px 0;
+        }
+
+        .form-card-header {
+            padding: 16px;
+        }
+
+        .form-card-header h5 {
+            font-size: 1rem;
+        }
+
+        .form-card-body {
+            padding: 12px;
+        }
+
+        .form-card-footer {
+            padding: 10px 12px;
+        }
+
+        .btn {
+            font-size: 0.85rem;
+            padding: 8px 14px;
+        }
+
+        .btn-sm {
+            font-size: 0.8rem;
+            padding: 6px 12px;
+        }
+    }
+
+    .fa-spin {
+        animation: fa-spin 1s infinite linear;
+    }
+
+    @@keyframes fa-spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+        }
+</style>

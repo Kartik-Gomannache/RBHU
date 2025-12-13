@@ -1,0 +1,1303 @@
+﻿@model List<RBHU_DbServices.Models.Email>
+@{
+    ViewData["Title"] = "Customer Emails";
+    Layout = "";
+}
+
+<link rel="icon" type="image/x-icon" href="~/images/as_logo.png">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+<div class="email-container">
+    <!-- Header Section -->
+    <div class="email-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="mb-1"><i class="fas fa-envelope me-2"></i>Customer Inquiries</h4>
+                <p class="text-muted mb-0 small">Manage and respond to customer messages</p>
+            </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-outline-secondary" onclick="showStats()">
+                    <i class="fas fa-chart-bar me-1"></i><span class="btn-text">Statistics</span>
+                </button>
+                <button class="btn btn-sm btn-primary" onclick="refreshData()">
+                    <i class="fas fa-sync-alt me-1" id="refreshIcon"></i><span class="btn-text">Refresh</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Cards (Collapsible) -->
+    <div id="statsPanel" class="stats-panel" style="display: none;">
+        <div class="row g-3 mb-4">
+            <div class="col-lg-3 col-md-6 col-6">
+                <div class="stat-card">
+                    <div class="stat-icon bg-primary-light">
+                        <i class="fas fa-envelope text-primary"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number" id="statTotal">@Model.Count()</h3>
+                        <p class="stat-label">Total Emails</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-6">
+                <div class="stat-card">
+                    <div class="stat-icon bg-success-light">
+                        <i class="fas fa-check-circle text-success"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number" id="statContactForms">@Model.Count(e => e.IsContactForm)</h3>
+                        <p class="stat-label">Contact Forms</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-6">
+                <div class="stat-card">
+                    <div class="stat-icon bg-warning-light">
+                        <i class="fas fa-bell text-warning"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number" id="statUnread">@Model.Count(e => e.Unread)</h3>
+                        <p class="stat-label">Unread Messages</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-6">
+                <div class="stat-card">
+                    <div class="stat-icon bg-info-light">
+                        <i class="fas fa-clock text-info"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number" id="statSyncTime">--:--</h3>
+                        <p class="stat-label">Last Updated</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <div class="row g-2">
+            <div class="col-lg-6 col-md-12 col-12">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input id="searchBox" class="form-control" placeholder="Search by name, email, company, phone..." />
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-6">
+                <select id="filterStatus" class="form-select">
+                    <option value="">All Status</option>
+                    <option value="unread">Unread Only</option>
+                    <option value="attachments">With Attachments</option>
+                    <option value="contact-forms">Contact Forms Only</option>
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-6 col-6">
+                <select id="filterDate" class="form-select">
+                    <option value="">All Time</option>
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Email Table -->
+    <div class="table-container">
+        <table id="emailsTable" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Contact Info</th>
+                    <th>Company Details</th>
+                    <th>Phone</th>
+                    <th>Received</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var email in Model)
+                {
+                    <tr id="email-row-@email.Id" class="@(email.Unread ? "row-unread" : "")">
+                        <td>
+                            <div class="contact-info">
+                                <div class="contact-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <div class="contact-name">@email.FromName</div>
+                                    <div class="contact-email">@email.FromEmail</div>
+                                    <div class="contact-subject">@email.Subject</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(email.Company))
+                            {
+                                <div class="company-name">@email.Company</div>
+                            }
+                            @if (!string.IsNullOrEmpty(email.GstNumber))
+                            {
+                                <div class="gst-number">GST: @email.GstNumber</div>
+                            }
+                            @if (string.IsNullOrEmpty(email.Company) && string.IsNullOrEmpty(email.GstNumber))
+                            {
+                                <span class="text-muted">-</span>
+                            }
+                        </td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(email.Phone))
+                            {
+                                <div class="phone-number">
+                                    <i class="fas fa-phone me-1"></i>@email.Phone
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="text-muted">-</span>
+                            }
+                        </td>
+                        <td>
+                            <div class="date-time">
+                                <div class="date">@email.ReceivedUtc.ToString("MMM dd, yyyy")</div>
+                                <div class="time">@email.ReceivedUtc.ToString("HH:mm")</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="status-badges">
+                                @if (email.Unread)
+                                {
+                                    <span class="badge badge-unread">
+                                        <i class="fas fa-circle"></i> Unread
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-read">
+                                        <i class="fas fa-check"></i> Read
+                                    </span>
+                                }
+
+                                @if (email.IsContactForm)
+                                {
+                                    <span class="badge badge-contact">
+                                        <i class="fas fa-wpforms"></i> Contact
+                                    </span>
+                                }
+
+                                @if (email.HasAttachments)
+                                {
+                                    <span class="badge badge-attachment">
+                                        <i class="fas fa-paperclip"></i>
+                                    </span>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-action btn-view" onclick="viewEmail(@email.Id)" title="View Details">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-action btn-reply" onclick="replyToEmail('@email.FromEmail', '@email.Subject')" title="Reply">
+                                    <i class="fas fa-reply"></i>
+                                </button>
+                                @if (email.Unread)
+                                {
+                                    <button class="btn-action btn-mark-read" onclick="markAsRead(@email.Id)" title="Mark as Read">
+                                        <i class="fas fa-check-circle"></i>
+                                    </button>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Detail Offcanvas -->
+    <div class="offcanvas offcanvas-end email-detail-offcanvas" tabindex="-1" id="detailPane">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">
+                <i class="fas fa-envelope-open me-2"></i>Email Details
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div id="emailDetail"></div>
+        </div>
+    </div>
+
+    <!-- Loading Modal -->
+    <div class="modal fade" id="loadingModal" tabindex="-1">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center py-4">
+                    <div class="spinner-border text-primary mb-3" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mb-0">Syncing emails...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+<script>
+    let table;
+
+    // Theme Management
+    function initTheme() {
+        const savedTheme = localStorage.getItem('adminTheme') || 'light';
+        applyTheme(savedTheme);
+    }
+
+    function applyTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+    }
+
+    $(document).ready(function () {
+        initTheme();
+
+        // Listen for theme changes from parent dashboard
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'THEME_CHANGE') {
+                applyTheme(event.data.theme);
+            }
+        });
+
+        table = $('#emailsTable').DataTable({
+            "order": [[3, "desc"]],
+            "pageLength": 25,
+            "responsive": true,
+            "columnDefs": [
+                { "orderable": false, "targets": [5] },
+                { "width": "30%", "targets": 0 },
+                { "width": "15%", "targets": 1 },
+                { "width": "12%", "targets": 2 },
+                { "width": "12%", "targets": 3 },
+                { "width": "15%", "targets": 4 },
+                { "width": "15%", "targets": 5 }
+            ],
+            "language": {
+                "emptyTable": "No customer emails found",
+                "info": "Showing _START_ to _END_ of _TOTAL_ emails",
+                "infoEmpty": "Showing 0 to 0 of 0 emails",
+                "search": "Search:"
+            }
+        });
+
+        $('#searchBox').on('keyup', function () {
+            table.search(this.value).draw();
+        });
+
+        $('#filterStatus').on('change', function () {
+            var filterValue = this.value;
+
+            if (filterValue === 'unread') {
+                table.columns(4).search('Unread').draw();
+            } else if (filterValue === 'attachments') {
+                table.columns(4).search('paperclip').draw();
+            } else if (filterValue === 'contact-forms') {
+                table.columns(4).search('Contact').draw();
+            } else {
+                table.columns(4).search('').draw();
+            }
+        });
+
+        updateStats();
+    });
+
+    function refreshData() {
+        $('#refreshIcon').addClass('fa-spin');
+        setTimeout(function () {
+            location.reload();
+        }, 1000);
+    }
+
+    function showStats() {
+        $('#statsPanel').slideToggle(300);
+        updateStats();
+    }
+
+    function updateStats() {
+        $('#statSyncTime').text(new Date().toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit'
+        }));
+    }
+
+    function replyToEmail(fromEmail, subject) {
+        var replySubject = subject.startsWith('Re: ') ? subject : 'Re: ' + subject;
+        var mailtoLink = `mailto:${fromEmail}?subject=${encodeURIComponent(replySubject)}`;
+        window.location.href = mailtoLink;
+    }
+
+    function viewEmail(emailId) {
+        loadEmailDetail(emailId);
+        var detailPane = new bootstrap.Offcanvas(document.getElementById('detailPane'));
+        detailPane.show();
+    }
+
+    function loadEmailDetail(emailId) {
+        var emailData = @Html.Raw(Json.Serialize(Model));
+        var email = emailData.find(e => e.id === emailId);
+
+        if (email) {
+            var detailHtml = `
+                    <div class="email-detail-content">
+                        <div class="detail-section">
+                            <div class="detail-label">From</div>
+                            <div class="detail-value">
+                                <div class="fw-bold">${email.fromName}</div>
+                                <div class="text-muted small">${email.fromEmail}</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-section">
+                            <div class="detail-label">Subject</div>
+                            <div class="detail-value">${email.subject}</div>
+                        </div>
+
+                        ${email.company ? `
+                            <div class="detail-section">
+                                <div class="detail-label">Company</div>
+                                <div class="detail-value">
+                                    <div>${email.company}</div>
+                                    ${email.gstNumber ? `<div class="text-muted small">GST: ${email.gstNumber}</div>` : ''}
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        ${email.phone ? `
+                            <div class="detail-section">
+                                <div class="detail-label">Phone</div>
+                                <div class="detail-value">
+                                    <a href="tel:${email.phone}" class="text-decoration-none">
+                                        <i class="fas fa-phone me-2"></i>${email.phone}
+                                    </a>
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <div class="detail-section">
+                            <div class="detail-label">Received</div>
+                            <div class="detail-value">${new Date(email.receivedUtc).toLocaleString()}</div>
+                        </div>
+
+                        <div class="detail-section">
+                            <div class="detail-label">Status</div>
+                            <div class="detail-value">
+                                ${email.unread ? '<span class="badge badge-unread">Unread</span>' : '<span class="badge badge-read">Read</span>'}
+                                ${email.isContactForm ? '<span class="badge badge-contact ms-1">Contact Form</span>' : ''}
+                                ${email.hasAttachments ? '<span class="badge badge-attachment ms-1"><i class="fas fa-paperclip"></i> Attachments</span>' : ''}
+                            </div>
+                        </div>
+
+                        ${email.message ? `
+                            <div class="detail-section">
+                                <div class="detail-label">Message</div>
+                                <div class="detail-message">
+                                    ${email.message.replace(/\n/g, '<br>')}
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        ${email.htmlBody ? `
+                            <div class="detail-section">
+                                <div class="detail-label">Email Content</div>
+                                <div class="detail-html-body">
+                                    ${email.htmlBody}
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <div class="detail-actions mt-4">
+                            <button class="btn btn-primary w-100 mb-2" onclick="replyToEmail('${email.fromEmail}', '${email.subject}')">
+                                <i class="fas fa-reply me-2"></i>Reply to Email
+                            </button>
+                            ${email.unread ? `
+                                <button class="btn btn-outline-secondary w-100" onclick="markAsRead(${email.id})">
+                                    <i class="fas fa-check-circle me-2"></i>Mark as Read
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+
+            $('#emailDetail').html(detailHtml);
+        }
+    }
+
+    function markAsRead(emailId) {
+        $.ajax({
+            url: '/Admin/MarkAsRead',
+            type: 'POST',
+            data: { id: emailId },
+            success: function (response) {
+                if (response.success) {
+                    let row = $(`#email-row-${emailId}`);
+
+                    row.removeClass('row-unread');
+
+                    row.find('.badge-unread')
+                        .removeClass('badge-unread')
+                        .addClass('badge-read')
+                        .html('<i class="fas fa-check"></i> Read');
+
+                    row.find('.btn-mark-read').remove();
+
+                    var unreadCount = parseInt($('#statUnread').text()) - 1;
+                    $('#statUnread').text(unreadCount);
+
+                    var detailPane = bootstrap.Offcanvas.getInstance(document.getElementById('detailPane'));
+                    if (detailPane) {
+                        detailPane.hide();
+                    }
+
+                    showToast('Email marked as read successfully', 'success');
+                } else {
+                    showToast('Failed to mark email as read', 'error');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error:", error);
+                showToast('An error occurred', 'error');
+            }
+        });
+    }
+
+    function showToast(message, type) {
+        const bgColor = type === 'success' ? '#10b981' : '#ef4444';
+        const icon = type === 'success' ? 'check-circle' : 'exclamation-circle';
+
+        const toast = $(`
+                <div class="custom-toast" style="background: ${bgColor}">
+                    <i class="fas fa-${icon} me-2"></i>${message}
+                </div>
+            `);
+
+        $('body').append(toast);
+
+        setTimeout(() => {
+            toast.addClass('show');
+        }, 100);
+
+        setTimeout(() => {
+            toast.removeClass('show');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+</script>
+
+<style>
+    :root {
+        --bg-primary: #f5f7fa;
+        --bg-secondary: #ffffff;
+        --bg-tertiary: #f8fafc;
+        --text-primary: #2d3748;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border-color: #e2e8f0;
+        --border-light: #f1f5f9;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --transition: all 0.3s ease;
+    }
+
+    [data-theme="dark"] {
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --bg-tertiary: #334155;
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --text-muted: #94a3b8;
+        --border-color: #334155;
+        --border-light: #475569;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+    }
+
+    .email-container {
+        padding: 24px;
+        max-width: 100%;
+    }
+
+    /* Header */
+    .email-header {
+        background: var(--bg-secondary);
+        padding: 24px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        margin-bottom: 20px;
+    }
+
+    .email-header h4 {
+        color: var(--text-primary);
+        font-weight: 700;
+        font-size: 1.5rem;
+    }
+
+    /* Stats Panel */
+    .stats-panel {
+        margin-bottom: 20px;
+    }
+
+    .stat-card {
+        background: var(--bg-secondary);
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transition: var(--transition);
+    }
+
+    .stat-card:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+    }
+
+    .stat-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .bg-primary-light {
+        background: #dbeafe;
+    }
+
+    .bg-success-light {
+        background: #d1fae5;
+    }
+
+    .bg-warning-light {
+        background: #fef3c7;
+    }
+
+    .bg-info-light {
+        background: #e0f2fe;
+    }
+
+    .stat-content {
+        flex: 1;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 4px;
+        line-height: 1;
+    }
+
+    .stat-label {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin: 0;
+    }
+
+    /* Filter Section */
+    .filter-section {
+        background: var(--bg-secondary);
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        margin-bottom: 20px;
+    }
+
+    .search-box {
+        position: relative;
+    }
+
+    .search-box i {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+    }
+
+    .search-box input {
+        padding-left: 40px;
+    }
+
+    .form-control,
+    .form-select {
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 0.9rem;
+        transition: var(--transition);
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+
+    /* Table Container */
+    .table-container {
+        background: var(--bg-secondary);
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+    }
+
+    #emailsTable {
+        width: 100% !important;
+    }
+
+    #emailsTable thead th {
+        background: var(--bg-tertiary);
+        color: var(--text-secondary);
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 16px 12px;
+        border-bottom: 2px solid var(--border-color);
+    }
+
+    #emailsTable tbody td {
+        padding: 16px 12px;
+        vertical-align: middle;
+        border-bottom: 1px solid var(--border-light);
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+
+    #emailsTable tbody tr {
+        transition: var(--transition);
+    }
+
+    #emailsTable tbody tr:hover {
+        background: var(--bg-tertiary) !important;
+    }
+
+    .row-unread {
+        background: #fef3c7 !important;
+    }
+
+    [data-theme="dark"] .row-unread {
+        background: #422006 !important;
+    }
+
+    .row-unread:hover {
+        background: #fde68a !important;
+    }
+
+    [data-theme="dark"] .row-unread:hover {
+        background: #713f12 !important;
+    }
+
+    /* Contact Info */
+    .contact-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .contact-avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+    }
+
+    .contact-details {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .contact-name {
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 0.95rem;
+        margin-bottom: 2px;
+    }
+
+    .contact-email {
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        margin-bottom: 4px;
+    }
+
+    .contact-subject {
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Company Info */
+    .company-name {
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 0.9rem;
+        margin-bottom: 4px;
+    }
+
+    .gst-number {
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+    }
+
+    /* Phone Number */
+    .phone-number {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    /* Date Time */
+    .date-time .date {
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 0.9rem;
+    }
+
+    .date-time .time {
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+    }
+
+    /* Status Badges */
+    .status-badges {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .badge {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        width: fit-content;
+    }
+
+    .badge i {
+        font-size: 0.7rem;
+    }
+
+    .badge-unread {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    .badge-read {
+        background: #d1fae5;
+        color: #059669;
+    }
+
+    .badge-contact {
+        background: #dbeafe;
+        color: #2563eb;
+    }
+
+    .badge-attachment {
+        background: #e0e7ff;
+        color: #6366f1;
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+        display: flex;
+        gap: 6px;
+    }
+
+    .btn-action {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        background: var(--bg-secondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--transition);
+        color: var(--text-secondary);
+    }
+
+    .btn-action:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .btn-view:hover {
+        background: #dbeafe;
+        border-color: #3b82f6;
+        color: #3b82f6;
+    }
+
+    .btn-reply:hover {
+        background: #d1fae5;
+        border-color: #10b981;
+        color: #10b981;
+    }
+
+    .btn-mark-read:hover {
+        background: #fef3c7;
+        border-color: #f59e0b;
+        color: #f59e0b;
+    }
+
+    /* Offcanvas */
+    .email-detail-offcanvas {
+        width: 600px !important;
+        background: var(--bg-secondary);
+    }
+
+    .offcanvas-header {
+        border-bottom: 1px solid var(--border-color);
+        padding: 20px 24px;
+        background: var(--bg-secondary);
+    }
+
+    .offcanvas-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .offcanvas-body {
+        padding: 24px;
+        background: var(--bg-secondary);
+    }
+
+    .btn-close {
+        filter: var(--text-primary);
+    }
+
+    [data-theme="dark"] .btn-close {
+        filter: invert(1);
+    }
+
+    /* Email Detail Content */
+    .email-detail-content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .detail-section {
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .detail-section:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .detail-label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+    }
+
+    .detail-value {
+        color: var(--text-primary);
+        font-size: 0.95rem;
+    }
+
+    .detail-message {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 16px;
+        line-height: 1.6;
+        color: var(--text-secondary);
+    }
+
+    .detail-html-body {
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 16px;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .detail-actions {
+        padding-top: 20px;
+        border-top: 1px solid var(--border-color);
+    }
+
+    /* Buttons */
+    .btn {
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 0.9rem;
+        transition: var(--transition);
+        border: none;
+    }
+
+    .btn-sm {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+
+    .btn-primary {
+        background: #3b82f6;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background: #2563eb;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-outline-secondary {
+        background: var(--bg-secondary);
+        color: var(--text-secondary);
+        border: 1px solid var(--border-color);
+    }
+
+    .btn-outline-secondary:hover {
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+        border-color: var(--text-muted);
+    }
+
+    /* Custom Toast */
+    .custom-toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 16px 24px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 500;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        z-index: 9999;
+        opacity: 0;
+        transform: translateX(400px);
+        transition: all 0.3s ease;
+    }
+
+    .custom-toast.show {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* DataTables Customization */
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_paginate {
+        padding: 12px 0;
+        color: var(--text-primary);
+    }
+
+    .dataTables_wrapper .dataTables_length select,
+    .dataTables_wrapper .dataTables_filter input {
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 6px 12px;
+        font-size: 0.9rem;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        padding: 6px 12px;
+        margin: 0 2px;
+        border-radius: 6px;
+        border: 1px solid var(--border-color);
+        background: var(--bg-secondary);
+        color: var(--text-secondary) !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background: var(--bg-tertiary) !important;
+        border-color: var(--text-muted) !important;
+        color: var(--text-primary) !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        background: #3b82f6 !important;
+        border-color: #3b82f6 !important;
+        color: white !important;
+    }
+
+    /* Loading Modal */
+    .modal-content {
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+
+    .modal-body {
+        padding: 24px;
+    }
+
+    .spinner-border {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    /* Text Colors */
+    .text-muted {
+        color: var(--text-muted) !important;
+    }
+
+    .fw-bold {
+        font-weight: 600;
+    }
+
+    .small {
+        font-size: 0.875rem;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--bg-tertiary);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--text-muted);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--text-secondary);
+    }
+
+    /* Responsive - Matching Dashboard Style */
+    @@media (max-width: 768px) {
+        .email-container {
+            padding: 16px 12px;
+        }
+
+        .email-header {
+            padding: 16px;
+        }
+
+        .email-header h4 {
+            font-size: 1.2rem;
+        }
+
+        .email-header h4 i {
+            display: none;
+        }
+
+        .email-header p {
+            font-size: 0.8rem;
+        }
+
+        .btn-text {
+            display: none;
+        }
+
+        .btn-sm {
+            padding: 6px 10px;
+        }
+
+        .filter-section {
+            padding: 14px;
+        }
+
+        .table-container {
+            padding: 12px;
+            overflow-x: auto;
+        }
+
+        .stat-card {
+            padding: 16px;
+            gap: 12px;
+        }
+
+        .stat-icon {
+            width: 44px;
+            height: 44px;
+            font-size: 1.2rem;
+        }
+
+        .stat-number {
+            font-size: 1.6rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+        }
+
+        .contact-avatar {
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+        }
+
+        .contact-name {
+            font-size: 0.85rem;
+        }
+
+        .contact-email,
+        .contact-subject {
+            font-size: 0.75rem;
+        }
+
+        .custom-toast {
+            right: 12px;
+            left: 12px;
+            top: 12px;
+        }
+
+        .email-detail-offcanvas {
+            width: 100% !important;
+        }
+
+        table.dataTable tbody td {
+            padding: 12px 8px !important;
+            font-size: 0.85rem;
+        }
+
+        table.dataTable thead th {
+            padding: 12px 8px !important;
+            font-size: 0.75rem;
+        }
+
+        .btn-action {
+            width: 32px;
+            height: 32px;
+            font-size: 0.85rem;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .email-container {
+            padding: 12px;
+        }
+
+        .email-header {
+            padding: 12px;
+        }
+
+        .email-header h4 {
+            font-size: 1.1rem;
+        }
+
+        .email-header p {
+            display: none;
+        }
+
+        .stat-card {
+            padding: 14px;
+            gap: 10px;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 1.1rem;
+        }
+
+        .stat-number {
+            font-size: 1.4rem;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+        }
+
+        .filter-section {
+            padding: 12px;
+        }
+
+        .table-container {
+            padding: 10px;
+        }
+
+        .contact-avatar {
+            width: 36px;
+            height: 36px;
+            font-size: 0.95rem;
+        }
+
+        .btn-action {
+            width: 30px;
+            height: 30px;
+            font-size: 0.8rem;
+        }
+
+        .offcanvas-header,
+        .offcanvas-body {
+            padding: 16px;
+        }
+
+        table.dataTable tbody td {
+            padding: 10px 6px !important;
+            font-size: 0.8rem;
+        }
+
+        table.dataTable thead th {
+            padding: 10px 6px !important;
+            font-size: 0.7rem;
+        }
+    }
+
+    /* Animation */
+    .fa-spin {
+        animation: fa-spin 1s infinite linear;
+    }
+
+    @@keyframes fa-spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>

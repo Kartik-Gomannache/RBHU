@@ -1,0 +1,1694 @@
+﻿@model RBHU_DbServices.ViewModel.CategoryViewModel
+@{
+    ViewData["Title"] = "Abrasives";
+}
+
+<div class="page-content">
+    <section class="section-padding" style="margin-top: 80px;">
+        <div class="container-fluid">
+            <!-- Header Section -->
+            <div class="row mb-4">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-title" data-aos="fade-up">@Model.CategoryName</h2>
+                    <p class="lead text-muted" data-aos="fade-up" data-aos-delay="100">
+                        Professional-grade abrasive products for precision finishing and surface preparation
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Left Sidebar - Subcategory Tree -->
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <div class="category-sidebar">
+                        <div class="sidebar-header">
+                            <h6 class="mb-0"><i class="fas fa-filter me-2"></i>Filter Products</h6>
+                            <button class="btn btn-sm btn-link text-decoration-none" onclick="clearFilters()">
+                                <i class="fas fa-redo"></i> Reset
+                            </button>
+                        </div>
+
+                        <!-- Show All Products Button -->
+                        <button class="btn btn-outline-secondary w-100 mb-3 btn-sm" onclick="showAllProducts()">
+                            <i class="fas fa-th-large me-2"></i>All Products
+                        </button>
+                        <a class="btn btn-outline-secondary w-100 mb-3 btn-sm" asp-action="Products" asp-controller="Home">
+                            <i class='fas fa-angle-left'></i> Go back to category page
+                        </a>
+
+                        <div class="subcategory-tree">
+                            @if (Model.SubCategories1 != null && Model.SubCategories1.Any())
+                            {
+                                @foreach (var subCat1 in Model.SubCategories1)
+                                {
+                                    var subCat1Id = $"subcat1-{subCat1.Id}";
+                                    var subCategories2 = Model.SubCategories2Map != null && Model.SubCategories2Map.ContainsKey(subCat1.Id)
+                                    ? Model.SubCategories2Map[subCat1.Id]
+                                    : new List<RBHU_DbServices.Models.SubCategory2>();
+
+                                    var hasSubCategories2 = subCategories2 != null && subCategories2.Any();
+
+                                    <div class="category-level-1 mb-2">
+                                        <div class="category-header"
+                                             data-subcategory1-id="@subCat1.Id"
+                                             data-brand-name="@subCat1.Name"
+                                             data-has-subcat2="@(hasSubCategories2 ? "true" : "false")"
+                                             onclick="toggleSubCategory1(@subCat1.Id, '@Html.Raw(subCat1.Name.Replace("'", "\\'"))'); event.stopPropagation();">
+                                            <div class="category-info">
+                                                <i class="fas fa-folder me-2"></i>
+                                                <span class="category-name">@subCat1.Name</span>
+                                            </div>
+                                            @if (hasSubCategories2)
+                                            {
+                                                <i class="fas fa-chevron-down toggle-icon"></i>
+                                            }
+                                        </div>
+
+                                        @if (hasSubCategories2)
+                                        {
+                                            <div class="category-level-2" id="@subCat1Id" style="display: none;">
+                                                @foreach (var subCat2 in subCategories2)
+                                                {
+                                                    <div class="subcategory2-item"
+                                                         data-subcategory2-id="@subCat2.Id"
+                                                         onclick="filterBySubCategory2(@subCat1.Id, @subCat2.Id, '@Html.Raw(subCat1.Name.Replace("'", "\\'"))', '@Html.Raw(subCat2.Name.Replace("'", "\\'"))'); event.stopPropagation();">
+                                                        <i class="fas fa-circle me-2"></i>
+                                                        <span>@subCat2.Name</span>
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="alert alert-light border">
+                                    <small class="text-muted"><i class="fas fa-info-circle me-2"></i>No subcategories available</small>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side - Products Grid -->
+                <div class="col-lg-9 col-md-8">
+                    <!-- Brand Images Section - CLICKABLE BUTTONS -->
+                    <div class="brand-showcase mb-4" id="brandShowcase">
+                        <h5 class="brand-showcase-title text-center mb-3">
+                            <i class="fas fa-award me-2"></i>Featured Brands
+                        </h5>
+                        <div class="brand-container">
+                            <!-- Kovax Brand Button -->
+                            <div class="brand-item" data-brand="Kovax">
+                                <div class="brand-card" onclick="filterByBrand('Kovax')">
+                                    <img src="~/images/Product_Brands/Kovax.jpg" alt="Kovax Brand" class="brand-logo">
+                                    <div class="brand-name">Kovax</div>
+                                </div>
+                            </div>
+                            <!-- Norton Brand Button -->
+                            <div class="brand-item" data-brand="Norton">
+                                <div class="brand-card" onclick="filterByBrand('Norton')">
+                                    <img src="~/images/Product_Brands/Norton.jpg" alt="Norton Brand" class="brand-logo">
+                                    <div class="brand-name">Norton</div>
+                                </div>
+                            </div>
+                            <!-- Orient Brand Button -->
+                            <div class="brand-item" data-brand="Orient">
+                                <div class="brand-card" onclick="filterByBrand('Orient')">
+                                    <img src="~/images/Product_Brands/Orient.jpg" alt="Orient Brand" class="brand-logo">
+                                    <div class="brand-name">Orient</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Active Filter Display -->
+                    <div id="activeFilters" class="mb-3" style="display: @(Model.SelectedSubCategory1Id.HasValue || Model.SelectedSubCategory2Id.HasValue ? "block" : "none")">
+                        <div class="alert alert-light border d-flex justify-content-between align-items-center">
+                            <small>
+                                <i class="fas fa-filter me-2"></i>
+                                <strong>Filtered by:</strong> <span id="filterText">
+                                    @if (Model.SelectedSubCategory2Id.HasValue)
+                                    {
+                                        var subCat1 = Model.SubCategories1.FirstOrDefault(s => s.Id == Model.SelectedSubCategory1Id);
+                                        var subCat2 = Model.SubCategories2Map.ContainsKey(Model.SelectedSubCategory1Id.Value)
+                                        ? Model.SubCategories2Map[Model.SelectedSubCategory1Id.Value].FirstOrDefault(s => s.Id == Model.SelectedSubCategory2Id)
+                                        : null;
+                                        @($"{subCat1?.Name} → {subCat2?.Name}")
+                                    }
+                                    else if (Model.SelectedSubCategory1Id.HasValue)
+                                    {
+                                        var subCat1 = Model.SubCategories1.FirstOrDefault(s => s.Id == Model.SelectedSubCategory1Id);
+                                        @subCat1?.Name
+                                    }
+                                </span>
+                            </small>
+                            <button class="btn btn-sm btn-link text-decoration-none" onclick="clearFilters()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Products Count -->
+                    <div class="mb-3">
+                        <small class="text-muted" id="productCount">
+                            <i class="fas fa-box me-1"></i>
+                            @Model.Products.Count Product@(Model.Products.Count != 1 ? "s" : "")
+                        </small>
+                    </div>
+
+                    <!-- Loading Indicator -->
+                    <div id="loadingIndicator" class="text-center py-5" style="display: none;">
+                        <div class="spinner-border spinner-border-sm text-secondary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-3 text-muted small">Loading products...</p>
+                    </div>
+
+                    <!-- Sample Products Grid (Shows 1 product per SubCategory2) -->
+                    <div id="sampleProductsContainer" style="display: none;">
+                        <h5 class="mb-4" id="sampleProductsTitle">
+                            <i class="fas fa-th me-2"></i>Select a Collection
+                        </h5>
+                        <div id="sampleProductsGrid" class="row">
+                            <!-- Sample products will be dynamically inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div id="productsGrid" class="row">
+                        @if (Model.Products != null && Model.Products.Any())
+                        {
+                            @foreach (var product in Model.Products)
+                            {
+                                <div class="col-lg-4 col-md-6 col-sm-6 mb-3">
+                                    <div class="card product-card h-100">
+                                        <div class="product-image-container">
+                                            @if (!string.IsNullOrEmpty(product.ImageUrl))
+                                            {
+                                                <img src="@product.ImageUrl" alt="@product.Name" class="card-img-top product-image" onclick="GoToContact()">
+                                            }
+                                            else
+                                            {
+                                                <div class="no-image-placeholder">
+                                                    <i class="fas fa-circle-notch fa-2x text-muted"></i>
+                                                </div>
+                                            }
+                                        </div>
+
+                                        <div class="card-body p-3">
+                                            <h6 class="product-title">@product.Name</h6>
+                                            <p class="product-description small text-muted mb-2">
+                                                @(string.IsNullOrEmpty(product.Description) ? "High-quality abrasive product." :
+                                                    (product.Description.Length > 60 ? product.Description.Substring(0, 60) + "..." : product.Description))
+                                            </p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <a asp-controller="Home" asp-action="Contact" class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-phone"></i> Enquire
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="col-12 text-center py-5">
+                                <i class="fas fa-circle-notch fa-3x text-muted mb-3"></i>
+                                <h5 class="text-muted">No Products Available</h5>
+                                <p class="text-muted">No products found in this category.</p>
+                                <a asp-controller="Home" asp-action="Contact" class="btn btn-secondary">
+                                    <i class="fas fa-envelope me-2"></i>Contact Us
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="row mt-5 pt-4 border-top">
+                <div class="col-lg-12">
+                    <h4 class="text-center mb-4">Why Choose Our Abrasives?</h4>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="text-center">
+                        <i class="fas fa-gem fa-2x text-secondary mb-3"></i>
+                        <h6>Premium Quality</h6>
+                        <p class="small text-muted">High-grade materials for superior cutting and finishing performance.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="text-center">
+                        <i class="fas fa-clock fa-2x text-secondary mb-3"></i>
+                        <h6>Long Lasting</h6>
+                        <p class="small text-muted">Extended service life reduces downtime and replacement costs.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="text-center">
+                        <i class="fas fa-chart-line fa-2x text-secondary mb-3"></i>
+                        <h6>Consistent Results</h6>
+                        <p class="small text-muted">Uniform grain distribution ensures predictable finishing quality.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="text-center">
+                        <i class="fas fa-layer-group fa-2x text-secondary mb-3"></i>
+                        <h6>Wide Range</h6>
+                        <p class="small text-muted">Extensive selection of grits and types for every application.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="row mt-4">
+                <div class="col-lg-12 text-center">
+                    <div class="bg-light p-4 rounded border">
+                        <h5>Need the Right Abrasive Solution?</h5>
+                        <p class="text-muted mb-3">Our team can help you select the perfect abrasive for your application.</p>
+                        <a asp-controller="Home" asp-action="Contact" class="btn btn-secondary me-2">
+                            <i class="fas fa-phone me-2"></i>Contact Us
+                        </a>
+                        <a asp-controller="Home" asp-action="Products" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Go Back
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<link href="~/css/product-cards.css" rel="stylesheet" />
+
+@section Scripts {
+    <script>
+        const categoryId = @Model.CategoryId;
+        let currentSubCategory1Id = @(Model.SelectedSubCategory1Id ?? 0);
+        let currentSubCategory2Id = @(Model.SelectedSubCategory2Id ?? 0);
+        let currentBrand = '';
+        let showingSampleProducts = false;
+
+        function GoToContact() {
+            window.location.href = '/Home/Contact';
+        }
+
+        // Normalize brand name for consistent comparison (case-insensitive)
+        function normalizeBrandName(brandName) {
+            if (!brandName) return '';
+            return brandName.toLowerCase().trim();
+        }
+
+        // Find element by brand name (case-insensitive)
+        function findElementByBrandName(brandName) {
+            let foundElement = null;
+            $('[data-brand-name]').each(function() {
+                const elementBrand = $(this).data('brand-name');
+                if (normalizeBrandName(elementBrand) === normalizeBrandName(brandName)) {
+                    foundElement = $(this);
+                    return false; // break the loop
+                }
+            });
+            return foundElement;
+        }
+
+        // Get actual brand name from database (preserves original casing)
+        function getActualBrandName(brandName) {
+            const element = findElementByBrandName(brandName);
+            if (element && element.length > 0) {
+                return element.data('brand-name');
+            }
+            return brandName;
+        }
+
+        // AUTO-DETECT ON PAGE LOAD
+        $(document).ready(function () {
+            console.log('=== Page Load ===');
+            console.log('Current SubCat1 ID:', currentSubCategory1Id);
+            console.log('Current SubCat2 ID:', currentSubCategory2Id);
+
+            if (currentSubCategory1Id > 0) {
+                const element = $('[data-subcategory1-id="' + currentSubCategory1Id + '"]');
+
+                if (element.length > 0) {
+                    const parent = element.closest('.category-level-1');
+                    const toggleIcon = parent.find('.toggle-icon');
+                    const subCat2Container = parent.find('.category-level-2');
+
+                    let brandName = element.data('brand-name');
+                    if (!brandName) {
+                        brandName = element.find('.category-name').text().trim();
+                    }
+
+                    toggleIcon.addClass('rotated');
+                    subCat2Container.slideDown(300);
+                    parent.addClass('active');
+
+                    currentBrand = brandName;
+
+                    const hasSubCat2 = element.data('has-subcat2') === 'true' || element.data('has-subcat2') === true;
+                    if (hasSubCat2) {
+                        showSampleProducts(currentSubCategory1Id, brandName);
+                    } else {
+                        highlightBrand(brandName);
+                        showOnlyBrand(brandName);
+                    }
+
+                    if (currentSubCategory2Id > 0) {
+                        updateActiveFilter(brandName, $('[data-subcategory2-id="' + currentSubCategory2Id + '"] span').text().trim());
+                    } else {
+                        updateActiveFilter(brandName, null);
+                    }
+
+                    $('#activeFilters').show();
+                }
+            }
+
+            if (currentSubCategory2Id > 0) {
+                $('[data-subcategory2-id="' + currentSubCategory2Id + '"]').addClass('active');
+            }
+        });
+
+        // Filter by brand button - FIXED with case-insensitive matching
+        function filterByBrand(brandName) {
+            console.log('=== Brand Button Clicked ===');
+            console.log('Brand clicked:', brandName);
+
+            // Get actual brand name from database
+            const actualBrandName = getActualBrandName(brandName);
+            const subCat1Element = findElementByBrandName(brandName);
+
+            if (subCat1Element && subCat1Element.length) {
+                const subCat1Id = subCat1Element.data('subcategory1-id');
+                const hasSubCat2Data = subCat1Element.data('has-subcat2');
+                const hasSubCat2 = hasSubCat2Data === 'true' || hasSubCat2Data === true;
+
+                console.log('SubCat1 ID:', subCat1Id, 'Has SubCat2:', hasSubCat2);
+
+                // Close all other subcategories first
+                $('.category-level-1').each(function () {
+                    const $this = $(this);
+                    if ($this.find('[data-subcategory1-id="' + subCat1Id + '"]').length === 0) {
+                        $this.find('.toggle-icon').removeClass('rotated');
+                        $this.find('.category-level-2').hide();
+                        $this.removeClass('active');
+                    }
+                });
+
+                // Open the selected subcategory
+                const parent = subCat1Element.closest('.category-level-1');
+                const toggleIcon = parent.find('.toggle-icon');
+                const subCat2Container = parent.find('.category-level-2');
+
+                toggleIcon.addClass('rotated');
+                subCat2Container.slideDown(300);
+                parent.addClass('active');
+
+                // Update state
+                currentSubCategory1Id = subCat1Id;
+                currentSubCategory2Id = 0;
+                currentBrand = actualBrandName;
+
+                $('.subcategory2-item').removeClass('active');
+
+                // IMMEDIATELY highlight and show brand
+                highlightBrand(brandName);
+                showOnlyBrand(brandName);
+
+                // IMMEDIATELY show products or sample products based on hasSubCat2
+                if (hasSubCat2) {
+                    console.log('Has SubCategory2 - showing sample products IMMEDIATELY');
+                    showSampleProducts(subCat1Id, actualBrandName);
+                } else {
+                    console.log('No SubCategory2 - loading ALL products IMMEDIATELY');
+                    $('#sampleProductsContainer').hide();
+                    $('#productsGrid').show();
+                    updateActiveFilter(actualBrandName, null);
+                    loadProducts(categoryId, subCat1Id, null);
+                }
+
+                console.log('Brand filter applied successfully');
+            } else {
+                console.error('Brand not found:', brandName);
+                alert('Brand "' + brandName + '" not found. Please contact support.');
+            }
+        }
+
+        // Highlight brand (case-insensitive)
+        function highlightBrand(brandName) {
+            $('.brand-card').removeClass('active');
+            if (brandName) {
+                const normalizedBrand = normalizeBrandName(brandName);
+                $('.brand-item').each(function() {
+                    const itemBrand = $(this).data('brand');
+                    if (normalizeBrandName(itemBrand) === normalizedBrand) {
+                        $(this).find('.brand-card').addClass('active');
+                    }
+                });
+            }
+        }
+
+        // Show only selected brand (case-insensitive)
+        function showOnlyBrand(brandName) {
+            const $brandItems = $('.brand-item');
+
+            if (!brandName || brandName === '') {
+                // Show all brands
+                $brandItems.show();
+                $('.brand-card').removeClass('active');
+            } else {
+                // Hide other brands, show only selected one
+                const normalizedBrand = normalizeBrandName(brandName);
+                $brandItems.each(function () {
+                    const $item = $(this);
+                    const itemBrand = $item.data('brand');
+                    if (normalizeBrandName(itemBrand) === normalizedBrand) {
+                        $item.show();
+                    } else {
+                        $item.hide();
+                    }
+                });
+            }
+        }
+
+        // Show sample products (1 per SubCategory2)
+        function showSampleProducts(subCat1Id, subCat1Name) {
+            console.log('=== Loading Sample Products ===');
+            console.log('SubCat1 ID:', subCat1Id, 'SubCat1 Name:', subCat1Name);
+
+            // IMMEDIATELY hide products grid and show sample container
+            $('#productsGrid').hide();
+            $('#sampleProductsContainer').show();
+            $('#sampleProductsTitle').text(subCat1Name + ' Collections');
+
+            // Show loading state in sample products grid
+            const $grid = $('#sampleProductsGrid');
+            $grid.html(`
+                <div class="col-12 text-center py-5">
+                    <div class="spinner-border text-secondary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-3 text-muted">Loading collections...</p>
+                </div>
+            `);
+
+            $.ajax({
+                url: '/Product/GetSampleProductsForSubCategories2',
+                type: 'GET',
+                data: { subCategory1Id: subCat1Id },
+                success: function (response) {
+                    console.log('Sample Products Response:', response);
+
+                    $grid.empty();
+
+                    if (response && response.length > 0) {
+                        response.forEach(function (item) {
+                            if (!item.product) {
+                                console.warn('No product for SubCategory2:', item.subCategory2Name);
+                                return;
+                            }
+
+                            const productImageHtml = item.product.imageUrl
+                                ? `<img src="${item.product.imageUrl}" alt="${item.subCategory2Name}" class="card-img-top product-image">`
+                                : `<div class="no-image-placeholder"><i class="fas fa-circle-notch fa-2x text-muted"></i></div>`;
+
+                            const productDescription = item.product.description
+                                ? (item.product.description.length > 60
+                                    ? item.product.description.substring(0, 60) + '...'
+                                    : item.product.description)
+                                : 'High-quality abrasive product.';
+
+                            const cardHtml = `
+                                <div class="col-lg-4 col-md-6 col-sm-6 mb-3">
+                                    <div class="card sample-product-card h-100 shadow-sm">
+                                        <div class="product-image-container">
+                                            ${productImageHtml}
+                                        </div>
+                                        <div class="card-body p-3">
+                                            <div class="category-badge mb-2">
+                                                <small class="badge bg-info">${item.subCategory2Name}</small>
+                                            </div>
+                                            <h6 class="product-title">${item.product.name}</h6>
+                                            <p class="product-description small text-muted mb-3">
+                                                ${productDescription}
+                                            </p>
+                                            <button class="btn btn-sm btn-primary w-100" onclick="exploreSubCategory(${subCat1Id}, ${item.subCategory2Id}, '${subCat1Name.replace(/'/g, "\\'")}', '${item.subCategory2Name.replace(/'/g, "\\'")}')">
+                                                <i class="fas fa-arrow-right me-2"></i>Explore More
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            $grid.append(cardHtml);
+                        });
+
+                        updateActiveFilter(subCat1Name, null);
+                    } else {
+                        $grid.html(`
+                            <div class="col-12 text-center py-5">
+                                <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                                <h5 class="text-muted">No Collections Available</h5>
+                            </div>
+                        `);
+                    }
+
+                    showingSampleProducts = true;
+                    updateProductCount(response ? response.length : 0);
+                },
+                error: function (error) {
+                    console.error('Error loading sample products:', error);
+                    $grid.html(`
+                        <div class="col-12 text-center py-5">
+                            <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                            <h5 class="text-danger">Error Loading Collections</h5>
+                            <p class="text-muted">Please try again later.</p>
+                        </div>
+                    `);
+                }
+            });
+        }
+
+        // Explore SubCategory - Show all products for that SubCategory2
+        function exploreSubCategory(subCat1Id, subCat2Id, subCat1Name, subCat2Name) {
+            console.log('=== Exploring SubCategory ===');
+            console.log('SubCat1 ID:', subCat1Id, 'SubCat2 ID:', subCat2Id);
+
+            currentSubCategory1Id = subCat1Id;
+            currentSubCategory2Id = subCat2Id;
+            currentBrand = subCat1Name;
+
+            $('#sampleProductsContainer').hide();
+            $('#productsGrid').show();
+
+            updateActiveFilter(subCat1Name, subCat2Name);
+            loadProducts(categoryId, subCat1Id, subCat2Id);
+
+            $('.subcategory2-item').removeClass('active');
+            $('[data-subcategory2-id="' + subCat2Id + '"]').addClass('active');
+
+            highlightBrand(subCat1Name);
+            showOnlyBrand(subCat1Name);
+        }
+
+        // Toggle SubCategory1 - FIXED to show products/samples immediately
+        function toggleSubCategory1(subCat1Id, subCat1Name) {
+            console.log('=== toggleSubCategory1 Called ===');
+            console.log('SubCat1 ID:', subCat1Id, 'SubCat1 Name:', subCat1Name);
+
+            const element = $(event.currentTarget);
+            const parent = element.closest('.category-level-1');
+            const toggleIcon = parent.find('.toggle-icon');
+            const subCat2Container = parent.find('.category-level-2');
+            const hasSubCat2Data = element.data('has-subcat2');
+            const hasSubCat2 = hasSubCat2Data === 'true' || hasSubCat2Data === true;
+
+            const isCurrentlyExpanded = parent.hasClass('active');
+
+            console.log('Has SubCat2:', hasSubCat2, 'Is Expanded:', isCurrentlyExpanded);
+
+            // Close all other subcategories
+            $('.category-level-1').not(parent).each(function () {
+                $(this).find('.toggle-icon').removeClass('rotated');
+                $(this).find('.category-level-2').slideUp(300);
+                $(this).removeClass('active');
+            });
+
+            $('.subcategory2-item').removeClass('active');
+
+            if (!isCurrentlyExpanded) {
+                // Opening the category
+                toggleIcon.addClass('rotated');
+                subCat2Container.slideDown(300);
+                parent.addClass('active');
+
+                currentSubCategory1Id = subCat1Id;
+                currentSubCategory2Id = 0;
+                currentBrand = subCat1Name;
+
+                highlightBrand(subCat1Name);
+                showOnlyBrand(subCat1Name);
+
+                // IMMEDIATELY show products or sample products based on hasSubCat2
+                if (hasSubCat2) {
+                    console.log('Has SubCategory2 - showing sample products IMMEDIATELY');
+                    showSampleProducts(subCat1Id, subCat1Name);
+                } else {
+                    console.log('No SubCategory2 - loading ALL products IMMEDIATELY');
+                    updateActiveFilter(subCat1Name, null);
+                    $('#sampleProductsContainer').hide();
+                    $('#productsGrid').show();
+                    loadProducts(categoryId, subCat1Id, null);
+                }
+            } else {
+                // Collapsing - show all products
+                toggleIcon.removeClass('rotated');
+                subCat2Container.slideUp(300);
+                parent.removeClass('active');
+
+                currentSubCategory1Id = 0;
+                currentSubCategory2Id = 0;
+                currentBrand = '';
+                $('#activeFilters').hide();
+                $('#sampleProductsContainer').hide();
+                $('#productsGrid').show();
+                loadProducts(categoryId, null, null);
+                showOnlyBrand('');
+            }
+        }
+
+        // Filter by SubCategory2 (from sidebar) - THIS DOES THE ACTUAL FILTERING
+        function filterBySubCategory2(subCat1Id, subCat2Id, subCat1Name, subCat2Name) {
+            console.log('=== Filter by SubCategory2 ===');
+            console.log('SubCat1:', subCat1Name, 'SubCat2:', subCat2Name);
+
+            currentSubCategory1Id = subCat1Id;
+            currentSubCategory2Id = subCat2Id;
+            currentBrand = subCat1Name;
+
+            $('.subcategory2-item').removeClass('active');
+            $('[data-subcategory2-id="' + subCat2Id + '"]').addClass('active');
+
+            updateActiveFilter(subCat1Name, subCat2Name);
+            showingSampleProducts = false;
+            $('#sampleProductsContainer').hide();
+            $('#productsGrid').show();
+            loadProducts(categoryId, subCat1Id, subCat2Id);
+
+            highlightBrand(subCat1Name);
+            showOnlyBrand(subCat1Name);
+        }
+
+        function showAllProducts() {
+            console.log('=== Show All Products ===');
+
+            currentSubCategory1Id = 0;
+            currentSubCategory2Id = 0;
+            currentBrand = '';
+
+            $('.category-level-1').each(function () {
+                $(this).find('.toggle-icon').removeClass('rotated');
+                $(this).find('.category-level-2').slideUp(300);
+                $(this).removeClass('active');
+            });
+
+            $('.subcategory2-item').removeClass('active');
+            $('#activeFilters').hide();
+            $('#sampleProductsContainer').hide();
+            $('#productsGrid').show();
+
+            loadProducts(categoryId, null, null);
+            showOnlyBrand('');
+        }
+
+        function loadProducts(catId, subCat1Id, subCat2Id) {
+            console.log('=== Loading Products ===');
+            console.log('Category ID:', catId, 'SubCat1:', subCat1Id, 'SubCat2:', subCat2Id);
+
+            const $productsGrid = $('#productsGrid');
+            const $loadingIndicator = $('#loadingIndicator');
+
+            $productsGrid.hide();
+            $loadingIndicator.show();
+
+            $.ajax({
+                url: '/Product/GetProductsByFilter',
+                type: 'POST',
+                data: {
+                    categoryId: catId,
+                    subCategory1Id: subCat1Id,
+                    subCategory2Id: subCat2Id
+                },
+                success: function (response) {
+                    console.log('Products loaded:', response.data ? response.data.length : 0);
+
+                    $loadingIndicator.hide();
+                    $('#sampleProductsContainer').hide();
+                    $productsGrid.show();
+
+                    if (response.success && response.data && response.data.length > 0) {
+                        renderProducts(response.data);
+                        updateProductCount(response.data.length);
+                    } else {
+                        $productsGrid.html(`
+                            <div class="col-12 text-center py-5">
+                                <i class="fas fa-circle-notch fa-3x text-muted mb-3"></i>
+                                <h5 class="text-muted">No Products Found</h5>
+                                <p class="text-muted">No products available for the selected filter.</p>
+                                <button class="btn btn-secondary" onclick="clearFilters()">
+                                    <i class="fas fa-redo me-2"></i>Show All Products
+                                </button>
+                            </div>
+                        `);
+                        updateProductCount(0);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error loading products:', error);
+                    $loadingIndicator.hide();
+                    $productsGrid.show();
+                    $productsGrid.html(`
+                        <div class="col-12 text-center py-5">
+                            <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                            <h5 class="text-danger">Error Loading Products</h5>
+                            <p class="text-muted">Please try again later.</p>
+                        </div>
+                    `);
+                }
+            });
+        }
+
+        function renderProducts(products) {
+            const $grid = $('#productsGrid');
+            $grid.empty();
+
+            products.forEach(function (product) {
+                const hasImage = product.imageUrl && product.imageUrl.trim() !== '';
+
+                let imageHtml = '';
+                if (hasImage) {
+                    imageHtml = `<img src="${product.imageUrl}" alt="${product.name}" class="product-image" onclick="GoToContact()">`;
+                } else {
+                    imageHtml = `
+                        <div class="no-image-placeholder">
+                            <i class="fas fa-circle-notch fa-2x text-muted"></i>
+                        </div>
+                    `;
+                }
+
+                const productHtml = `
+                    <div class="col-lg-4 col-md-6 col-sm-6 mb-3">
+                        <div class="card product-card h-100">
+                            <div class="product-image-container">
+                                ${imageHtml}
+                            </div>
+                            <div class="card-body p-3">
+                                <h6 class="product-title">${product.name}</h6>
+                                <p class="product-description small text-muted mb-2">
+                                    ${product.description ? (product.description.length > 60 ? product.description.substring(0, 60) + '...' : product.description) : 'High-quality abrasive product.'}
+                                </p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a href="/Home/Contact" class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-phone"></i> Enquire
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                $grid.append(productHtml);
+            });
+        }
+
+        function updateProductCount(count) {
+            $('#productCount').html(`<i class="fas fa-box me-1"></i>${count} Product${count !== 1 ? 's' : ''}`);
+        }
+
+        function updateActiveFilter(subCat1Name, subCat2Name) {
+            let filterText = subCat1Name;
+            if (subCat2Name) {
+                filterText += ' → ' + subCat2Name;
+            }
+            $('#filterText').text(filterText);
+            $('#activeFilters').show();
+        }
+
+        function clearFilters() {
+            showAllProducts();
+        }
+    </script>
+
+    <style>
+        /* ===================================
+               PAGE BACKGROUND
+               =================================== */
+        .page-content {
+            background: #f8f9fa;
+        }
+
+        /* ===================================
+               BRAND SHOWCASE STYLES
+               =================================== */
+        .brand-showcase {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .brand-showcase-title {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .brand-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .brand-item {
+            transition: all 0.3s ease;
+        }
+
+        .brand-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 220px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            will-change: transform;
+        }
+
+            .brand-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+                border-color: #1a365d;
+            }
+
+            .brand-card.active {
+                border-color: #1a365d;
+                background: linear-gradient(135deg, #f0f4f8 0%, #ffffff 100%);
+                box-shadow: 0 6px 16px rgba(26, 54, 93, 0.2);
+                transform: scale(1.03);
+            }
+
+        .brand-logo {
+            height: 100px;
+            width: auto;
+            max-width: 160px;
+            object-fit: contain;
+            transition: all 0.3s ease;
+            margin-bottom: 12px;
+        }
+
+        .brand-card:hover .brand-logo,
+        .brand-card.active .brand-logo {
+            transform: scale(1.08);
+        }
+
+        .brand-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #4a5568;
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .brand-card.active .brand-name {
+            color: #1a365d;
+        }
+
+        /* ===================================
+               SIDEBAR STYLES
+               =================================== */
+        .category-sidebar {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+            .category-sidebar::-webkit-scrollbar {
+                width: 5px;
+            }
+
+            .category-sidebar::-webkit-scrollbar-track {
+                background: #f8f9fa;
+            }
+
+            .category-sidebar::-webkit-scrollbar-thumb {
+                background: #cbd5e0;
+                border-radius: 5px;
+            }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+            .sidebar-header h6 {
+                color: #2d3748;
+                font-weight: 600;
+            }
+
+        /* ===================================
+               CATEGORY TREE STYLES
+               =================================== */
+        .subcategory-tree {
+            margin-top: 15px;
+        }
+
+        .category-level-1 {
+            margin-bottom: 5px;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            background: #ffffff;
+            color: #4a5568;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            user-select: none;
+            border: 2px solid #e2e8f0;
+            position: relative;
+            will-change: transform;
+        }
+
+            .category-header:hover {
+                background: #f7fafc;
+                border-color: #cbd5e0;
+                transform: translateX(2px);
+            }
+
+        .category-level-1.active .category-header {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            color: #ffffff;
+            border-color: #2d3748;
+            box-shadow: 0 3px 10px rgba(45, 55, 72, 0.2);
+            font-weight: 600;
+            transform: translateX(3px);
+        }
+
+            .category-level-1.active .category-header::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 4px;
+                background: #fff;
+                border-radius: 8px 0 0 8px;
+            }
+
+        .category-info {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+            .category-info i {
+                transition: all 0.3s ease;
+            }
+
+        .category-level-1.active .category-info i {
+            color: #ffffff;
+        }
+
+        .category-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .category-level-1.active .category-name {
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s ease, color 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+            .toggle-icon.rotated {
+                transform: rotate(180deg);
+            }
+
+        .category-level-1.active .toggle-icon {
+            color: #ffffff;
+        }
+
+        /* ===================================
+               SUBCATEGORY2 STYLES
+               =================================== */
+        .category-level-2 {
+            padding: 8px 0 5px 10px;
+            background: #f7fafc;
+            margin-top: 5px;
+            border-left: 3px solid #4a5568;
+        }
+
+        .subcategory2-item {
+            padding: 8px 12px;
+            margin: 3px 0;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            color: #4a5568;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            position: relative;
+        }
+
+            .subcategory2-item i {
+                font-size: 0.5rem;
+                transition: all 0.2s ease;
+                color: #a0aec0;
+            }
+
+            .subcategory2-item:hover {
+                background: #edf2f7;
+                border-color: #4a5568;
+                transform: translateX(3px);
+            }
+
+                .subcategory2-item:hover i {
+                    color: #4a5568;
+                    transform: scale(1.2);
+                }
+
+            .subcategory2-item.active {
+                background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+                color: #ffffff;
+                border-color: #2d3748;
+                font-weight: 600;
+                box-shadow: 0 2px 6px rgba(45, 55, 72, 0.2);
+                transform: translateX(5px);
+            }
+
+                .subcategory2-item.active i {
+                    color: #ffffff;
+                    transform: scale(1.3);
+                }
+
+                .subcategory2-item.active::before {
+                    content: '';
+                    position: absolute;
+                    left: -3px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 6px;
+                    height: 60%;
+                    background: #ffffff;
+                    border-radius: 0 3px 3px 0;
+                }
+
+        /* ===================================
+               SAMPLE PRODUCTS CARD STYLES
+               =================================== */
+        .sample-product-card {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            position: relative;
+            background: #ffffff;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+            .sample-product-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: linear-gradient(90deg, #4a5568 0%, #2d3748 100%);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .sample-product-card:hover {
+                border-color: #4a5568;
+                box-shadow: 0 12px 32px rgba(74, 85, 104, 0.25);
+                transform: translateY(-10px);
+            }
+
+                .sample-product-card:hover::before {
+                    opacity: 1;
+                }
+
+        .category-badge {
+            display: inline-block;
+        }
+
+            .category-badge .badge {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.65rem;
+                font-weight: 600;
+                letter-spacing: 0.5px;
+                background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+                border: none;
+            }
+
+        .sample-product-card .product-image-container {
+            height: 220px;
+            overflow: hidden;
+            background: #ffffff;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+            .sample-product-card .product-image-container img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                transition: all 0.4s ease;
+            }
+
+        .sample-product-card:hover .product-image-container img {
+            transform: scale(1.1);
+        }
+
+        .sample-product-card .no-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+        }
+
+            .sample-product-card .no-image-placeholder i {
+                color: #cbd5e0;
+                font-size: 2rem;
+            }
+
+        .sample-product-card .card-body {
+            padding: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sample-product-card .btn-primary {
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            border: none;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            padding: 10px 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(74, 85, 104, 0.2);
+            font-size: 0.875rem;
+            border-radius: 6px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: auto;
+        }
+
+            .sample-product-card .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(74, 85, 104, 0.35);
+                background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            }
+
+            .sample-product-card .btn-primary i {
+                transition: transform 0.3s ease;
+            }
+
+            .sample-product-card .btn-primary:hover i {
+                transform: translateX(3px);
+            }
+
+        .sample-product-card .product-title {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            height: 42px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .sample-product-card .product-description {
+            line-height: 1.4;
+            color: #718096;
+            font-size: 0.85rem;
+            height: 36px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            margin-bottom: 12px;
+        }
+
+        /* ===================================
+               SAMPLE PRODUCTS SECTION HEADER
+               =================================== */
+        #sampleProductsTitle {
+            color: #2d3748;
+            font-weight: 700;
+            font-size: 1.4rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+            #sampleProductsTitle::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 80px;
+                height: 3px;
+                background: linear-gradient(90deg, #4a5568 0%, #2d3748 100%);
+                border-radius: 2px;
+            }
+
+        /* ===================================
+               STANDARD PRODUCT CARD STYLES
+               =================================== */
+        .product-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            background: #ffffff;
+            cursor: pointer;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            will-change: transform;
+        }
+
+            .product-card:hover {
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                border-color: #cbd5e0;
+                transform: translateY(-4px);
+            }
+
+            .product-card .product-image-container {
+                position: relative;
+                height: 200px;
+                overflow: hidden;
+                background: #ffffff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 15px;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-card .no-image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+            .product-card .no-image-placeholder i {
+                color: #cbd5e0;
+                font-size: 2rem;
+                transition: all 0.3s ease;
+            }
+
+        .product-card:hover .no-image-placeholder i {
+            color: #a0aec0;
+            transform: scale(1.1);
+        }
+
+        .product-card .card-body {
+            padding: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card .p-3 {
+            padding: 15px;
+        }
+
+        .product-title {
+            font-weight: 500;
+            color: #2d3748;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            font-size: 0.95rem;
+            height: 42px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            transition: color 0.3s ease;
+        }
+
+        .product-card:hover .product-title {
+            color: #4a5568;
+        }
+
+        .product-description {
+            line-height: 1.4;
+            color: #718096;
+            font-size: 0.85rem;
+            height: 36px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            margin-bottom: 12px;
+        }
+
+        /* ===================================
+               ACTION BUTTONS
+               =================================== */
+        .btn-sm.btn-outline-secondary {
+            background: transparent;
+            border: 1px solid #4a5568;
+            color: #4a5568;
+            padding: 6px 12px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+            .btn-sm.btn-outline-secondary:hover {
+                background: #4a5568;
+                border-color: #4a5568;
+                color: #ffffff;
+                transform: translateY(-2px);
+            }
+
+        .d-flex.justify-content-between.align-items-center {
+            margin-top: auto;
+        }
+
+        /* ===================================
+               RESPONSIVE STYLES
+               =================================== */
+        @@media (max-width: 991px) {
+            .category-sidebar {
+                position: relative;
+                top: 0;
+                margin-bottom: 25px;
+                max-height: none;
+            }
+
+            .brand-logo {
+                height: 90px;
+                max-width: 140px;
+            }
+
+            .brand-card {
+                padding: 18px;
+                min-width: 200px;
+            }
+
+            .brand-showcase {
+                padding: 20px;
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .category-header {
+                padding: 8px 10px;
+                font-size: 0.85rem;
+            }
+
+            .subcategory2-item {
+                padding: 7px 10px;
+                font-size: 0.8rem;
+            }
+
+            .brand-logo {
+                height: 80px;
+                max-width: 130px;
+            }
+
+            .brand-container {
+                gap: 25px;
+            }
+
+            .brand-card {
+                padding: 15px;
+                min-width: 180px;
+            }
+
+            .brand-showcase {
+                padding: 18px;
+            }
+
+            .brand-showcase-title {
+                font-size: 1.1rem;
+                margin-bottom: 18px;
+            }
+
+            .brand-name {
+                font-size: 0.95rem;
+            }
+
+            .product-card .product-image-container {
+                height: 180px;
+                padding: 12px;
+            }
+
+            .product-card .no-image-placeholder {
+                height: 180px;
+            }
+
+            .sample-product-card .product-image-container {
+                height: 200px;
+            }
+
+            .product-title {
+                font-size: 0.9rem;
+                height: 40px;
+            }
+
+            .product-description {
+                font-size: 0.8rem;
+                height: 34px;
+            }
+
+            #sampleProductsTitle {
+                font-size: 1.3rem;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .category-sidebar {
+                padding: 15px;
+            }
+
+            .brand-logo {
+                height: 70px;
+                max-width: 110px;
+            }
+
+            .brand-showcase {
+                padding: 15px;
+            }
+
+            .brand-container {
+                gap: 20px;
+            }
+
+            .brand-card {
+                padding: 12px;
+                min-width: 150px;
+            }
+
+            .brand-showcase-title {
+                font-size: 1rem;
+                margin-bottom: 15px;
+            }
+
+            .brand-name {
+                font-size: 0.9rem;
+                margin-top: 6px;
+            }
+
+            .product-card .product-image-container {
+                height: 160px;
+                padding: 10px;
+            }
+
+            .product-card .no-image-placeholder {
+                height: 160px;
+            }
+
+                .product-card .no-image-placeholder i {
+                    font-size: 1.75rem;
+                }
+
+            .sample-product-card .product-image-container {
+                height: 180px;
+                padding: 12px;
+            }
+
+            .product-card .card-body,
+            .product-card .p-3 {
+                padding: 12px;
+            }
+
+            .product-title {
+                font-size: 0.875rem;
+                height: 38px;
+                margin-bottom: 8px;
+            }
+
+            .product-description {
+                font-size: 0.75rem;
+                height: 32px;
+                margin-bottom: 10px;
+            }
+
+            .btn-sm.btn-outline-secondary {
+                font-size: 0.8rem;
+                padding: 8px 12px;
+            }
+
+            .sample-product-card .btn-primary {
+                font-size: 0.8rem;
+                padding: 8px 12px;
+            }
+
+            #sampleProductsTitle {
+                font-size: 1.2rem;
+            }
+        }
+
+        @@media (max-width: 374px) {
+            .product-card .product-image-container {
+                height: 130px;
+                padding: 6px;
+            }
+
+            .product-card .no-image-placeholder {
+                height: 130px;
+            }
+
+                .product-card .no-image-placeholder i {
+                    font-size: 1.35rem;
+                }
+
+            .sample-product-card .product-image-container {
+                height: 150px;
+                padding: 8px;
+            }
+
+            .product-card .card-body,
+            .product-card .p-3,
+            .sample-product-card .card-body {
+                padding: 8px;
+            }
+
+            .product-title {
+                font-size: 0.75rem;
+                height: 34px;
+            }
+
+            .product-description {
+                font-size: 0.65rem;
+                height: 28px;
+                margin-bottom: 6px;
+            }
+
+            .btn-sm.btn-outline-secondary,
+            .sample-product-card .btn-primary {
+                font-size: 0.7rem;
+                padding: 5px 8px;
+            }
+
+            #sampleProductsTitle {
+                font-size: 1rem;
+            }
+        }
+
+        .h-100 {
+            height: 100% !important;
+        }
+
+        .text-muted {
+            color: #718096 !important;
+        }
+
+        .small {
+            font-size: 0.85rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem !important;
+        }
+
+        .mb-3 {
+            margin-bottom: 1rem !important;
+        }
+
+        .me-1 {
+            margin-right: 0.25rem !important;
+        }
+
+        .me-2 {
+            margin-right: 0.5rem !important;
+        }
+
+        @@media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+}

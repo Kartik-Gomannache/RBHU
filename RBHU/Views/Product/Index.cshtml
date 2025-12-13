@@ -1,0 +1,1290 @@
+﻿@model RBHU_DbServices.ViewModel.ProductListViewModel
+@{
+    ViewData["Title"] = "Product Management";
+    Layout = "";
+}
+
+<link rel="icon" type="image/x-icon" href="~/images/as_logo.png">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+<div class="product-container">
+    <!-- Alert Messages -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Header Section -->
+    <div class="product-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="mb-1"><i class="fas fa-box me-2"></i>Product Management</h4>
+                <p class="text-muted mb-0 small">Manage your product catalog</p>
+            </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-outline-secondary" onclick="showStats()">
+                    <i class="fas fa-chart-bar me-1"></i><span class="btn-text">Statistics</span>
+                </button>
+                <a href="@Url.Action("Create", "Product")" class="btn btn-sm btn-success">
+                    <i class="fas fa-plus me-1"></i><span class="btn-text">Add Product</span>
+                </a>
+                <button class="btn btn-sm btn-primary" onclick="refreshData()">
+                    <i class="fas fa-sync-alt me-1" id="refreshIcon"></i><span class="btn-text">Refresh</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Cards (Collapsible) -->
+    <div id="statsPanel" class="stats-panel" style="display: none;">
+        <div class="row g-3 mb-4">
+            <div class="col-lg-3 col-md-6 col-6">
+                <div class="stat-card">
+                    <div class="stat-icon bg-primary-light">
+                        <i class="fas fa-box text-primary"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">@Model.Products.Count</h3>
+                        <p class="stat-label">Total Products</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-6">
+                <div class="stat-card">
+                    <div class="stat-icon bg-success-light">
+                        <i class="fas fa-tags text-success"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">@Model.Categories.Count</h3>
+                        <p class="stat-label">Categories</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-6">
+                <div class="stat-card">
+                    <div class="stat-icon bg-warning-light">
+                        <i class="fas fa-percentage text-warning"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">@Model.Products.Count(p => p.OfferPrice > 0)</h3>
+                        <p class="stat-label">On Offer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-6">
+                <div class="stat-card">
+                    <div class="stat-icon bg-info-light">
+                        <i class="fas fa-rupee-sign text-info"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 class="stat-number">₹@(Model.Products.Any() ? Model.Products.Average(p => p.Price).ToString("N0") : "0")</h3>
+                        <p class="stat-label">Avg Price</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <div class="row g-2">
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input id="searchBox" class="form-control" placeholder="Search products by name, description..." />
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-6">
+                <select id="categoryFilter" class="form-select">
+                    <option value="">All Categories</option>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <option value="@category.Name">@category.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="col-lg-2 col-md-6 col-6">
+                <select id="priceFilter" class="form-select">
+                    <option value="">All Prices</option>
+                    <option value="under-1000">Under ₹1K</option>
+                    <option value="1000-5000">₹1K - ₹5K</option>
+                    <option value="5000-10000">₹5K - ₹10K</option>
+                    <option value="above-10000">Above ₹10K</option>
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <select id="offerFilter" class="form-select">
+                    <option value="">All Products</option>
+                    <option value="on-offer">On Offer</option>
+                    <option value="regular">Regular Price</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Table -->
+    <div class="table-container">
+        <table id="productsTable" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Product Info</th>
+                    <th>Category</th>
+                    <th>Pricing</th>
+                    <th>Created</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model.Products)
+                {
+                    <tr id="product-row-@product.Id">
+                        <td>
+                            <div class="product-info">
+                                <div class="product-image">
+                                    @if (!string.IsNullOrEmpty(product.ImageUrl))
+                                    {
+                                        <img src="@product.ImageUrl" alt="@product.Name">
+                                    }
+                                    else
+                                    {
+                                        <div class="product-placeholder">
+                                            <i class="fas fa-image"></i>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="product-details">
+                                    <div class="product-name">@product.Name</div>
+                                    @if (!string.IsNullOrEmpty(product.Description))
+                                    {
+                                        <div class="product-description">@product.Description</div>
+                                    }
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="category-info">
+                                <span class="badge badge-primary">@product.Category?.Name</span>
+                                @if (product.SubCategory1 != null)
+                                {
+                                    <span class="badge badge-secondary">@product.SubCategory1.Name</span>
+                                }
+                                @if (product.SubCategory2 != null)
+                                {
+                                    <span class="badge badge-light">@product.SubCategory2.Name</span>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <div class="pricing-info">
+                                @if (product.OfferPrice > 0 && product.OfferPrice < product.Price)
+                                {
+                                    <div class="price-offer">₹@product.OfferPrice.ToString("N0")</div>
+                                    <div class="price-original">₹@product.Price.ToString("N0")</div>
+                                    var discount = ((product.Price - product.OfferPrice) / product.Price) * 100;
+                                    <div class="discount-badge">@discount.ToString("F0")% OFF</div>
+                                }
+                                else
+                                {
+                                    <div class="price-current">₹@product.Price.ToString("N0")</div>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            @if (product.CreatedAt.HasValue)
+                            {
+                                <div class="date-info">
+                                    <div class="date">@product.CreatedAt.Value.ToString("MMM dd, yyyy")</div>
+                                    <div class="time">@product.CreatedAt.Value.ToString("HH:mm")</div>
+                                </div>
+                            }
+                            else
+                            {
+                                <span class="text-muted">-</span>
+                            }
+                        </td>
+                        <td>
+                            <div class="status-badges">
+                                @if (product.OfferPrice > 0 && product.OfferPrice < product.Price)
+                                {
+                                    <span class="badge badge-offer">
+                                        <i class="fas fa-tag"></i> On Offer
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-active">
+                                        <i class="fas fa-check"></i> Active
+                                    </span>
+                                }
+                                @if (!string.IsNullOrEmpty(product.ImageUrl))
+                                {
+                                    <span class="badge badge-image">
+                                        <i class="fas fa-camera"></i> Image
+                                    </span>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <a href="@Url.Action("Details", "Product", new { id = product.Id })" class="btn-action btn-view" title="View Details">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="@Url.Action("Edit", "Product", new { id = product.Id })" class="btn-action btn-edit" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button class="btn-action btn-delete" onclick="confirmDelete(@product.Id, '@product.Name')" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-exclamation-triangle text-warning me-2"></i>Confirm Delete
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-3">Are you sure you want to delete this product?</p>
+                    <div class="product-to-delete">
+                        <strong id="productToDelete"></strong>
+                    </div>
+                    <div class="alert alert-warning mt-3 mb-0">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        This action cannot be undone.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn" onclick="executeDelete()">
+                        <i class="fas fa-trash me-2"></i>Delete Product
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+<script>
+    let table;
+    let productToDeleteId = null;
+
+    // Theme Management
+    function initTheme() {
+        const savedTheme = localStorage.getItem('adminTheme') || 'light';
+        applyTheme(savedTheme);
+    }
+
+    function applyTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+    }
+
+    $(document).ready(function () {
+        initTheme();
+
+        // Listen for theme changes from parent dashboard
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'THEME_CHANGE') {
+                applyTheme(event.data.theme);
+            }
+        });
+
+        table = $('#productsTable').DataTable({
+            "order": [[3, "desc"]],
+            "pageLength": 25,
+            "responsive": true,
+            "columnDefs": [
+                { "orderable": false, "targets": [5] },
+                { "width": "30%", "targets": 0 },
+                { "width": "15%", "targets": 1 },
+                { "width": "15%", "targets": 2 },
+                { "width": "12%", "targets": 3 },
+                { "width": "13%", "targets": 4 },
+                { "width": "15%", "targets": 5 }
+            ],
+            "language": {
+                "emptyTable": "No products found",
+                "info": "Showing _START_ to _END_ of _TOTAL_ products",
+                "infoEmpty": "Showing 0 to 0 of 0 products",
+                "search": "Search:"
+            }
+        });
+
+        // Auto-hide alerts
+        setTimeout(function () {
+            $('.alert').fadeOut('slow');
+        }, 5000);
+
+        // Search functionality
+        $('#searchBox').on('keyup', function () {
+            table.search(this.value).draw();
+        });
+
+        // Category filter
+        $('#categoryFilter').on('change', function () {
+            table.column(1).search(this.value).draw();
+        });
+
+        // Price filter
+        $('#priceFilter').on('change', function () {
+            var filterValue = this.value;
+            $.fn.dataTable.ext.search.pop();
+
+            if (filterValue) {
+                $.fn.dataTable.ext.search.push(
+                    function (settings, data, dataIndex) {
+                        var priceText = data[2];
+                        var priceMatch = priceText.match(/₹([\d,]+)/);
+                        if (!priceMatch) return false;
+
+                        var price = parseInt(priceMatch[1].replace(/,/g, ''));
+
+                        switch (filterValue) {
+                            case 'under-1000':
+                                return price < 1000;
+                            case '1000-5000':
+                                return price >= 1000 && price <= 5000;
+                            case '5000-10000':
+                                return price > 5000 && price <= 10000;
+                            case 'above-10000':
+                                return price > 10000;
+                            default:
+                                return true;
+                        }
+                    }
+                );
+            }
+            table.draw();
+        });
+
+        // Offer filter
+        $('#offerFilter').on('change', function () {
+            var filterValue = this.value;
+
+            if (filterValue === 'on-offer') {
+                table.column(4).search('On Offer').draw();
+            } else if (filterValue === 'regular') {
+                table.column(4).search('Active').draw();
+            } else {
+                table.column(4).search('').draw();
+            }
+        });
+    });
+
+    function refreshData() {
+        $('#refreshIcon').addClass('fa-spin');
+        setTimeout(function () {
+            location.reload();
+        }, 1000);
+    }
+
+    function showStats() {
+        $('#statsPanel').slideToggle(300);
+    }
+
+    function confirmDelete(productId, productName) {
+        productToDeleteId = productId;
+        $('#productToDelete').text(productName);
+        var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        deleteModal.show();
+    }
+
+    function executeDelete() {
+        if (!productToDeleteId) return;
+
+        const confirmBtn = $('#confirmDeleteBtn');
+        const originalHtml = confirmBtn.html();
+        confirmBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-2"></i>Deleting...');
+
+        $.ajax({
+            url: '@Url.Action("DeleteProduct", "Product")',
+            type: 'POST',
+            data: { id: productToDeleteId },
+            success: function (response) {
+                confirmBtn.prop('disabled', false).html(originalHtml);
+
+                if (response.success) {
+                    var deleteModal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+                    deleteModal.hide();
+
+                    table.row($(`#product-row-${productToDeleteId}`)).remove().draw();
+
+                    showToast('Product deleted successfully!', 'success');
+                } else {
+                    showToast(response.message || 'Error deleting product.', 'error');
+                }
+            },
+            error: function () {
+                confirmBtn.prop('disabled', false).html(originalHtml);
+                showToast('An error occurred while deleting the product.', 'error');
+            }
+        });
+    }
+
+    function showToast(message, type) {
+        const bgColor = type === 'success' ? '#10b981' : '#ef4444';
+        const icon = type === 'success' ? 'check-circle' : 'exclamation-circle';
+
+        const toast = $(`
+            <div class="custom-toast" style="background: ${bgColor}">
+                <i class="fas fa-${icon} me-2"></i>${message}
+            </div>
+        `);
+
+        $('body').append(toast);
+
+        setTimeout(() => {
+            toast.addClass('show');
+        }, 100);
+
+        setTimeout(() => {
+            toast.removeClass('show');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+</script>
+
+<style>
+    :root {
+        --bg-primary: #f5f7fa;
+        --bg-secondary: #ffffff;
+        --bg-tertiary: #f8fafc;
+        --text-primary: #2d3748;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border-color: #e2e8f0;
+        --border-light: #f1f5f9;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --transition: all 0.3s ease;
+    }
+
+    [data-theme="dark"] {
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --bg-tertiary: #334155;
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --text-muted: #94a3b8;
+        --border-color: #334155;
+        --border-light: #475569;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+    }
+
+    .product-container {
+        padding: 24px;
+        max-width: 100%;
+    }
+
+    /* Alert */
+    .alert {
+        border-radius: 8px;
+        border: none;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .alert-success {
+        background: #d1fae5;
+        color: #065f46;
+    }
+
+    .alert-danger {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    .alert-warning {
+        background: #fef3c7;
+        color: #92400e;
+    }
+
+    /* Header */
+    .product-header {
+        background: var(--bg-secondary);
+        padding: 24px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        margin-bottom: 20px;
+    }
+
+    .product-header h4 {
+        color: var(--text-primary);
+        font-weight: 700;
+        font-size: 1.5rem;
+    }
+
+    /* Stats Panel */
+    .stats-panel {
+        margin-bottom: 20px;
+    }
+
+    .stat-card {
+        background: var(--bg-secondary);
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transition: var(--transition);
+    }
+
+    .stat-card:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+    }
+
+    .stat-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+
+    .bg-primary-light {
+        background: #dbeafe;
+    }
+
+    .bg-success-light {
+        background: #d1fae5;
+    }
+
+    .bg-warning-light {
+        background: #fef3c7;
+    }
+
+    .bg-info-light {
+        background: #e0f2fe;
+    }
+
+    .stat-content {
+        flex: 1;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 4px;
+        line-height: 1;
+    }
+
+    .stat-label {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin: 0;
+    }
+
+    /* Filter Section */
+    .filter-section {
+        background: var(--bg-secondary);
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        margin-bottom: 20px;
+    }
+
+    .search-box {
+        position: relative;
+    }
+
+    .search-box i {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+    }
+
+    .search-box input {
+        padding-left: 40px;
+    }
+
+    .form-control,
+    .form-select {
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 0.9rem;
+        transition: var(--transition);
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+
+    /* Table Container */
+    .table-container {
+        background: var(--bg-secondary);
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+    }
+
+    #productsTable {
+        width: 100% !important;
+    }
+
+    #productsTable thead th {
+        background: var(--bg-tertiary);
+        color: var(--text-secondary);
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 16px 12px;
+        border-bottom: 2px solid var(--border-color);
+    }
+
+    #productsTable tbody td {
+        padding: 16px 12px;
+        vertical-align: middle;
+        border-bottom: 1px solid var(--border-light);
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+
+    #productsTable tbody tr {
+        transition: var(--transition);
+    }
+
+    #productsTable tbody tr:hover {
+        background: var(--bg-tertiary) !important;
+    }
+
+    /* Product Info */
+    .product-info {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .product-image {
+        width: 60px;
+        height: 60px;
+        border-radius: 8px;
+        overflow: hidden;
+        flex-shrink: 0;
+        background: var(--bg-tertiary);
+    }
+
+    .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .product-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+        font-size: 1.5rem;
+    }
+
+    .product-details {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .product-name {
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 0.95rem;
+        margin-bottom: 4px;
+    }
+
+    .product-description {
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        margin-bottom: 4px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .product-code {
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        font-family: 'Courier New', monospace;
+    }
+
+    /* Category Info */
+    .category-info {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    /* Pricing Info */
+    .pricing-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .price-current {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+
+    .price-offer {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #10b981;
+    }
+
+    .price-original {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        text-decoration: line-through;
+    }
+
+    .discount-badge {
+        display: inline-block;
+        padding: 3px 8px;
+        background: #fee2e2;
+        color: #dc2626;
+        font-size: 0.75rem;
+        font-weight: 600;
+        border-radius: 4px;
+        width: fit-content;
+    }
+
+    /* Date Info */
+    .date-info .date {
+        font-weight: 600;
+        color: var(--text-primary);
+        font-size: 0.9rem;
+    }
+
+    .date-info .time {
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+    }
+
+    /* Status Badges */
+    .status-badges {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .badge {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        width: fit-content;
+    }
+
+    .badge i {
+        font-size: 0.7rem;
+    }
+
+    .badge-primary {
+        background: #dbeafe;
+        color: #2563eb;
+    }
+
+    .badge-secondary {
+        background: #e0e7ff;
+        color: #6366f1;
+    }
+
+    .badge-light {
+        background: var(--bg-tertiary);
+        color: var(--text-secondary);
+    }
+
+    .badge-offer {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    .badge-active {
+        background: #d1fae5;
+        color: #059669;
+    }
+
+    .badge-image {
+        background: #fef3c7;
+        color: #d97706;
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+        display: flex;
+        gap: 6px;
+    }
+
+    .btn-action {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        background: var(--bg-secondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--transition);
+        color: var(--text-secondary);
+        text-decoration: none;
+    }
+
+    .btn-action:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .btn-view:hover {
+        background: #dbeafe;
+        border-color: #3b82f6;
+        color: #3b82f6;
+    }
+
+    .btn-edit:hover {
+        background: #fef3c7;
+        border-color: #f59e0b;
+        color: #f59e0b;
+    }
+
+    .btn-delete:hover {
+        background: #fee2e2;
+        border-color: #ef4444;
+        color: #ef4444;
+    }
+
+    /* Buttons */
+    .btn {
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 0.9rem;
+        transition: var(--transition);
+        border: none;
+    }
+
+    .btn-sm {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+
+    .btn-primary {
+        background: #3b82f6;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background: #2563eb;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-success {
+        background: #10b981;
+        color: white;
+    }
+
+    .btn-success:hover {
+        background: #059669;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-secondary {
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+    }
+
+    .btn-danger {
+        background: #ef4444;
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background: #dc2626;
+    }
+
+    .btn-outline-secondary {
+        background: var(--bg-secondary);
+        color: var(--text-secondary);
+        border: 1px solid var(--border-color);
+    }
+
+    .btn-outline-secondary:hover {
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+        border-color: var(--text-muted);
+    }
+
+    /* Modal */
+    .modal-content {
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+
+    .modal-header {
+        border-bottom: 1px solid var(--border-color);
+        padding: 20px 24px;
+    }
+
+    .modal-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .modal-body {
+        padding: 24px;
+    }
+
+    .modal-footer {
+        border-top: 1px solid var(--border-color);
+        padding: 16px 24px;
+    }
+
+    .btn-close {
+        filter: var(--text-primary);
+    }
+
+    [data-theme="dark"] .btn-close {
+        filter: invert(1);
+    }
+
+    .product-to-delete {
+        padding: 16px;
+        background: var(--bg-tertiary);
+        border-radius: 8px;
+        border-left: 4px solid #f59e0b;
+    }
+
+    /* Custom Toast */
+    .custom-toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 16px 24px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 500;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        z-index: 9999;
+        opacity: 0;
+        transform: translateX(400px);
+        transition: all 0.3s ease;
+    }
+
+    .custom-toast.show {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* DataTables Customization */
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_paginate {
+        padding: 12px 0;
+        color: var(--text-primary);
+    }
+
+    .dataTables_wrapper .dataTables_length select,
+    .dataTables_wrapper .dataTables_filter input {
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 6px 12px;
+        font-size: 0.9rem;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        padding: 6px 12px;
+        margin: 0 2px;
+        border-radius: 6px;
+        border: 1px solid var(--border-color);
+        background: var(--bg-secondary);
+        color: var(--text-secondary) !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background: var(--bg-tertiary) !important;
+        border-color: var(--text-muted) !important;
+        color: var(--text-primary) !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        background: #3b82f6 !important;
+        border-color: #3b82f6 !important;
+        color: white !important;
+    }
+
+    /* Text Colors */
+    .text-muted {
+        color: var(--text-muted) !important;
+    }
+
+    .text-warning {
+        color: #f59e0b !important;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--bg-tertiary);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--text-muted);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--text-secondary);
+    }
+
+    /* Responsive - Matching Dashboard Style */
+    @@media (max-width: 768px) {
+        .product-container {
+            padding: 16px 12px;
+        }
+
+        .product-header {
+            padding: 16px;
+        }
+
+        .product-header h4 {
+            font-size: 1.2rem;
+        }
+
+        .product-header h4 i {
+            display: none;
+        }
+
+        .product-header p {
+            font-size: 0.8rem;
+        }
+
+        .btn-text {
+            display: none;
+        }
+
+        .btn-sm {
+            padding: 6px 10px;
+        }
+
+        .filter-section {
+            padding: 14px;
+        }
+
+        .table-container {
+            padding: 12px;
+            overflow-x: auto;
+        }
+
+        .stat-card {
+            padding: 16px;
+            gap: 12px;
+        }
+
+        .stat-icon {
+            width: 44px;
+            height: 44px;
+            font-size: 1.2rem;
+        }
+
+        .stat-number {
+            font-size: 1.6rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+        }
+
+        .product-image {
+            width: 50px;
+            height: 50px;
+        }
+
+        .product-name {
+            font-size: 0.85rem;
+        }
+
+        .product-description,
+        .product-code {
+            font-size: 0.75rem;
+        }
+
+        .custom-toast {
+            right: 12px;
+            left: 12px;
+            top: 12px;
+        }
+
+        table.dataTable tbody td {
+            padding: 12px 8px !important;
+            font-size: 0.85rem;
+        }
+
+        table.dataTable thead th {
+            padding: 12px 8px !important;
+            font-size: 0.75rem;
+        }
+
+        .btn-action {
+            width: 32px;
+            height: 32px;
+            font-size: 0.85rem;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .product-container {
+            padding: 12px;
+        }
+
+        .product-header {
+            padding: 12px;
+        }
+
+        .product-header h4 {
+            font-size: 1.1rem;
+        }
+
+        .product-header p {
+            display: none;
+        }
+
+        .stat-card {
+            padding: 14px;
+            gap: 10px;
+        }
+
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 1.1rem;
+        }
+
+        .stat-number {
+            font-size: 1.4rem;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+        }
+
+        .filter-section {
+            padding: 12px;
+        }
+
+        .table-container {
+            padding: 10px;
+        }
+
+        .product-image {
+            width: 44px;
+            height: 44px;
+        }
+
+        .btn-action {
+            width: 30px;
+            height: 30px;
+            font-size: 0.8rem;
+        }
+
+        .modal-header,
+        .modal-body,
+        .modal-footer {
+            padding: 16px;
+        }
+
+        table.dataTable tbody td {
+            padding: 10px 6px !important;
+            font-size: 0.8rem;
+        }
+
+        table.dataTable thead th {
+            padding: 10px 6px !important;
+            font-size: 0.7rem;
+        }
+    }
+
+    /* Animation */
+    .fa-spin {
+        animation: fa-spin 1s infinite linear;
+    }
+
+    @@keyframes fa-spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>

@@ -1,0 +1,1362 @@
+﻿@{
+    ViewData["Title"] = "Contact Us";
+}
+
+<style>
+    /* ===== CONTACT PAGE RESPONSIVE STYLES ===== */
+    
+    /* Base Contact Page Styles */
+    .page-content {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .contact-form {
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        margin-bottom: 30px;
+    }
+
+    .contact-info {
+        background: var(--primary-color, #1a365d);
+        color: white;
+        padding: 40px;
+        border-radius: 15px;
+        height: fit-content;
+    }
+
+    /* Only sticky on large screens */
+    @@media (min-width: 992px) {
+        .contact-info {
+            position: sticky;
+            top: 100px;
+        }
+    }
+
+    .contact-form h4,
+    .contact-info h4 {
+        font-size: clamp(1.05rem, 2.5vw, 1.5rem);
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        font-weight: 600;
+        font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+        margin-bottom: 0.5rem;
+        color: #2d3748;
+    }
+
+    .form-control {
+        padding: 12px 16px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: clamp(0.8rem, 1.8vw, 1rem);
+        transition: all 0.3s ease;
+        background: white;
+        width: 100%;
+    }
+
+        .form-control:focus {
+            border-color: #3182ce;
+            box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+            background: white;
+            outline: none;
+        }
+
+        .form-control.is-invalid {
+            border-color: #e53e3e;
+            background: #fff5f5;
+        }
+
+    .invalid-feedback {
+        display: none;
+        color: #e53e3e;
+        font-size: clamp(0.75rem, 1.6vw, 0.875rem);
+        margin-top: 0.25rem;
+        font-weight: 500;
+    }
+
+    .btn-submit {
+        background: linear-gradient(130deg, #8b0000 0%, #cc0017 50%, #8b0000 90%);
+        border: none;
+        padding: 14px 40px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: clamp(0.9rem, 2vw, 1.1rem);
+        transition: all 0.3s ease;
+        color: white;
+        width: 100%;
+        max-width: 300px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    @@media (min-width: 768px) {
+        .btn-submit {
+            width: auto;
+            margin: 0;
+        }
+    }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(49, 130, 206, 0.3);
+            background: linear-gradient(130deg, #8b0000 0%, #cc0017 50%, #8b0000 90%);
+            color: white;
+        }
+
+        .btn-submit:disabled {
+            background: #a0aec0;
+            transform: none;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+    .contact-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+    }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+
+        .contact-item i {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-right: 15px;
+            margin-top: 2px;
+            width: 30px;
+            flex-shrink: 0;
+        }
+
+        .contact-item strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+        }
+
+        .contact-item div {
+            font-size: clamp(0.8rem, 1.6vw, 0.95rem);
+            line-height: 1.6;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            word-break: break-word;
+        }
+
+            .contact-item a:hover {
+                color: #ffd700;
+                text-decoration: underline;
+            }
+
+    .social-links {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 15px;
+    }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+        }
+
+            .social-links a:hover {
+                background: white;
+                color: var(--primary-color, #1a365d);
+                transform: translateY(-3px);
+                box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+            }
+
+    .quick-contact-card {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        margin-bottom: 12px;
+    }
+
+        .quick-contact-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+
+        .quick-contact-card i {
+            font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+        }
+
+        .quick-contact-card strong {
+            display: block;
+            font-size: clamp(0.85rem, 1.8vw, 1rem);
+        }
+
+        .quick-contact-card small {
+            font-size: clamp(0.75rem, 1.6vw, 0.85rem);
+            opacity: 0.9;
+        }
+
+    .map-container1 {
+        border-radius: 15px;
+        overflow: hidden;
+        height: 400px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+        max-width: 100%;
+    }
+
+        .map-container1:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .map-container1 iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+    .faq-item {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+        .faq-item:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .faq-item h6 {
+            font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2d3748;
+        }
+
+        .faq-item p {
+            margin: 0;
+            font-size: clamp(0.8rem, 1.6vw, 0.95rem);
+            line-height: 1.6;
+        }
+
+    .section-padding {
+        padding: 80px 0 !important;
+        margin-top: 80px !important;
+    }
+
+    .section-title {
+        font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .lead {
+        font-size: clamp(1rem, 2vw, 1.25rem) !important;
+        margin-bottom: 3rem !important;
+    }
+
+    /* ===== OFFICE TAB STYLES ===== */
+    .office-tab {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        width: 100%;
+        text-align: left;
+        padding: 12px 15px;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+        .office-tab:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            transform: translateX(3px);
+        }
+
+        .office-tab.active {
+            background: linear-gradient( 130deg, #8b0000 20%, #cc0017 50%, #8b0000 90%) !important;
+            color: var(--primary-color, #8b0000);
+            font-weight: 600;
+            border-color: white;
+        }
+
+    .office-details {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+        .office-details h5 {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .office-details p {
+            color: white;
+            line-height: 1.8;
+        }
+
+    .quick-contact-btns .btn {
+        background: white;
+        color: var(--primary-color, #8b0000);
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .quick-contact-btns .btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.02);
+        }
+
+    /* ===== RESPONSIVE BREAKPOINTS ===== */
+
+    /* Large Desktop (1400px+) */
+    @@media (min-width: 1400px) {
+        .container {
+            max-width: 1320px;
+        }
+    }
+
+    /* Medium Desktop (1200px - 1399px) */
+    @@media (max-width: 1399px) {
+        .container {
+            max-width: 1140px;
+        }
+    }
+
+    /* Tablet Landscape & Small Desktop (992px - 1199px) */
+    @@media (max-width: 1199px) {
+        .container {
+            max-width: 960px;
+        }
+
+        .section-padding {
+            padding: 70px 0 !important;
+            margin-top: 70px !important;
+        }
+
+        .contact-form {
+            padding: 35px;
+        }
+
+        .contact-info {
+            padding: 35px;
+            margin-top: 30px;
+        }
+    }
+
+    /* Tablet Portrait (768px - 991px) */
+    @@media (max-width: 991px) {
+        .container {
+            max-width: 720px;
+        }
+
+        .section-padding {
+            padding: 60px 0 !important;
+            margin-top: 65px !important;
+        }
+
+        .contact-form {
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+
+        .contact-info {
+            padding: 30px;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        .contact-item {
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+
+        .map-container1 {
+            height: 350px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .office-tab {
+            padding: 10px 12px;
+            font-size: 0.9rem;
+        }
+    }
+
+    /* Large Mobile & Small Tablet (576px - 767px) */
+    @@media (max-width: 767px) {
+        .container {
+            max-width: 540px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .section-padding {
+            padding: 50px 0 !important;
+            margin-top: 60px !important;
+        }
+
+        .contact-form {
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+
+        .social-links {
+            gap: 10px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+        }
+
+        .map-container1 {
+            height: 300px;
+        }
+
+        .faq-item {
+            padding: 18px;
+            margin-bottom: 15px;
+        }
+
+        .office-details {
+            padding: 15px;
+        }
+    }
+
+    /* Medium Mobile (480px - 575px) */
+    @@media (max-width: 575px) {
+        .container {
+            max-width: 100%;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .section-padding {
+            padding: 45px 0 !important;
+            margin-top: 55px !important;
+        }
+
+        .contact-form {
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+        }
+
+        .contact-info {
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+        }
+
+        .contact-item {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .social-links {
+            gap: 8px;
+        }
+
+        .social-links a {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+        }
+
+        .quick-contact-card {
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+        }
+
+        .map-container1 {
+            height: 280px;
+            border-radius: 12px;
+        }
+
+        .faq-item {
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+
+        .mb-3, .mb-4 {
+            margin-bottom: 1rem !important;
+        }
+
+        .mt-4 {
+            margin-top: 1.5rem !important;
+        }
+
+        .mt-5 {
+            margin-top: 2rem !important;
+        }
+    }
+
+    /* Small Mobile (375px - 479px) */
+    @@media (max-width: 479px) {
+        .container {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .section-padding {
+            padding: 40px 0 !important;
+            margin-top: 50px !important;
+        }
+
+        .contact-form {
+            padding: 18px;
+            margin-bottom: 18px;
+        }
+
+        .contact-info {
+            padding: 18px;
+            margin-bottom: 18px;
+        }
+
+        .contact-item {
+            padding: 9px;
+            margin-bottom: 9px;
+        }
+
+        .social-links a {
+            width: 36px;
+            height: 36px;
+        }
+
+        .quick-contact-card {
+            padding: 9px;
+        }
+
+        .map-container1 {
+            height: 250px;
+        }
+
+        .faq-item {
+            padding: 14px;
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+        }
+    }
+
+    /* Extra Small Mobile (320px - 374px) */
+    @@media (max-width: 374px) {
+        .container {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+
+        .section-padding {
+            padding: 35px 0 !important;
+            margin-top: 50px !important;
+        }
+
+        .contact-form {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+        }
+
+        .contact-info {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+        }
+
+        .contact-item {
+            padding: 8px;
+            margin-bottom: 8px;
+        }
+
+        .social-links {
+            gap: 6px;
+        }
+
+        .social-links a {
+            width: 34px;
+            height: 34px;
+            border-radius: 7px;
+        }
+
+        .quick-contact-card {
+            padding: 8px;
+            margin-bottom: 7px;
+        }
+
+        .map-container1 {
+            height: 220px;
+            border-radius: 10px;
+        }
+
+        .faq-item {
+            padding: 12px;
+        }
+
+        textarea.form-control {
+            min-height: 90px;
+        }
+
+        .form-control {
+            padding: 8px 10px;
+            border-radius: 6px;
+        }
+
+        .form-text {
+            font-size: 0.7rem !important;
+        }
+
+        .mt-4 {
+            margin-top: 1rem !important;
+        }
+
+        .mt-5 {
+            margin-top: 1.5rem !important;
+        }
+    }
+
+    /* Ultra Small Mobile (max 319px) */
+    @@media (max-width: 319px) {
+        .container {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .section-padding {
+            padding: 30px 0 !important;
+            margin-top: 45px !important;
+        }
+
+        .contact-form {
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+
+        .contact-info {
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+
+        .contact-item {
+            padding: 7px;
+            margin-bottom: 7px;
+        }
+
+        .social-links a {
+            width: 32px;
+            height: 32px;
+        }
+
+        .quick-contact-card {
+            padding: 7px;
+        }
+
+        .map-container1 {
+            height: 200px;
+        }
+
+        .faq-item {
+            padding: 10px;
+        }
+
+        textarea.form-control {
+            min-height: 80px;
+        }
+
+        .form-control {
+            padding: 7px 9px;
+        }
+    }
+
+    /* Landscape Mode Adjustments for Mobile */
+    @@media (max-height: 500px) and (orientation: landscape) {
+        .section-padding {
+            margin-top: 60px !important;
+        }
+
+        .contact-info {
+            position: relative !important;
+            top: 0 !important;
+        }
+
+        .map-container1 {
+            height: 250px;
+        }
+    }
+
+    /* Touch Device Optimizations */
+    @@media (hover: none) and (pointer: coarse) {
+        .form-control {
+            min-height: 44px;
+        }
+
+        .btn-submit {
+            min-height: 48px;
+            padding: 14px 30px;
+        }
+
+        select.form-control {
+            min-height: 44px;
+        }
+
+        .social-links a {
+            min-width: 44px;
+            min-height: 44px;
+        }
+    }
+
+    /* High DPI Screens */
+    @@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .contact-form,
+        .contact-info,
+        .faq-item {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+    }
+
+    /* Print Styles */
+    @@media print {
+        .contact-form,
+        .contact-info {
+            box-shadow: none;
+            border: 1px solid #ddd;
+        }
+
+        .map-container1 {
+            display: none;
+        }
+
+        .btn-submit {
+            display: none;
+        }
+
+        .social-links {
+            display: none;
+        }
+
+        .section-padding {
+            margin-top: 0 !important;
+        }
+    }
+</style>
+
+<div class="page-content">
+    <section class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <h2 class="section-title" data-aos="fade-up">Contact Us</h2>
+                    <p class="lead" data-aos="fade-up" data-aos-delay="100">
+                        Get in touch with our team for all your industrial tool requirements
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8 mb-4">
+                    <div class="contact-form" data-aos="fade-right">
+                        <h4 class="mb-4" style="color: #c20303;">
+                            <i class="fas fa-envelope me-2"></i>Send us a Message
+                        </h4>
+
+                        <div id="contactFormContainer">
+                            <div id="validationSummary" class="alert alert-danger" style="display: none;">
+                                <ul id="validationList"></ul>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="FullName" class="form-label">Full Name *</label>
+                                    <input id="FullName" name="FullName" class="form-control" placeholder="Enter your full name" />
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="PhoneNumber" class="form-label">Phone Number *</label>
+                                    <input id="PhoneNumber" name="PhoneNumber" class="form-control" type="tel" placeholder="Enter your phone number" />
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="Email" class="form-label">Email Address *</label>
+                                    <input id="Email" name="Email" class="form-control" type="email" placeholder="Enter your email address" />
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="GSTNumber" class="form-label">GST Number</label>
+                                    <input id="GSTNumber" name="GSTNumber" class="form-control" placeholder="e.g., 22AAAAA0000A1Z5" />
+                                    <div class="invalid-feedback"></div>
+                                    <small class="form-text text-muted">Optional - for business customers</small>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="Company" class="form-label">Company Name</label>
+                                <input id="Company" name="Company" class="form-control" placeholder="Enter your company name" />
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="Subject" class="form-label">Subject *</label>
+                                <select id="Subject" name="Subject" class="form-control">
+                                    <option value="">Select Subject</option>
+                                    <option value="Product Inquiry">Product Inquiry</option>
+                                    <option value="Bulk Order">Bulk Order</option>
+                                    <option value="Technical Support">Technical Support</option>
+                                    <option value="Partnership Opportunity">Partnership Opportunity</option>
+                                    <option value="Warranty Claim">Warranty Claim</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="Message" class="form-label">Message *</label>
+                                <textarea id="Message" name="Message" class="form-control" rows="5" placeholder="Please describe your requirements in detail..."></textarea>
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <button type="button" id="submitBtn" class="btn btn-submit btn-primary" onclick="sendContactEmail()">
+                                <i class="fas fa-paper-plane me-2"></i>Send Message
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="contact-info" data-aos="fade-left">
+                        <h4 class="mb-4"><i class="fas fa-info-circle me-2"></i>Get in Touch</h4>
+                        
+                        <!-- Office Tabs -->
+                        <ul class="nav nav-pills mb-3 flex-column" id="officeTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active office-tab" id="belgaum-tab" data-bs-toggle="pill" data-bs-target="#belgaum" type="button">
+                                    <i class="fas fa-building me-2"></i>Belgaum (Head Office)
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link office-tab" id="hyderabad-tab" data-bs-toggle="pill" data-bs-target="#hyderabad" type="button">
+                                    <i class="fas fa-map-marker-alt me-2"></i>Hyderabad
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link office-tab" id="bangalore-tab" data-bs-toggle="pill" data-bs-target="#bangalore" type="button">
+                                    <i class="fas fa-map-marker-alt me-2"></i>Bangalore
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link office-tab" id="chennai-tab" data-bs-toggle="pill" data-bs-target="#chennai" type="button">
+                                    <i class="fas fa-map-marker-alt me-2"></i>Chennai
+                                </button>
+                            </li>
+                        </ul>
+
+                        <!-- Office Details -->
+                        <div class="tab-content" id="officeTabContent">
+                            <!-- Belgaum Office -->
+                            <div class="tab-pane fade show active" id="belgaum" role="tabpanel">
+                                <div class="office-details">
+                                    <h5 class="mb-3"><i class="fas fa-map-marker-alt me-2"></i>Belgaum Office</h5>
+                                    <p class="mb-3">
+                                        <small>
+                                            Aniket Sales Agencies<br>
+                                            RS No: 345, Plot No: 122/2A,<br>
+                                            Udyambag Industrial Estate,<br>
+                                            Belgaum, Karnataka - 590008
+                                        </small>
+                                    </p>
+                                    <div class="quick-contact-btns">
+                                        <a href="tel:+917090979999" class="btn btn-light btn-sm mb-2 w-100">
+                                            <i class="fas fa-phone me-2"></i>+91 7090979999
+                                        </a>
+                                        <a href="mailto:office@aniketsales.com" class="btn btn-light btn-sm w-100">
+                                            <i class="fas fa-envelope me-2"></i>office@aniketsales.com
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hyderabad Office -->
+                            <div class="tab-pane fade" id="hyderabad" role="tabpanel">
+                                <div class="office-details">
+                                    <h5 class="mb-3"><i class="fas fa-map-marker-alt me-2"></i>Hyderabad Office</h5>
+                                    <p class="mb-3">
+                                        <small>
+                                            Plot No. 3, Ratna Co-op Society,<br>
+                                            Opp. Hanuman Temple, Tankbund,<br>
+                                            Chandulal Bowli, Secunderabad,<br>
+                                            Telangana, Hyderabad - 500029
+                                        </small>
+                                    </p>
+                                    <div class="quick-contact-btns">
+                                        <a href="tel:+918520063964" class="btn btn-light btn-sm mb-2 w-100">
+                                            <i class="fas fa-phone me-2"></i>+91 8520063964
+                                        </a>
+                                        <a href="mailto:hyderabad@aniketsales.com" class="btn btn-light btn-sm w-100">
+                                            <i class="fas fa-envelope me-2"></i>hyderabad@aniketsales.com
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bangalore Office -->
+                            <div class="tab-pane fade" id="bangalore" role="tabpanel">
+                                <div class="office-details">
+                                    <h5 class="mb-3"><i class="fas fa-map-marker-alt me-2"></i>Bangalore Office</h5>
+                                    <p class="mb-3">
+                                        <small>
+                                            SY No. 31, Ground Floor, 278,<br>
+                                            Ashraya Badavane, 6th Cross Road,<br>
+                                            Kodigehalli North,<br>
+                                            Bengaluru Urban, Karnataka - 560091
+                                        </small>
+                                    </p>
+                                    <div class="quick-contact-btns">
+                                        <a href="tel:+919164633373" class="btn btn-light btn-sm mb-2 w-100">
+                                            <i class="fas fa-phone me-2"></i>+91 9164633373
+                                        </a>
+                                        <a href="mailto:sweekar@aniketsales.com" class="btn btn-light btn-sm w-100">
+                                            <i class="fas fa-envelope me-2"></i>sweekar@aniketsales.com
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Chennai Office -->
+                            <div class="tab-pane fade" id="chennai" role="tabpanel">
+                                <div class="office-details">
+                                    <h5 class="mb-3"><i class="fas fa-map-marker-alt me-2"></i>Chennai Office</h5>
+                                    <p class="mb-3">
+                                        <small>
+                                            No. 4/253, Suresh Nagar, 2nd Street,<br>
+                                            Ganesh Avenue, Porur,<br>
+                                            Chennai, Tamil Nadu - 600116
+                                        </small>
+                                    </p>
+                                    <div class="quick-contact-btns">
+                                        <a href="tel:+919952049587" class="btn btn-light btn-sm mb-2 w-100">
+                                            <i class="fas fa-phone me-2"></i>+91 9952049587
+                                        </a>
+                                        <a href="mailto:chennai@aniketsales.com" class="btn btn-light btn-sm w-100">
+                                            <i class="fas fa-envelope me-2"></i>chennai@aniketsales.com
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Business Hours -->
+                        <div class="mt-4 pt-3" style="border-top: 1px solid rgba(255,255,255,0.2);">
+                            <small>
+                                <i class="fas fa-clock me-2"></i><strong>Business Hours</strong><br>
+                                Mon - Sat: 9:00 AM - 6:00 PM
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Section -->
+            <div class="row mt-5">
+                <div class="col-lg-12">
+                    <h4 class="text-center mb-4">Find Us</h4>
+                    <div class="map-container1" data-aos="fade-up">
+                        <iframe width="100%"
+                                height="400"
+                                style="border:0"
+                                loading="lazy"
+                                allowfullscreen
+                                referrerpolicy="no-referrer-when-downgrade"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7624.772!2d74.49229!3d15.81718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbf65b7be6dca61%3A0x412f7c54e9a0ddd0!2sAniket%20Sales%20Agencies!5e1!3m2!1sen!2sin!4v1723718400">
+                        </iframe>
+                    </div>
+                    <div class="text-center mt-3">
+                        <p class="text-muted">
+                            <i class="fas fa-directions me-2"></i>
+                            <a href="https://maps.google.com/?q=Aniket+Sales+Agencies+Belagavi" target="_blank" class="text-primary text-decoration-none">
+                                Get Directions to Our Office
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script src="~/js/site.js"></script>
+    <script>
+        // Validation functions
+        function showValidationMessage(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const feedback = field.parentNode.querySelector('.invalid-feedback');
+            
+            if (!field || !feedback) return;
+            
+            field.classList.remove('is-invalid');
+            feedback.style.display = 'none';
+            
+            if (message) {
+                field.classList.add('is-invalid');
+                feedback.textContent = message;
+                feedback.style.display = 'block';
+            }
+        }
+
+        function clearValidationMessage(fieldId) {
+            const field = document.getElementById(fieldId);
+            const feedback = field.parentNode.querySelector('.invalid-feedback');
+            
+            if (!field || !feedback) return;
+            
+            field.classList.remove('is-invalid');
+            feedback.style.display = 'none';
+        }
+
+        function validateFullName() {
+            const name = document.getElementById('FullName').value.trim();
+            
+            if (!name) {
+                showValidationMessage('FullName', 'Full Name is required');
+                return false;
+            }
+            
+            if (name.length < 2) {
+                showValidationMessage('FullName', 'Name must be at least 2 characters long');
+                return false;
+            }
+            
+            if (name.length > 100) {
+                showValidationMessage('FullName', 'Full Name cannot exceed 100 characters');
+                return false;
+            }
+            
+            if (!/^[a-zA-Z\s'-]+$/.test(name)) {
+                showValidationMessage('FullName', 'Name can only contain letters, spaces, hyphens and apostrophes');
+                return false;
+            }
+            
+            clearValidationMessage('FullName');
+            return true;
+        }
+
+        function validateEmail() {
+            const email = document.getElementById('Email').value.trim();
+            
+            if (!email) {
+                showValidationMessage('Email', 'Email is required');
+                return false;
+            }
+            
+            const emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+            if (!emailRegex.test(email)) {
+                showValidationMessage('Email', 'Please enter a valid email address');
+                return false;
+            }
+            
+            if (email.length > 255) {
+                showValidationMessage('Email', 'Email cannot exceed 255 characters');
+                return false;
+            }
+            
+            clearValidationMessage('Email');
+            return true;
+        }
+
+        function validatePhoneNumber() {
+            const phone = document.getElementById('PhoneNumber').value.trim();
+            
+            if (!phone) {
+                showValidationMessage('PhoneNumber', 'Phone Number is required');
+                return false;
+            }
+            
+            const cleanPhone = phone.replace(/[\s\-\(\)\+]/g, '');
+            
+            if (cleanPhone.length < 10) {
+                showValidationMessage('PhoneNumber', 'Phone number must be at least 10 digits');
+                return false;
+            }
+            
+            if (cleanPhone.length > 20) {
+                showValidationMessage('PhoneNumber', 'Phone Number cannot exceed 20 characters');
+                return false;
+            }
+            
+            if (!/^\d+$/.test(cleanPhone)) {
+                showValidationMessage('PhoneNumber', 'Please enter a valid phone number');
+                return false;
+            }
+            
+            clearValidationMessage('PhoneNumber');
+            return true;
+        }
+
+        function validateCompany() {
+            const company = document.getElementById('Company').value.trim();
+            
+            if (company && company.length > 100) {
+                showValidationMessage('Company', 'Company name cannot exceed 100 characters');
+                return false;
+            }
+            
+            clearValidationMessage('Company');
+            return true;
+        }
+
+        function validateGSTNumber() {
+            const gst = document.getElementById('GSTNumber').value.trim();
+            
+            if (gst) {
+                if (gst.length > 15) {
+                    showValidationMessage('GSTNumber', 'GST Number cannot exceed 15 characters');
+                    return false;
+                }
+                
+                const gstRegex = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
+                if (!gstRegex.test(gst)) {
+                    showValidationMessage('GSTNumber', 'Please enter a valid GST number (e.g., 22AAAAA0000A1Z5)');
+                    return false;
+                }
+            }
+            
+            clearValidationMessage('GSTNumber');
+            return true;
+        }
+
+        function validateSubject() {
+            const subject = document.getElementById('Subject').value.trim();
+            
+            if (!subject) {
+                showValidationMessage('Subject', 'Subject is required');
+                return false;
+            }
+            
+            if (subject.length > 200) {
+                showValidationMessage('Subject', 'Subject cannot exceed 200 characters');
+                return false;
+            }
+            
+            clearValidationMessage('Subject');
+            return true;
+        }
+
+        function validateMessage() {
+            const message = document.getElementById('Message').value.trim();
+            
+            if (!message) {
+                showValidationMessage('Message', 'Message is required');
+                return false;
+            }
+            
+            if (message.length < 10) {
+                showValidationMessage('Message', 'Message must be at least 10 characters long');
+                return false;
+            }
+            
+            if (message.length > 2000) {
+                showValidationMessage('Message', 'Message cannot exceed 2000 characters');
+                return false;
+            }
+            
+            clearValidationMessage('Message');
+            return true;
+        }
+
+        function validateForm() {
+            let isValid = true;
+            
+            const validations = [
+                validateFullName(),
+                validateEmail(),
+                validatePhoneNumber(),
+                validateCompany(),
+                validateGSTNumber(),
+                validateSubject(),
+                validateMessage()
+            ];
+            
+            isValid = validations.every(validation => validation === true);
+            
+            return isValid;
+        }
+
+        function initializeValidation() {
+            // Full Name validation
+            document.getElementById('FullName').addEventListener('blur', validateFullName);
+            document.getElementById('FullName').addEventListener('input', function() {
+                if (this.value.trim().length > 0) {
+                    validateFullName();
+                } else {
+                    clearValidationMessage('FullName');
+                }
+            });
+
+            // Email validation
+            document.getElementById('Email').addEventListener('blur', validateEmail);
+            document.getElementById('Email').addEventListener('input', function() {
+                if (this.value.trim().length > 0) {
+                    validateEmail();
+                } else {
+                    clearValidationMessage('Email');
+                }
+            });
+
+            // Phone validation
+            document.getElementById('PhoneNumber').addEventListener('blur', validatePhoneNumber);
+            document.getElementById('PhoneNumber').addEventListener('input', function() {
+                if (this.value.trim().length > 0) {
+                    validatePhoneNumber();
+                } else {
+                    clearValidationMessage('PhoneNumber');
+                }
+            });
+
+            // Company validation
+            document.getElementById('Company').addEventListener('blur', validateCompany);
+            document.getElementById('Company').addEventListener('input', validateCompany);
+
+            // GST validation
+            document.getElementById('GSTNumber').addEventListener('blur', validateGSTNumber);
+            document.getElementById('GSTNumber').addEventListener('input', validateGSTNumber);
+
+            // Subject validation
+            document.getElementById('Subject').addEventListener('change', validateSubject);
+            document.getElementById('Subject').addEventListener('blur', validateSubject);
+
+            // Message validation
+            document.getElementById('Message').addEventListener('blur', validateMessage);
+            document.getElementById('Message').addEventListener('input', function() {
+                if (this.value.trim().length > 0) {
+                    validateMessage();
+                } else {
+                    clearValidationMessage('Message');
+                }
+            });
+        }
+
+        function sendContactEmail() {
+            // Validate form before submission
+            if (!validateForm()) {
+                alert('Please correct the validation errors before submitting.');
+                
+                const firstInvalidField = document.querySelector('.is-invalid');
+                if (firstInvalidField) {
+                    firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstInvalidField.focus();
+                }
+                return;
+            }
+
+            var btn = document.getElementById('submitBtn');
+            
+            // Prevent double submission
+            if (btn.disabled) return;
+            
+            // Set loading state
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+            
+            // Prepare contact data object
+            var contactData = {
+                FullName: document.getElementById('FullName').value.trim(),
+                Email: document.getElementById('Email').value.trim(),
+                PhoneNumber: document.getElementById('PhoneNumber').value.trim(),
+                Company: document.getElementById('Company').value.trim(),
+                GSTNumber: document.getElementById('GSTNumber').value.trim(),
+                Subject: document.getElementById('Subject').value.trim(),
+                Message: document.getElementById('Message').value.trim()
+            };
+            
+            // AJAX call using jQuery (consistent with your other files)
+            $.ajax({
+                url: '/Home/SendMail',
+                type: 'POST',
+                data: { model: contactData },
+                success: function(response) {
+                    // Reset button
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Send Message';
+                    
+                    if (response.success) {
+                        alert('Message sent successfully!');
+                        // Clear form
+                        document.getElementById('contactFormContainer').querySelectorAll('input, select, textarea').forEach(function(field) {
+                            field.value = '';
+                            field.classList.remove('is-invalid');
+                        });
+                        // Clear all validation messages
+                        document.querySelectorAll('.invalid-feedback').forEach(function(feedback) {
+                            feedback.style.display = 'none';
+                        });
+                    } else {
+                        alert('Error: ' + (response.message || 'Failed to send message'));
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Reset button
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Send Message';
+                    
+                    let errorMessage = 'Error sending message. Please try again.';
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        errorMessage = xhr.responseJSON.message;
+                    } else if (xhr.responseText) {
+                        errorMessage = xhr.responseText;
+                    }
+                    alert(errorMessage);
+                }
+            });
+        }
+
+        // Initialize validation when document is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeValidation();
+        });
+    </script>
+}

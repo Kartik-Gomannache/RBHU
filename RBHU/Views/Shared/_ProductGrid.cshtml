@@ -1,0 +1,80 @@
+﻿@model List<RBHU_DbServices.Models.Product>
+
+@foreach (var product in Model)
+{
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card product-card-modern h-100" data-aos="fade-up">
+            <div class="product-image-container">
+                @if (!string.IsNullOrEmpty(product.ImageUrl))
+                {
+                    <img src="@product.ImageUrl" alt="@product.Name" class="card-img-top product-image-modern">
+                }
+                else
+                {
+                    <div class="no-image-placeholder">
+                        <i class="fas fa-wind fa-3x text-muted"></i>
+                        <p class="text-muted mt-2">No Image</p>
+                    </div>
+                }
+
+                @if (product.OfferPrice > 0 && product.OfferPrice < product.Price)
+                {
+                    <div class="offer-badge">
+                        @{
+                            var discount = Math.Round(((product.Price - product.OfferPrice) / product.Price) * 100);
+                        }
+                        @discount% OFF
+                    </div>
+                }
+
+                <div class="product-overlay">
+                    <a asp-controller="Home" asp-action="Contact" class="btn btn-primary btn-order">
+                        <i class="fas fa-shopping-cart me-2"></i>Order Now
+                    </a>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <h5 class="card-title product-title">@product.Name</h5>
+                <p class="card-text product-description">
+                    @(string.IsNullOrEmpty(product.Description) ? "High-performance pneumatic tool powered by compressed air for maximum efficiency." :
+                        (product.Description.Length > 80 ? product.Description.Substring(0, 80) + "..." : product.Description))
+                </p>
+
+                <div class="price-section mb-3">
+                    @if (product.OfferPrice > 0 && product.OfferPrice < product.Price)
+                    {
+                        <span class="current-price">₹@product.OfferPrice.ToString("N2")</span>
+                        <span class="original-price">₹@product.Price.ToString("N2")</span>
+                    }
+                    else
+                    {
+                        <span class="current-price">₹@product.Price.ToString("N2")</span>
+                    }
+                </div>
+
+                <div class="product-features mb-3">
+                    <small class="text-muted">
+                        <i class="fas fa-check-circle text-success me-1"></i>Air Powered
+                    </small>
+                    <br>
+                    <small class="text-muted">
+                        <i class="fas fa-bolt text-success me-1"></i>High Efficiency
+                    </small>
+                </div>
+            </div>
+
+            <div class="card-footer bg-transparent">
+                <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">
+                        <i class="fas fa-calendar me-1"></i>
+                        Added: @(product.CreatedAt?.ToString("MMM dd, yyyy") ?? "N/A")
+                    </small>
+                    <a asp-controller="Home" asp-action="Contact" class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-phone me-1"></i>Enquire
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

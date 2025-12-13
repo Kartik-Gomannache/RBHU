@@ -1,0 +1,1953 @@
+﻿@model List<RBHU_DbServices.Models.Product>
+@{
+    ViewData["Title"] = "Special Offers";
+}
+
+<div class="page-content">
+    <section class="section-padding offers-section" style="margin-top: 80px;">
+        <div class="container">
+            <!-- Enhanced Hero Banner -->
+            <div class="row mb-4">
+                <div class="col-lg-12">
+                    <div class="offers-hero-banner" data-aos="fade-down">
+                        <div class="banner-pattern"></div>
+                        <div class="banner-content">
+                            <div class="banner-left">
+                                <div class="offer-badge-large">
+                                    <span class="badge-icon">🔥</span>
+                                    <span class="badge-text">Hot Deals</span>
+                                </div>
+                                <h1 class="banner-title">Special Offers & Deals</h1>
+                                <p class="banner-subtitle">Exclusive discounts on premium industrial tools and equipment</p>
+                                <div class="banner-features">
+                                    <div class="feature-item">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Save up to 70%</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fas fa-shipping-fast"></i>
+                                        <span>Free Delivery</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fas fa-shield-alt"></i>
+                                        <span>Quality Guaranteed</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="banner-right">
+                                <div class="discount-showcase">
+                                    <div class="discount-circle">
+                                        <div class="discount-inner">
+                                            <span class="discount-text">UP TO</span>
+                                            <span class="discount-number">70%</span>
+                                            <span class="discount-off">OFF</span>
+                                        </div>
+                                    </div>
+                                    <div class="floating-badge badge-1">
+                                        <i class="fas fa-tag"></i>
+                                        <span>Best Prices</span>
+                                    </div>
+                                    <div class="floating-badge badge-2">
+                                        <i class="fas fa-star"></i>
+                                        <span>Premium Quality</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (Model != null && Model.Any())
+            {
+                <!-- Filters & Sorting Bar -->
+                <div class="row mb-4">
+                    <div class="col-lg-12">
+                        <div class="filter-sort-bar">
+                            <div class="filter-left">
+                                <button class="filter-toggle-btn" id="filterToggleBtn">
+                                    <i class="fas fa-filter"></i> Filters
+                                </button>
+                                <span class="results-count">Showing <strong>@Model.Count</strong> products</span>
+                            </div>
+
+                            <div class="filter-right">
+                                <div class="view-toggle">
+                                    <button class="view-btn active" data-view="grid" title="Grid View">
+                                        <i class="fas fa-th"></i>
+                                    </button>
+                                    <button class="view-btn" data-view="list" title="List View">
+                                        <i class="fas fa-list"></i>
+                                    </button>
+                                </div>
+
+                                <select class="sort-select" id="sortSelect">
+                                    <option value="featured">Featured</option>
+                                    <option value="price-low">Price: Low to High</option>
+                                    <option value="price-high">Price: High to Low</option>
+                                    <option value="discount">Discount: High to Low</option>
+                                    <option value="name">Name: A to Z</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Sidebar Filters -->
+                    <div class="col-lg-3 col-md-4 mb-4">
+                        <div class="filters-sidebar" id="filtersSidebar">
+                            <div class="filters-header">
+                                <h5><i class="fas fa-sliders-h"></i> Filters</h5>
+                                <button class="clear-filters-btn" id="clearFiltersBtn">Clear All</button>
+                            </div>
+
+                            <!-- Category Filter -->
+                            <div class="filter-section">
+                                <h6 class="filter-title" data-bs-toggle="collapse" data-bs-target="#categoryFilter">
+                                    Category <i class="fas fa-chevron-down"></i>
+                                </h6>
+                                <div class="collapse show" id="categoryFilter">
+                                    <div class="filter-options">
+                                        @foreach (var category in Model.Select(p => p.Category?.Name).Distinct().Where(c => !string.IsNullOrEmpty(c)))
+                                        {
+                                            <label class="filter-option">
+                                                <input type="checkbox" class="filter-checkbox" name="category" value="@category">
+                                                <span>@category</span>
+                                            </label>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Price Range Filter -->
+                            <div class="filter-section">
+                                <h6 class="filter-title" data-bs-toggle="collapse" data-bs-target="#priceFilter">
+                                    Price Range <i class="fas fa-chevron-down"></i>
+                                </h6>
+                                <div class="collapse show" id="priceFilter">
+                                    <div class="filter-options">
+                                        <label class="filter-option">
+                                            <input type="checkbox" class="filter-checkbox" name="price" value="0-5000">
+                                            <span>Under ₹5,000</span>
+                                        </label>
+                                        <label class="filter-option">
+                                            <input type="checkbox" class="filter-checkbox" name="price" value="5000-10000">
+                                            <span>₹5,000 - ₹10,000</span>
+                                        </label>
+                                        <label class="filter-option">
+                                            <input type="checkbox" class="filter-checkbox" name="price" value="10000-25000">
+                                            <span>₹10,000 - ₹25,000</span>
+                                        </label>
+                                        <label class="filter-option">
+                                            <input type="checkbox" class="filter-checkbox" name="price" value="25000-50000">
+                                            <span>₹25,000 - ₹50,000</span>
+                                        </label>
+                                        <label class="filter-option">
+                                            <input type="checkbox" class="filter-checkbox" name="price" value="50000-999999">
+                                            <span>Over ₹50,000</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Discount Filter -->
+                            <div class="filter-section">
+                                <h6 class="filter-title" data-bs-toggle="collapse" data-bs-target="#discountFilter">
+                                    Discount <i class="fas fa-chevron-down"></i>
+                                </h6>
+                                <div class="collapse show" id="discountFilter">
+                                    <div class="filter-options">
+                                        <label class="filter-option">
+                                            <input type="checkbox" class="filter-checkbox" name="discount" value="50">
+                                            <span>50% or more</span>
+                                        </label>
+                                        <label class="filter-option">
+                                            <input type="checkbox" class="filter-checkbox" name="discount" value="40">
+                                            <span>40% or more</span>
+                                        </label>
+                                        <label class="filter-option">
+                                            <input type="checkbox" class="filter-checkbox" name="discount" value="30">
+                                            <span>30% or more</span>
+                                        </label>
+                                        <label class="filter-option">
+                                            <input type="checkbox" class="filter-checkbox" name="discount" value="20">
+                                            <span>20% or more</span>
+                                        </label>
+                                        <label class="filter-option">
+                                            <input type="checkbox" class="filter-checkbox" name="discount" value="10">
+                                            <span>10% or more</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Special Offers Banner in Sidebar -->
+                            <div class="sidebar-promo">
+                                <div class="promo-icon">🎁</div>
+                                <h6>Bulk Order Discounts</h6>
+                                <p>Get up to 15% extra off on bulk orders!</p>
+                                <a href="#" class="promo-link" data-bs-toggle="modal" data-bs-target="#contactModal">Learn More →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid -->
+                    <div class="col-lg-9 col-md-8">
+                        <div id="productsContainer" class="products-grid">
+                            @foreach (var product in Model)
+                            {
+                                var discountPercentage = Math.Round(((product.Price - product.OfferPrice) / product.Price) * 100);
+                                var savings = product.Price - product.OfferPrice;
+                                var rating = 3.5 + (new Random().NextDouble() * 1.5);
+                                var reviewCount = new Random().Next(50, 500);
+
+                                <div class="product-card"
+                                     data-category="@(product.Category?.Name ?? "Uncategorized")"
+                                     data-price="@product.OfferPrice"
+                                     data-discount="@discountPercentage"
+                                     data-name="@product.Name"
+                                     data-aos="fade-up">
+
+                                    <!-- Badges -->
+                                    <div class="product-badges">
+                                        <span class="badge-discount">@discountPercentage% OFF</span>
+                                        @if (discountPercentage >= 50)
+                                        {
+                                            <span class="badge-hot">🔥 HOT DEAL</span>
+                                        }
+                                    </div>
+
+                                    <!-- Quick View Button Only -->
+                                    <div class="quick-actions">
+                                        <button class="action-btn quickview-btn" title="Quick View" data-product-id="@product.Id">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- Product Image -->
+                                    <div class="product-image-wrapper">
+                                        @if (!string.IsNullOrEmpty(product.ImageUrl))
+                                        {
+                                            <img src="@product.ImageUrl" alt="@product.Name" class="product-image card-img-top">
+                                        }
+                                        else
+                                        {
+                                            <img src="https://via.placeholder.com/400x400?text=No+Image" alt="@product.Name" class="product-image card-img-top">
+                                        }
+                                    </div>
+
+                                    <!-- Product Details -->
+                                    <div class="product-details">
+                                        <!-- Category Tags -->
+                                        <div class="category-tags-inline">
+                                            @if (product.Category != null)
+                                            {
+                                                <span class="tag-category">@product.Category.Name</span>
+                                            }
+                                        </div>
+
+                                        <!-- Product Title -->
+                                        <h5 class="product-title">
+                                            <a href="#" class="product-link">@product.Name</a>
+                                        </h5>
+
+                                        <!-- Rating -->
+                                       @*  <div class="product-rating">
+                                            <div class="stars">
+                                                @for (int i = 1; i <= 5; i++)
+                                                {
+                                                    if (i <= Math.Floor(rating))
+                                                    {
+                                                        <i class="fas fa-star"></i>
+                                                    }
+                                                    else if (i - rating < 1)
+                                                    {
+                                                        <i class="fas fa-star-half-alt"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="far fa-star"></i>
+                                                    }
+                                                }
+                                            </div>
+                                            <span class="rating-text">@rating.ToString("0.0") (@reviewCount reviews)</span>
+                                        </div> *@
+
+                                        <!-- Description -->
+                                        <p class="product-description">@product.Description</p>
+
+                                        <!-- Price Section -->
+                                        <div class="price-section">
+                                            <div class="prices">
+                                                <span class="price-current">₹@product.OfferPrice.ToString("N0")</span>
+                                                <span class="price-original">₹@product.Price.ToString("N0")</span>
+                                                <span> + GST</span>
+                                            </div>
+                                            <div class="savings-info">
+                                                <span class="savings-amount">Save ₹@savings.ToString("N0")</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Action Buttons -->
+                                        <div class="product-actions">
+                                            <button class="btn-enquire" data-bs-toggle="modal" data-bs-target="#contactModal">
+                                                <i class="fas fa-envelope"></i> Enquire Now
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <!-- No Results Message -->
+                        <div id="noResults" class="no-results" style="display: none;">
+                            <i class="fas fa-search fa-3x mb-3"></i>
+                            <h4>No products found</h4>
+                            <p>Try adjusting your filters or search criteria</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bulk Order Section -->
+                <div class="row mt-5">
+                    <div class="col-lg-12">
+                        <div class="bulk-order-section" data-aos="fade-up">
+                            <div class="bulk-header">
+                                <h3><i class="fas fa-boxes"></i> Bulk Order Discounts</h3>
+                                <p>Get additional discounts on bulk purchases</p>
+                            </div>
+                            <div class="bulk-tiers">
+                                <div class="bulk-tier">
+                                    <div class="tier-icon">
+                                        <i class="fas fa-box"></i>
+                                    </div>
+                                    <div class="tier-details">
+                                        <h5>10-50 Items</h5>
+                                        <p class="tier-discount">+5% OFF</p>
+                                        <span class="tier-badge">Starter Pack</span>
+                                    </div>
+                                </div>
+                                <div class="bulk-tier">
+                                    <div class="tier-icon">
+                                        <i class="fas fa-boxes"></i>
+                                    </div>
+                                    <div class="tier-details">
+                                        <h5>51-100 Items</h5>
+                                        <p class="tier-discount">+10% OFF</p>
+                                        <span class="tier-badge">Popular</span>
+                                    </div>
+                                </div>
+                                <div class="bulk-tier">
+                                    <div class="tier-icon">
+                                        <i class="fas fa-warehouse"></i>
+                                    </div>
+                                    <div class="tier-details">
+                                        <h5>100+ Items</h5>
+                                        <p class="tier-discount">+15% OFF</p>
+                                        <span class="tier-badge">Best Value</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bulk-cta">
+                                <button type="button" class="btn-bulk-inquiry" data-bs-toggle="modal" data-bs-target="#contactModal">
+                                    <i class="fas fa-phone"></i> Contact for Bulk Orders
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-12">
+                        <div class="empty-state">
+                            <i class="fas fa-tag fa-4x mb-4"></i>
+                            <h3>No Special Offers Available</h3>
+                            <p>Check back later for exciting deals on our products!</p>
+                            <a asp-controller="Home" asp-action="Products" class="btn btn-primary btn-lg mt-3">
+                                <i class="fas fa-shopping-bag"></i> Browse All Products
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+</div>
+
+<!-- Quick View Modal -->
+<div class="modal fade" id="quickViewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Quick View</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="https://via.placeholder.com/400x400" alt="Product" class="img-fluid rounded" id="quickViewImage">
+                    </div>
+                    <div class="col-md-6">
+                        <h4 id="quickViewName">Product Name</h4>
+                        <div class="product-rating mb-3">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-text">4.5 (250 reviews)</span>
+                        </div>
+                        <p id="quickViewDescription">Product description goes here...</p>
+                        <div class="price-section mb-4">
+                            <div class="prices">
+                                <span class="price-current" id="quickViewOfferPrice">₹0</span>
+                                <span class="price-original" id="quickViewPrice">₹0</span>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#contactModal" data-bs-dismiss="modal">
+                                <i class="fas fa-envelope"></i> Enquire Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // View Toggle (Grid/List)
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                const view = this.getAttribute('data-view');
+                const container = document.getElementById('productsContainer');
+
+                if (view === 'list') {
+                    container.classList.add('products-list');
+                } else {
+                    container.classList.remove('products-list');
+                }
+            });
+        });
+
+        // Sorting Functionality
+        document.getElementById('sortSelect').addEventListener('change', function () {
+            const sortValue = this.value;
+            const container = document.getElementById('productsContainer');
+            const products = Array.from(container.querySelectorAll('.product-card'));
+
+            products.sort((a, b) => {
+                switch (sortValue) {
+                    case 'price-low':
+                        return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+                    case 'price-high':
+                        return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+                    case 'discount':
+                        return parseFloat(b.dataset.discount) - parseFloat(a.dataset.discount);
+                    case 'name':
+                        return a.dataset.name.localeCompare(b.dataset.name);
+                    default:
+                        return 0;
+                }
+            });
+
+            products.forEach(product => container.appendChild(product));
+        });
+
+        // Filter Functionality
+        function applyFilters() {
+            const categoryFilters = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(el => el.value);
+            const priceFilters = Array.from(document.querySelectorAll('input[name="price"]:checked')).map(el => el.value);
+            const discountFilters = Array.from(document.querySelectorAll('input[name="discount"]:checked')).map(el => el.value);
+
+            const products = document.querySelectorAll('.product-card');
+            let visibleCount = 0;
+
+            products.forEach(product => {
+                let show = true;
+
+                // Category filter
+                if (categoryFilters.length > 0 && !categoryFilters.includes(product.dataset.category)) {
+                    show = false;
+                }
+
+                // Price filter
+                if (priceFilters.length > 0) {
+                    const price = parseFloat(product.dataset.price);
+                    const matchesPrice = priceFilters.some(range => {
+                        const [min, max] = range.split('-').map(Number);
+                        return price >= min && price <= max;
+                    });
+                    if (!matchesPrice) show = false;
+                }
+
+                // Discount filter
+                if (discountFilters.length > 0) {
+                    const discount = parseFloat(product.dataset.discount);
+                    const matchesDiscount = discountFilters.some(minDiscount => discount >= parseFloat(minDiscount));
+                    if (!matchesDiscount) show = false;
+                }
+
+                product.style.display = show ? '' : 'none';
+                if (show) visibleCount++;
+            });
+
+            // Update results count
+            document.querySelector('.results-count strong').textContent = visibleCount;
+
+            // Show no results message
+            document.getElementById('noResults').style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        // Attach filter listeners
+        document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', applyFilters);
+        });
+
+        // Clear filters
+        document.getElementById('clearFiltersBtn').addEventListener('click', function () {
+            document.querySelectorAll('.filter-checkbox').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            applyFilters();
+        });
+
+        // Mobile filter toggle
+        document.getElementById('filterToggleBtn').addEventListener('click', function () {
+            document.getElementById('filtersSidebar').classList.toggle('show-mobile');
+        });
+
+        // Quick View functionality
+        document.querySelectorAll('.quickview-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const productCard = this.closest('.product-card');
+                const name = productCard.querySelector('.product-title a').textContent;
+                const image = productCard.querySelector('.product-image').src;
+                const description = productCard.querySelector('.product-description').textContent;
+                const offerPrice = productCard.querySelector('.price-current').textContent;
+                const originalPrice = productCard.querySelector('.price-original').textContent;
+
+                document.getElementById('quickViewName').textContent = name;
+                document.getElementById('quickViewImage').src = image;
+                document.getElementById('quickViewDescription').textContent = description;
+                document.getElementById('quickViewOfferPrice').textContent = offerPrice;
+                document.getElementById('quickViewPrice').textContent = originalPrice;
+
+                const modal = new bootstrap.Modal(document.getElementById('quickViewModal'));
+                modal.show();
+            });
+        });
+
+        // Close mobile sidebar when clicking outside
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('filtersSidebar');
+            const toggleBtn = document.getElementById('filterToggleBtn');
+            
+            if (sidebar.classList.contains('show-mobile') && 
+                !sidebar.contains(event.target) && 
+                !toggleBtn.contains(event.target)) {
+                sidebar.classList.remove('show-mobile');
+            }
+        });
+    </script>
+    <style>
+    /* ===== IMPORT FONTS ===== */
+    @@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+    /* ===== GENERAL STYLES ===== */
+    * {
+        box-sizing: border-box;
+    }
+
+    .page-content {
+        background: #f8fafc;
+        font-family: 'DM Sans', sans-serif;
+    }
+
+    .section-padding {
+        padding: 40px 0 60px;
+    }
+
+    .breadcrumb {
+        background: transparent;
+        padding: 0;
+    }
+
+    .breadcrumb-item a {
+        color: #666;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+        .breadcrumb-item a:hover {
+            color: #1A365D;
+        }
+
+    .breadcrumb-item.active {
+        color: #333;
+    }
+
+    /* ===== ENHANCED HERO BANNER ===== */
+    .offers-hero-banner {
+        background: linear-gradient(130deg, #8b0000 0%, #cc0017 50%, #8b0000 100%);
+        border-radius: 24px;
+        padding: 50px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(26, 54, 93, 0.3);
+    }
+
+    .banner-pattern {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+        pointer-events: none;
+    }
+
+    .banner-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .banner-left {
+        flex: 1;
+        color: white;
+    }
+
+    .offer-badge-large {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        padding: 12px 24px;
+        border-radius: 50px;
+        margin-bottom: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .badge-icon {
+        font-size: 24px;
+    }
+
+    .badge-text {
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: 0.5px;
+    }
+
+    .banner-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 48px;
+        font-weight: 800;
+        margin-bottom: 15px;
+        line-height: 1.2;
+    }
+
+    .banner-subtitle {
+        font-size: 18px;
+        margin-bottom: 30px;
+        opacity: 0.95;
+        line-height: 1.6;
+    }
+
+    .banner-features {
+        display: flex;
+        gap: 25px;
+        flex-wrap: wrap;
+    }
+
+    .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+        .feature-item i {
+            font-size: 20px;
+            color: #ffc107;
+        }
+
+    .banner-right {
+        flex-shrink: 0;
+    }
+
+    .discount-showcase {
+        position: relative;
+        width: 250px;
+        height: 250px;
+    }
+
+    .discount-circle {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #99001a 0%, #e6001a 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        animation: rotate360 20s linear infinite;
+        border: 8px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .discount-inner {
+        background: white;
+        width: 85%;
+        height: 85%;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        animation: rotate-reverse 20s linear infinite;
+    }
+
+    .discount-text {
+        font-size: 14px;
+        font-weight: 600;
+        color: #666;
+        letter-spacing: 1px;
+    }
+
+    .discount-number {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 64px;
+        font-weight: 800;
+        color: #1A365D;
+        line-height: 1;
+        margin: 5px 0;
+    }
+
+    .discount-off {
+        font-size: 18px;
+        font-weight: 700;
+        color: #333;
+        letter-spacing: 2px;
+    }
+
+    @@keyframes rotate360 {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    @@keyframes rotate-reverse {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(-360deg); }
+    }
+
+    .floating-badge {
+        position: absolute;
+        background: white;
+        padding: 12px 20px;
+        border-radius: 50px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        font-size: 13px;
+        color: #333;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .badge-1 {
+        top: -10px;
+        right: 20px;
+        animation-delay: 0s;
+    }
+
+        .badge-1 i {
+            color: #1A365D;
+        }
+
+    .badge-2 {
+        bottom: -10px;
+        left: -20px;
+        animation-delay: 1.5s;
+    }
+
+        .badge-2 i {
+            color: #28a745;
+        }
+
+    @@keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    /* ===== FILTER & SORT BAR ===== */
+    .filter-sort-bar {
+        background: white;
+        padding: 20px 25px;
+        border-radius: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .filter-left, .filter-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .filter-toggle-btn {
+            background: linear-gradient(130deg, #8b0000 0%, #cc0017 50%, #8b0000 90%);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3);
+    }
+
+        .filter-toggle-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(26, 54, 93, 0.4);
+        }
+
+    .results-count {
+        color: #666;
+        font-size: 15px;
+    }
+
+        .results-count strong {
+            color: #333;
+            font-weight: 700;
+        }
+
+    .view-toggle {
+        display: flex;
+        gap: 5px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 5px;
+    }
+
+    .view-btn {
+        background: transparent;
+        border: none;
+        padding: 10px 14px;
+        cursor: pointer;
+        border-radius: 8px;
+        color: #666;
+        transition: all 0.3s;
+    }
+
+        .view-btn.active {
+            background: white;
+            color: #1A365D;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .view-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+    .sort-select {
+        padding: 12px 18px;
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        font-size: 14px;
+        cursor: pointer;
+        background: white;
+        transition: all 0.3s;
+        font-weight: 500;
+    }
+
+        .sort-select:focus {
+            outline: none;
+            border-color: #1A365D;
+        }
+
+    /* ===== FILTERS SIDEBAR ===== */
+    .filters-sidebar {
+        background: white;
+        border-radius: 16px;
+        padding: 25px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        position: sticky;
+        top: 100px;
+        max-height: calc(100vh - 120px);
+        overflow-y: auto;
+    }
+
+        .filters-sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .filters-sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .filters-sidebar::-webkit-scrollbar-thumb {
+                background: #c20303;
+            border-radius: 10px;
+        }
+
+    .filters-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+        .filters-header h5 {
+            margin: 0;
+            font-weight: 700;
+            color: #333;
+            font-size: 18px;
+        }
+
+            .filters-header h5 i {
+                color: #1A365D;
+                margin-right: 8px;
+            }
+
+    .clear-filters-btn {
+        background: none;
+        border: none;
+        color: #1A365D;
+        font-size: 13px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: color 0.3s;
+    }
+
+        .clear-filters-btn:hover {
+            color: #2c5aa0;
+            text-decoration: underline;
+        }
+
+    .filter-section {
+        margin-bottom: 25px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+        .filter-section:last-of-type {
+            border-bottom: none;
+        }
+
+    .filter-title {
+        font-size: 15px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 15px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        user-select: none;
+    }
+
+        .filter-title i {
+            font-size: 12px;
+            transition: transform 0.3s;
+            color: #999;
+        }
+
+        .filter-title:hover {
+            color: #1A365D;
+        }
+
+    .filter-options {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .filter-option {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 5px 0;
+        transition: all 0.2s;
+    }
+
+        .filter-option:hover {
+            padding-left: 5px;
+        }
+
+    .filter-checkbox {
+        margin-right: 12px;
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+        accent-color: #1A365D;
+    }
+
+    .filter-option span {
+        font-size: 14px;
+        color: #666;
+        transition: color 0.2s;
+    }
+
+    .filter-option:hover span {
+        color: #1A365D;
+    }
+
+    .sidebar-promo {
+        background: linear-gradient(45deg, #8b0000 0%, #cc0017 50%, #8b0000 90%);
+        color: white;
+        padding: 30px;
+        border-radius: 16px;
+        text-align: center;
+        margin-top: 25px;
+    }
+
+    .promo-icon {
+        font-size: 48px;
+        margin-bottom: 15px;
+        animation: bounce 2s ease-in-out infinite;
+    }
+
+    @@keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .sidebar-promo h6 {
+        font-weight: 700;
+        margin-bottom: 12px;
+        font-size: 17px;
+    }
+
+    .sidebar-promo p {
+        font-size: 14px;
+        margin-bottom: 18px;
+        opacity: 0.95;
+        line-height: 1.5;
+    }
+
+    .promo-link {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: all 0.3s;
+    }
+
+        .promo-link:hover {
+            transform: translateX(5px);
+            color: white;
+        }
+
+    /* ===== PRODUCTS GRID ===== */
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+    }
+
+        .products-grid.products-list {
+            grid-template-columns: 1fr;
+        }
+
+    .products-list .product-card {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    .products-list .product-image-wrapper {
+        max-width: 280px;
+        flex-shrink: 0;
+    }
+
+    .products-list .product-details {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .products-list .product-actions {
+        margin-top: auto;
+    }
+
+    /* ===== PRODUCT CARD ===== */
+    .product-card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+    }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+        }
+
+    .product-badges {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .badge-discount {
+            background: linear-gradient(135deg, #8b0000 0%, #cc0017 100%);
+        color: white;
+        padding: 7px 14px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        box-shadow: 0 4px 12px rgba(26, 54, 93, 0.4);
+        letter-spacing: 0.5px;
+    }
+
+    .badge-hot {
+        background: linear-gradient(135deg, #d35400 0%, #f39c12 50%, #d35400 100%);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 8px;
+        font-size: 11px;
+        font-weight: 700;
+        box-shadow: 0 3px 10px rgba(250, 112, 154, 0.4);
+    }
+
+    .quick-actions {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        opacity: 0;
+        transform: translateX(15px);
+        transition: all 0.3s;
+    }
+
+    .product-card:hover .quick-actions {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .action-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: white;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s;
+        color: #666;
+    }
+
+        .action-btn:hover {
+            background: #1A365D;
+            color: white;
+            transform: scale(1.1);
+        }
+
+    /* ===== FIXED IMAGE STYLING ===== */
+    .product-image-wrapper {
+        position: relative;
+        overflow: hidden;
+        background: #ffffff;
+        height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .product-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .product-card:hover .product-image {
+        transform: scale(1.05);
+    }
+
+    .product-details {
+        padding: 20px;
+    }
+
+    .category-tags-inline {
+        margin-bottom: 8px;
+    }
+
+    .tag-category {
+        display: inline-block;
+        background: linear-gradient(135deg, #f0f4ff 0%, #e6efff 100%);
+        color: #1A365D;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    .product-title {
+        margin: 10px 0;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.4;
+    }
+
+    .product-link {
+        color: #333;
+        text-decoration: none;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        transition: color 0.3s;
+    }
+
+        .product-link:hover {
+            color: #1A365D;
+        }
+
+    .product-rating {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+
+    .stars {
+        color: #ffc107;
+        font-size: 13px;
+    }
+
+    .rating-text {
+        font-size: 12px;
+        color: #666;
+    }
+
+    .product-description {
+        font-size: 13px;
+        color: #666;
+        margin-bottom: 15px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        line-height: 1.5;
+    }
+
+    .price-section {
+        margin-bottom: 15px;
+        padding: 12px 0;
+        border-top: 1px solid #f0f0f0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .prices {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        margin-bottom: 6px;
+    }
+
+    .price-current {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        color: #28a745;
+    }
+
+    .price-original {
+        font-size: 16px;
+        color: #999;
+        text-decoration: line-through;
+    }
+
+    .savings-info {
+        font-size: 13px;
+    }
+
+    .savings-amount {
+        color: #28a745;
+        font-weight: 600;
+    }
+
+    .product-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn-enquire {
+        width: 100%;
+            background: #cc0017;
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3);
+    }
+
+        .btn-enquire:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(26, 54, 93, 0.4);
+        }
+
+    /* ===== NO RESULTS ===== */
+    .no-results {
+        text-align: center;
+        padding: 80px 20px;
+        color: #666;
+    }
+
+        .no-results i {
+            color: #ddd;
+        }
+
+        .no-results h4 {
+            margin-top: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+
+    /* ===== BULK ORDER SECTION ===== */
+    .bulk-order-section {
+        background: white;
+        border-radius: 20px;
+        padding: 50px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .bulk-header {
+        text-align: center;
+        margin-bottom: 45px;
+    }
+
+        .bulk-header h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 32px;
+        }
+
+            .bulk-header h3 i {
+                color: #1A365D;
+                margin-right: 10px;
+            }
+
+        .bulk-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+    .bulk-tiers {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    .bulk-tier {
+        background: linear-gradient( 130deg, #8b0000 0%, #cc0017 50%, #8b0000 90%);
+        border: 2px solid #e9ecef;
+        border-radius: 16px;
+        padding: 35px;
+        text-align: center;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+
+        .bulk-tier:not(.featured):hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+            border-color: #1A365D;
+        }
+
+    .tier-icon {
+        font-size: 52px;
+        margin-bottom: 18px;
+        color: white;
+    }
+
+    .bulk-tier.featured .tier-icon {
+        color: white;
+    }
+
+    .tier-details h5 {
+        color: white;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        margin-bottom: 12px;
+        font-size: 20px;
+    }
+
+    .tier-discount {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 32px;
+        font-weight: 800;
+            color: #ffc107;
+        margin: 18px 0;
+    }
+
+    .tier-badge {
+        background: rgba(255, 255, 255, 0.25);
+        color: white;
+        padding: 6px 18px;
+        border-radius: 25px;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .bulk-tier.featured .tier-badge {
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(10px);
+    }
+
+    .bulk-cta {
+        text-align: center;
+    }
+
+    .btn-bulk-inquiry {
+        display: inline-block;
+        background: linear-gradient( 130deg, #8b0000 0%, #cc0017 50%, #8b0000 90%);
+        color: white;
+        padding: 18px 45px;
+        border-radius: 12px;
+        border: none;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 6px 18px rgba(26, 54, 93, 0.3);
+    }
+
+        .btn-bulk-inquiry:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(26, 54, 93, 0.4);
+            color: white;
+        }
+
+    /* ===== EMPTY STATE ===== */
+    .empty-state {
+        text-align: center;
+        padding: 100px 20px;
+        color: #666;
+    }
+
+        .empty-state i {
+            color: #ddd;
+        }
+
+        .empty-state h3 {
+            margin-top: 25px;
+            color: #333;
+            font-weight: 600;
+        }
+
+    /* ===== MODAL IMPROVEMENTS ===== */
+    .modal-content {
+        border: none;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid #f0f0f0;
+        padding: 25px 30px;
+        background: #f8f9fa;
+    }
+
+        .modal-header .modal-title {
+            font-weight: 700;
+            color: #333;
+        }
+
+    .modal-body {
+        padding: 35px;
+    }
+
+    /* ===== RESPONSIVE DESIGN ===== */
+
+    /* Desktop (1200px - 1399px) */
+    @@media (min-width: 1200px) and (max-width: 1399px) {
+        .banner-title {
+            font-size: 42px;
+        }
+
+        .discount-showcase {
+            width: 220px;
+            height: 220px;
+        }
+
+        .discount-number {
+            font-size: 56px;
+        }
+
+        .product-image-wrapper {
+            height: 230px;
+            padding: 18px;
+        }
+    }
+
+    /* Tablet (992px - 1199px) */
+    @@media (max-width: 1199px) {
+        .offers-hero-banner {
+            padding: 40px;
+        }
+
+        .banner-content {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .banner-features {
+            justify-content: center;
+        }
+
+        .discount-showcase {
+            width: 200px;
+            height: 200px;
+            margin-top: 30px;
+        }
+
+        .discount-number {
+            font-size: 48px;
+        }
+
+        .floating-badge {
+            font-size: 12px;
+            padding: 10px 16px;
+        }
+
+        .products-grid {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-image-wrapper {
+            height: 230px;
+            padding: 18px;
+        }
+    }
+
+    /* Tablet (768px - 991px) */
+    @@media (max-width: 991px) {
+        .filters-sidebar {
+            position: fixed;
+            left: -100%;
+            top: 0;
+            height: 100vh;
+            z-index: 1050;
+            transition: left 0.3s;
+            overflow-y: auto;
+            width: 320px;
+            max-height: 100vh;
+            border-radius: 0;
+        }
+
+            .filters-sidebar.show-mobile {
+                left: 0;
+                box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
+            }
+
+        .offers-hero-banner {
+            padding: 35px 30px;
+        }
+
+        .banner-title {
+            font-size: 36px;
+        }
+
+        .banner-subtitle {
+            font-size: 16px;
+        }
+
+        .bulk-order-section {
+            padding: 40px 30px;
+        }
+
+        .bulk-header h3 {
+            font-size: 28px;
+        }
+
+        .bulk-tiers {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .bulk-tier.featured {
+            transform: scale(1);
+        }
+
+        .product-image-wrapper {
+            height: 220px;
+            padding: 16px;
+        }
+    }
+
+    /* Mobile (576px - 767px) */
+    @@media (max-width: 767px) {
+        .section-padding {
+            padding: 30px 0 50px;
+        }
+
+        .offers-hero-banner {
+            padding: 30px 25px;
+            border-radius: 16px;
+        }
+
+        .banner-title {
+            font-size: 28px;
+        }
+
+        .banner-subtitle {
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+
+        .offer-badge-large {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .badge-icon {
+            font-size: 20px;
+        }
+
+        .banner-features {
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feature-item {
+            font-size: 14px;
+        }
+
+        .discount-showcase {
+            width: 180px;
+            height: 180px;
+            margin-top: 25px;
+        }
+
+        .discount-number {
+            font-size: 42px;
+        }
+
+        .discount-text {
+            font-size: 12px;
+        }
+
+        .discount-off {
+            font-size: 16px;
+        }
+
+        .floating-badge {
+            padding: 8px 14px;
+            font-size: 11px;
+        }
+
+        .filter-sort-bar {
+            flex-direction: column;
+            align-items: stretch;
+            padding: 18px;
+        }
+
+        .filter-left,
+        .filter-right {
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .filter-right {
+            margin-top: 10px;
+        }
+
+        .products-grid {
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .product-image-wrapper {
+            height: 200px;
+            padding: 14px;
+        }
+
+        .bulk-order-section {
+            padding: 35px 25px;
+        }
+
+        .bulk-header h3 {
+            font-size: 24px;
+        }
+
+        .tier-icon {
+            font-size: 44px;
+        }
+
+        .tier-discount {
+            font-size: 28px;
+        }
+    }
+
+    /* Small Mobile (376px - 575px) */
+    @@media (max-width: 575px) {
+        .offers-hero-banner {
+            padding: 25px 20px;
+        }
+
+        .banner-title {
+            font-size: 24px;
+        }
+
+        .banner-subtitle {
+            font-size: 14px;
+        }
+
+        .offer-badge-large {
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+
+        .banner-features {
+            gap: 12px;
+        }
+
+        .feature-item {
+            font-size: 13px;
+        }
+
+            .feature-item i {
+                font-size: 18px;
+            }
+
+        .discount-showcase {
+            width: 160px;
+            height: 160px;
+        }
+
+        .discount-number {
+            font-size: 36px;
+        }
+
+        .floating-badge {
+            padding: 6px 12px;
+            font-size: 10px;
+        }
+
+        .badge-1 {
+            top: -5px;
+            right: 10px;
+        }
+
+        .badge-2 {
+            bottom: -5px;
+            left: -10px;
+        }
+
+        .filter-sort-bar {
+            padding: 15px;
+        }
+
+        .filter-toggle-btn {
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+
+        .results-count {
+            font-size: 13px;
+        }
+
+        .sort-select {
+            padding: 10px 14px;
+            font-size: 13px;
+        }
+
+        .products-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .product-image-wrapper {
+            height: 200px;
+            padding: 15px;
+        }
+
+        .product-details {
+            padding: 16px;
+        }
+
+        .price-current {
+            font-size: 22px;
+        }
+
+        .price-original {
+            font-size: 15px;
+        }
+
+        .bulk-order-section {
+            padding: 30px 20px;
+        }
+
+        .bulk-header h3 {
+            font-size: 22px;
+        }
+
+        .bulk-header p {
+            font-size: 14px;
+        }
+
+        .bulk-tier {
+            padding: 28px;
+        }
+
+        .tier-icon {
+            font-size: 40px;
+        }
+
+        .tier-details h5 {
+            font-size: 18px;
+        }
+
+        .tier-discount {
+            font-size: 26px;
+        }
+
+        .btn-bulk-inquiry {
+            padding: 15px 35px;
+            font-size: 15px;
+        }
+    }
+
+    /* Extra Small Mobile (320px - 375px) */
+    @@media (max-width: 375px) {
+        .offers-hero-banner {
+            padding: 20px 15px;
+        }
+
+        .banner-title {
+            font-size: 22px;
+        }
+
+        .banner-subtitle {
+            font-size: 13px;
+        }
+
+        .discount-showcase {
+            width: 140px;
+            height: 140px;
+            margin-top: 20px;
+        }
+
+        .discount-number {
+            font-size: 32px;
+        }
+
+        .discount-text {
+            font-size: 11px;
+        }
+
+        .discount-off {
+            font-size: 14px;
+        }
+
+        .product-image-wrapper {
+            height: 180px;
+            padding: 12px;
+        }
+
+        .filters-sidebar {
+            width: 280px;
+        }
+
+        .bulk-order-section {
+            padding: 25px 15px;
+        }
+
+        .bulk-tier {
+            padding: 24px;
+        }
+    }
+
+    /* Container adjustments */
+    @@media (max-width: 575px) {
+        .container {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    }
+
+    @@media (max-width: 375px) {
+        .container {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+
+    /* List view adjustments for mobile */
+    @@media (max-width: 767px) {
+        .products-list .product-card {
+            flex-direction: column;
+        }
+
+        .products-list .product-image-wrapper {
+            max-width: 100%;
+        }
+    }
+
+    /* Smooth animations */
+    @@media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+</style>
+}

@@ -1,0 +1,1191 @@
+﻿@{
+    ViewData["Title"] = "Products";
+}
+
+<style>
+    /* ===================================
+       PRODUCT CARD FIXED DIMENSIONS
+       =================================== */
+    .product-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-color: #cbd5e0;
+        }
+
+    /* Fixed Image Container Height */
+    .product-card .product-image {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .product-card:hover .product-image {
+        transform: scale(1.05);
+    }
+
+    /* Card Body with Fixed Structure */
+    .product-card .card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 1.25rem;
+        min-height: 420px;
+    }
+
+    /* Fixed Height for Title */
+    .product-card .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        line-height: 1.3;
+    }
+
+        .product-card .card-title a {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+    /* Fixed Height for Description */
+    .product-card .card-text {
+        font-size: 0.9rem;
+        color: #718096;
+        margin-bottom: 1rem;
+        height: 90px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        line-height: 1.5;
+    }
+
+    /* Fixed Height for Feature List */
+    .product-card .list-unstyled {
+        margin-bottom: 1rem;
+        height: 100px;
+        overflow: hidden;
+    }
+
+        .product-card .list-unstyled li {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 0.25rem;
+        }
+
+    /* Badge Container at Bottom */
+    .product-card .mt-3 {
+        margin-top: auto !important;
+        padding-top: 1rem;
+        border-top: 1px solid #f0f0f0;
+    }
+
+    /* Responsive Card Heights */
+    /* Desktop (992px+) */
+    @@media (min-width: 992px) {
+        .product-card .product-image {
+            height: 220px;
+        }
+
+        .product-card .card-body {
+            min-height: 420px;
+        }
+
+        .product-card .card-title {
+            height: 60px;
+            font-size: 1.25rem;
+        }
+
+        .product-card .card-text {
+            height: 90px;
+            font-size: 0.9rem;
+        }
+
+        .product-card .list-unstyled {
+            height: 100px;
+        }
+    }
+
+    /* Tablet (768px - 991px) */
+    @@media (min-width: 768px) and (max-width: 991px) {
+        .product-card .product-image {
+            height: 200px;
+        }
+
+        .product-card .card-body {
+            min-height: 400px;
+        }
+
+        .product-card .card-title {
+            height: 58px;
+            font-size: 1.15rem;
+        }
+
+        .product-card .card-text {
+            height: 85px;
+            font-size: 0.875rem;
+        }
+
+        .product-card .list-unstyled {
+            height: 95px;
+        }
+
+            .product-card .list-unstyled li {
+                font-size: 0.8rem;
+            }
+    }
+
+    /* Mobile Landscape (576px - 767px) */
+    @@media (min-width: 576px) and (max-width: 767px) {
+        .product-card .product-image {
+            height: 180px;
+        }
+
+        .product-card .card-body {
+            min-height: 380px;
+            padding: 1rem;
+        }
+
+        .product-card .card-title {
+            height: 56px;
+            font-size: 1.1rem;
+        }
+
+        .product-card .card-text {
+            height: 80px;
+            font-size: 0.85rem;
+            -webkit-line-clamp: 3;
+        }
+
+        .product-card .list-unstyled {
+            height: 90px;
+        }
+
+            .product-card .list-unstyled li {
+                font-size: 0.75rem;
+            }
+    }
+
+    /* Mobile Portrait (375px - 575px) */
+    @@media (max-width: 575px) {
+        .product-card .product-image {
+            height: 160px;
+        }
+
+        .product-card .card-body {
+            min-height: 360px;
+            padding: 0.875rem;
+        }
+
+        .product-card .card-title {
+            height: 52px;
+            font-size: 1.05rem;
+        }
+
+        .product-card .card-text {
+            height: 75px;
+            font-size: 0.8rem;
+            -webkit-line-clamp: 3;
+        }
+
+        .product-card .list-unstyled {
+            height: 85px;
+        }
+
+            .product-card .list-unstyled li {
+                font-size: 0.7rem;
+            }
+
+        .product-card .badge {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+        }
+    }
+
+    /* Extra Small Mobile (320px - 374px) */
+    @@media (max-width: 374px) {
+        .product-card .product-image {
+            height: 150px;
+        }
+
+        .product-card .card-body {
+            min-height: 340px;
+            padding: 0.75rem;
+        }
+
+        .product-card .card-title {
+            height: 50px;
+            font-size: 1rem;
+        }
+
+        .product-card .card-text {
+            height: 70px;
+            font-size: 0.75rem;
+            -webkit-line-clamp: 3;
+        }
+
+        .product-card .list-unstyled {
+            height: 80px;
+        }
+
+            .product-card .list-unstyled li {
+                font-size: 0.65rem;
+            }
+    }
+
+    /* Card Link Overlay */
+    .product-card .card-link {
+        display: block;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .custom-solutions{
+        background: linear-gradient(130deg, #8b0000 0%, #cc0017 50%, #8b0000 90%) !important;
+    }
+
+    .solutions-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: clamp(2rem, 4vw, 2.75rem);
+        font-weight: 700;
+        color: white;
+        margin-bottom: 1.5rem;
+        letter-spacing: -0.02em;
+        text-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .solutions-description{
+        font-family: 'DM Sans', sans-serif;
+        font-size: 1.125rem;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.95);
+        margin-bottom: 2.5rem;
+        max-width: 650px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    /* ===== SOLUTIONS BUTTON - Solid White ===== */
+.solutions-btn {
+    font-family: 'Space Grotesk', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    padding: 16px 36px;
+    background: white;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+    .solutions-btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(127, 29, 29, 0.1);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+
+    .solutions-btn:hover::before {
+        width: 300px;
+        height: 300px;
+    }
+
+    .solutions-btn:hover {
+        background: #f8f9fa;
+        transform: translateY(-3px);
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+        color: var(--primary-color);
+    }
+
+    .solutions-btn > * {
+        position: relative;
+        z-index: 1;
+    }
+
+/* ===== SOLUTIONS BUTTON OUTLINE - Transparent with Border ===== */
+.solutions-btn-outline {
+    font-family: 'Space Grotesk', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    padding: 16px 36px;
+    background: transparent;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+    .solutions-btn-outline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        transition: left 0.4s ease;
+    }
+
+    .solutions-btn-outline:hover::before {
+        left: 0;
+    }
+
+    .solutions-btn-outline:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: white;
+        transform: translateY(-3px);
+        color: white;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .solutions-btn-outline > * {
+        position: relative;
+        z-index: 1;
+    }
+        .product-card .card-link::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0);
+            transition: background 0.3s ease;
+        }
+
+        .product-card:hover .card-link::after {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+    /* Responsive Button Styling for Products Page */
+    .product-cta-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 1.5rem;
+    }
+
+    .product-cta-buttons .btn {
+        flex: 0 1 auto;
+        min-width: 160px;
+        white-space: nowrap;
+        transition: all 0.3s ease;
+    }
+
+    /* Desktop & Large Tablets (992px+) */
+    @@media (min-width: 992px) {
+        .product-cta-buttons .btn {
+            font-size: 1.125rem;
+            padding: 0.875rem 2rem;
+        }
+    }
+
+    /* Tablets (768px - 991px) */
+    @@media (max-width: 991px) {
+        .product-cta-buttons {
+            gap: 0.875rem;
+        }
+
+        .product-cta-buttons .btn {
+            font-size: 1rem;
+            padding: 0.75rem 1.75rem;
+            min-width: 150px;
+        }
+    }
+
+    /* Large Mobile (576px - 767px) */
+    @@media (max-width: 767px) {
+        .product-cta-buttons {
+            gap: 0.75rem;
+        }
+
+        .product-cta-buttons .btn {
+            font-size: 0.95rem;
+            padding: 0.7rem 1.5rem;
+            min-width: 140px;
+        }
+    }
+
+    /* Medium Mobile (480px - 575px) */
+    @@media (max-width: 575px) {
+        .product-cta-buttons {
+            flex-direction: column;
+            gap: 0.75rem;
+            width: 100%;
+            padding: 0 1rem;
+        }
+
+        .product-cta-buttons .btn {
+            width: 100%;
+            max-width: 100%;
+            font-size: 0.9rem;
+            padding: 0.65rem 1.25rem;
+            min-width: unset;
+        }
+    }
+
+    /* Small Mobile (375px - 479px) */
+    @@media (max-width: 479px) {
+        .product-cta-buttons {
+            padding: 0 0.75rem;
+            gap: 0.65rem;
+        }
+
+        .product-cta-buttons .btn {
+            font-size: 0.875rem;
+            padding: 0.6rem 1rem;
+        }
+
+        .product-cta-buttons .btn i {
+            font-size: 0.85rem;
+        }
+    }
+
+    /* Extra Small Mobile (320px - 374px) */
+    @@media (max-width: 374px) {
+        .product-cta-buttons {
+            padding: 0 0.5rem;
+            gap: 0.6rem;
+        }
+
+        .product-cta-buttons .btn {
+            font-size: 0.85rem;
+            padding: 0.55rem 0.85rem;
+        }
+
+        .product-cta-buttons .btn i {
+            font-size: 0.8rem;
+            margin-right: 0.35rem !important;
+        }
+    }
+
+    /* Very Small Mobile (<320px) */
+    @@media (max-width: 319px) {
+        .product-cta-buttons {
+            padding: 0 0.35rem;
+            gap: 0.5rem;
+        }
+
+        .product-cta-buttons .btn {
+            font-size: 0.8rem;
+            padding: 0.5rem 0.75rem;
+        }
+
+        .product-cta-buttons .btn i {
+            font-size: 0.75rem;
+            margin-right: 0.3rem !important;
+        }
+    }
+
+    /* CTA Section Responsive */
+    .product-cta-section {
+        padding: 3rem 1.5rem;
+    }
+
+    .product-cta-section h4 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .product-cta-section p {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    @@media (max-width: 767px) {
+        .product-cta-section {
+            padding: 2.5rem 1.25rem;
+        }
+
+        .product-cta-section h4 {
+            font-size: 1.5rem;
+        }
+
+        .product-cta-section p {
+            font-size: 1rem;
+        }
+    }
+
+    @@media (max-width: 575px) {
+        .product-cta-section {
+            padding: 2rem 1rem;
+        }
+
+        .product-cta-section h4 {
+            font-size: 1.35rem;
+        }
+
+        .product-cta-section p {
+            font-size: 0.95rem;
+        }
+    }
+
+    @@media (max-width: 479px) {
+        .product-cta-section {
+            padding: 1.75rem 0.85rem;
+        }
+
+        .product-cta-section h4 {
+            font-size: 1.25rem;
+        }
+
+        .product-cta-section p {
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+        }
+    }
+
+    @@media (max-width: 374px) {
+        .product-cta-section {
+            padding: 1.5rem 0.75rem;
+        }
+
+        .product-cta-section h4 {
+            font-size: 1.15rem;
+        }
+
+        .product-cta-section p {
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+    }
+
+    @@media (max-width: 319px) {
+        .product-cta-section {
+            padding: 1.25rem 0.65rem;
+        }
+
+        .product-cta-section h4 {
+            font-size: 1.05rem;
+        }
+
+        .product-cta-section p {
+            font-size: 0.8rem;
+            margin-bottom: 0.85rem;
+        }
+    }
+
+    /* ===================================
+       PRODUCT CARD FIXED HEIGHT STYLES
+       =================================== */
+    .product-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        overflow: hidden;
+        background: #ffffff;
+    }
+
+        .product-card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-color: #cbd5e0;
+            transform: translateY(-4px);
+        }
+
+    .card-link {
+        display: block;
+        text-decoration: none;
+    }
+
+    /* Fixed Image Container */
+    .product-image {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .product-card:hover .product-image {
+        transform: scale(1.05);
+    }
+
+    /* Card Body with Fixed Heights */
+    .product-card .card-body {
+        padding: 1.25rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-card .card-title {
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 0.75rem;
+        font-size: 1.15rem;
+        min-height: 56px;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+        .product-card .card-title a {
+            color: #2d3748;
+            transition: color 0.3s ease;
+        }
+
+            .product-card .card-title a:hover {
+                color: #4a5568;
+            }
+
+    .product-card .card-text {
+        font-size: 0.9rem;
+        color: #718096;
+        line-height: 1.5;
+        margin-bottom: 0.75rem;
+        min-height: 90px;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .product-card .list-unstyled {
+        margin-bottom: 0.75rem;
+        min-height: 88px;
+    }
+
+        .product-card .list-unstyled li {
+            font-size: 0.85rem;
+            color: #4a5568;
+            margin-bottom: 0.35rem;
+            line-height: 1.4;
+        }
+
+    /* Badge Container */
+    .product-card .mt-3 {
+        margin-top: auto !important;
+        padding-top: 0.5rem;
+    }
+
+    .product-card .badge {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.65rem;
+        font-weight: 600;
+    }
+
+    /* ===================================
+       RESPONSIVE ADJUSTMENTS FOR CARDS
+       =================================== */
+    /* Large Desktop (1200px+) */
+    @@media (min-width: 1200px) {
+        .product-image {
+            height: 240px;
+        }
+
+        .product-card .card-title {
+            font-size: 1.2rem;
+            min-height: 60px;
+        }
+
+        .product-card .card-text {
+            min-height: 96px;
+        }
+
+        .product-card .list-unstyled {
+            min-height: 92px;
+        }
+    }
+
+    /* Desktop (992px - 1199px) */
+    @@media (min-width: 992px) and (max-width: 1199px) {
+        .product-image {
+            height: 220px;
+        }
+
+        .product-card .card-title {
+            font-size: 1.1rem;
+            min-height: 56px;
+        }
+
+        .product-card .card-text {
+            font-size: 0.875rem;
+            min-height: 88px;
+        }
+
+        .product-card .list-unstyled {
+            min-height: 88px;
+        }
+
+            .product-card .list-unstyled li {
+                font-size: 0.8rem;
+            }
+    }
+
+    /* Tablet (768px - 991px) */
+    @@media (min-width: 768px) and (max-width: 991px) {
+        .product-image {
+            height: 200px;
+        }
+
+        .product-card .card-body {
+            padding: 1rem;
+        }
+
+        .product-card .card-title {
+            font-size: 1.05rem;
+            min-height: 54px;
+        }
+
+        .product-card .card-text {
+            font-size: 0.85rem;
+            min-height: 84px;
+        }
+
+        .product-card .list-unstyled {
+            min-height: 84px;
+        }
+
+            .product-card .list-unstyled li {
+                font-size: 0.8rem;
+                margin-bottom: 0.3rem;
+            }
+
+        .product-card .badge {
+            font-size: 0.7rem;
+            padding: 0.3rem 0.55rem;
+        }
+    }
+
+    /* Mobile Landscape (576px - 767px) */
+    @@media (min-width: 576px) and (max-width: 767px) {
+        .product-image {
+            height: 180px;
+        }
+
+        .product-card .card-body {
+            padding: 0.875rem;
+        }
+
+        .product-card .card-title {
+            font-size: 1rem;
+            min-height: 50px;
+            margin-bottom: 0.6rem;
+        }
+
+        .product-card .card-text {
+            font-size: 0.8rem;
+            min-height: 78px;
+            margin-bottom: 0.6rem;
+        }
+
+        .product-card .list-unstyled {
+            min-height: 80px;
+            margin-bottom: 0.6rem;
+        }
+
+            .product-card .list-unstyled li {
+                font-size: 0.75rem;
+                margin-bottom: 0.25rem;
+            }
+
+        .product-card .badge {
+            font-size: 0.65rem;
+            padding: 0.25rem 0.5rem;
+        }
+    }
+
+    /* Mobile Portrait (320px - 575px) */
+    @@media (max-width: 575px) {
+        .product-image {
+            height: 160px;
+        }
+
+        .product-card .card-body {
+            padding: 0.75rem;
+        }
+
+        .product-card .card-title {
+            font-size: 0.95rem;
+            min-height: 48px;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-card .card-text {
+            font-size: 0.75rem;
+            min-height: 72px;
+            margin-bottom: 0.5rem;
+            -webkit-line-clamp: 3;
+        }
+
+        .product-card .list-unstyled {
+            min-height: 76px;
+            margin-bottom: 0.5rem;
+        }
+
+            .product-card .list-unstyled li {
+                font-size: 0.7rem;
+                margin-bottom: 0.2rem;
+            }
+
+        .product-card .badge {
+            font-size: 0.6rem;
+            padding: 0.2rem 0.45rem;
+        }
+    }
+
+    /* Extra Small Mobile (320px - 374px) */
+    @@media (max-width: 374px) {
+        .product-image {
+            height: 150px;
+        }
+
+        .product-card .card-body {
+            padding: 0.65rem;
+        }
+
+        .product-card .card-title {
+            font-size: 0.9rem;
+            min-height: 46px;
+        }
+
+        .product-card .card-text {
+            font-size: 0.7rem;
+            min-height: 68px;
+            line-height: 1.4;
+        }
+
+        .product-card .list-unstyled {
+            min-height: 72px;
+        }
+
+            .product-card .list-unstyled li {
+                font-size: 0.65rem;
+                margin-bottom: 0.15rem;
+            }
+
+        .product-card .badge {
+            font-size: 0.55rem;
+            padding: 0.15rem 0.4rem;
+        }
+    }
+
+    /* Very Small Mobile (<320px) */
+    @@media (max-width: 319px) {
+        .product-image {
+            height: 140px;
+        }
+
+        .product-card .card-body {
+            padding: 0.6rem;
+        }
+
+        .product-card .card-title {
+            font-size: 0.85rem;
+            min-height: 44px;
+        }
+
+        .product-card .card-text {
+            font-size: 0.65rem;
+            min-height: 64px;
+        }
+
+        .product-card .list-unstyled {
+            min-height: 68px;
+        }
+
+            .product-card .list-unstyled li {
+                font-size: 0.6rem;
+            }
+
+        .product-card .badge {
+            font-size: 0.5rem;
+            padding: 0.15rem 0.35rem;
+        }
+    }
+
+    /* Ensure consistent row heights */
+    .row .col-lg-3,
+    .row .col-md-6 {
+        display: flex;
+        margin-bottom: 1.5rem;
+    }
+
+        .row .col-lg-3 > .product-card,
+        .row .col-md-6 > .product-card {
+            width: 100%;
+        }
+</style>
+
+<div class="page-content">
+    <section class="section-padding" style="margin-top: 80px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <h2 class="section-title" data-aos="fade-up">Our Products</h2>
+                    <p class="lead" data-aos="fade-up" data-aos-delay="100">
+                        Professional-grade industrial tools and equipment for all your manufacturing needs
+                    </p>
+                </div>
+            </div>
+
+            <!-- Product Categories -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card product-card" data-aos="fade-up" data-aos-delay="100">
+                        <a asp-area="" asp-controller="Product" asp-action="Pneumatic" class="card-link">
+                            <img src="~/images/products/pneumatic_general.png" alt="Pneumatic Tools" class="card-img-top product-image">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a asp-area="" asp-controller="Product" asp-action="Pneumatic" class="text-decoration-none text-dark">
+                                    Pneumatic 
+                                </a>
+                            </h5>
+                            <p class="card-text">High-performance pneumatic tools including air compressors, impact wrenches, and pneumatic drills for industrial applications.</p>
+                            <ul class="list-unstyled small text-muted">
+                                <li>• Air Impact Wrenches</li>
+                                <li>• Pneumatic Drills</li>
+                                <li>• Air Compressors</li>
+                                <li>• Pneumatic Sanders</li>
+                            </ul>
+                            <div class="mt-3">
+                                <span class="badge bg-primary me-2">Professional Grade</span>
+                                <span class="badge bg-success">In Stock</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card product-card" data-aos="fade-up" data-aos-delay="200">
+                        <a asp-area="" asp-controller="Product" asp-action="PowerTools" class="card-link">
+                            <img src="~/images/products/power_general2.jpg" alt="Power Tools" class="card-img-top product-image">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a asp-area="" asp-controller="Product" asp-action="PowerTools" class="text-decoration-none text-dark">
+                                    Power Tools
+                                </a>
+                            </h5>
+                            <p class="card-text">
+                                Electric and battery-powered tools designed for heavy-duty industrial use with superior performance and durability.
+                            </p>
+                            <ul class="list-unstyled small text-muted">
+                                <li>• Electric Drills</li>
+                                <li>• Angle Grinders</li>
+                                <li>• Circular Saws</li>
+                                <li>• Impact Drivers</li>
+                            </ul>
+                            <div class="mt-3">
+                                <span class="badge bg-primary me-2">Heavy Duty</span>
+                                <span class="badge bg-success">In Stock</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card product-card" data-aos="fade-up" data-aos-delay="300">
+                        <a asp-area="" asp-controller="Product" asp-action="CuttingTools" class="card-link">
+                            <img src="~/images/products/cutting_general.jpg" alt="Cutting Tools" class="card-img-top product-image">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a asp-area="" asp-controller="Product" asp-action="CuttingTools" class="text-decoration-none text-dark">
+                                    Cutting Tools
+                                </a>
+                            </h5>
+                            <p class="card-text">
+                                Precision cutting tools and blades for metal, wood, and composite materials. Built for accuracy and longevity.
+                            </p>
+                            <ul class="list-unstyled small text-muted">
+                                <li>• Carbide End Mills</li>
+                                <li>• HSS Drill Bits</li>
+                                <li>• Saw Blades</li>
+                                <li>• Router Bits</li>
+                            </ul>
+                            <div class="mt-3">
+                                <span class="badge bg-primary me-2">Precision</span>
+                                <span class="badge bg-success">In Stock</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card product-card" data-aos="fade-up" data-aos-delay="400">
+                        <a asp-area="" asp-controller="Product" asp-action="Abrasives" class="card-link">
+                            <img src="~/images/products/abrasive_general.jpg" alt="Abrasives" class="card-img-top product-image">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a asp-area="" asp-controller="Product" asp-action="Abrasives" class="text-decoration-none text-dark">
+                                    Abrasives
+                                </a>
+                            </h5>
+                            <p class="card-text">
+                                Industrial-grade abrasive products including grinding wheels, sandpaper, and polishing compounds for surface finishing.
+                            </p>
+                            <ul class="list-unstyled small text-muted">
+                                <li>• Grinding Wheels</li>
+                                <li>• Sanding Discs</li>
+                                <li>• Wire Brushes</li>
+                                <li>• Polishing Compounds</li>
+                            </ul>
+                            <div class="mt-3">
+                                <span class="badge bg-primary me-2">Industrial Grade</span>
+                                <span class="badge bg-success">In Stock</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*   <!-- Additional Product Categories -->
+            <div class="row mt-4">
+            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card product-card" data-aos="fade-up" data-aos-delay="500">
+            <img src="~/images/products/measuring_general.jpg" alt="Measuring Tools" class="card-img-top product-image">
+            <div class="card-body">
+            <h5 class="card-title">Measuring & Testing</h5>
+            <p class="card-text">Precision measuring instruments and testing equipment for quality control and dimensional accuracy.</p>
+            <ul class="list-unstyled small text-muted">
+            <li>• Digital Calipers</li>
+            <li>• Micrometers</li>
+            <li>• Gauge Blocks</li>
+            <li>• Surface Plates</li>
+            </ul>
+            <div class="mt-3">
+            <span class="badge bg-primary me-2">Precision</span>
+            <span class="badge bg-success">In Stock</span>
+            </div>
+            </div>
+            </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card product-card" data-aos="fade-up" data-aos-delay="600">
+            <img src="~/images/products/safety_general.jpg" alt="Safety Equipment" class="card-img-top product-image">
+            <div class="card-body">
+            <h5 class="card-title">Safety Equipment</h5>
+            <p class="card-text">Comprehensive safety gear and protective equipment to ensure workplace safety and compliance.</p>
+            <ul class="list-unstyled small text-muted">
+            <li>• Safety Helmets</li>
+            <li>• Protective Eyewear</li>
+            <li>• Work Gloves</li>
+            <li>• Safety Vests</li>
+            </ul>
+            <div class="mt-3">
+            <span class="badge bg-primary me-2">Safety First</span>
+            <span class="badge bg-success">In Stock</span>
+            </div>
+            </div>
+            </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card product-card" data-aos="fade-up" data-aos-delay="700">
+            <img src="~/images/products/hand_general.jpg" alt="Hand Tools" class="card-img-top product-image">
+            <div class="card-body">
+            <h5 class="card-title">Hand Tools</h5>
+            <p class="card-text">Professional hand tools including wrenches, screwdrivers, and specialty tools for precision work.</p>
+            <ul class="list-unstyled small text-muted">
+            <li>• Socket Sets</li>
+            <li>• Screwdriver Sets</li>
+            <li>• Pliers & Cutters</li>
+            <li>• Specialty Tools</li>
+            </ul>
+            <div class="mt-3">
+            <span class="badge bg-primary me-2">Professional</span>
+            <span class="badge bg-success">In Stock</span>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div> *@
+
+            <!-- Product Features Section -->
+            <div class="row mt-5">
+                <div class="col-lg-12 text-center mb-4">
+                    <h3>Why Choose Our Products?</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-center">
+                        <i class="fas fa-certificate fa-3x text-primary mb-3"></i>
+                        <h5>Certified Quality</h5>
+                        <p class="text-muted">All products are ISO certified and meet international quality standards.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-center">
+                        <i class="fas fa-shipping-fast fa-3x text-primary mb-3"></i>
+                        <h5>Fast Delivery</h5>
+                        <p class="text-muted">Quick and reliable delivery to your doorstep with tracking support.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-center">
+                        <i class="fas fa-tools fa-3x text-primary mb-3"></i>
+                        <h5>Expert Support</h5>
+                        <p class="text-muted">Technical assistance and product guidance from our expert team.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-center">
+                        <i class="fas fa-medal fa-3x text-primary mb-3"></i>
+                        <h5>Warranty</h5>
+                        <p class="text-muted">Comprehensive warranty coverage on all our industrial products.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section with Responsive Buttons -->
+            <div class="row mt-5">
+                <div class="col-lg-12 text-center">
+                    <div class="product-cta-section custom-solutions">
+                        <h4 class="solutions-title">Need Custom Solutions?</h4>
+                        <p class="solutions-description">We offer customized industrial tool solutions tailored to your specific requirements.</p>
+                        <div class="product-cta-buttons">
+                            <a asp-area="" asp-controller="Home" asp-action="Contact" class="solutions-btn">
+                                <i class="fas fa-envelope me-2"></i>Contact Us
+                            </a>
+                            <a asp-area="" asp-controller="Home" asp-action="Offers" class="solutions-btn-outline">
+                                <i class="fas fa-tags me-2"></i>View Offers
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,603 @@
+﻿/* ==========================================
+   PROFESSIONAL MINIMAL THEME
+   Light & Dark Mode - Clean & Decent
+   ========================================== */
+
+/* CSS Variables for Light Theme (Default - Minimal & Professional) */
+:root {
+    /* Background Colors - Minimal palette */
+    --bg-primary: #f8f9fa;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f0f2f5;
+    /* Text Colors - Professional gray tones */
+    --text-primary: #1a1a1a;
+    --text-secondary: #6c757d;
+    --text-tertiary: #adb5bd;
+    /* Border Colors - Subtle */
+    --border-primary: #dee2e6;
+    --border-secondary: #e9ecef;
+    /* Shadows - Very subtle */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.08);
+    /* Accent Colors - Minimal use */
+    --accent-primary: #0066cc;
+    --accent-secondary: #004999;
+    --accent-success: #28a745;
+    --accent-danger: #dc3545;
+    --accent-warning: #ffc107;
+    /* Component Backgrounds */
+    --card-bg: #ffffff;
+    --card-hover-bg: #f8f9fa;
+    --input-bg: #ffffff;
+    --input-border: #dee2e6;
+    --input-focus-border: #0066cc;
+    --nav-bg: #ffffff;
+    --nav-border: #dee2e6;
+    /* Table styling */
+    --table-header-bg: #f8f9fa;
+    --table-border: #dee2e6;
+    --table-hover: #f8f9fa;
+    --table-row-border: #dee2e6;
+}
+
+/* CSS Variables for Dark Theme */
+[data-theme="dark"] {
+    /* Background Colors - Dark professional */
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-tertiary: #3d3d3d;
+    /* Text Colors - Light grays */
+    --text-primary: #e8e8e8;
+    --text-secondary: #b0b0b0;
+    --text-tertiary: #808080;
+    /* Border Colors - Subtle dark */
+    --border-primary: #404040;
+    --border-secondary: #4a4a4a;
+    /* Shadows - Dark mode */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.5);
+    /* Accent Colors - Minimal use */
+    --accent-primary: #4a9eff;
+    --accent-secondary: #0066cc;
+    --accent-success: #51cf66;
+    --accent-danger: #ff6b6b;
+    --accent-warning: #ffd43b;
+    /* Component Backgrounds */
+    --card-bg: #2d2d2d;
+    --card-hover-bg: #3d3d3d;
+    --input-bg: #2d2d2d;
+    --input-border: #404040;
+    --input-focus-border: #4a9eff;
+    --nav-bg: #252525;
+    --nav-border: #404040;
+    /* Table styling */
+    --table-header-bg: #3d3d3d;
+    --table-border: #404040;
+    --table-hover: #3d3d3d;
+    --table-row-border: #404040;
+}
+
+/* ==========================================
+   SMOOTH TRANSITIONS
+   ========================================== */
+* {
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+/* ==========================================
+   GLOBAL STYLES
+   ========================================== */
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    line-height: 1.5;
+}
+
+/* ==========================================
+   NAVIGATION BAR
+   ========================================== */
+.admin-nav-wrapper,
+.navbar {
+    background: var(--nav-bg) !important;
+    border-bottom: 1px solid var(--nav-border) !important;
+    box-shadow: var(--shadow-sm);
+    padding: 0.75rem 0;
+}
+
+.admin-brand h5,
+.navbar-brand {
+    color: var(--text-primary) !important;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: -0.3px;
+}
+
+.admin-brand h5 {
+    font-size: clamp(0.95rem, 3vw, 1.1rem);
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--nav-border);
+}
+
+.mobile-menu-item,
+.nav-link {
+    color: var(--text-secondary) !important;
+    font-size: 0.95rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--nav-border);
+}
+
+    .mobile-menu-item:hover,
+    .nav-link:hover {
+        background: var(--card-hover-bg);
+        color: var(--text-primary) !important;
+    }
+
+.mobile-menu-toggle {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 0.5rem;
+}
+
+    .mobile-menu-toggle:hover {
+        color: var(--text-primary);
+    }
+
+/* ==========================================
+   HEADERS & TYPOGRAPHY
+   ========================================== */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary) !important;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+h3, h4 {
+    font-weight: 600;
+}
+
+h5, h6 {
+    font-weight: 500;
+}
+
+.text-muted,
+.header-title p,
+.dashboard-header p,
+small {
+    color: var(--text-secondary) !important;
+    font-weight: 400;
+}
+
+/* ==========================================
+   CARDS & CONTAINERS
+   ========================================== */
+.card,
+.content-card,
+.stat-card,
+.filter-section,
+.table-container,
+.email-header {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-primary) !important;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+}
+
+    .stat-card:hover,
+    .card:hover {
+        box-shadow: var(--shadow-md);
+        border-color: var(--border-secondary) !important;
+    }
+
+.card-body {
+    padding: 1.25rem;
+}
+
+/* ==========================================
+   STAT CARDS - PROFESSIONAL STYLE
+   ========================================== */
+.stat-card {
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--border-primary);
+    border-radius: 8px;
+}
+
+    .stat-card .stat-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        background: var(--bg-tertiary);
+        color: var(--text-secondary);
+        font-size: 1.5rem;
+    }
+
+    .stat-card .stat-content h6 {
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        font-weight: 500;
+        margin: 0 0 0.25rem 0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .stat-card .stat-content .stat-value {
+        color: var(--text-primary);
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .stat-card .stat-change {
+        text-align: right;
+    }
+
+        .stat-card .stat-change .change-value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-success);
+        }
+
+        .stat-card .stat-change .change-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+/* ==========================================
+   FORMS & INPUTS
+   ========================================== */
+.form-control,
+.form-select,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="number"],
+textarea,
+select {
+    background: var(--input-bg) !important;
+    border: 1px solid var(--input-border) !important;
+    color: var(--text-primary) !important;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    padding: 0.625rem 0.875rem;
+}
+
+    .form-control:focus,
+    .form-select:focus {
+        background: var(--input-bg) !important;
+        border-color: var(--input-focus-border) !important;
+        box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        outline: none;
+    }
+
+    .form-control::placeholder {
+        color: var(--text-tertiary) !important;
+    }
+
+.search-box {
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    padding: 0.625rem 0.875rem;
+}
+
+    .search-box i {
+        color: var(--text-tertiary);
+    }
+
+/* ==========================================
+   BUTTONS - PROFESSIONAL
+   ========================================== */
+.btn {
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.625rem 0.875rem;
+    border: none;
+    transition: all 0.25s ease;
+}
+
+.btn-primary {
+    background: var(--accent-primary);
+    color: #ffffff;
+}
+
+    .btn-primary:hover {
+        background: var(--accent-secondary);
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-md);
+    }
+
+.btn-success {
+    background: var(--accent-success);
+    color: #ffffff;
+}
+
+.btn-danger {
+    background: var(--accent-danger);
+    color: #ffffff;
+}
+
+.btn-outline-secondary {
+    background: var(--card-bg);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-primary) !important;
+}
+
+    .btn-outline-secondary:hover {
+        background: var(--card-hover-bg);
+        color: var(--text-primary);
+        border-color: var(--border-secondary) !important;
+    }
+
+.btn-sm {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+/* ==========================================
+   TABLES
+   ========================================== */
+.table {
+    color: var(--text-primary);
+    border-collapse: collapse;
+}
+
+    .table thead th {
+        background: var(--table-header-bg);
+        color: var(--text-primary);
+        border: none;
+        border-bottom: 1px solid var(--table-border);
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 1rem;
+    }
+
+    .table tbody td {
+        border-bottom: 1px solid var(--table-border);
+        color: var(--text-primary);
+        padding: 1rem;
+        font-size: 0.95rem;
+    }
+
+    .table tbody tr:hover {
+        background: var(--table-hover);
+    }
+
+    .table tbody tr {
+        border: none;
+    }
+
+/* ==========================================
+   BADGES
+   ========================================== */
+.badge {
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    letter-spacing: 0.3px;
+}
+
+.badge-success {
+    background: var(--accent-success);
+    color: #ffffff;
+}
+
+.badge-danger {
+    background: var(--accent-danger);
+    color: #ffffff;
+}
+
+.badge-warning {
+    background: var(--accent-warning);
+    color: #000;
+}
+
+.badge-info {
+    background: var(--accent-primary);
+    color: #ffffff;
+}
+
+/* ==========================================
+   THEME TOGGLE BUTTON
+   ========================================== */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    color: var(--text-secondary);
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.25s ease;
+}
+
+    .theme-toggle:hover {
+        background: var(--card-hover-bg);
+        color: var(--text-primary);
+        border-color: var(--border-secondary);
+    }
+
+    .theme-toggle i {
+        font-size: 1rem;
+        transition: transform 0.25s ease;
+    }
+
+    .theme-toggle:hover i {
+        transform: rotate(15deg);
+    }
+
+/* ==========================================
+   FILTER & SEARCH SECTION
+   ========================================== */
+.filter-section {
+    background: var(--card-bg);
+    padding: 1.25rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+    .filter-section .form-control,
+    .filter-section .form-select {
+        font-size: 0.9rem;
+    }
+
+/* ==========================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================== */
+@media (max-width: 375px) {
+    .admin-brand h5 {
+        font-size: 0.9rem;
+    }
+
+    .stat-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+        .stat-card .stat-icon {
+            margin-right: 0;
+            margin-bottom: 0.75rem;
+        }
+}
+
+@media (max-width: 768px) {
+    .container-fluid {
+        padding: 0.75rem;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+}
+
+/* ==========================================
+   UTILITY CLASSES
+   ========================================== */
+.text-secondary {
+    color: var(--text-secondary) !important;
+}
+
+.text-tertiary {
+    color: var(--text-tertiary) !important;
+}
+
+.bg-light {
+    background: var(--bg-tertiary) !important;
+}
+
+/* ==========================================
+   MODALS
+   ========================================== */
+.modal-content {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border-primary);
+    background: var(--bg-tertiary);
+}
+
+/* ==========================================
+   SCROLLBAR
+   ========================================== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-secondary);
+    border-radius: 4px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--border-primary);
+    }
+
+/* ==========================================
+   DATATABLE CUSTOMIZATION
+   ========================================== */
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
+    color: var(--text-secondary) !important;
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    margin: 0 2px;
+}
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background: var(--card-hover-bg);
+        border-color: var(--border-secondary);
+        color: var(--text-primary) !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        background: var(--accent-primary);
+        color: #ffffff !important;
+        border-color: var(--accent-primary);
+    }
+
+.dataTables_wrapper .dataTables_info {
+    color: var(--text-secondary);
+    padding: 0.75rem 0;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    margin-bottom: 1rem;
+}
+
+    .dataTables_wrapper .dataTables_filter input {
+        background: var(--input-bg);
+        border: 1px solid var(--input-border);
+        color: var(--text-primary);
+        padding: 0.5rem 0.75rem;
+        border-radius: 4px;
+    } 
+
+/* ==========================================
+   PRINT STYLES
+   ========================================== */
+@media print {
+    .theme-toggle,
+    .admin-nav-wrapper,
+    .mobile-menu {
+        display: none;
+    }
+}

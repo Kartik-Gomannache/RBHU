@@ -1,0 +1,2080 @@
+﻿@using System.Security.Claims
+
+@{
+
+    var uniqueUserIdentifier = User.Claims.FirstOrDefault()?.Value;
+    var newl = "";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Aniket Sales Agencies</title>
+    <link rel="icon" type="image/x-icon" href="~/images/as_logo.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <style>
+        /* Professional Products Dropdown Styles */
+        .products-dropdown-wrapper {
+            position: relative;
+        }
+
+        .products-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+            .products-dropdown-toggle:hover {
+                color: #ffd700 !important;
+            }
+
+        .dropdown-icon {
+            transition: transform 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .products-dropdown-wrapper.show .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        .products-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 350px;
+            max-width: 450px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            padding: 0;
+            margin-top: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .products-dropdown-wrapper.show .products-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-header {
+            padding: 20px 20px 15px;
+            border-bottom: 1px solid #f1f5f9;
+            text-align: center;
+            background: linear-gradient(130deg, #8b0000 0%, #cc0017 50%, #8b0000 90%) !important;
+            color: white;
+            border-radius: 12px 12px 0 0;
+        }
+
+            .dropdown-header h6 {
+                margin: 0;
+                font-weight: 600;
+                font-size: 1.1rem;
+            }
+
+            .dropdown-header p {
+                margin: 5px 0 0;
+                font-size: 0.85rem;
+                opacity: 0.9;
+            }
+
+        .dropdown-items {
+            padding: 15px 10px;
+            max-height: 450px;
+            overflow-y: auto;
+        }
+
+        .category-item {
+            margin-bottom: 8px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid #cbd5e1;
+            text-decoration: none;
+            color: inherit;
+        }
+
+            .category-header:hover {
+                background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+                transform: translateX(3px);
+                color: inherit;
+            }
+
+        .category-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 6px;
+            object-fit: cover;
+            margin-right: 12px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .category-content {
+            flex: 1;
+        }
+
+            .category-content h6 {
+                margin: 0;
+                font-size: 0.95rem;
+                font-weight: 600;
+                color: #1e293b;
+            }
+
+        .category-toggle-icon {
+            margin-left: auto;
+            font-size: 0.75rem;
+            transition: transform 0.3s ease;
+            color: #64748b;
+        }
+
+        .category-item.open .category-toggle-icon {
+            transform: rotate(90deg);
+        }
+
+        .subcategory-list {
+            display: none;
+            padding-left: 47px;
+            margin-top: 8px;
+        }
+
+        .category-item.open .subcategory-list {
+            display: block;
+        }
+
+        .subcategory-item {
+            margin-bottom: 6px;
+        }
+
+        .subcategory-header {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            background: #f8fafc;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-left: 3px solid #cbd5e1;
+            text-decoration: none;
+            color: inherit;
+        }
+
+            .subcategory-header:hover {
+                background: #f1f5f9;
+                border-left-color: #667eea;
+                transform: translateX(3px);
+                color: inherit;
+            }
+
+        .subcategory-content {
+            flex: 1;
+        }
+
+            .subcategory-content span {
+                font-size: 0.88rem;
+                font-weight: 500;
+                color: #475569;
+            }
+
+        .subcategory-toggle-icon {
+            margin-left: auto;
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+            color: #94a3b8;
+        }
+
+        .subcategory-item.open .subcategory-toggle-icon {
+            transform: rotate(90deg);
+        }
+
+        .subcategory2-list {
+            display: none;
+            padding-left: 20px;
+            margin-top: 6px;
+        }
+
+        .subcategory-item.open .subcategory2-list {
+            display: block;
+        }
+
+        .subcategory2-link {
+            display: block;
+            padding: 6px 12px;
+            font-size: 0.82rem;
+            color: #64748b;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            border-left: 2px solid transparent;
+        }
+
+            .subcategory2-link:hover {
+                background: #f8fafc;
+                color: #1e293b;
+                border-left-color: #667eea;
+                transform: translateX(2px);
+            }
+
+            .subcategory2-link i {
+                font-size: 0.4rem;
+                vertical-align: middle;
+            }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 15px;
+            color: #e53e3e;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+            .dropdown-overlay.show {
+                opacity: 1;
+                visibility: visible;
+            }
+
+        @@media (max-width: 991px) {
+            .products-dropdown {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(0.9);
+                min-width: 90vw;
+                max-width: 500px;
+                max-height: 80vh;
+                margin-top: 0;
+            }
+
+            .products-dropdown-wrapper.show .products-dropdown {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            .dropdown-items {
+                max-height: calc(80vh - 100px);
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .category-icon {
+                width: 30px;
+                height: 30px;
+                margin-right: 10px;
+            }
+
+            .category-content h6 {
+                font-size: 0.9rem;
+            }
+
+            .subcategory-content span {
+                font-size: 0.85rem;
+            }
+
+            .subcategory2-link {
+                font-size: 0.8rem;
+            }
+        }
+
+        .dropdown-items::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .dropdown-items::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 3px;
+        }
+
+        .dropdown-items::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+            .dropdown-items::-webkit-scrollbar-thumb:hover {
+                background: #94a3b8;
+            }
+
+        /* Fixed Chat Button Styles */
+        .fixed-chat-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1050;
+            background: linear-gradient( 130deg, #8b0000 0%, #cc0017 50%, #8b0000 90%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(49, 130, 206, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: pulse 2s infinite;
+        }
+
+            .fixed-chat-btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 12px 35px rgba(49, 130, 206, 0.4);
+                background: linear-gradient( 130deg, #8b0000 0%, #cc0017 50%, #8b0000 90%);
+                color: white;
+            }
+
+        @@keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(49, 130, 206, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(49, 130, 206, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(49, 130, 206, 0);
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .fixed-chat-btn {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+        }
+
+        /* ===== ENHANCED RESPONSIVE CONTACT MODAL STYLES ===== */
+        /* Base Modal Styles */
+        .contact-modal .modal-dialog {
+            max-width: 600px;
+            margin: 1.75rem auto;
+        }
+
+        .contact-modal .modal-content {
+            border-radius: 0.5rem;
+            border: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-modal .modal-header {
+            background: linear-gradient(0deg, #8b0000 0%, #cc0017 50%, #8b0000 90%) !important;
+            color: white;
+            border-bottom: none;
+            border-radius: 0.5rem 0.5rem 0 0;
+            padding: 1.5rem 2rem;
+        }
+
+            .contact-modal .modal-header .modal-title {
+                font-size: 1.25rem;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+                .contact-modal .modal-header .modal-title i {
+                    font-size: 1.1rem;
+                }
+
+            .contact-modal .modal-header .btn-close {
+                background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath d='m.234 1.667l5.253 5.253-5.253 5.253a1.2 1.2 0 001.697 1.697l5.253-5.253 5.253 5.253a1.2 1.2 0 001.697-1.697l-5.253-5.253 5.253-5.253a1.2 1.2 0 00-1.697-1.697l-5.253 5.253-5.253-5.253a1.2 1.2 0 00-1.697 1.697z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+                filter: none;
+                opacity: 1;
+                padding: 0.5rem;
+            }
+
+        .contact-modal .modal-body {
+            padding: 2rem;
+            background: #f8fafc;
+        }
+
+        .contact-modal .form-label {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .contact-modal .form-control {
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+            background: white;
+            font-size: 0.95rem;
+        }
+
+            .contact-modal .form-control:focus {
+                border-color: #3182ce;
+                box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+                background: white;
+                outline: none;
+            }
+
+            .contact-modal .form-control.is-invalid {
+                border-color: #e53e3e;
+                background: #fed7d7;
+            }
+
+        .contact-modal .invalid-feedback {
+            display: none;
+            color: #e53e3e;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            font-weight: 500;
+        }
+
+        .contact-modal .btn-submit {
+            background: linear-gradient(130deg, #8b0000 0%, #cc0017 50%, #8b0000 90%) !important;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 1rem;
+        }
+
+            .contact-modal .btn-submit:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(49, 130, 206, 0.3);
+                background: none;
+            }
+
+            .contact-modal .btn-submit:disabled {
+                background: #a0aec0;
+                transform: none;
+                box-shadow: none;
+                cursor: not-allowed;
+            }
+
+        .contact-modal .quick-contact {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+            .contact-modal .quick-contact h6 {
+                font-size: 1rem;
+                font-weight: 600;
+                margin-bottom: 1rem;
+                color: #2d3748;
+            }
+
+        .contact-modal .quick-contact-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+            .contact-modal .quick-contact-item:last-child {
+                border-bottom: none;
+            }
+
+            .contact-modal .quick-contact-item i {
+                font-size: 1.2rem;
+                margin-right: 1rem;
+                width: 24px;
+                flex-shrink: 0;
+            }
+
+            .contact-modal .quick-contact-item strong {
+                font-size: 0.9rem;
+                display: inline-block;
+                min-width: 70px;
+            }
+
+            .contact-modal .quick-contact-item a {
+                font-size: 0.9rem;
+                word-break: break-word;
+            }
+
+        /* Tablet Responsive (768px - 991px) */
+        @@media (max-width: 991px) {
+            .contact-modal .modal-dialog {
+                max-width: 90%;
+                margin: 1.5rem auto;
+            }
+
+            .contact-modal .modal-header {
+                padding: 1.25rem 1.5rem;
+            }
+
+                .contact-modal .modal-header .modal-title {
+                    font-size: 1.15rem;
+                }
+
+            .contact-modal .modal-body {
+                padding: 1.5rem;
+            }
+
+            .contact-modal .form-label {
+                font-size: 0.9rem;
+            }
+
+            .contact-modal .form-control {
+                font-size: 0.9rem;
+                padding: 0.7rem 0.9rem;
+            }
+
+            .contact-modal .btn-submit {
+                font-size: 0.95rem;
+                padding: 0.7rem 1.75rem;
+            }
+
+            .contact-modal .quick-contact {
+                padding: 1.25rem;
+            }
+
+                .contact-modal .quick-contact h6 {
+                    font-size: 0.95rem;
+                }
+
+            .contact-modal .quick-contact-item strong {
+                font-size: 0.85rem;
+                min-width: 65px;
+            }
+
+            .contact-modal .quick-contact-item a {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Large Mobile (576px - 767px) */
+        @@media (max-width: 767px) {
+            .contact-modal .modal-dialog {
+                max-width: 95%;
+                margin: 1rem auto;
+            }
+
+            .contact-modal .modal-header {
+                padding: 1rem 1.25rem;
+            }
+
+                .contact-modal .modal-header .modal-title {
+                    font-size: 1.05rem;
+                }
+
+                    .contact-modal .modal-header .modal-title i {
+                        font-size: 1rem;
+                    }
+
+            .contact-modal .modal-body {
+                padding: 1.25rem;
+            }
+
+            .contact-modal .form-label {
+                font-size: 0.875rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .contact-modal .form-control {
+                font-size: 0.875rem;
+                padding: 0.65rem 0.85rem;
+            }
+
+            .contact-modal .btn-submit {
+                font-size: 0.9rem;
+                padding: 0.65rem 1.5rem;
+            }
+
+            .contact-modal .quick-contact {
+                padding: 1rem;
+            }
+
+                .contact-modal .quick-contact h6 {
+                    font-size: 0.9rem;
+                    margin-bottom: 0.75rem;
+                }
+
+            .contact-modal .quick-contact-item {
+                padding: 0.4rem 0;
+            }
+
+                .contact-modal .quick-contact-item i {
+                    font-size: 1.1rem;
+                    margin-right: 0.75rem;
+                    width: 22px;
+                }
+
+                .contact-modal .quick-contact-item strong {
+                    font-size: 0.8rem;
+                    min-width: 60px;
+                }
+
+                .contact-modal .quick-contact-item a {
+                    font-size: 0.8rem;
+                }
+        }
+
+        /* Medium Mobile (480px - 575px) */
+        @@media (max-width: 575px) {
+            .contact-modal .modal-dialog {
+                max-width: 96%;
+                margin: 0.75rem auto;
+            }
+
+            .contact-modal .modal-header {
+                padding: 0.9rem 1rem;
+            }
+
+                .contact-modal .modal-header .modal-title {
+                    font-size: 1rem;
+                }
+
+                    .contact-modal .modal-header .modal-title i {
+                        font-size: 0.95rem;
+                    }
+
+            .contact-modal .modal-body {
+                padding: 1rem;
+            }
+
+            .contact-modal .form-label {
+                font-size: 0.85rem;
+                margin-bottom: 0.35rem;
+            }
+
+            .contact-modal .form-control {
+                font-size: 0.85rem;
+                padding: 0.6rem 0.8rem;
+                border-radius: 0.4rem;
+            }
+
+            .contact-modal .btn-submit {
+                font-size: 0.875rem;
+                padding: 0.6rem 1.25rem;
+                border-radius: 0.4rem;
+            }
+
+            .contact-modal .mb-3 {
+                margin-bottom: 0.75rem !important;
+            }
+
+            .contact-modal .mb-4 {
+                margin-bottom: 1rem !important;
+            }
+
+            .contact-modal .quick-contact {
+                padding: 0.9rem;
+                margin-top: 0.75rem;
+            }
+
+                .contact-modal .quick-contact h6 {
+                    font-size: 0.875rem;
+                    margin-bottom: 0.65rem;
+                }
+
+            .contact-modal .quick-contact-item {
+                padding: 0.35rem 0;
+            }
+
+                .contact-modal .quick-contact-item i {
+                    font-size: 1rem;
+                    margin-right: 0.65rem;
+                    width: 20px;
+                }
+
+                .contact-modal .quick-contact-item strong {
+                    font-size: 0.75rem;
+                    min-width: 55px;
+                }
+
+                .contact-modal .quick-contact-item a {
+                    font-size: 0.75rem;
+                }
+        }
+
+        /* Small Mobile (375px - 479px) */
+        @@media (max-width: 479px) {
+            .contact-modal .modal-dialog {
+                max-width: 98%;
+                margin: 0.5rem auto;
+            }
+
+            .contact-modal .modal-header {
+                padding: 0.85rem 0.9rem;
+            }
+
+                .contact-modal .modal-header .modal-title {
+                    font-size: 0.95rem;
+                }
+
+                    .contact-modal .modal-header .modal-title i {
+                        font-size: 0.9rem;
+                        margin-right: 0.35rem;
+                    }
+
+                .contact-modal .modal-header .btn-close {
+                    padding: 0.4rem;
+                }
+
+            .contact-modal .modal-body {
+                padding: 0.9rem;
+            }
+
+            .contact-modal .form-label {
+                font-size: 0.8rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .contact-modal .form-control {
+                font-size: 0.8rem;
+                padding: 0.55rem 0.75rem;
+                border-radius: 0.35rem;
+            }
+
+            .contact-modal textarea.form-control {
+                min-height: 80px;
+            }
+
+            .contact-modal .btn-submit {
+                font-size: 0.85rem;
+                padding: 0.55rem 1rem;
+                border-radius: 0.35rem;
+            }
+
+            .contact-modal .mb-3 {
+                margin-bottom: 0.65rem !important;
+            }
+
+            .contact-modal .mb-4 {
+                margin-bottom: 0.85rem !important;
+            }
+
+            .contact-modal .quick-contact {
+                padding: 0.8rem;
+                margin-top: 0.65rem;
+            }
+
+                .contact-modal .quick-contact h6 {
+                    font-size: 0.85rem;
+                    margin-bottom: 0.55rem;
+                }
+
+            .contact-modal .quick-contact-item {
+                padding: 0.3rem 0;
+                flex-wrap: wrap;
+            }
+
+                .contact-modal .quick-contact-item i {
+                    font-size: 0.95rem;
+                    margin-right: 0.6rem;
+                    width: 18px;
+                }
+
+                .contact-modal .quick-contact-item strong {
+                    font-size: 0.7rem;
+                    min-width: 50px;
+                }
+
+                .contact-modal .quick-contact-item a {
+                    font-size: 0.7rem;
+                }
+        }
+
+        /* Extra Small Mobile (320px - 374px) */
+        @@media (max-width: 374px) {
+            .contact-modal .modal-dialog {
+                max-width: 100%;
+                margin: 0.25rem;
+            }
+
+            .contact-modal .modal-header {
+                padding: 0.75rem 0.8rem;
+            }
+
+                .contact-modal .modal-header .modal-title {
+                    font-size: 0.9rem;
+                }
+
+                    .contact-modal .modal-header .modal-title i {
+                        font-size: 0.85rem;
+                        margin-right: 0.3rem;
+                    }
+
+                .contact-modal .modal-header .btn-close {
+                    padding: 0.35rem;
+                    width: 32px;
+                    height: 32px;
+                }
+
+            .contact-modal .modal-body {
+                padding: 0.75rem;
+            }
+
+            .contact-modal .form-label {
+                font-size: 0.75rem;
+                margin-bottom: 0.25rem;
+            }
+
+            .contact-modal .form-control {
+                font-size: 0.75rem;
+                padding: 0.5rem 0.65rem;
+                border-radius: 0.3rem;
+            }
+
+            .contact-modal textarea.form-control {
+                min-height: 70px;
+            }
+
+            .contact-modal .btn-submit {
+                font-size: 0.8rem;
+                padding: 0.5rem 0.85rem;
+                border-radius: 0.3rem;
+            }
+
+            .contact-modal .mb-3 {
+                margin-bottom: 0.55rem !important;
+            }
+
+            .contact-modal .mb-4 {
+                margin-bottom: 0.75rem !important;
+            }
+
+            .contact-modal .quick-contact {
+                padding: 0.7rem;
+                margin-top: 0.55rem;
+            }
+
+                .contact-modal .quick-contact h6 {
+                    font-size: 0.8rem;
+                    margin-bottom: 0.5rem;
+                }
+
+            .contact-modal .quick-contact-item {
+                padding: 0.25rem 0;
+            }
+
+                .contact-modal .quick-contact-item i {
+                    font-size: 0.9rem;
+                    margin-right: 0.5rem;
+                    width: 16px;
+                }
+
+                .contact-modal .quick-contact-item strong {
+                    font-size: 0.68rem;
+                    min-width: 48px;
+                    display: block;
+                    margin-bottom: 0.1rem;
+                }
+
+                .contact-modal .quick-contact-item a {
+                    font-size: 0.68rem;
+                }
+
+                .contact-modal .quick-contact-item div {
+                    flex: 1;
+                }
+        }
+
+        /* Very Small Mobile (<320px) */
+        @@media (max-width: 319px) {
+            .contact-modal .modal-dialog {
+                max-width: 100%;
+                margin: 0.15rem;
+            }
+
+            .contact-modal .modal-header {
+                padding: 0.65rem 0.7rem;
+            }
+
+                .contact-modal .modal-header .modal-title {
+                    font-size: 0.85rem;
+                }
+
+                    .contact-modal .modal-header .modal-title i {
+                        font-size: 0.8rem;
+                    }
+
+                .contact-modal .modal-header .btn-close {
+                    padding: 0.3rem;
+                    width: 30px;
+                    height: 30px;
+                }
+
+            .contact-modal .modal-body {
+                padding: 0.65rem;
+            }
+
+            .contact-modal .form-label {
+                font-size: 0.7rem;
+                margin-bottom: 0.2rem;
+            }
+
+            .contact-modal .form-control {
+                font-size: 0.7rem;
+                padding: 0.45rem 0.6rem;
+                border-radius: 0.25rem;
+            }
+
+            .contact-modal textarea.form-control {
+                min-height: 60px;
+            }
+
+            .contact-modal .btn-submit {
+                font-size: 0.75rem;
+                padding: 0.45rem 0.75rem;
+                border-radius: 0.25rem;
+            }
+
+            .contact-modal .mb-3 {
+                margin-bottom: 0.5rem !important;
+            }
+
+            .contact-modal .mb-4 {
+                margin-bottom: 0.65rem !important;
+            }
+
+            .contact-modal .quick-contact {
+                padding: 0.6rem;
+                margin-top: 0.5rem;
+            }
+
+                .contact-modal .quick-contact h6 {
+                    font-size: 0.75rem;
+                    margin-bottom: 0.45rem;
+                }
+
+            .contact-modal .quick-contact-item {
+                padding: 0.2rem 0;
+            }
+
+                .contact-modal .quick-contact-item i {
+                    font-size: 0.85rem;
+                    margin-right: 0.4rem;
+                    width: 14px;
+                }
+
+                .contact-modal .quick-contact-item strong {
+                    font-size: 0.65rem;
+                    display: block;
+                    margin-bottom: 0.1rem;
+                }
+
+                .contact-modal .quick-contact-item a {
+                    font-size: 0.65rem;
+                }
+        }
+
+        /* Landscape Mode Adjustments for Modal */
+        @@media (max-height: 600px) and (orientation: landscape) {
+            .contact-modal .modal-dialog {
+                margin: 0.5rem auto;
+                max-height: 95vh;
+            }
+
+            .contact-modal .modal-content {
+                max-height: 95vh;
+                overflow-y: auto;
+            }
+
+            .contact-modal .modal-body {
+                padding: 1rem;
+            }
+
+            .contact-modal textarea.form-control {
+                min-height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Home">
+                <img src="~/images/as_logo.png" class="brand-logo" alt="Logo" />
+                <span class="brand-text">Aniket Sales Agencies</span>
+            </a>
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <button class="mobile-close-btn" type="button" onclick="closeMobileNav()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Home">
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">
+                            <span>About Us</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item products-dropdown-wrapper">
+                        <a class="nav-link products-dropdown-toggle" asp-action="Products" asp-controller="Home">
+                            <span>Products</span>
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <div class="products-dropdown">
+                            <div class="dropdown-header">
+                                <h6>Categories</h6>
+                            </div>
+                            <div class="dropdown-items" id="productCategoriesContainer">
+                                <div class="text-center py-3">
+                                    <i class="fas fa-spinner fa-spin"></i> Loading categories...
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link offer-highlight" asp-area="" asp-controller="Home" asp-action="Offers">
+                            <span><i class="fas fa-fire"></i>&nbsp; Offers</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">
+                            <span>Contact Us</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="AdminLogin()">
+                            <span>👤</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dropdown Overlay for Mobile -->
+    <div class="dropdown-overlay" onclick="closeProductsDropdown()"></div>
+
+    <!-- Fixed Chat Button -->
+    <button class="fixed-chat-btn" type="button" data-bs-toggle="modal" data-bs-target="#contactModal">
+        <i class="fas fa-comments"></i>
+        <span>Contact us</span>
+    </button>
+    <input id="hiddenVar" value="@uniqueUserIdentifier" hidden />
+    <!-- Contact Modal -->
+    <div class="modal fade contact-modal" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactModalLabel">
+                        <i class="fas fa-envelope me-2"></i>Contact Us
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="modalValidationSummary" class="alert alert-danger" style="display: none;">
+                        <ul id="modalValidationList"></ul>
+                    </div>
+
+                    <form id="contactModalForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="modalFullName" class="form-label">Full Name *</label>
+                                <input id="modalFullName" name="FullName" class="form-control" placeholder="Enter your full name" />
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="modalPhoneNumber" class="form-label">Phone Number *</label>
+                                <input id="modalPhoneNumber" name="PhoneNumber" class="form-control" type="tel" placeholder="Enter your phone number" />
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="modalEmail" class="form-label">Email Address *</label>
+                                <input id="modalEmail" name="Email" class="form-control" type="email" placeholder="Enter your email address" />
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="modalSubject" class="form-label">Subject *</label>
+                                <select id="modalSubject" name="Subject" class="form-control">
+                                    <option value="">Select Subject</option>
+                                    <option value="Product Inquiry">Product Inquiry</option>
+                                    <option value="Bulk Order">Bulk Order</option>
+                                    <option value="Technical Support">Technical Support</option>
+                                    <option value="Partnership Opportunity">Partnership Opportunity</option>
+                                    <option value="Warranty Claim">Warranty Claim</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="modalCompany" class="form-label">Company Name</label>
+                            <input id="modalCompany" name="Company" class="form-control" placeholder="Enter your company name" />
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="modalMessage" class="form-label">Message *</label>
+                            <textarea id="modalMessage" name="Message" class="form-control" rows="4" placeholder="Please describe your requirements..."></textarea>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <button type="button" id="modalSubmitBtn" class="btn btn-submit w-100" onclick="sendModalContactEmail()">
+                            <i class="fas fa-paper-plane me-2"></i>Send Message
+                        </button>
+                    </form>
+
+                    <div class="quick-contact mt-4">
+                        <h6 class="mb-3">Quick Contact</h6>
+                        <div class="quick-contact-item">
+                            <i class="fas fa-phone text-primary"></i>
+                            <div>
+                                <strong>Call Us:</strong>
+                                <a href="tel:+917090979999" class="text-decoration-none ms-2">+91 7090979999</a>
+                            </div>
+                        </div>
+                        <div class="quick-contact-item">
+                            <i class="fas fa-envelope text-primary"></i>
+                            <div>
+                                <strong>Email:</strong>
+                                <a href="mailto:office@aniketsalesagencies.com" class="text-decoration-none ms-2">office@aniketsalesagencies.com</a>
+                            </div>
+                        </div>
+                        <div class="quick-contact-item">
+                            <i class="fas fa-clock text-primary"></i>
+                            <div>
+                                <strong>Hours:</strong> Mon-Sat 9:00 AM - 6:00 PM
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-section">
+                        <h5 class="d-flex align-items-center">
+                            <img src="~/images/AS_logo.png" alt="Aniket Sales Agencies Logo" class="footer-inline-logo me-2" />
+                            <span>Aniket Sales Agencies</span>
+                        </h5>
+                        <p class="mb-3">Leading provider of industrial tools and manufacturing equipment with over 35 years of excellence in serving industries worldwide.</p>
+                        <div class="social-links">
+                            <a target="_blank" href="https://www.facebook.com/share/1DPGuZv8Hy/?mibextid=wwXIfr" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/aniket-pawashe-8b478137/" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a target="_blank" href="https://www.instagram.com/aniket_sales?igsh=MWdudGd1dWZjeXFnaA==" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a target="_blank" href="https://youtube.com/@@aniketsalesagencies" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-section">
+                        <h5>Our Products</h5>
+                        <ul class="list-unstyled">
+                            <li><a asp-area="" asp-controller="Product" asp-action="Pneumatic" class="text-light text-decoration-none">Pneumatic</a></li>
+                            <li><a asp-area="" asp-controller="Product" asp-action="PowerTools" class="text-light text-decoration-none">Power Tools</a></li>
+                            <li><a asp-area="" asp-controller="Product" asp-action="CuttingTools" class="text-light text-decoration-none">Cutting Tools</a></li>
+                            <li><a asp-area="" asp-controller="Product" asp-action="Abrasives" class="text-light text-decoration-none">Abrasives</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-section">
+                        <h5>Contact Info</h5>
+                        <div class="contact-item mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <small>
+                                Aniket Sales Agencies<br>
+                                RS no: 345, Plot No: 122/2A,<br>
+                                Udyambag Industrial Estate,<br>
+                                Belgaum, Karnataka - 590008,<br>
+                                India
+                            </small>
+                        </div>
+                        <div class="contact-item mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            <small>+91 7090979999</small>
+                        </div>
+                        <div class="contact-item mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            <small>office@aniketsales.com</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-section">
+                        <h5>Our Location</h5>
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.9721553491486!2d74.4922944740879!3d15.817183846138205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbf65b7be6dca61%3A0x412f7c54e9a0ddd0!2sAniket%20Sales%20Agencies!5e1!3m2!1sen!2sin!4v1754494922351!5m2!1sen!2sin" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p class="mb-0">&copy; 2025 Aniket Sales Agencies. All rights reserved. | Designed and developed by <a href="https://tridenttech.bsite.net" target="_blank">Trident Tech.</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+    <script>
+        let categoriesData = [];
+        let hoverTimeouts = {};
+
+        const categoryImages = {
+            'Abrasives': '/images/products/Abrasive_general.jpg',      // Fixed: single 'b'
+            'PowerTools': '/images/products/Power_general2.jpg',
+            'CuttingTools': '/images/products/Cutting_general.jpg',
+            'Pneumatic': '/images/products/Pneumatic_general.png'      // Fixed: .png instead of .jpg
+        };
+
+        const categoryRoutes = {
+            'Abrasives': 'Abrasives',
+            'PowerTools': 'PowerTools',
+            'CuttingTools': 'CuttingTools',
+            'Pneumatic': 'Pneumatic'
+        };
+
+        const categoryDisplayNames = {
+            'Abrasives': 'Abrasives',
+            'PowerTools': 'Power Tools',
+            'CuttingTools': 'Cutting Tools',
+            'Pneumatic': 'Pneumatic'
+        };
+
+        function getCategoryDisplayName(categoryName) {
+            if (categoryDisplayNames[categoryName]) {
+                return categoryDisplayNames[categoryName];
+            }
+            return categoryName;
+        }
+
+        
+        function AdminLogin()
+        {
+            if (localStorage.getItem('IsLoggedIn') == "true") {
+                $.ajax({
+                url: '/Login/LoginUser',
+                type: 'GET',
+                data : { userName : "ASA", password : "admin123" },
+                success: function (response) {
+                    if (response.success) {
+                         window.location.href = "/Admin/Dashboard";
+                    } else {
+                         //alert("Something Went Wrong, Please Relogin")
+                         window.location.href = "/Login/Login"
+                    }
+                },
+                error: function () {
+                    //$('#productCategoriesContainer').html('<div class="error-message">Failed to load categories</div>');
+                }
+            });
+            }
+            else {
+                window.location.href = "/Login/Login";
+            }
+        }
+
+        $(document).ready(function () {
+            loadProductCategories();
+            setupProductsDropdownHover();
+        });
+
+        function setupProductsDropdownHover() {
+            const dropdownWrapper = $('.products-dropdown-wrapper');
+            const dropdownToggle = $('.products-dropdown-toggle');
+            const dropdown = $('.products-dropdown');
+
+            dropdownToggle.on('mouseenter', function () {
+                openProductsDropdown();
+            });
+
+            dropdown.on('mouseenter', function () {
+                clearTimeout(hoverTimeouts['dropdown-close']);
+            });
+
+            dropdownToggle.on('mouseleave', function () {
+                hoverTimeouts['dropdown-close'] = setTimeout(function () {
+                    if (!dropdown.is(':hover')) {
+                        closeProductsDropdown();
+                    }
+                }, 300);
+            });
+
+            dropdown.on('mouseleave', function () {
+                hoverTimeouts['dropdown-close'] = setTimeout(function () {
+                    closeProductsDropdown();
+                }, 300);
+            });
+        }
+
+        function openProductsDropdown() {
+            clearTimeout(hoverTimeouts['dropdown-close']);
+            const wrapper = document.querySelector('.products-dropdown-wrapper');
+            const overlay = document.querySelector('.dropdown-overlay');
+
+            wrapper.classList.add('show');
+            if (overlay && window.innerWidth <= 991) {
+                overlay.classList.add('show');
+            }
+        }
+
+        function loadProductCategories() {
+            $.ajax({
+                url: '/Product/GetCategories',
+                type: 'POST',
+                success: function (response) {
+                    if (response.success && response.data) {
+                        categoriesData = response.data;
+                        renderCategoryTree();
+                    } else {
+                        $('#productCategoriesContainer').html('<div class="error-message">Failed to load categories</div>');
+                    }
+                },
+                error: function () {
+                    $('#productCategoriesContainer').html('<div class="error-message">Failed to load categories</div>');
+                }
+            });
+        }
+
+        function renderCategoryTree() {
+            const container = $('#productCategoriesContainer');
+            container.empty();
+
+            if (!categoriesData || categoriesData.length === 0) {
+                container.html('<div class="text-center text-muted py-3">No categories available</div>');
+                return;
+            }
+
+            categoriesData.forEach(function (category) {
+                const categoryHtml = createCategoryItem(category);
+                container.append(categoryHtml);
+            });
+        }
+
+        function getCategoryImage(categoryName) {
+            for (let key in categoryImages) {
+                if (categoryName.toLowerCase().includes(key.toLowerCase())) {
+                    return categoryImages[key];
+                }
+            }
+            return null;
+        }
+
+        function getCategoryRoute(categoryName) {
+            for (let key in categoryRoutes) {
+                if (categoryName.toLowerCase().includes(key.toLowerCase())) {
+                    return categoryRoutes[key];
+                }
+            }
+            return null;
+        }
+
+        function createCategoryItem(category) {
+            const categoryDiv = $('<div>').addClass('category-item');
+            const imageUrl = getCategoryImage(category.name);
+            const categoryRoute = getCategoryRoute(category.name);
+
+            let imageHtml = '';
+            if (imageUrl) {
+                imageHtml = `<img src="${imageUrl}" alt="${category.name}" class="category-icon">`;
+            } else {
+                imageHtml = `<div class="category-icon d-flex align-items-center justify-content-center" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;">
+                            <i class="fas fa-box text-white"></i>
+                        </div>`;
+            }
+
+            $.ajax({
+                url: '/Product/GetSubCategories1',
+                type: 'POST',
+                data: { categoryId: category.id },
+                async: false,
+                success: function (response) {
+                    const hasSubCategories = response.success && response.data && response.data.length > 0;
+
+                    if (hasSubCategories) {
+                        const categoryHeader = $('<div>')
+                            .addClass('category-header')
+                            .attr('data-category-id', category.id)
+                            .attr('data-category-name', category.name)
+                            .attr('data-category-route', categoryRoute)
+                            .html(`
+                                        ${imageHtml}
+                                        <div class="category-content">
+                                                    <h6>${getCategoryDisplayName(category.name)}</h6>
+                                        </div>
+                                        <i class="fas fa-chevron-right category-toggle-icon"></i>
+                                    `)
+                            .on('click', function (e) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                if (categoryRoute) {
+                                    window.location.href = `/Product/Category/${categoryRoute}`;
+                                }
+                            })
+                            .on('mouseenter', function () {
+                                handleCategoryHover(category.id, $(this).closest('.category-item'));
+                            })
+                            .on('mouseleave', function () {
+                                handleCategoryLeave(category.id);
+                            });
+
+                        categoryDiv.append(categoryHeader);
+
+                        const subcategoryList = $('<div>')
+                            .addClass('subcategory-list')
+                            .attr('id', `subcategory-list-${category.id}`)
+                            .on('mouseenter', function () {
+                                clearTimeout(hoverTimeouts[`category-${category.id}`]);
+                            })
+                            .on('mouseleave', function () {
+                                handleCategoryLeave(category.id);
+                            });
+
+                        categoryDiv.append(subcategoryList);
+                    } else {
+                        let categoryUrl = categoryRoute ? `/Product/Category/${categoryRoute}` : `/Product/Index?categoryId=${category.id}`;
+
+                        const categoryLink = $('<a>')
+                            .addClass('category-header')
+                            .attr('href', categoryUrl)
+                            .css('text-decoration', 'none')
+                            .html(`
+                                        ${imageHtml}
+                                        <div class="category-content">
+                                                    <h6>${getCategoryDisplayName(category.name)}</h6>
+                                        </div>
+                                    `)
+                            .on('click', function () {
+                                closeProductsDropdown();
+                            });
+
+                        categoryDiv.append(categoryLink);
+                    }
+                }
+            });
+
+            return categoryDiv;
+        }
+
+        function handleCategoryHover(categoryId, categoryItem) {
+            clearTimeout(hoverTimeouts[`category-${categoryId}`]);
+
+            hoverTimeouts[`category-${categoryId}-open`] = setTimeout(function () {
+                const subcategoryList = $(`#subcategory-list-${categoryId}`);
+
+                categoryItem.addClass('open');
+
+                if (subcategoryList.children().length === 0) {
+                    loadSubCategories1(categoryId, subcategoryList);
+                }
+            }, 200);
+        }
+
+        function handleCategoryLeave(categoryId) {
+            clearTimeout(hoverTimeouts[`category-${categoryId}-open`]);
+
+            hoverTimeouts[`category-${categoryId}`] = setTimeout(function () {
+                $(`.category-item .category-header[data-category-id="${categoryId}"]`)
+                    .closest('.category-item')
+                    .removeClass('open');
+            }, 300);
+        }
+
+        function loadSubCategories1(categoryId, container) {
+            container.html('<div class="text-center py-2"><i class="fas fa-spinner fa-spin"></i> Loading...</div>');
+
+            const categoryHeader = $(`.category-header[data-category-id="${categoryId}"]`);
+            const categoryRoute = categoryHeader.attr('data-category-route');
+            const categoryName = categoryHeader.attr('data-category-name');
+
+            $.ajax({
+                url: '/Product/GetSubCategories1',
+                type: 'POST',
+                data: { categoryId: categoryId },
+                success: function (response) {
+                    container.empty();
+
+                    if (response.success && response.data && response.data.length > 0) {
+                        response.data.forEach(function (subCat1) {
+                            const subCat1Html = createSubCategory1Item(subCat1, categoryId, categoryRoute, categoryName);
+                            container.append(subCat1Html);
+                        });
+                    }
+                },
+                error: function () {
+                    container.html('<div class="text-center text-danger py-2">Failed to load</div>');
+                }
+            });
+        }
+
+        function createSubCategory1Item(subCat1, categoryId, categoryRoute, categoryName) {
+            const subCat1Div = $('<div>').addClass('subcategory-item');
+
+            $.ajax({
+                url: '/Product/GetSubCategories2',
+                type: 'POST',
+                data: { subCategory1Id: subCat1.id },
+                async: false,
+                success: function (response) {
+                    const hasSubCategory2 = response.success && response.data && response.data.length > 0;
+
+                    if (hasSubCategory2) {
+                        const subCat1Header = $('<div>')
+                            .addClass('subcategory-header')
+                            .attr('data-subcategory1-id', subCat1.id)
+                            .attr('data-subcategory1-name', subCat1.name)
+                            .html(`
+                                        <div class="subcategory-content">
+                                            <span>${subCat1.name}</span>
+                                        </div>
+                                        <i class="fas fa-chevron-right subcategory-toggle-icon"></i>
+                                    `)
+                            .on('click', function (e) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                if (categoryRoute) {
+                                    window.location.href = `/Product/Category/${categoryRoute}/${encodeURIComponent(subCat1.name)}`;
+                                }
+                            })
+                            .on('mouseenter', function () {
+                                handleSubCategory1Hover(subCat1.id, categoryId, categoryRoute, subCat1.name, subCat1Div);
+                            })
+                            .on('mouseleave', function () {
+                                handleSubCategory1Leave(subCat1.id);
+                            });
+
+                        subCat1Div.append(subCat1Header);
+
+                        const subCategory2List = $('<div>')
+                            .addClass('subcategory2-list')
+                            .attr('id', `subcategory2-list-${subCat1.id}`)
+                            .on('mouseenter', function () {
+                                clearTimeout(hoverTimeouts[`subcategory1-${subCat1.id}`]);
+                            })
+                            .on('mouseleave', function () {
+                                handleSubCategory1Leave(subCat1.id);
+                            });
+
+                        subCat1Div.append(subCategory2List);
+                    } else {
+                        let subCat1Url = categoryRoute
+                            ? `/Product/Category/${categoryRoute}/${encodeURIComponent(subCat1.name)}`
+                            : `/Product/Index?categoryId=${categoryId}&subCategory1Id=${subCat1.id}`;
+
+                        const subCat1Link = $('<a>')
+                            .addClass('subcategory-header')
+                            .attr('href', subCat1Url)
+                            .css('text-decoration', 'none')
+                            .html(`
+                                        <div class="subcategory-content">
+                                            <span>${subCat1.name}</span>
+                                        </div>
+                                    `)
+                            .on('click', function () {
+                                closeProductsDropdown();
+                            });
+
+                        subCat1Div.append(subCat1Link);
+                    }
+                }
+            });
+
+            return subCat1Div;
+        }
+
+        function handleSubCategory1Hover(subCategory1Id, categoryId, categoryRoute, brandName, subCat1Item) {
+            clearTimeout(hoverTimeouts[`subcategory1-${subCategory1Id}`]);
+
+            hoverTimeouts[`subcategory1-${subCategory1Id}-open`] = setTimeout(function () {
+                const subCategory2List = $(`#subcategory2-list-${subCategory1Id}`);
+
+                subCat1Item.addClass('open');
+
+                if (subCategory2List.children().length === 0) {
+                    loadSubCategories2(subCategory1Id, categoryId, categoryRoute, brandName, subCategory2List);
+                }
+            }, 200);
+        }
+
+        function handleSubCategory1Leave(subCategory1Id) {
+            clearTimeout(hoverTimeouts[`subcategory1-${subCategory1Id}-open`]);
+
+            hoverTimeouts[`subcategory1-${subCategory1Id}`] = setTimeout(function () {
+                $(`.subcategory-header[data-subcategory1-id="${subCategory1Id}"]`)
+                    .closest('.subcategory-item')
+                    .removeClass('open');
+            }, 300);
+        }
+
+        function loadSubCategories2(subCategory1Id, categoryId, categoryRoute, brandName, container) {
+            container.html('<div class="text-center py-2"><i class="fas fa-spinner fa-spin"></i></div>');
+
+            $.ajax({
+                url: '/Product/GetSubCategories2',
+                type: 'POST',
+                data: { subCategory1Id: subCategory1Id },
+                success: function (response) {
+                    container.empty();
+
+                    if (response.success && response.data && response.data.length > 0) {
+                        response.data.forEach(function (subCat2) {
+                            let subCat2Url = categoryRoute
+                                ? `/Product/Category/${categoryRoute}/${encodeURIComponent(brandName)}?subCategory2Id=${subCat2.id}`
+                                : `/Product/Index?categoryId=${categoryId}&subCategory1Id=${subCategory1Id}&subCategory2Id=${subCat2.id}`;
+
+                            const subCat2Link = $('<a>')
+                                .addClass('subcategory2-link')
+                                .attr('href', subCat2Url)
+                                .html(`<i class="fas fa-circle me-2" style="font-size: 0.4rem;"></i>${subCat2.name}`)
+                                .on('click', function () {
+                                    closeProductsDropdown();
+                                });
+                            container.append(subCat2Link);
+                        });
+                    }
+                },
+                error: function () {
+                    container.html('<div class="text-center text-danger py-2">Failed to load</div>');
+                }
+            });
+        }
+
+        function closeProductsDropdown() {
+            const wrapper = document.querySelector('.products-dropdown-wrapper');
+            const overlay = document.querySelector('.dropdown-overlay');
+
+            wrapper.classList.remove('show');
+            if (overlay) overlay.classList.remove('show');
+            document.body.style.overflow = '';
+
+            $('.category-item').removeClass('open');
+            $('.subcategory-item').removeClass('open');
+
+            for (let key in hoverTimeouts) {
+                clearTimeout(hoverTimeouts[key]);
+            }
+            hoverTimeouts = {};
+        }
+
+        function closeAllDropdowns() {
+            document.querySelectorAll('.products-dropdown-wrapper.show').forEach(el => el.classList.remove('show'));
+            const overlay = document.querySelector('.dropdown-overlay');
+            if (overlay) overlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        function closeMobileNav() {
+            const navbarCollapse = document.getElementById('navbarNav');
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                toggle: false
+            });
+            bsCollapse.hide();
+
+            if (navbarToggler) {
+                navbarToggler.classList.add('collapsed');
+                navbarToggler.setAttribute('aria-expanded', 'false');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbarCollapse = document.getElementById('navbarNav');
+            const navbarToggler = document.querySelector('.navbar-toggler');
+
+            if (navbarCollapse && navbarToggler) {
+                navbarCollapse.addEventListener('show.bs.collapse', function () {
+                    navbarToggler.classList.remove('collapsed');
+                    navbarToggler.setAttribute('aria-expanded', 'true');
+                });
+
+                navbarCollapse.addEventListener('hidden.bs.collapse', function () {
+                    navbarToggler.classList.add('collapsed');
+                    navbarToggler.setAttribute('aria-expanded', 'false');
+                });
+
+                if (window.innerWidth <= 991) {
+                    const navLinks = navbarCollapse.querySelectorAll('.nav-link');
+                    navLinks.forEach(link => {
+                        link.addEventListener('click', function () {
+                            if (!this.classList.contains('products-dropdown-toggle')) {
+                                closeMobileNav();
+                            }
+                        });
+                    });
+                }
+            }
+        });
+
+        document.addEventListener('click', function (event) {
+            const wrapper = document.querySelector('.products-dropdown-wrapper');
+            if (wrapper && !wrapper.contains(event.target)) {
+                closeProductsDropdown();
+            }
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeProductsDropdown();
+                closeMobileNav();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbar = document.querySelector('.navbar');
+
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 800,
+                    once: true,
+                    offset: 100
+                });
+            }
+        });
+
+        function showModalValidationMessage(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const feedback = field.nextElementSibling;
+
+            field.classList.add('is-invalid');
+            feedback.textContent = message;
+            feedback.style.display = 'block';
+        }
+
+        function clearModalValidationMessage(fieldId) {
+            const field = document.getElementById(fieldId);
+            const feedback = field.nextElementSibling;
+
+            field.classList.remove('is-invalid');
+            feedback.textContent = '';
+            feedback.style.display = 'none';
+        }
+
+        function validateModalFullName() {
+            const fullName = document.getElementById('modalFullName').value.trim();
+
+            if (!fullName) {
+                showModalValidationMessage('modalFullName', 'Full Name is required');
+                return false;
+            }
+
+            if (fullName.length < 2) {
+                showModalValidationMessage('modalFullName', 'Full Name must be at least 2 characters long');
+                return false;
+            }
+
+            if (fullName.length > 100) {
+                showModalValidationMessage('modalFullName', 'Full Name cannot exceed 100 characters');
+                return false;
+            }
+
+            clearModalValidationMessage('modalFullName');
+            return true;
+        }
+
+        function validateModalEmail() {
+            const email = document.getElementById('modalEmail').value.trim();
+
+            if (!email) {
+                showModalValidationMessage('modalEmail', 'Email is required');
+                return false;
+            }
+
+            const emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+            if (!emailRegex.test(email)) {
+                showModalValidationMessage('modalEmail', 'Please enter a valid email address');
+                return false;
+            }
+
+            if (email.length > 255) {
+                showModalValidationMessage('modalEmail', 'Email cannot exceed 255 characters');
+                return false;
+            }
+
+            clearModalValidationMessage('modalEmail');
+            return true;
+        }
+
+        function validateModalPhoneNumber() {
+            const phone = document.getElementById('modalPhoneNumber').value.trim();
+
+            if (!phone) {
+                showModalValidationMessage('modalPhoneNumber', 'Phone Number is required');
+                return false;
+            }
+
+            const cleanPhone = phone.replace(/[\s\-\(\)\+]/g, '');
+
+            if (cleanPhone.length < 10) {
+                showModalValidationMessage('modalPhoneNumber', 'Phone number must be at least 10 digits');
+                return false;
+            }
+
+            if (cleanPhone.length > 20) {
+                showModalValidationMessage('modalPhoneNumber', 'Phone Number cannot exceed 20 characters');
+                return false;
+            }
+
+            if (!/^\d+$/.test(cleanPhone)) {
+                showModalValidationMessage('modalPhoneNumber', 'Please enter a valid phone number');
+                return false;
+            }
+
+            clearModalValidationMessage('modalPhoneNumber');
+            return true;
+        }
+
+        function validateModalCompany() {
+            const company = document.getElementById('modalCompany').value.trim();
+
+            if (company && company.length > 100) {
+                showModalValidationMessage('modalCompany', 'Company name cannot exceed 100 characters');
+                return false;
+            }
+
+            clearModalValidationMessage('modalCompany');
+            return true;
+        }
+
+        function validateModalSubject() {
+            const subject = document.getElementById('modalSubject').value.trim();
+
+            if (!subject) {
+                showModalValidationMessage('modalSubject', 'Subject is required');
+                return false;
+            }
+
+            if (subject.length > 200) {
+                showModalValidationMessage('modalSubject', 'Subject cannot exceed 200 characters');
+                return false;
+            }
+
+            clearModalValidationMessage('modalSubject');
+            return true;
+        }
+
+        function validateModalMessage() {
+            const message = document.getElementById('modalMessage').value.trim();
+
+            if (!message) {
+                showModalValidationMessage('modalMessage', 'Message is required');
+                return false;
+            }
+
+            if (message.length < 10) {
+                showModalValidationMessage('modalMessage', 'Message must be at least 10 characters long');
+                return false;
+            }
+
+            if (message.length > 2000) {
+                showModalValidationMessage('modalMessage', 'Message cannot exceed 2000 characters');
+                return false;
+            }
+
+            clearModalValidationMessage('modalMessage');
+            return true;
+        }
+
+        function validateModalForm() {
+            let isValid = true;
+
+            const validations = [
+                validateModalFullName(),
+                validateModalEmail(),
+                validateModalPhoneNumber(),
+                validateModalCompany(),
+                validateModalSubject(),
+                validateModalMessage()
+            ];
+
+            isValid = validations.every(validation => validation === true);
+
+            return isValid;
+        }
+
+        function initializeModalValidation() {
+            document.getElementById('modalFullName').addEventListener('blur', validateModalFullName);
+            document.getElementById('modalFullName').addEventListener('input', function () {
+                if (this.value.trim().length > 0) {
+                    validateModalFullName();
+                } else {
+                    clearModalValidationMessage('modalFullName');
+                }
+            });
+
+            document.getElementById('modalEmail').addEventListener('blur', validateModalEmail);
+            document.getElementById('modalEmail').addEventListener('input', function () {
+                if (this.value.trim().length > 0) {
+                    validateModalEmail();
+                } else {
+                    clearModalValidationMessage('modalEmail');
+                }
+            });
+
+            document.getElementById('modalPhoneNumber').addEventListener('blur', validateModalPhoneNumber);
+            document.getElementById('modalPhoneNumber').addEventListener('input', function () {
+                if (this.value.trim().length > 0) {
+                    validateModalPhoneNumber();
+                } else {
+                    clearModalValidationMessage('modalPhoneNumber');
+                }
+            });
+
+            document.getElementById('modalCompany').addEventListener('blur', validateModalCompany);
+            document.getElementById('modalCompany').addEventListener('input', validateModalCompany);
+
+            document.getElementById('modalSubject').addEventListener('change', validateModalSubject);
+            document.getElementById('modalSubject').addEventListener('blur', validateModalSubject);
+
+            document.getElementById('modalMessage').addEventListener('blur', validateModalMessage);
+            document.getElementById('modalMessage').addEventListener('input', function () {
+                if (this.value.trim().length > 0) {
+                    validateModalMessage();
+                } else {
+                    clearModalValidationMessage('modalMessage');
+                }
+            });
+        }
+
+        function sendModalContactEmail() {
+            if (!validateModalForm()) {
+                alert('Please correct the validation errors before submitting.');
+
+                const firstInvalidField = document.querySelector('#contactModal .is-invalid');
+                if (firstInvalidField) {
+                    firstInvalidField.focus();
+                }
+                return;
+            }
+
+            var btn = document.getElementById('modalSubmitBtn');
+
+            if (btn.disabled) return;
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+
+            var contactData = {
+                FullName: document.getElementById('modalFullName').value.trim(),
+                Email: document.getElementById('modalEmail').value.trim(),
+                PhoneNumber: document.getElementById('modalPhoneNumber').value.trim(),
+                Company: document.getElementById('modalCompany').value.trim(),
+                Subject: document.getElementById('modalSubject').value.trim(),
+                Message: document.getElementById('modalMessage').value.trim()
+            };
+
+            $.ajax({
+                url: '/Home/SendMail',
+                type: 'POST',
+                data: { model: contactData },
+                success: function (response) {
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Send Message';
+
+                    if (response.success) {
+                        alert('Message sent successfully!');
+                        location.reload();
+                        document.getElementById('contactModalForm').querySelectorAll('input, select, textarea').forEach(function (field) {
+                            field.value = '';
+                            field.classList.remove('is-invalid');
+                        });
+
+                        document.querySelectorAll('#contactModal .invalid-feedback').forEach(function (feedback) {
+                            feedback.style.display = 'none';
+                        });
+
+                        var modal = bootstrap.Modal.getInstance(document.getElementById('contactModal'));
+                        modal.hide();
+                    } else {
+                        alert('Error: ' + (response.message || 'Failed to send message'));
+                    }
+                },
+                error: function (xhr, status, error) {
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Send Message';
+
+                    let errorMessage = 'Error sending message. Please try again.';
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        errorMessage = xhr.responseJSON.message;
+                    } else if (xhr.responseText) {
+                        errorMessage = xhr.responseText;
+                    }
+                    alert(errorMessage);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            initializeModalValidation();
+        });
+    </script>
+</body>
+</html>

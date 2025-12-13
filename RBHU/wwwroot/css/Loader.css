@@ -1,0 +1,201 @@
+﻿/* loader.css — Global Loader Styles
+   - Loader overlay with backdrop blur
+   - Animated spinner
+   - Pulsing text animation
+   - Wrapper opacity control
+*/
+
+/* ===== GLOBAL LOADER OVERLAY ===== */
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); /* Safari support */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+    /* Active state - show loader */
+    .loader-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+/* ===== LOADER CONTAINER ===== */
+.loader-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* ===== SPINNER ANIMATION ===== */
+.loader-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid #e0e0e0;
+    border-top: 4px solid #1a365d; /* Primary color */
+    border-right: 4px solid #ff6b35; /* Accent color */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===== LOADER TEXT ===== */
+.loader-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a365d; /* Primary color */
+    letter-spacing: 1px;
+    animation: pulse-text 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-text {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* ===== WRAPPER OPACITY CONTROL ===== */
+/* Dims the page content when loader is active */
+.wrapper {
+    transition: opacity 0.3s ease;
+}
+
+    .wrapper.loading {
+        opacity: 0.3;
+        pointer-events: none; /* Disable interactions while loading */
+    }
+
+/* ===== RESPONSIVE STYLES ===== */
+@media (max-width: 768px) {
+    .loader-spinner {
+        width: 50px;
+        height: 50px;
+        border-width: 3px;
+    }
+
+    .loader-text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .loader-spinner {
+        width: 40px;
+        height: 40px;
+        border-width: 3px;
+    }
+
+    .loader-text {
+        font-size: 0.9rem;
+    }
+
+    .loader-container {
+        gap: 15px;
+    }
+}
+
+/* ===== DARK MODE SUPPORT (Optional) ===== */
+@media (prefers-color-scheme: dark) {
+    .loader-overlay {
+        background: rgba(0, 0, 0, 0.95);
+    }
+
+    .loader-spinner {
+        border-color: #333;
+        border-top-color: #4a90e2;
+        border-right-color: #ff6b35;
+    }
+
+    .loader-text {
+        color: #ffffff;
+    }
+}
+
+/* ===== ACCESSIBILITY ===== */
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    .loader-overlay,
+    .wrapper {
+        transition: none;
+    }
+
+    .loader-spinner {
+        animation: spin 2s linear infinite; /* Slower animation */
+    }
+
+    .loader-text {
+        animation: none;
+        opacity: 1;
+    }
+}
+
+/* ===== CUSTOM COLOR VARIANTS ===== */
+/* You can add these classes to .loader-spinner for different color schemes */
+
+.loader-spinner.success {
+    border-top-color: #28a745;
+    border-right-color: #28a745;
+}
+
+.loader-spinner.danger {
+    border-top-color: #dc3545;
+    border-right-color: #dc3545;
+}
+
+.loader-spinner.warning {
+    border-top-color: #ffc107;
+    border-right-color: #ffc107;
+}
+
+.loader-spinner.info {
+    border-top-color: #17a2b8;
+    border-right-color: #17a2b8;
+}
+
+/* ===== ALTERNATIVE SPINNER STYLES ===== */
+/* Uncomment to use a dual-ring spinner instead */
+
+/*
+.loader-spinner.dual-ring {
+    width: 64px;
+    height: 64px;
+    border: none;
+}
+
+.loader-spinner.dual-ring:after {
+    content: " ";
+    display: block;
+    width: 46px;
+    height: 46px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 5px solid #1a365d;
+    border-color: #1a365d transparent #ff6b35 transparent;
+    animation: spin 1.2s linear infinite;
+}
+*/
