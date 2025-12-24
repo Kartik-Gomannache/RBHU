@@ -9,16 +9,16 @@
 /* ===== COLOR PALETTE ===== */
 :root {
     /* Primary Colors - Industrial Blue & Gold */
-    --rbhu-primary: #1e3a5f;
-    --rbhu-primary-light: #2d5a8a;
-    --rbhu-primary-dark: #0f1d30;
-    --rbhu-secondary: #c4933f;
-    --rbhu-secondary-light: #d4a554;
-    --rbhu-secondary-dark: #a67c2f;
+    --rbhu-primary: #2E86DE;
+    --rbhu-primary-light: #5bc2d6;
+    --rbhu-primary-dark: #1a5fa8;
+    --rbhu-secondary: #F5A623;
+    --rbhu-secondary-light: #f7b851;
+    --rbhu-secondary-dark: #e69500;
     /* Accent Colors */
-    --rbhu-accent: #3eb1c8;
-    --rbhu-accent-light: #5bc2d6;
-    --rbhu-accent-dark: #2a8ca0;
+    --rbhu-accent: #F5A623;
+    --rbhu-accent-light: #f7b851;
+    --rbhu-accent-dark: #e69500;
     /* Neutrals */
     --rbhu-white: #ffffff;
     --rbhu-gray-50: #f8f9fa;
@@ -305,7 +305,7 @@ a {
     align-items: center;
     gap: 0.75rem;
     padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, rgba(30, 58, 95, 0.1), rgba(62, 177, 200, 0.1));
+    background: linear-gradient(135deg, rgba(46, 134, 222, 0.1), rgba(245, 166, 35, 0.1));
     border: 1px solid var(--rbhu-accent);
     border-radius: 50px;
     font-family: 'Rajdhani', sans-serif;
@@ -529,7 +529,7 @@ a {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(30, 58, 95, 0.9), rgba(62, 177, 200, 0.9));
+    background: linear-gradient(135deg, rgba(46, 134, 222, 0.9), rgba(245, 166, 35, 0.9));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1328,7 +1328,7 @@ a {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(30, 58, 95, 0.9), rgba(62, 177, 200, 0.9));
+    background: linear-gradient(135deg, rgba(46, 134, 222, 0.9), rgba(245, 166, 35, 0.9));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1414,7 +1414,7 @@ a {
     align-items: center;
     text-align: center;
     padding: 2rem 1.5rem;
-    background: linear-gradient(135deg, rgba(62, 177, 200, 0.05), rgba(30, 58, 95, 0.05));
+    background: linear-gradient(135deg, rgba(245, 166, 35, 0.05), rgba(46, 134, 222, 0.05));
     border: 2px solid var(--rbhu-gray-200);
     border-radius: 16px;
     transition: var(--rbhu-transition-normal);
