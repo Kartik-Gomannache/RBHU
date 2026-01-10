@@ -96,14 +96,48 @@
                         <h5 class="brand-showcase-title text-center mb-3">
                             <i class="fas fa-award me-2"></i>Featured Brands
                         </h5>
-                        <div class="brand-container">
-                            <!-- Makita Brand Button -->
-                            <div class="brand-item" data-brand="Makita">
-                                <div class="brand-card" onclick="filterByBrand('Makita')">
-                                    <img src="~/images/Product_Brands/Makita.jpg" alt="Makita Brand" class="brand-logo">
-                                    <div class="brand-name">Makita</div>
+                        <div class="brand-container" id="brandContainer">
+                            @using System.Text.Encodings.Web
+
+                            @if (Model.SubCategories1 != null && Model.SubCategories1.Any())
+                            {
+                                foreach (var brand in Model.SubCategories1)
+                                {
+                                    var brandLower = brand.Name.ToLowerInvariant().Trim();
+
+                                    var imageFileName = brandLower switch
+                                    {
+                                        "makita" => "Makita.jpg",
+                                        "bosch" => "Bosch.jpg",
+                                        _ => brand.Name.Replace(" ", "_") + ".jpg"
+                                    };
+
+                                    var brandImagePath = Url.Content($"~/images/Product_Brands/{imageFileName}");
+                                    var safeBrandName = JavaScriptEncoder.Default.Encode(brand.Name);
+
+                                    <div class="brand-item"
+                                         data-brand="@brand.Name"
+                                         data-brand-id="@brand.Id">
+
+                                        <div class="brand-card"
+                                             onclick="filterByBrand('@safeBrandName', @brand.Id)">
+
+                                            <img src="@brandImagePath"
+                                                 alt="@brand.Name Brand"
+                                                 class="brand-logo" />
+
+                                            <div class="brand-name">@brand.Name</div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+                            else
+                            {
+                                <div class="col-12 text-center">
+                                    <p class="text-white-50">No brands available</p>
                                 </div>
-                            </div>
+                            }`
                         </div>
                     </div>
 
@@ -348,16 +382,10 @@
         }
     });
 
-    // Filter by clicking brand button in the showcase
-    function filterByBrand(brandName) {
-        console.log('=== Brand Button Clicked ===');
-        console.log('Brand clicked:', brandName);
-
-        const brandInfo = brandToSubCategoryMap[brandName];
-        if (!brandInfo) {
-            console.error('Brand not found in mapping:', brandName);
-            return;
-        }
+        // Filter by brand button - shows products/samples immediately
+        function filterByBrand(brandName) {
+            console.log('=== Brand Button Clicked ===');
+            console.log('Brand clicked:', brandName);
 
         const subCat1Element = $('[data-brand-name="' + brandName + '"]');
         console.log('SubCat1 Element found:', subCat1Element.length);

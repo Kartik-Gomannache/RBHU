@@ -286,54 +286,77 @@
         let categoriesData = [];
         let hoverTimeouts = {};
 
+        // Updated category images to match DB names
         const categoryImages = {
-            'Abrasives': '/images/products/Abrasive_general.jpg',      // Fixed: single 'b'
-            'PowerTools': '/images/products/Power_general2.jpg',
-            'CuttingTools': '/images/products/Cutting_general.jpg',
-            'Pneumatic': '/images/products/Pneumatic_general.png'      // Fixed: .png instead of .jpg
+            'Abrasives': '/images/products/Abrasive_general.jpg',
+            'Power Tools and Accessories': '/images/products/Power_general2.jpg',
+            'Cutting Tools': '/images/products/Cutting_general.jpg',
+            'Pneumatic tools and Systems': '/images/products/Pneumatic_general.png',
+            'Safety Products and Equipment': '/images/products/Safety_general.jpg',
+            'Hoses': '/images/products/Hoses-general.jpg',
+            'Belts': '/images/products/Belts_general.jpg'
         };
 
+        // Map DB names to simple view names
         const categoryRoutes = {
             'Abrasives': 'Abrasives',
-            'PowerTools': 'PowerTools',
-            'CuttingTools': 'CuttingTools',
-            'Pneumatic': 'Pneumatic'
+            'Power Tools and Accessories': 'PowerTools',
+            'Cutting Tools': 'CuttingTools',
+            'Pneumatic tools and Systems': 'Pneumatic',
+            'Safety Products and Equipment': 'SafetyProducts',
+            'Hoses': 'Hoses',
+            'Belts': 'Belts'
         };
 
-        const categoryDisplayNames = {
-            'Abrasives': 'Abrasives',
-            'PowerTools': 'Power Tools',
-            'CuttingTools': 'Cutting Tools',
-            'Pneumatic': 'Pneumatic'
-        };
-
-        function getCategoryDisplayName(categoryName) {
-            if (categoryDisplayNames[categoryName]) {
-                return categoryDisplayNames[categoryName];
+        function getCategoryImage(categoryName) {
+            // Try exact match first
+            if (categoryImages[categoryName]) {
+                return categoryImages[categoryName];
             }
-            return categoryName;
+
+            // Try partial match
+            for (let key in categoryImages) {
+                if (categoryName.toLowerCase().includes(key.toLowerCase()) ||
+                    key.toLowerCase().includes(categoryName.toLowerCase())) {
+                    return categoryImages[key];
+                }
+            }
+            return null;
         }
 
+        function getCategoryRoute(categoryName) {
+            // Try exact match first
+            if (categoryRoutes[categoryName]) {
+                return categoryRoutes[categoryName];
+            }
 
-        function AdminLogin()
-        {
+            // Try partial match
+            for (let key in categoryRoutes) {
+                if (categoryName.toLowerCase().includes(key.toLowerCase()) ||
+                    key.toLowerCase().includes(categoryName.toLowerCase())) {
+                    return categoryRoutes[key];
+                }
+            }
+            return null;
+        }
+
+        function AdminLogin() {
             if (localStorage.getItem('IsLoggedIn') == "true") {
                 $.ajax({
-                url: '/Login/LoginUser',
-                type: 'GET',
-                data : { userName : "ASA", password : "admin123" },
-                success: function (response) {
-                    if (response.success) {
-                         window.location.href = "/Admin/Dashboard";
-                    } else {
-                         //alert("Something Went Wrong, Please Relogin")
-                         window.location.href = "/Login/Login"
+                    url: '/Login/LoginUser',
+                    type: 'GET',
+                    data: { userName: "ASA", password: "admin123" },
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.href = "/Admin/Dashboard";
+                        } else {
+                            window.location.href = "/Login/Login"
+                        }
+                    },
+                    error: function () {
+                        window.location.href = "/Login/Login";
                     }
-                },
-                error: function () {
-                    //$('#productCategoriesContainer').html('<div class="error-message">Failed to load categories</div>');
-                }
-            });
+                });
             }
             else {
                 window.location.href = "/Login/Login";
@@ -417,24 +440,6 @@
             });
         }
 
-        function getCategoryImage(categoryName) {
-            for (let key in categoryImages) {
-                if (categoryName.toLowerCase().includes(key.toLowerCase())) {
-                    return categoryImages[key];
-                }
-            }
-            return null;
-        }
-
-        function getCategoryRoute(categoryName) {
-            for (let key in categoryRoutes) {
-                if (categoryName.toLowerCase().includes(key.toLowerCase())) {
-                    return categoryRoutes[key];
-                }
-            }
-            return null;
-        }
-
         function createCategoryItem(category) {
             const categoryDiv = $('<div>').addClass('category-item');
             const imageUrl = getCategoryImage(category.name);
@@ -464,12 +469,12 @@
                             .attr('data-category-name', category.name)
                             .attr('data-category-route', categoryRoute)
                             .html(`
-                                        ${imageHtml}
-                                        <div class="category-content">
-                                                    <h6>${getCategoryDisplayName(category.name)}</h6>
-                                        </div>
-                                        <i class="fas fa-chevron-right category-toggle-icon"></i>
-                                    `)
+                                ${imageHtml}
+                                <div class="category-content">
+                                    <h6>${category.name}</h6>
+                                </div>
+                                <i class="fas fa-chevron-right category-toggle-icon"></i>
+                            `)
                             .on('click', function (e) {
                                 e.preventDefault();
                                 e.stopPropagation();
@@ -505,11 +510,11 @@
                             .attr('href', categoryUrl)
                             .css('text-decoration', 'none')
                             .html(`
-                                        ${imageHtml}
-                                        <div class="category-content">
-                                                    <h6>${getCategoryDisplayName(category.name)}</h6>
-                                        </div>
-                                    `)
+                                ${imageHtml}
+                                <div class="category-content">
+                                    <h6>${category.name}</h6>
+                                </div>
+                            `)
                             .on('click', function () {
                                 closeProductsDropdown();
                             });
@@ -590,11 +595,11 @@
                             .attr('data-subcategory1-id', subCat1.id)
                             .attr('data-subcategory1-name', subCat1.name)
                             .html(`
-                                        <div class="subcategory-content">
-                                            <span>${subCat1.name}</span>
-                                        </div>
-                                        <i class="fas fa-chevron-right subcategory-toggle-icon"></i>
-                                    `)
+                                <div class="subcategory-content">
+                                    <span>${subCat1.name}</span>
+                                </div>
+                                <i class="fas fa-chevron-right subcategory-toggle-icon"></i>
+                            `)
                             .on('click', function (e) {
                                 e.preventDefault();
                                 e.stopPropagation();
@@ -632,10 +637,10 @@
                             .attr('href', subCat1Url)
                             .css('text-decoration', 'none')
                             .html(`
-                                        <div class="subcategory-content">
-                                            <span>${subCat1.name}</span>
-                                        </div>
-                                    `)
+                                <div class="subcategory-content">
+                                    <span>${subCat1.name}</span>
+                                </div>
+                            `)
                             .on('click', function () {
                                 closeProductsDropdown();
                             });
@@ -805,6 +810,7 @@
             }
         });
 
+        // Contact Modal Validation Functions
         function showModalValidationMessage(fieldId, message) {
             const field = document.getElementById(fieldId);
             const feedback = field.nextElementSibling;

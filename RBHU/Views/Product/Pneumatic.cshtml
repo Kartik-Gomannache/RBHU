@@ -55,7 +55,7 @@
 
                                             <div class="category-info">
                                                 <i class="fas fa-folder me-2"></i>
-                                                <span class="category-name">@subCat1.Name.ToUpper()</span>
+                                                <span class="category-name">@subCat1.Name</span>
                                             </div>
 
                                             @if (subCategories2 != null && subCategories2.Any())
@@ -102,17 +102,24 @@
                         </h5>
                         <div class="brand-container">
                             <!-- CP Brand Button -->
-                            <div class="brand-item" data-brand="CP">
-                                <div class="brand-card" onclick="filterByBrand('CP')">
+                            <div class="brand-item" data-brand="Chicago Pneumatic">
+                                <div class="brand-card" onclick="filterByBrand('Chicago Pneumatic')">
                                     <img src="~/images/Product_Brands/CP.jpg" alt="CP Brand" class="brand-logo">
-                                    <div class="brand-name">CP</div>
+                                    <div class="brand-name">Chicago Pneumatic</div>
+                                </div>
+                            </div>
+                            <!-- FUJI Brand Button -->
+                            <div class="brand-item" data-brand="Fuji">
+                                <div class="brand-card" onclick="filterByBrand('Fuji')">
+                                    <img src="~/images/Product_Brands/Fuji.jpg" alt="IMI Brand" class="brand-logo">
+                                    <div class="brand-name">Fuji</div>
                                 </div>
                             </div>
                             <!-- IMI Brand Button -->
-                            <div class="brand-item" data-brand="IMI">
-                                <div class="brand-card" onclick="filterByBrand('IMI')">
-                                    <img src="~/images/Product_Brands/IMI.jpg" alt="IMI Brand" class="brand-logo">
-                                    <div class="brand-name">IMI</div>
+                            <div class="brand-item" data-brand="IMI Norgren">
+                                <div class="brand-card" onclick="filterByBrand('IMI Norgren')">
+                                    <img src="~/images/Product_Brands/IMI.jpg" alt="IMI Norgren Brand" class="brand-logo">
+                                    <div class="brand-name">IMI Norgren</div>
                                 </div>
                             </div>
                         </div>

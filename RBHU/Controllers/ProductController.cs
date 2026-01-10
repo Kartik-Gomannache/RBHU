@@ -500,10 +500,103 @@ namespace RBHU.Controllers
             });
         }
 
+        public IActionResult Hoses(int? subCategory1Id = null, int? subCategory2Id = null)
+        {
+            var categoryName = "Hoses";
+            var categories = _productService.GetAllCategories();
+            var category = categories.FirstOrDefault(c => c.Name.Contains(categoryName, StringComparison.OrdinalIgnoreCase));
+
+            if (category == null)
+            {
+                return View(new CategoryViewModel
+                {
+                    CategoryName = categoryName,
+                    Products = new List<Product>(),
+                    SubCategories1 = new List<SubCategory1>()
+                });
+            }
+
+            var viewModel = new CategoryViewModel
+            {
+                CategoryId = category.Id,
+                CategoryName = category.Name,
+                SubCategories1 = _productService.GetSubCategories1ByCategory(category.Id),
+                Products = subCategory2Id.HasValue ? _productService.GetProductsBySubCategory2(subCategory2Id.Value) :
+                           subCategory1Id.HasValue ? _productService.GetProductsBySubCategory1(subCategory1Id.Value) :
+                           _productService.GetProductsByCategory(category.Id),
+                SelectedSubCategory1Id = subCategory1Id,
+                SelectedSubCategory2Id = subCategory2Id
+            };
+
+            return View(viewModel);
+        }
+
+        public IActionResult Belts(int? subCategory1Id = null, int? subCategory2Id = null)
+        {
+            var categoryName = "Belts";
+            var categories = _productService.GetAllCategories();
+            var category = categories.FirstOrDefault(c => c.Name.Contains(categoryName, StringComparison.OrdinalIgnoreCase));
+
+            if (category == null)
+            {
+                return View(new CategoryViewModel
+                {
+                    CategoryName = categoryName,
+                    Products = new List<Product>(),
+                    SubCategories1 = new List<SubCategory1>()
+                });
+            }
+
+            var viewModel = new CategoryViewModel
+            {
+                CategoryId = category.Id,
+                CategoryName = category.Name,
+                SubCategories1 = _productService.GetSubCategories1ByCategory(category.Id),
+                Products = subCategory2Id.HasValue ? _productService.GetProductsBySubCategory2(subCategory2Id.Value) :
+                           subCategory1Id.HasValue ? _productService.GetProductsBySubCategory1(subCategory1Id.Value) :
+                           _productService.GetProductsByCategory(category.Id),
+                SelectedSubCategory1Id = subCategory1Id,
+                SelectedSubCategory2Id = subCategory2Id
+            };
+
+            return View(viewModel);
+        }
+
+        public IActionResult SafetyProducts(int? subCategory1Id = null, int? subCategory2Id = null)
+        {
+            var categoryName = "SafetyTools";
+            var categories = _productService.GetAllCategories();
+            var category = categories.FirstOrDefault(c => c.Name.Contains(categoryName, StringComparison.OrdinalIgnoreCase));
+
+            if (category == null)
+            {
+                return View(new CategoryViewModel
+                {
+                    CategoryName = categoryName,
+                    Products = new List<Product>(),
+                    SubCategories1 = new List<SubCategory1>()
+                });
+            }
+
+            var viewModel = new CategoryViewModel
+            {
+                CategoryId = category.Id,
+                CategoryName = category.Name,
+                SubCategories1 = _productService.GetSubCategories1ByCategory(category.Id),
+                Products = subCategory2Id.HasValue ? _productService.GetProductsBySubCategory2(subCategory2Id.Value) :
+                           subCategory1Id.HasValue ? _productService.GetProductsBySubCategory1(subCategory1Id.Value) :
+                           _productService.GetProductsByCategory(category.Id),
+                SelectedSubCategory1Id = subCategory1Id,
+                SelectedSubCategory2Id = subCategory2Id
+            };
+
+            return View(viewModel);
+        }
+
         // Update other category methods similarly
         public IActionResult PowerTools(int? subCategory1Id = null, int? subCategory2Id = null)
         {
-            var categoryName = "PowerTools";
+            var categoryName = "Power Tools";
             var categories = _productService.GetAllCategories();
             var category = categories.FirstOrDefault(c => c.Name.Contains(categoryName, StringComparison.OrdinalIgnoreCase));
 
@@ -690,24 +783,25 @@ namespace RBHU.Controllers
                         SelectedSubCategory2Id = null
                     };
 
-                    // Return appropriate view based on category
-                    string viewName = categoryName switch
-                    {
-                        "Pneumatic" => "Pneumatic",
-                        "CuttingTools" => "CuttingTools",
-                        "Abrasives" => "Abrasives",
-                        "PowerTools" => "PowerTools",
-                        _ => "Category"
-                    };
-
-                    return View(viewName, viewModel);
-                }
-                catch (Exception ex)
+                string viewName = category.Name switch
                 {
-                    Console.WriteLine($"Error loading category by brand: {ex.Message}");
-                    return StatusCode(500, "An error occurred while loading the category");
-                }
-           
+                    "Abrasives" => "Abrasives",
+                    "Cutting Tools" => "CuttingTools",
+                    "Pneumatic tools and Systems" => "Pneumatic",
+                    "Power Tools and Accessories" => "PowerTools",
+                    "Safety Products and Equipment" => "SafetyProducts",
+                    "Hoses" => "Hoses",
+                    "Belts" => "Belts",
+                    _ => "Category" // fallback
+                };
+                return View(viewName, viewModel);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading category: {ex.Message}");
+                return StatusCode(500, "An error occurred while loading the category");
+            }
         }
 
         //public IActionResult SaveCategory(string name)

@@ -1,6 +1,6 @@
 ﻿@model RBHU_DbServices.ViewModel.CategoryViewModel
 @{
-    ViewData["Title"] = "Abrasives";
+    ViewData["Title"] = "Hoses";
 }
 
 <div class="page-content">
@@ -11,7 +11,7 @@
                 <div class="col-lg-12 text-center">
                     <h2 class="section-title" data-aos="fade-up">@Model.CategoryName</h2>
                     <p class="lead text-muted" data-aos="fade-up" data-aos-delay="100">
-                        Professional-grade abrasive products for precision finishing and surface preparation
+                        Premium hydraulic and industrial hoses for reliable fluid transfer and power transmission
                     </p>
                 </div>
             </div>
@@ -98,21 +98,20 @@
                             <i class="fas fa-award me-2"></i>Featured Brands
                         </h5>
                         <div class="brand-container">
-                            <!-- Bosch Brand Button -->
-                            <div class="brand-item" data-brand="Bosch">
-                                <div class="brand-card" onclick="filterByBrand('Bosch')">
-                                    <img src="~/images/Product_Brands/Bosch.jpg" alt="Bosch Brand" class="brand-logo">
-                                    <div class="brand-name">Bosch</div>
+                            <!-- Parker Brand Button -->
+                            <div class="brand-item" data-brand="Parker">
+                                <div class="brand-card" onclick="filterByBrand('Parker')">
+                                    <img src="~/images/Product_Brands/Parker.jpg" alt="Parker Brand" class="brand-logo">
+                                    <div class="brand-name">Parker</div>
                                 </div>
                             </div>
-                            <!-- klingspor Brand Button -->
-                            <div class="brand-item" data-brand="Klingspor">
-                                <div class="brand-card" onclick="filterByBrand('Klingspor')">
-                                    <img src="~/images/Product_Brands/klingspor.jpg" alt="Klingspor Brand" class="brand-logo">
-                                    <div class="brand-name">Klingspor</div>
+                            <!-- Polyhose Brand Button -->
+                            <div class="brand-item" data-brand="Polyhose">
+                                <div class="brand-card" onclick="filterByBrand('Polyhose')">
+                                    <img src="~/images/Product_Brands/Polyhose.jpg" alt="Polyhose Brand" class="brand-logo">
+                                    <div class="brand-name">Polyhose</div>
                                 </div>
                             </div>
-                           
                         </div>
                     </div>
 
@@ -188,23 +187,23 @@
                                                     <i class="fas fa-circle-notch fa-2x text-muted"></i>
                                                 </div>
                                             }
-                                        </div>
+                                    </div>
 
-                                        <div class="card-body p-3">
-                                            <h6 class="product-title">@product.Name</h6>
-                                            <p class="product-description small text-muted mb-2">
-                                                @(string.IsNullOrEmpty(product.Description) ? "High-quality abrasive product." :
-                                                    (product.Description.Length > 60 ? product.Description.Substring(0, 60) + "..." : product.Description))
-                                            </p>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <a asp-controller="Home" asp-action="Contact" class="btn btn-sm btn-outline-secondary">
-                                                    <i class="fas fa-phone"></i> Enquire
-                                                </a>
-                                            </div>
-                                        </div>
+                                    <div class="card-body p-3">
+                                        <h6 class="product-title">@product.Name</h6>
+                                        <p class="product-description small text-muted mb-2">
+                                            @(string.IsNullOrEmpty(product.Description) ? "High-quality hose product." :
+                                                                                    (product.Description.Length > 60 ? product.Description.Substring(0, 60) + "..." : product.Description))
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a asp-controller="Home" asp-action="Contact" class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-phone"></i> Enquire
+                                        </a>
                                     </div>
                                 </div>
-                            }
+                            </div>
+                        </div>
+                                                }
                         }
                         else
                         {
@@ -224,34 +223,34 @@
             <!-- Features Section -->
             <div class="row mt-5 pt-4 border-top">
                 <div class="col-lg-12">
-                    <h4 class="text-center mb-4">Why Choose Our Abrasives?</h4>
+                    <h4 class="text-center mb-4">Why Choose Our Hoses?</h4>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="text-center">
-                        <i class="fas fa-gem fa-2x text-secondary mb-3"></i>
-                        <h6>Premium Quality</h6>
-                        <p class="small text-muted">High-grade materials for superior cutting and finishing performance.</p>
+                        <i class="fas fa-shield-alt fa-2x text-secondary mb-3"></i>
+                        <h6>High Pressure Rating</h6>
+                        <p class="small text-muted">Engineered to withstand extreme pressures and harsh operating conditions.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="text-center">
-                        <i class="fas fa-clock fa-2x text-secondary mb-3"></i>
-                        <h6>Long Lasting</h6>
-                        <p class="small text-muted">Extended service life reduces downtime and replacement costs.</p>
+                        <i class="fas fa-thermometer-half fa-2x text-secondary mb-3"></i>
+                        <h6>Temperature Resistant</h6>
+                        <p class="small text-muted">Superior performance across wide temperature ranges from -40°C to +100°C.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="text-center">
-                        <i class="fas fa-chart-line fa-2x text-secondary mb-3"></i>
-                        <h6>Consistent Results</h6>
-                        <p class="small text-muted">Uniform grain distribution ensures predictable finishing quality.</p>
+                        <i class="fas fa-check-circle fa-2x text-secondary mb-3"></i>
+                        <h6>Quality Certified</h6>
+                        <p class="small text-muted">Meets international standards for hydraulic and industrial applications.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="text-center">
-                        <i class="fas fa-layer-group fa-2x text-secondary mb-3"></i>
-                        <h6>Wide Range</h6>
-                        <p class="small text-muted">Extensive selection of grits and types for every application.</p>
+                        <i class="fas fa-wrench fa-2x text-secondary mb-3"></i>
+                        <h6>Easy Installation</h6>
+                        <p class="small text-muted">Compatible with standard fittings and accessories for quick setup.</p>
                     </div>
                 </div>
             </div>
@@ -260,8 +259,8 @@
             <div class="row mt-4">
                 <div class="col-lg-12 text-center">
                     <div class="bg-light p-4 rounded border">
-                        <h5>Need the Right Abrasive Solution?</h5>
-                        <p class="text-muted mb-3">Our team can help you select the perfect abrasive for your application.</p>
+                        <h5>Need the Right Hose Solution?</h5>
+                        <p class="text-muted mb-3">Our team can help you select the perfect hose for your hydraulic and industrial needs.</p>
                         <a asp-controller="Home" asp-action="Contact" class="btn btn-secondary me-2">
                             <i class="fas fa-phone me-2"></i>Contact Us
                         </a>
@@ -513,7 +512,7 @@
                                 ? (item.product.description.length > 60
                                     ? item.product.description.substring(0, 60) + '...'
                                     : item.product.description)
-                                : 'High-quality abrasive product.';
+                                : 'High-quality hose product.';
 
                             const cardHtml = `
                                 <div class="col-lg-4 col-md-6 col-sm-6 mb-3">
@@ -781,7 +780,7 @@
                             <div class="card-body p-3">
                                 <h6 class="product-title">${product.name}</h6>
                                 <p class="product-description small text-muted mb-2">
-                                    ${product.description ? (product.description.length > 60 ? product.description.substring(0, 60) + '...' : product.description) : 'High-quality abrasive product.'}
+                                    ${product.description ? (product.description.length > 60 ? product.description.substring(0, 60) + '...' : product.description) : 'High-quality hose product.'}
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <a href="/Home/Contact" class="btn btn-sm btn-outline-secondary">
@@ -817,15 +816,15 @@
 
     <style>
         /* ===================================
-               PAGE BACKGROUND
-               =================================== */
+                       PAGE BACKGROUND
+                       =================================== */
         .page-content {
             background: #f8f9fa;
         }
 
         /* ===================================
-               BRAND SHOWCASE STYLES
-               =================================== */
+                       BRAND SHOWCASE STYLES
+                       =================================== */
         .brand-showcase {
             background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
             border: none;
@@ -908,8 +907,8 @@
         }
 
         /* ===================================
-               SIDEBAR STYLES
-               =================================== */
+                       SIDEBAR STYLES
+                       =================================== */
         .category-sidebar {
             background: #ffffff;
             border: 1px solid #e2e8f0;
@@ -950,8 +949,8 @@
             }
 
         /* ===================================
-               CATEGORY TREE STYLES
-               =================================== */
+                       CATEGORY TREE STYLES
+                       =================================== */
         .subcategory-tree {
             margin-top: 15px;
         }
@@ -1046,8 +1045,8 @@
         }
 
         /* ===================================
-               SUBCATEGORY2 STYLES
-               =================================== */
+                       SUBCATEGORY2 STYLES
+                       =================================== */
         .category-level-2 {
             padding: 8px 0 5px 10px;
             background: #f7fafc;
@@ -1114,8 +1113,8 @@
                 }
 
         /* ===================================
-               SAMPLE PRODUCTS CARD STYLES
-               =================================== */
+                       SAMPLE PRODUCTS CARD STYLES
+                       =================================== */
         .sample-product-card {
             border: 2px solid #e2e8f0;
             border-radius: 12px;
@@ -1266,8 +1265,8 @@
         }
 
         /* ===================================
-               SAMPLE PRODUCTS SECTION HEADER
-               =================================== */
+                       SAMPLE PRODUCTS SECTION HEADER
+                       =================================== */
         #sampleProductsTitle {
             color: #2d3748;
             font-weight: 700;
@@ -1288,8 +1287,8 @@
             }
 
         /* ===================================
-               STANDARD PRODUCT CARD STYLES
-               =================================== */
+                       STANDARD PRODUCT CARD STYLES
+                       =================================== */
         .product-card {
             border: 1px solid #e2e8f0;
             border-radius: 8px;
@@ -1396,8 +1395,8 @@
         }
 
         /* ===================================
-               ACTION BUTTONS
-               =================================== */
+                       ACTION BUTTONS
+                       =================================== */
         .btn-sm.btn-outline-secondary {
             background: transparent;
             border: 1px solid #4a5568;
@@ -1426,225 +1425,237 @@
         }
 
         /* ===================================
-               RESPONSIVE STYLES
-               =================================== */
+                       RESPONSIVE STYLES
+                       =================================== */
         @@media (max-width: 991px) {
-            .category-sidebar {
-                position: relative;
-                top: 0;
-                margin-bottom: 25px;
-                max-height: none;
-            }
+            .category-sidebar
 
-            .brand-logo {
-                height: 90px;
-                max-width: 140px;
-            }
+        {
+            position: relative;
+            top: 0;
+            margin-bottom: 25px;
+            max-height: none;
+        }
 
-            .brand-card {
-                padding: 18px;
-                min-width: 200px;
-            }
+        .brand-logo {
+            height: 90px;
+            max-width: 140px;
+        }
 
-            .brand-showcase {
-                padding: 20px;
-            }
+        .brand-card {
+            padding: 18px;
+            min-width: 200px;
+        }
+
+        .brand-showcase {
+            padding: 20px;
+        }
+
         }
 
         @@media (max-width: 768px) {
-            .category-header {
-                padding: 8px 10px;
-                font-size: 0.85rem;
-            }
+            .category-header
 
-            .subcategory2-item {
-                padding: 7px 10px;
-                font-size: 0.8rem;
-            }
+        {
+            padding: 8px 10px;
+            font-size: 0.85rem;
+        }
 
-            .brand-logo {
-                height: 80px;
-                max-width: 130px;
-            }
+        .subcategory2-item {
+            padding: 7px 10px;
+            font-size: 0.8rem;
+        }
 
-            .brand-container {
-                gap: 25px;
-            }
+        .brand-logo {
+            height: 80px;
+            max-width: 130px;
+        }
 
-            .brand-card {
-                padding: 15px;
-                min-width: 180px;
-            }
+        .brand-container {
+            gap: 25px;
+        }
 
-            .brand-showcase {
-                padding: 18px;
-            }
+        .brand-card {
+            padding: 15px;
+            min-width: 180px;
+        }
 
-            .brand-showcase-title {
-                font-size: 1.1rem;
-                margin-bottom: 18px;
-            }
+        .brand-showcase {
+            padding: 18px;
+        }
 
-            .brand-name {
-                font-size: 0.95rem;
-            }
+        .brand-showcase-title {
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+        }
 
-            .product-card .product-image-container {
-                height: 180px;
-                padding: 12px;
-            }
+        .brand-name {
+            font-size: 0.95rem;
+        }
 
-            .product-card .no-image-placeholder {
-                height: 180px;
-            }
+        .product-card .product-image-container {
+            height: 180px;
+            padding: 12px;
+        }
 
-            .sample-product-card .product-image-container {
-                height: 200px;
-            }
+        .product-card .no-image-placeholder {
+            height: 180px;
+        }
 
-            .product-title {
-                font-size: 0.9rem;
-                height: 40px;
-            }
+        .sample-product-card .product-image-container {
+            height: 200px;
+        }
 
-            .product-description {
-                font-size: 0.8rem;
-                height: 34px;
-            }
+        .product-title {
+            font-size: 0.9rem;
+            height: 40px;
+        }
 
-            #sampleProductsTitle {
-                font-size: 1.3rem;
-            }
+        .product-description {
+            font-size: 0.8rem;
+            height: 34px;
+        }
+
+        #sampleProductsTitle {
+            font-size: 1.3rem;
+        }
+
         }
 
         @@media (max-width: 576px) {
-            .category-sidebar {
-                padding: 15px;
+            .category-sidebar
+
+        {
+            padding: 15px;
+        }
+
+        .brand-logo {
+            height: 70px;
+            max-width: 110px;
+        }
+
+        .brand-showcase {
+            padding: 15px;
+        }
+
+        .brand-container {
+            gap: 20px;
+        }
+
+        .brand-card {
+            padding: 12px;
+            min-width: 150px;
+        }
+
+        .brand-showcase-title {
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .brand-name {
+            font-size: 0.9rem;
+            margin-top: 6px;
+        }
+
+        .product-card .product-image-container {
+            height: 160px;
+            padding: 10px;
+        }
+
+        .product-card .no-image-placeholder {
+            height: 160px;
+        }
+
+            .product-card .no-image-placeholder i {
+                font-size: 1.75rem;
             }
 
-            .brand-logo {
-                height: 70px;
-                max-width: 110px;
-            }
+        .sample-product-card .product-image-container {
+            height: 180px;
+            padding: 12px;
+        }
 
-            .brand-showcase {
-                padding: 15px;
-            }
+        .product-card .card-body,
+        .product-card .p-3 {
+            padding: 12px;
+        }
 
-            .brand-container {
-                gap: 20px;
-            }
+        .product-title {
+            font-size: 0.875rem;
+            height: 38px;
+            margin-bottom: 8px;
+        }
 
-            .brand-card {
-                padding: 12px;
-                min-width: 150px;
-            }
+        .product-description {
+            font-size: 0.75rem;
+            height: 32px;
+            margin-bottom: 10px;
+        }
 
-            .brand-showcase-title {
-                font-size: 1rem;
-                margin-bottom: 15px;
-            }
+        .btn-sm.btn-outline-secondary {
+            font-size: 0.8rem;
+            padding: 8px 12px;
+        }
 
-            .brand-name {
-                font-size: 0.9rem;
-                margin-top: 6px;
-            }
+        .sample-product-card .btn-primary {
+            font-size: 0.8rem;
+            padding: 8px 12px;
+        }
 
-            .product-card .product-image-container {
-                height: 160px;
-                padding: 10px;
-            }
+        #sampleProductsTitle {
+            font-size: 1.2rem;
+        }
 
-            .product-card .no-image-placeholder {
-                height: 160px;
-            }
-
-                .product-card .no-image-placeholder i {
-                    font-size: 1.75rem;
-                }
-
-            .sample-product-card .product-image-container {
-                height: 180px;
-                padding: 12px;
-            }
-
-            .product-card .card-body,
-            .product-card .p-3 {
-                padding: 12px;
-            }
-
-            .product-title {
-                font-size: 0.875rem;
-                height: 38px;
-                margin-bottom: 8px;
-            }
-
-            .product-description {
-                font-size: 0.75rem;
-                height: 32px;
-                margin-bottom: 10px;
-            }
-
-            .btn-sm.btn-outline-secondary {
-                font-size: 0.8rem;
-                padding: 8px 12px;
-            }
-
-            .sample-product-card .btn-primary {
-                font-size: 0.8rem;
-                padding: 8px 12px;
-            }
-
-            #sampleProductsTitle {
-                font-size: 1.2rem;
-            }
         }
 
         @@media (max-width: 374px) {
-            .product-card .product-image-container {
-                height: 130px;
-                padding: 6px;
+            .product-card .product-image-container
+
+        {
+            height: 130px;
+            padding: 6px;
+        }
+
+        .product-card .no-image-placeholder {
+            height: 130px;
+        }
+
+            .product-card .no-image-placeholder i {
+                font-size: 1.35rem;
             }
 
-            .product-card .no-image-placeholder {
-                height: 130px;
-            }
+        .sample-product-card .product-image-container {
+            height: 150px;
+            padding: 8px;
+        }
 
-                .product-card .no-image-placeholder i {
-                    font-size: 1.35rem;
-                }
+        .product-card .card-body,
+        .product-card .p-3,
+        .sample-product-card .card-body {
+            padding: 8px;
+        }
 
-            .sample-product-card .product-image-container {
-                height: 150px;
-                padding: 8px;
-            }
+        .product-title {
+            font-size: 0.75rem;
+            height: 34px;
+        }
 
-            .product-card .card-body,
-            .product-card .p-3,
-            .sample-product-card .card-body {
-                padding: 8px;
-            }
+        .product-description {
+            font-size: 0.65rem;
+            height: 28px;
+            margin-bottom: 6px;
+        }
 
-            .product-title {
-                font-size: 0.75rem;
-                height: 34px;
-            }
+        .btn-sm.btn-outline-secondary,
+        .sample-product-card .btn-primary {
+            font-size: 0.7rem;
+            padding: 5px 8px;
+        }
 
-            .product-description {
-                font-size: 0.65rem;
-                height: 28px;
-                margin-bottom: 6px;
-            }
+        #sampleProductsTitle {
+            font-size: 1rem;
+        }
 
-            .btn-sm.btn-outline-secondary,
-            .sample-product-card .btn-primary {
-                font-size: 0.7rem;
-                padding: 5px 8px;
-            }
-
-            #sampleProductsTitle {
-                font-size: 1rem;
-            }
         }
 
         .h-100 {
@@ -1676,13 +1687,14 @@
         }
 
         @@media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
+            *, *::before, *::after
+
+        {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+
         }
     </style>
 }
