@@ -713,16 +713,20 @@ namespace RBHU.Controllers
             
                 try
                 {
-                    // Map category names to IDs
-                    var categoryMap = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
-        {
-            { "Pneumatic", 3 },
-            { "CuttingTools", 2 },
-            { "Abrasives", 1 },
-            { "PowerTools", 4 }
-        };
+                // Map category names to IDs (as per DB screenshot)
+                var categoryMap = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "Abrasives", 3 },
+                    { "Belts", 7 },
+                    { "CuttingTools", 5 },
+                    { "Hoses", 6 },
+                    { "Pneumatic", 1 },
+                    { "PowerTools", 2 },
+                    { "SafetyProducts", 4 }
+                };
 
-                    if (!categoryMap.TryGetValue(categoryName, out int categoryId))
+
+                if (!categoryMap.TryGetValue(categoryName, out int categoryId))
                     {
                         return NotFound("Category not found");
                     }

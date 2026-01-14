@@ -3,13 +3,13 @@
 /* ===== BOSCH-INSPIRED COLOR SYSTEM ===== */
 :root {
     /* Primary Bosch Red */
-    --bosch-red: #E00420;
-    --bosch-red-dark: #C10318;
-    --bosch-red-light: #FF1A33;
-    --bosch-red-hover: #B8031A;
-    /* Focus Color - Yellowish Orange */
-    --focus-color: #FFA500;
-    --focus-color-light: rgba(255, 165, 0, 0.2);
+    --bosch-red: #FFC107;
+    --bosch-red-dark: #ba9423;
+    --bosch-red-light: #FFC107;
+    --bosch-red-hover: #ba9423;
+    /* Focus Color - Yellow */
+    --focus-color: #FFC107;
+    --focus-color-light: rgba(255, 193, 7, 0.2);
     /* Professional Grays (Bosch Palette) */
     --gray-platinum: #DFE2E4;
     --gray-x11: #B6BBBE;
@@ -1166,7 +1166,7 @@ body {
     }
 }
 
-/* Updated Focus Styles with Yellowish-Orange Color */
+/* Updated Focus Styles with Yellow Color */
 :focus-visible {
     outline: 2px solid var(--focus-color);
     outline-offset: 2px;

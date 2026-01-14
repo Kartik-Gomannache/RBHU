@@ -7,16 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Product\Shared\**" />
+    <Content Remove="Views\Product\Shared\**" />
+    <EmbeddedResource Remove="Views\Product\Shared\**" />
+    <None Remove="Views\Product\Shared\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.22" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\UserManagementEV\UserManagement.Lib\UserManagement.Lib.csproj" />
     <ProjectReference Include="..\RBHU_DbServices\RBHU_DbServices.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Product\Shared\" />
   </ItemGroup>
 
 </Project>

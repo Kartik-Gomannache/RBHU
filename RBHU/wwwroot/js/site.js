@@ -144,17 +144,17 @@
 
     // ===== Navbar scroll effect =====
     function handleNavbarScroll() {
-        const navbar = $(".navbar");
-        if (!navbar) return;
-        if (window.scrollY > 50) {
-            navbar.style.background = "rgba(26, 54, 93, 0.98)";
-            navbar.style.backdropFilter = "blur(15px)";
-            navbar.style.boxShadow = "0 4px 30px rgba(0,0,0,0.2)";
-        } else {
-            navbar.style.background = "rgba(26, 54, 93, 0.95)";
-            navbar.style.backdropFilter = "blur(10px)";
-            navbar.style.boxShadow = "0 2px 20px rgba(0,0,0,0.1)";
-        }
+        //const navbar = $(".navbar");
+        //if (!navbar) return;
+        //if (window.scrollY > 50) {
+        //   // navbar.style.background = "rgba(26, 54, 93, 0.98)";
+        //    navbar.style.backdropFilter = "blur(15px)";
+        //    navbar.style.boxShadow = "0 4px 30px rgba(0,0,0,0.2)";
+        //} else {
+        //    navbar.style.background = "rgba(26, 54, 93, 0.95)";
+        //    navbar.style.backdropFilter = "blur(10px)";
+        //    navbar.style.boxShadow = "0 2px 20px rgba(0,0,0,0.1)";
+        //}
     }
 
     // ===== Smooth anchors =====
