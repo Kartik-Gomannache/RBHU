@@ -39,8 +39,8 @@ namespace RBHU.Controllers
         public IActionResult Home()
         {
             ViewData["Title"] = "Home";
-            var Categories = _productService.GetAllCategoriesForHome();
-            return View(Categories);
+          //  var Categories = _productService.GetAllCategoriesForHome();
+            return View();
         }
 
         public IActionResult Index()

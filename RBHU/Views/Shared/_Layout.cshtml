@@ -1,18 +1,16 @@
 ﻿@using System.Security.Claims
 
 @{
-
     var uniqueUserIdentifier = User.Claims.FirstOrDefault()?.Value;
     var newl = "";
 }
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] RBHU Solutions LLP </title>
+    <title>@ViewData["Title"] RBHU Solutions LLP</title>
     <link rel="icon" type="image/x-icon" href="~/images/Bars.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -24,68 +22,73 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <!-- Bosch-Inspired Professional Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-professional fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Home">
-                <!-- Slanting Bars Background -->
-                <div class="brand-bars-container">
-                    <div class="brand-bar brand-bar-1"></div>
-                    <div class="brand-bar brand-bar-2"></div>
-                    <div class="brand-bar brand-bar-3"></div>
-                </div>
-                <!-- Logo and Text -->
-                <div class="brand-logo-wrapper">
-                    <img src="~/images/rbhu_3dlogo.png" class="brand-logo" alt="RBHU Solutions LLP Logo" />
-                    <span class="brand-text">RBHU Solutions LLP</span>
+            <a class="navbar-brand-professional" asp-area="" asp-controller="Home" asp-action="Home">
+                <!-- Logo with Bosch-style presentation -->
+                <div class="brand-logo-container">
+                    <img src="~/images/rbhu_3dlogo.png" class="brand-logo-image" alt="RBHU Solutions LLP Logo" />
+                    <div class="brand-text-container">
+                        <span class="brand-name">RBHU Solutions LLP</span>
+                        <span class="brand-tagline">Industrial Equipment & Tools</span>
+                    </div>
                 </div>
             </a>
-            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            
+            <button class="navbar-toggler-professional" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="toggler-line"></span>
+                <span class="toggler-line"></span>
+                <span class="toggler-line"></span>
             </button>
+            
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Home">
+                <ul class="navbar-nav-professional ms-auto">
+                    <li class="nav-item-professional">
+                        <a class="nav-link-professional" asp-area="" asp-controller="Home" asp-action="Home">
                             <span>Home</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">
+                    <li class="nav-item-professional">
+                        <a class="nav-link-professional" asp-area="" asp-controller="Home" asp-action="About">
                             <span>About Us</span>
                         </a>
                     </li>
-
-                    <li class="nav-item products-dropdown-wrapper">
-                        <a class="nav-link products-dropdown-toggle" asp-action="Products" asp-controller="Home">
+                    
+                    <li class="nav-item-professional products-nav-item">
+                        <a class="nav-link-professional products-nav-trigger" asp-action="Products" asp-controller="Home">
                             <span>Products</span>
-                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                            <i class="fas fa-chevron-down nav-arrow"></i>
                         </a>
-                        <div class="products-dropdown">
-                            <div class="dropdown-header">
-                                <h6>Categories</h6>
-                            </div>
-                            <div class="dropdown-items" id="productCategoriesContainer">
-                                <div class="text-center py-3">
-                                    <i class="fas fa-spinner fa-spin"></i> Loading categories...
+                        <div class="products-mega-menu">
+                            <div class="mega-menu-container">
+                                <div class="mega-menu-header">
+                                    <h3 class="mega-menu-title">Product Categories</h3>
+                                    <p class="mega-menu-subtitle">Explore our comprehensive range of industrial solutions</p>
+                                </div>
+                                <div class="mega-menu-content" id="productCategoriesContainer">
+                                    <div class="loading-state">
+                                        <i class="fas fa-spinner fa-spin"></i>
+                                        <span>Loading categories...</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link offer-highlight" asp-area="" asp-controller="Home" asp-action="Offers">
-                            <span>Offers</span>
+                    
+                    <li class="nav-item-professional">
+                        <a class="nav-link-professional nav-link-highlight" asp-area="" asp-controller="Home" asp-action="Offers">
+                            <span>Special Offers</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">
-                            <span>Contact Us</span>
+                    <li class="nav-item-professional">
+                        <a class="nav-link-professional" asp-area="" asp-controller="Home" asp-action="Contact">
+                            <span>Contact</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" onclick="AdminLogin()">
-                            <span>👤</span>
+                    <li class="nav-item-professional nav-item-login">
+                        <a class="nav-link-professional" onclick="AdminLogin()">
+                            <i class="fas fa-user-circle"></i>
                         </a>
                     </li>
                 </ul>
@@ -93,26 +96,34 @@
         </div>
     </nav>
 
-    <!-- Dropdown Overlay for Mobile -->
-    <div class="dropdown-overlay" onclick="closeProductsDropdown()"></div>
+    <!-- Mega Menu Backdrop -->
+    <div class="mega-menu-backdrop" onclick="closeMegaMenu()"></div>
 
-    <!-- Fixed Chat Button -->
-    <button class="fixed-chat-btn" type="button" data-bs-toggle="modal" data-bs-target="#contactModal">
-        <i class="fas fa-comments"></i>
-        <span>Contact us</span>
+    <!-- Professional Contact Button -->
+    <button class="contact-fab" type="button" data-bs-toggle="modal" data-bs-target="#contactModal">
+        <i class="fas fa-envelope"></i>
+        <span class="fab-label">Contact</span>
     </button>
+    
     <input id="hiddenVar" value="@uniqueUserIdentifier" hidden />
-    <!-- Contact Modal -->
-    <div class="modal fade contact-modal" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+    
+    <!-- Professional Contact Modal -->
+    <div class="modal fade contact-modal-professional" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="contactModalLabel">
-                        <i class="fas fa-envelope me-2"></i>Contact Us
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header-professional">
+                    <div class="modal-header-content">
+                        <i class="fas fa-envelope modal-header-icon"></i>
+                        <div>
+                            <h5 class="modal-title" id="contactModalLabel">Get in Touch</h5>
+                            <p class="modal-subtitle">We're here to help with your industrial needs</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close-professional" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body-professional">
                     <div id="modalValidationSummary" class="alert alert-danger" style="display: none;">
                         <ul id="modalValidationList"></ul>
                     </div>
@@ -120,26 +131,26 @@
                     <form id="contactModalForm">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="modalFullName" class="form-label">Full Name *</label>
-                                <input id="modalFullName" name="FullName" class="form-control" placeholder="Enter your full name" />
+                                <label for="modalFullName" class="form-label-professional">Full Name *</label>
+                                <input id="modalFullName" name="FullName" class="form-control-professional" placeholder="Enter your full name" />
                                 <div class="invalid-feedback"></div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="modalPhoneNumber" class="form-label">Phone Number *</label>
-                                <input id="modalPhoneNumber" name="PhoneNumber" class="form-control" type="tel" placeholder="Enter your phone number" />
+                                <label for="modalPhoneNumber" class="form-label-professional">Phone Number *</label>
+                                <input id="modalPhoneNumber" name="PhoneNumber" class="form-control-professional" type="tel" placeholder="Enter your phone number" />
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="modalEmail" class="form-label">Email Address *</label>
-                                <input id="modalEmail" name="Email" class="form-control" type="email" placeholder="Enter your email address" />
+                                <label for="modalEmail" class="form-label-professional">Email Address *</label>
+                                <input id="modalEmail" name="Email" class="form-control-professional" type="email" placeholder="Enter your email address" />
                                 <div class="invalid-feedback"></div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="modalSubject" class="form-label">Subject *</label>
-                                <select id="modalSubject" name="Subject" class="form-control">
+                                <label for="modalSubject" class="form-label-professional">Subject *</label>
+                                <select id="modalSubject" name="Subject" class="form-control-professional">
                                     <option value="">Select Subject</option>
                                     <option value="Product Inquiry">Product Inquiry</option>
                                     <option value="Bulk Order">Bulk Order</option>
@@ -153,42 +164,46 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="modalCompany" class="form-label">Company Name</label>
-                            <input id="modalCompany" name="Company" class="form-control" placeholder="Enter your company name" />
+                            <label for="modalCompany" class="form-label-professional">Company Name</label>
+                            <input id="modalCompany" name="Company" class="form-control-professional" placeholder="Enter your company name" />
                             <div class="invalid-feedback"></div>
                         </div>
 
                         <div class="mb-4">
-                            <label for="modalMessage" class="form-label">Message *</label>
-                            <textarea id="modalMessage" name="Message" class="form-control" rows="4" placeholder="Please describe your requirements..."></textarea>
+                            <label for="modalMessage" class="form-label-professional">Message *</label>
+                            <textarea id="modalMessage" name="Message" class="form-control-professional" rows="4" placeholder="Please describe your requirements..."></textarea>
                             <div class="invalid-feedback"></div>
                         </div>
 
-                        <button type="button" id="modalSubmitBtn" class="btn btn-submit w-100" onclick="sendModalContactEmail()">
-                            <i class="fas fa-paper-plane me-2"></i>Send Message
+                        <button type="button" id="modalSubmitBtn" class="btn-submit-professional w-100" onclick="sendModalContactEmail()">
+                            <span>Send Message</span>
+                            <i class="fas fa-arrow-right"></i>
                         </button>
                     </form>
 
-                    <div class="quick-contact mt-4">
-                        <h6 class="mb-3">Quick Contact</h6>
-                        <div class="quick-contact-item">
-                            <i class="fas fa-phone text-primary"></i>
-                            <div>
-                                <strong>Call Us:</strong>
-                                <a href="tel:+917090979999" class="text-decoration-none ms-2">+91 7090979999</a>
+                    <div class="contact-info-box">
+                        <h6 class="info-box-title">Direct Contact</h6>
+                        <div class="info-box-items">
+                            <div class="info-box-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <strong>Phone</strong>
+                                    <a href="tel:+917090979999">+91 7090979999</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="quick-contact-item">
-                            <i class="fas fa-envelope text-primary"></i>
-                            <div>
-                                <strong>Email:</strong>
-                                <a href="mailto:office@aniketsalesagencies.com" class="text-decoration-none ms-2">office@aniketsalesagencies.com</a>
+                            <div class="info-box-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <strong>Email</strong>
+                                    <a href="mailto:office@aniketsalesagencies.com">office@aniketsalesagencies.com</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="quick-contact-item">
-                            <i class="fas fa-clock text-primary"></i>
-                            <div>
-                                <strong>Hours:</strong> Mon-Sat 9:00 AM - 6:00 PM
+                            <div class="info-box-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <strong>Business Hours</strong>
+                                    <span>Mon-Sat: 9:00 AM - 6:00 PM</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -198,80 +213,94 @@
     </div>
 
     <!-- Main Content -->
-    <main role="main">
+    <main role="main" class="main-content">
         @RenderBody()
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="footer-section">
-                        <h5 class="d-flex align-items-center">
-                            <img src="~/images/rbhu_3dlogo.png" class="footer-inline-logo me-2" alt="RBHU Solutions LLP Logo" />
-                            <span>RBHU Solutions LLP</span>
-                        </h5>
-                        <p class="mb-3">Leading provider of industrial tools and manufacturing equipment with over 35 years of excellence in serving industries worldwide.</p>
-                        <div class="social-links">
-                            <a target="_blank" href="https://www.facebook.com/share/1DPGuZv8Hy/?mibextid=wwXIfr" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a target="_blank" href="https://www.linkedin.com/in/aniket-pawashe-8b478137/" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                            <a target="_blank" href="https://www.instagram.com/aniket_sales?igsh=MWdudGd1dWZjeXFnaA==" title="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a target="_blank" href="https://youtube.com/@@aniketsalesagencies" title="YouTube"><i class="fab fa-youtube"></i></a>
+    <!-- Professional Footer -->
+    <footer class="footer-professional">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                        <div class="footer-brand">
+                            <img src="~/images/rbhu_3dlogo.png" class="footer-logo" alt="RBHU Solutions LLP Logo" />
+                            <h5 class="footer-brand-name">RBHU Solutions LLP</h5>
+                            <p class="footer-brand-description">
+                                Leading provider of industrial tools and manufacturing equipment with over 35 years of excellence in serving industries worldwide.
+                            </p>
+                            <div class="social-links-professional">
+                                <a target="_blank" href="https://www.facebook.com/share/1DPGuZv8Hy/?mibextid=wwXIfr" class="social-link" title="Facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a target="_blank" href="https://www.linkedin.com/in/aniket-pawashe-8b478137/" class="social-link" title="LinkedIn">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a target="_blank" href="https://www.instagram.com/aniket_sales?igsh=MWdudGd1dWZjeXFnaA==" class="social-link" title="Instagram">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a target="_blank" href="https://youtube.com/@@aniketsalesagencies" class="social-link" title="YouTube">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-2 col-md-6 mb-4">
-                    <div class="footer-section">
-                        <h5>Our Products</h5>
-                        <ul class="list-unstyled">
-                            <li><a asp-area="" asp-controller="Product" asp-action="Pneumatic" class="text-light text-decoration-none">Pneumatic</a></li>
-                            <li><a asp-area="" asp-controller="Product" asp-action="PowerTools" class="text-light text-decoration-none">Power Tools</a></li>
-                            <li><a asp-area="" asp-controller="Product" asp-action="CuttingTools" class="text-light text-decoration-none">Cutting Tools</a></li>
-                            <li><a asp-area="" asp-controller="Product" asp-action="Abrasives" class="text-light text-decoration-none">Abrasives</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="footer-section">
-                        <h5>Contact Info</h5>
-                        <div class="contact-item mb-2">
-                            <i class="fas fa-map-marker-alt me-2"></i>
-                            <small>
-                                RBHU Solutions LLP<br>
-                                RS no: 345, Plot No: 122/2A,<br>
-                                Udyambag Industrial Estate,<br>
-                                Belgaum, Karnataka - 590008,<br>
-                                India
-                            </small>
-                        </div>
-                        <div class="contact-item mb-2">
-                            <i class="fas fa-phone me-2"></i>
-                            <small>+91 7090979999</small>
-                        </div>
-                        <div class="contact-item mb-2">
-                            <i class="fas fa-envelope me-2"></i>
-                            <small>office@aniketsales.com</small>
+                    <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                        <div class="footer-section">
+                            <h6 class="footer-heading">Products</h6>
+                            <ul class="footer-links">
+                                <li><a asp-area="" asp-controller="Product" asp-action="Pneumatic">Pneumatic Tools</a></li>
+                                <li><a asp-area="" asp-controller="Product" asp-action="PowerTools">Power Tools</a></li>
+                                <li><a asp-area="" asp-controller="Product" asp-action="CuttingTools">Cutting Tools</a></li>
+                                <li><a asp-area="" asp-controller="Product" asp-action="Abrasives">Abrasives</a></li>
+                            </ul>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="footer-section">
-                        <h5>Our Location</h5>
-                        <div class="map-container">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.9721553491486!2d74.4922944740879!3d15.817183846138205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbf65b7be6dca61%3A0x412f7c54e9a0ddd0!2sAniket%20Sales%20Agencies!5e1!3m2!1sen!2sin!4v1754494922351!5m2!1sen!2sin" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                        <div class="footer-section">
+                            <h6 class="footer-heading">Contact Information</h6>
+                            <ul class="footer-contact">
+                                <li>
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>
+                                        RS no: 345, Plot No: 122/2A,<br>
+                                        Udyambag Industrial Estate,<br>
+                                        Belgaum, Karnataka - 590008
+                                    </span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-phone"></i>
+                                    <span>+91 7090979999</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-envelope"></i>
+                                    <span>office@aniketsales.com</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-section">
+                            <h6 class="footer-heading">Location</h6>
+                            <div class="footer-map">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.9721553491486!2d74.4922944740879!3d15.817183846138205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbf65b7be6dca61%3A0x412f7c54e9a0ddd0!2sAniket%20Sales%20Agencies!5e1!3m2!1sen!2sin!4v1754494922351!5m2!1sen!2sin" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <hr class="my-4">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <p class="mb-0">&copy; 2025 RBHU Solutions LLPs. All rights reserved. | Designed and developed by <a href="https://tridenttech.bsite.net" target="_blank">Trident Tech.</a></p>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <p class="copyright">&copy; 2025 RBHU Solutions LLP. All rights reserved.</p>
+                    <p class="developer-credit">
+                        Designed and developed by <a href="https://tridenttech.bsite.net" target="_blank">Trident Tech</a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -282,11 +311,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
 
     @RenderSection("Scripts", required: false)
+    
     <script>
         let categoriesData = [];
         let hoverTimeouts = {};
 
-        // Updated category images to match DB names
+        // Category images mapping
         const categoryImages = {
             'Abrasives': '/images/products/Abrasive_general.jpg',
             'Power Tools and Accessories': '/images/products/Power_general2.jpg',
@@ -297,7 +327,7 @@
             'Belts': '/images/products/Belts_general.jpg'
         };
 
-        // Map DB names to simple view names
+        // Category routes mapping
         const categoryRoutes = {
             'Abrasives': 'Abrasives',
             'Power Tools and Accessories': 'PowerTools',
@@ -309,12 +339,7 @@
         };
 
         function getCategoryImage(categoryName) {
-            // Try exact match first
-            if (categoryImages[categoryName]) {
-                return categoryImages[categoryName];
-            }
-
-            // Try partial match
+            if (categoryImages[categoryName]) return categoryImages[categoryName];
             for (let key in categoryImages) {
                 if (categoryName.toLowerCase().includes(key.toLowerCase()) ||
                     key.toLowerCase().includes(categoryName.toLowerCase())) {
@@ -325,12 +350,7 @@
         }
 
         function getCategoryRoute(categoryName) {
-            // Try exact match first
-            if (categoryRoutes[categoryName]) {
-                return categoryRoutes[categoryName];
-            }
-
-            // Try partial match
+            if (categoryRoutes[categoryName]) return categoryRoutes[categoryName];
             for (let key in categoryRoutes) {
                 if (categoryName.toLowerCase().includes(key.toLowerCase()) ||
                     key.toLowerCase().includes(categoryName.toLowerCase())) {
@@ -365,46 +385,55 @@
 
         $(document).ready(function () {
             loadProductCategories();
-            setupProductsDropdownHover();
+            setupMegaMenuInteraction();
+            initializeModalValidation();
         });
 
-        function setupProductsDropdownHover() {
-            const dropdownWrapper = $('.products-dropdown-wrapper');
-            const dropdownToggle = $('.products-dropdown-toggle');
-            const dropdown = $('.products-dropdown');
+        function setupMegaMenuInteraction() {
+            const productsNavItem = $('.products-nav-item');
+            const megaMenu = $('.products-mega-menu');
+            const backdrop = $('.mega-menu-backdrop');
 
-            dropdownToggle.on('mouseenter', function () {
-                openProductsDropdown();
+            productsNavItem.on('mouseenter', function () {
+                openMegaMenu();
             });
 
-            dropdown.on('mouseenter', function () {
-                clearTimeout(hoverTimeouts['dropdown-close']);
-            });
-
-            dropdownToggle.on('mouseleave', function () {
-                hoverTimeouts['dropdown-close'] = setTimeout(function () {
-                    if (!dropdown.is(':hover')) {
-                        closeProductsDropdown();
+            productsNavItem.on('mouseleave', function () {
+                clearTimeout(hoverTimeouts['megamenu-close']);
+                hoverTimeouts['megamenu-close'] = setTimeout(function () {
+                    if (!megaMenu.is(':hover')) {
+                        closeMegaMenu();
                     }
                 }, 300);
             });
 
-            dropdown.on('mouseleave', function () {
-                hoverTimeouts['dropdown-close'] = setTimeout(function () {
-                    closeProductsDropdown();
+            megaMenu.on('mouseenter', function () {
+                clearTimeout(hoverTimeouts['megamenu-close']);
+            });
+
+            megaMenu.on('mouseleave', function () {
+                clearTimeout(hoverTimeouts['megamenu-close']);
+                hoverTimeouts['megamenu-close'] = setTimeout(function () {
+                    closeMegaMenu();
                 }, 300);
+            });
+
+            backdrop.on('click', function () {
+                closeMegaMenu();
             });
         }
 
-        function openProductsDropdown() {
-            clearTimeout(hoverTimeouts['dropdown-close']);
-            const wrapper = document.querySelector('.products-dropdown-wrapper');
-            const overlay = document.querySelector('.dropdown-overlay');
+        function openMegaMenu() {
+            clearTimeout(hoverTimeouts['megamenu-close']);
+            $('.products-nav-item').addClass('active');
+            $('.mega-menu-backdrop').addClass('active');
+        }
 
-            wrapper.classList.add('show');
-            if (overlay && window.innerWidth <= 991) {
-                overlay.classList.add('show');
-            }
+        function closeMegaMenu() {
+            $('.products-nav-item').removeClass('active');
+            $('.mega-menu-backdrop').removeClass('active');
+            $('.category-professional').removeClass('open');
+            $('.subcategory-professional').removeClass('open');
         }
 
         function loadProductCategories() {
@@ -414,44 +443,46 @@
                 success: function (response) {
                     if (response.success && response.data) {
                         categoriesData = response.data;
-                        renderCategoryTree();
+                        renderCategoryGrid();
                     } else {
-                        $('#productCategoriesContainer').html('<div class="error-message">Failed to load categories</div>');
+                        $('#productCategoriesContainer').html('<div class="error-state">Failed to load categories</div>');
                     }
                 },
                 error: function () {
-                    $('#productCategoriesContainer').html('<div class="error-message">Failed to load categories</div>');
+                    $('#productCategoriesContainer').html('<div class="error-state">Failed to load categories</div>');
                 }
             });
         }
 
-        function renderCategoryTree() {
+        function renderCategoryGrid() {
             const container = $('#productCategoriesContainer');
             container.empty();
 
             if (!categoriesData || categoriesData.length === 0) {
-                container.html('<div class="text-center text-muted py-3">No categories available</div>');
+                container.html('<div class="empty-state">No categories available</div>');
                 return;
             }
 
+            const grid = $('<div>').addClass('mega-menu-grid');
+            
             categoriesData.forEach(function (category) {
-                const categoryHtml = createCategoryItem(category);
-                container.append(categoryHtml);
+                const categoryCard = createCategoryCard(category);
+                grid.append(categoryCard);
             });
+            
+            container.append(grid);
         }
 
-        function createCategoryItem(category) {
-            const categoryDiv = $('<div>').addClass('category-item');
+        function createCategoryCard(category) {
+            const card = $('<div>').addClass('category-professional');
             const imageUrl = getCategoryImage(category.name);
             const categoryRoute = getCategoryRoute(category.name);
 
             let imageHtml = '';
             if (imageUrl) {
-                imageHtml = `<img src="${imageUrl}" alt="${category.name}" class="category-icon">`;
+                imageHtml = `<div class="category-image" style="background-image: url('${imageUrl}')"></div>`;
             } else {
-                imageHtml = `<div class="category-icon d-flex align-items-center justify-content-center" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;">
-                            <i class="fas fa-box text-white"></i>
-                        </div>`;
+                imageHtml = `<div class="category-image category-image-default"><i class="fas fa-tools"></i></div>`;
             }
 
             $.ajax({
@@ -462,37 +493,33 @@
                 success: function (response) {
                     const hasSubCategories = response.success && response.data && response.data.length > 0;
 
+                    const cardHeader = $('<div>')
+                        .addClass('category-header-pro')
+                        .attr('data-category-id', category.id)
+                        .attr('data-category-route', categoryRoute)
+                        .html(`
+                            ${imageHtml}
+                            <div class="category-info">
+                                <h4 class="category-name">${category.name}</h4>
+                                ${hasSubCategories ? '<i class="fas fa-chevron-right category-arrow"></i>' : ''}
+                            </div>
+                        `)
+                        .on('click', function (e) {
+                            e.preventDefault();
+                            if (categoryRoute) {
+                                window.location.href = `/Product/Category/${categoryRoute}`;
+                            }
+                        });
+
                     if (hasSubCategories) {
-                        const categoryHeader = $('<div>')
-                            .addClass('category-header')
-                            .attr('data-category-id', category.id)
-                            .attr('data-category-name', category.name)
-                            .attr('data-category-route', categoryRoute)
-                            .html(`
-                                ${imageHtml}
-                                <div class="category-content">
-                                    <h6>${category.name}</h6>
-                                </div>
-                                <i class="fas fa-chevron-right category-toggle-icon"></i>
-                            `)
-                            .on('click', function (e) {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                if (categoryRoute) {
-                                    window.location.href = `/Product/Category/${categoryRoute}`;
-                                }
-                            })
-                            .on('mouseenter', function () {
-                                handleCategoryHover(category.id, $(this).closest('.category-item'));
-                            })
-                            .on('mouseleave', function () {
-                                handleCategoryLeave(category.id);
-                            });
+                        cardHeader.on('mouseenter', function () {
+                            handleCategoryHover(category.id, card);
+                        }).on('mouseleave', function () {
+                            handleCategoryLeave(category.id);
+                        });
 
-                        categoryDiv.append(categoryHeader);
-
-                        const subcategoryList = $('<div>')
-                            .addClass('subcategory-list')
+                        const subList = $('<div>')
+                            .addClass('subcategory-list-pro')
                             .attr('id', `subcategory-list-${category.id}`)
                             .on('mouseenter', function () {
                                 clearTimeout(hoverTimeouts[`category-${category.id}`]);
@@ -501,40 +528,21 @@
                                 handleCategoryLeave(category.id);
                             });
 
-                        categoryDiv.append(subcategoryList);
+                        card.append(cardHeader, subList);
                     } else {
-                        let categoryUrl = categoryRoute ? `/Product/Category/${categoryRoute}` : `/Product/Index?categoryId=${category.id}`;
-
-                        const categoryLink = $('<a>')
-                            .addClass('category-header')
-                            .attr('href', categoryUrl)
-                            .css('text-decoration', 'none')
-                            .html(`
-                                ${imageHtml}
-                                <div class="category-content">
-                                    <h6>${category.name}</h6>
-                                </div>
-                            `)
-                            .on('click', function () {
-                                closeProductsDropdown();
-                            });
-
-                        categoryDiv.append(categoryLink);
+                        card.append(cardHeader);
                     }
                 }
             });
 
-            return categoryDiv;
+            return card;
         }
 
-        function handleCategoryHover(categoryId, categoryItem) {
+        function handleCategoryHover(categoryId, categoryCard) {
             clearTimeout(hoverTimeouts[`category-${categoryId}`]);
-
             hoverTimeouts[`category-${categoryId}-open`] = setTimeout(function () {
                 const subcategoryList = $(`#subcategory-list-${categoryId}`);
-
-                categoryItem.addClass('open');
-
+                categoryCard.addClass('open');
                 if (subcategoryList.children().length === 0) {
                     loadSubCategories1(categoryId, subcategoryList);
                 }
@@ -543,20 +551,18 @@
 
         function handleCategoryLeave(categoryId) {
             clearTimeout(hoverTimeouts[`category-${categoryId}-open`]);
-
             hoverTimeouts[`category-${categoryId}`] = setTimeout(function () {
-                $(`.category-item .category-header[data-category-id="${categoryId}"]`)
-                    .closest('.category-item')
+                $(`.category-header-pro[data-category-id="${categoryId}"]`)
+                    .closest('.category-professional')
                     .removeClass('open');
             }, 300);
         }
 
         function loadSubCategories1(categoryId, container) {
-            container.html('<div class="text-center py-2"><i class="fas fa-spinner fa-spin"></i> Loading...</div>');
+            container.html('<div class="loading-state-small"><i class="fas fa-spinner fa-spin"></i></div>');
 
-            const categoryHeader = $(`.category-header[data-category-id="${categoryId}"]`);
+            const categoryHeader = $(`.category-header-pro[data-category-id="${categoryId}"]`);
             const categoryRoute = categoryHeader.attr('data-category-route');
-            const categoryName = categoryHeader.attr('data-category-name');
 
             $.ajax({
                 url: '/Product/GetSubCategories1',
@@ -564,22 +570,21 @@
                 data: { categoryId: categoryId },
                 success: function (response) {
                     container.empty();
-
                     if (response.success && response.data && response.data.length > 0) {
                         response.data.forEach(function (subCat1) {
-                            const subCat1Html = createSubCategory1Item(subCat1, categoryId, categoryRoute, categoryName);
-                            container.append(subCat1Html);
+                            const subItem = createSubCategory1Item(subCat1, categoryId, categoryRoute);
+                            container.append(subItem);
                         });
                     }
                 },
                 error: function () {
-                    container.html('<div class="text-center text-danger py-2">Failed to load</div>');
+                    container.html('<div class="error-state-small">Failed to load</div>');
                 }
             });
         }
 
-        function createSubCategory1Item(subCat1, categoryId, categoryRoute, categoryName) {
-            const subCat1Div = $('<div>').addClass('subcategory-item');
+        function createSubCategory1Item(subCat1, categoryId, categoryRoute) {
+            const subDiv = $('<div>').addClass('subcategory-professional');
 
             $.ajax({
                 url: '/Product/GetSubCategories2',
@@ -589,35 +594,29 @@
                 success: function (response) {
                     const hasSubCategory2 = response.success && response.data && response.data.length > 0;
 
+                    const subHeader = $('<div>')
+                        .addClass('subcategory-header-pro')
+                        .attr('data-subcategory1-id', subCat1.id)
+                        .html(`
+                            <span class="subcategory-name">${subCat1.name}</span>
+                            ${hasSubCategory2 ? '<i class="fas fa-chevron-right subcategory-arrow"></i>' : ''}
+                        `)
+                        .on('click', function (e) {
+                            e.preventDefault();
+                            if (categoryRoute) {
+                                window.location.href = `/Product/Category/${categoryRoute}/${encodeURIComponent(subCat1.name)}`;
+                            }
+                        });
+
                     if (hasSubCategory2) {
-                        const subCat1Header = $('<div>')
-                            .addClass('subcategory-header')
-                            .attr('data-subcategory1-id', subCat1.id)
-                            .attr('data-subcategory1-name', subCat1.name)
-                            .html(`
-                                <div class="subcategory-content">
-                                    <span>${subCat1.name}</span>
-                                </div>
-                                <i class="fas fa-chevron-right subcategory-toggle-icon"></i>
-                            `)
-                            .on('click', function (e) {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                if (categoryRoute) {
-                                    window.location.href = `/Product/Category/${categoryRoute}/${encodeURIComponent(subCat1.name)}`;
-                                }
-                            })
-                            .on('mouseenter', function () {
-                                handleSubCategory1Hover(subCat1.id, categoryId, categoryRoute, subCat1.name, subCat1Div);
-                            })
-                            .on('mouseleave', function () {
-                                handleSubCategory1Leave(subCat1.id);
-                            });
+                        subHeader.on('mouseenter', function () {
+                            handleSubCategory1Hover(subCat1.id, categoryId, categoryRoute, subCat1.name, subDiv);
+                        }).on('mouseleave', function () {
+                            handleSubCategory1Leave(subCat1.id);
+                        });
 
-                        subCat1Div.append(subCat1Header);
-
-                        const subCategory2List = $('<div>')
-                            .addClass('subcategory2-list')
+                        const subList2 = $('<div>')
+                            .addClass('subcategory2-list-pro')
                             .attr('id', `subcategory2-list-${subCat1.id}`)
                             .on('mouseenter', function () {
                                 clearTimeout(hoverTimeouts[`subcategory1-${subCat1.id}`]);
@@ -626,59 +625,38 @@
                                 handleSubCategory1Leave(subCat1.id);
                             });
 
-                        subCat1Div.append(subCategory2List);
+                        subDiv.append(subHeader, subList2);
                     } else {
-                        let subCat1Url = categoryRoute
-                            ? `/Product/Category/${categoryRoute}/${encodeURIComponent(subCat1.name)}`
-                            : `/Product/Index?categoryId=${categoryId}&subCategory1Id=${subCat1.id}`;
-
-                        const subCat1Link = $('<a>')
-                            .addClass('subcategory-header')
-                            .attr('href', subCat1Url)
-                            .css('text-decoration', 'none')
-                            .html(`
-                                <div class="subcategory-content">
-                                    <span>${subCat1.name}</span>
-                                </div>
-                            `)
-                            .on('click', function () {
-                                closeProductsDropdown();
-                            });
-
-                        subCat1Div.append(subCat1Link);
+                        subDiv.append(subHeader);
                     }
                 }
             });
 
-            return subCat1Div;
+            return subDiv;
         }
 
-        function handleSubCategory1Hover(subCategory1Id, categoryId, categoryRoute, brandName, subCat1Item) {
+        function handleSubCategory1Hover(subCategory1Id, categoryId, categoryRoute, brandName, subItem) {
             clearTimeout(hoverTimeouts[`subcategory1-${subCategory1Id}`]);
-
             hoverTimeouts[`subcategory1-${subCategory1Id}-open`] = setTimeout(function () {
-                const subCategory2List = $(`#subcategory2-list-${subCategory1Id}`);
-
-                subCat1Item.addClass('open');
-
-                if (subCategory2List.children().length === 0) {
-                    loadSubCategories2(subCategory1Id, categoryId, categoryRoute, brandName, subCategory2List);
+                const subList2 = $(`#subcategory2-list-${subCategory1Id}`);
+                subItem.addClass('open');
+                if (subList2.children().length === 0) {
+                    loadSubCategories2(subCategory1Id, categoryId, categoryRoute, brandName, subList2);
                 }
             }, 200);
         }
 
         function handleSubCategory1Leave(subCategory1Id) {
             clearTimeout(hoverTimeouts[`subcategory1-${subCategory1Id}-open`]);
-
             hoverTimeouts[`subcategory1-${subCategory1Id}`] = setTimeout(function () {
-                $(`.subcategory-header[data-subcategory1-id="${subCategory1Id}"]`)
-                    .closest('.subcategory-item')
+                $(`.subcategory-header-pro[data-subcategory1-id="${subCategory1Id}"]`)
+                    .closest('.subcategory-professional')
                     .removeClass('open');
             }, 300);
         }
 
         function loadSubCategories2(subCategory1Id, categoryId, categoryRoute, brandName, container) {
-            container.html('<div class="text-center py-2"><i class="fas fa-spinner fa-spin"></i></div>');
+            container.html('<div class="loading-state-small"><i class="fas fa-spinner fa-spin"></i></div>');
 
             $.ajax({
                 url: '/Product/GetSubCategories2',
@@ -686,135 +664,51 @@
                 data: { subCategory1Id: subCategory1Id },
                 success: function (response) {
                     container.empty();
-
                     if (response.success && response.data && response.data.length > 0) {
                         response.data.forEach(function (subCat2) {
                             let subCat2Url = categoryRoute
                                 ? `/Product/Category/${categoryRoute}/${encodeURIComponent(brandName)}?subCategory2Id=${subCat2.id}`
                                 : `/Product/Index?categoryId=${categoryId}&subCategory1Id=${subCategory1Id}&subCategory2Id=${subCat2.id}`;
 
-                            const subCat2Link = $('<a>')
-                                .addClass('subcategory2-link')
+                            const link = $('<a>')
+                                .addClass('subcategory2-link-pro')
                                 .attr('href', subCat2Url)
-                                .html(`<i class="fas fa-circle me-2" style="font-size: 0.4rem;"></i>${subCat2.name}`)
+                                .html(`<span>${subCat2.name}</span>`)
                                 .on('click', function () {
-                                    closeProductsDropdown();
+                                    closeMegaMenu();
                                 });
-                            container.append(subCat2Link);
+                            container.append(link);
                         });
                     }
                 },
                 error: function () {
-                    container.html('<div class="text-center text-danger py-2">Failed to load</div>');
+                    container.html('<div class="error-state-small">Failed to load</div>');
                 }
             });
         }
 
-        function closeProductsDropdown() {
-            const wrapper = document.querySelector('.products-dropdown-wrapper');
-            const overlay = document.querySelector('.dropdown-overlay');
-
-            wrapper.classList.remove('show');
-            if (overlay) overlay.classList.remove('show');
-            document.body.style.overflow = '';
-
-            $('.category-item').removeClass('open');
-            $('.subcategory-item').removeClass('open');
-
-            for (let key in hoverTimeouts) {
-                clearTimeout(hoverTimeouts[key]);
+        // Navbar scroll effect
+        $(window).on('scroll', function () {
+            if ($(this).scrollTop() > 50) {
+                $('.navbar-professional').addClass('scrolled');
+            } else {
+                $('.navbar-professional').removeClass('scrolled');
             }
-            hoverTimeouts = {};
-        }
+        });
 
-        function closeAllDropdowns() {
-            document.querySelectorAll('.products-dropdown-wrapper.show').forEach(el => el.classList.remove('show'));
-            const overlay = document.querySelector('.dropdown-overlay');
-            if (overlay) overlay.classList.remove('show');
-            document.body.style.overflow = '';
-        }
-
-        function closeMobileNav() {
-            const navbarCollapse = document.getElementById('navbarNav');
-            const navbarToggler = document.querySelector('.navbar-toggler');
-            const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
-                toggle: false
+        // AOS initialization
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100
             });
-            bsCollapse.hide();
-
-            if (navbarToggler) {
-                navbarToggler.classList.add('collapsed');
-                navbarToggler.setAttribute('aria-expanded', 'false');
-            }
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const navbarCollapse = document.getElementById('navbarNav');
-            const navbarToggler = document.querySelector('.navbar-toggler');
-
-            if (navbarCollapse && navbarToggler) {
-                navbarCollapse.addEventListener('show.bs.collapse', function () {
-                    navbarToggler.classList.remove('collapsed');
-                    navbarToggler.setAttribute('aria-expanded', 'true');
-                });
-
-                navbarCollapse.addEventListener('hidden.bs.collapse', function () {
-                    navbarToggler.classList.add('collapsed');
-                    navbarToggler.setAttribute('aria-expanded', 'false');
-                });
-
-                if (window.innerWidth <= 991) {
-                    const navLinks = navbarCollapse.querySelectorAll('.nav-link');
-                    navLinks.forEach(link => {
-                        link.addEventListener('click', function () {
-                            if (!this.classList.contains('products-dropdown-toggle')) {
-                                closeMobileNav();
-                            }
-                        });
-                    });
-                }
-            }
-        });
-
-        document.addEventListener('click', function (event) {
-            const wrapper = document.querySelector('.products-dropdown-wrapper');
-            if (wrapper && !wrapper.contains(event.target)) {
-                closeProductsDropdown();
-            }
-        });
-
-        document.addEventListener('keydown', function (event) {
-            if (event.key === 'Escape') {
-                closeProductsDropdown();
-                closeMobileNav();
-            }
-        });
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const navbar = document.querySelector('.navbar');
-
-            window.addEventListener('scroll', function () {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-            });
-
-            if (typeof AOS !== 'undefined') {
-                AOS.init({
-                    duration: 800,
-                    once: true,
-                    offset: 100
-                });
-            }
-        });
-
-        // Contact Modal Validation Functions
+        // Modal validation functions (keeping all your original validation logic)
         function showModalValidationMessage(fieldId, message) {
             const field = document.getElementById(fieldId);
             const feedback = field.nextElementSibling;
-
             field.classList.add('is-invalid');
             feedback.textContent = message;
             feedback.style.display = 'block';
@@ -823,7 +717,6 @@
         function clearModalValidationMessage(fieldId) {
             const field = document.getElementById(fieldId);
             const feedback = field.nextElementSibling;
-
             field.classList.remove('is-invalid');
             feedback.textContent = '';
             feedback.style.display = 'none';
@@ -831,132 +724,107 @@
 
         function validateModalFullName() {
             const fullName = document.getElementById('modalFullName').value.trim();
-
             if (!fullName) {
                 showModalValidationMessage('modalFullName', 'Full Name is required');
                 return false;
             }
-
             if (fullName.length < 2) {
                 showModalValidationMessage('modalFullName', 'Full Name must be at least 2 characters long');
                 return false;
             }
-
             if (fullName.length > 100) {
                 showModalValidationMessage('modalFullName', 'Full Name cannot exceed 100 characters');
                 return false;
             }
-
             clearModalValidationMessage('modalFullName');
             return true;
         }
 
         function validateModalEmail() {
             const email = document.getElementById('modalEmail').value.trim();
-
             if (!email) {
                 showModalValidationMessage('modalEmail', 'Email is required');
                 return false;
             }
-
             const emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
             if (!emailRegex.test(email)) {
                 showModalValidationMessage('modalEmail', 'Please enter a valid email address');
                 return false;
             }
-
             if (email.length > 255) {
                 showModalValidationMessage('modalEmail', 'Email cannot exceed 255 characters');
                 return false;
             }
-
             clearModalValidationMessage('modalEmail');
             return true;
         }
 
         function validateModalPhoneNumber() {
             const phone = document.getElementById('modalPhoneNumber').value.trim();
-
             if (!phone) {
                 showModalValidationMessage('modalPhoneNumber', 'Phone Number is required');
                 return false;
             }
-
             const cleanPhone = phone.replace(/[\s\-\(\)\+]/g, '');
-
             if (cleanPhone.length < 10) {
                 showModalValidationMessage('modalPhoneNumber', 'Phone number must be at least 10 digits');
                 return false;
             }
-
             if (cleanPhone.length > 20) {
                 showModalValidationMessage('modalPhoneNumber', 'Phone Number cannot exceed 20 characters');
                 return false;
             }
-
             if (!/^\d+$/.test(cleanPhone)) {
                 showModalValidationMessage('modalPhoneNumber', 'Please enter a valid phone number');
                 return false;
             }
-
             clearModalValidationMessage('modalPhoneNumber');
             return true;
         }
 
         function validateModalCompany() {
             const company = document.getElementById('modalCompany').value.trim();
-
             if (company && company.length > 100) {
                 showModalValidationMessage('modalCompany', 'Company name cannot exceed 100 characters');
                 return false;
             }
-
             clearModalValidationMessage('modalCompany');
             return true;
         }
 
         function validateModalSubject() {
             const subject = document.getElementById('modalSubject').value.trim();
-
             if (!subject) {
                 showModalValidationMessage('modalSubject', 'Subject is required');
                 return false;
             }
-
             if (subject.length > 200) {
                 showModalValidationMessage('modalSubject', 'Subject cannot exceed 200 characters');
                 return false;
             }
-
             clearModalValidationMessage('modalSubject');
             return true;
         }
 
         function validateModalMessage() {
             const message = document.getElementById('modalMessage').value.trim();
-
             if (!message) {
                 showModalValidationMessage('modalMessage', 'Message is required');
                 return false;
             }
-
             if (message.length < 10) {
                 showModalValidationMessage('modalMessage', 'Message must be at least 10 characters long');
                 return false;
             }
-
             if (message.length > 2000) {
                 showModalValidationMessage('modalMessage', 'Message cannot exceed 2000 characters');
                 return false;
             }
-
             clearModalValidationMessage('modalMessage');
             return true;
         }
 
         function validateModalForm() {
-            let isValid = true;
-
             const validations = [
                 validateModalFullName(),
                 validateModalEmail(),
@@ -965,38 +833,26 @@
                 validateModalSubject(),
                 validateModalMessage()
             ];
-
-            isValid = validations.every(validation => validation === true);
-
-            return isValid;
+            return validations.every(validation => validation === true);
         }
 
         function initializeModalValidation() {
             document.getElementById('modalFullName').addEventListener('blur', validateModalFullName);
             document.getElementById('modalFullName').addEventListener('input', function () {
-                if (this.value.trim().length > 0) {
-                    validateModalFullName();
-                } else {
-                    clearModalValidationMessage('modalFullName');
-                }
+                if (this.value.trim().length > 0) validateModalFullName();
+                else clearModalValidationMessage('modalFullName');
             });
 
             document.getElementById('modalEmail').addEventListener('blur', validateModalEmail);
             document.getElementById('modalEmail').addEventListener('input', function () {
-                if (this.value.trim().length > 0) {
-                    validateModalEmail();
-                } else {
-                    clearModalValidationMessage('modalEmail');
-                }
+                if (this.value.trim().length > 0) validateModalEmail();
+                else clearModalValidationMessage('modalEmail');
             });
 
             document.getElementById('modalPhoneNumber').addEventListener('blur', validateModalPhoneNumber);
             document.getElementById('modalPhoneNumber').addEventListener('input', function () {
-                if (this.value.trim().length > 0) {
-                    validateModalPhoneNumber();
-                } else {
-                    clearModalValidationMessage('modalPhoneNumber');
-                }
+                if (this.value.trim().length > 0) validateModalPhoneNumber();
+                else clearModalValidationMessage('modalPhoneNumber');
             });
 
             document.getElementById('modalCompany').addEventListener('blur', validateModalCompany);
@@ -1007,27 +863,20 @@
 
             document.getElementById('modalMessage').addEventListener('blur', validateModalMessage);
             document.getElementById('modalMessage').addEventListener('input', function () {
-                if (this.value.trim().length > 0) {
-                    validateModalMessage();
-                } else {
-                    clearModalValidationMessage('modalMessage');
-                }
+                if (this.value.trim().length > 0) validateModalMessage();
+                else clearModalValidationMessage('modalMessage');
             });
         }
 
         function sendModalContactEmail() {
             if (!validateModalForm()) {
                 alert('Please correct the validation errors before submitting.');
-
                 const firstInvalidField = document.querySelector('#contactModal .is-invalid');
-                if (firstInvalidField) {
-                    firstInvalidField.focus();
-                }
+                if (firstInvalidField) firstInvalidField.focus();
                 return;
             }
 
             var btn = document.getElementById('modalSubmitBtn');
-
             if (btn.disabled) return;
 
             btn.disabled = true;
@@ -1048,30 +897,18 @@
                 data: { model: contactData },
                 success: function (response) {
                     btn.disabled = false;
-                    btn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Send Message';
+                    btn.innerHTML = '<span>Send Message</span><i class="fas fa-arrow-right"></i>';
 
                     if (response.success) {
                         alert('Message sent successfully!');
                         location.reload();
-                        document.getElementById('contactModalForm').querySelectorAll('input, select, textarea').forEach(function (field) {
-                            field.value = '';
-                            field.classList.remove('is-invalid');
-                        });
-
-                        document.querySelectorAll('#contactModal .invalid-feedback').forEach(function (feedback) {
-                            feedback.style.display = 'none';
-                        });
-
-                        var modal = bootstrap.Modal.getInstance(document.getElementById('contactModal'));
-                        modal.hide();
                     } else {
                         alert('Error: ' + (response.message || 'Failed to send message'));
                     }
                 },
                 error: function (xhr, status, error) {
                     btn.disabled = false;
-                    btn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Send Message';
-
+                    btn.innerHTML = '<span>Send Message</span><i class="fas fa-arrow-right"></i>';
                     let errorMessage = 'Error sending message. Please try again.';
                     if (xhr.responseJSON && xhr.responseJSON.message) {
                         errorMessage = xhr.responseJSON.message;
@@ -1082,10 +919,6 @@
                 }
             });
         }
-
-        $(document).ready(function () {
-            initializeModalValidation();
-        });
     </script>
 </body>
 </html>

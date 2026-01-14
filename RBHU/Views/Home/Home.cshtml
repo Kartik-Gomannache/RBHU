@@ -3,319 +3,303 @@
 }
 
 <link href="~/css/home.css" rel="stylesheet" />
-<div class="rbhu-professional-wrapper">
-    <!-- Ultra-Premium Hero Section with Professional Carousel -->
-    <section class="rbhu-hero-cinematic">
-        <!-- Professional Rotating Background Carousel -->
-        <picture class="rbhu-hero-picture">
-            <img src="~/images/carousel/bosch.jpg" alt="Industrial Equipment Manufacturing - Bosch" class="rbhu-hero-bg-image active">
-            <img src="~/images/carousel/makita.jpg" alt="Industrial Equipment Manufacturing - Makita" class="rbhu-hero-bg-image">
-            <img src="~/images/carousel/klingspor.jpg" alt="Industrial Equipment Manufacturing - Klingspor" class="rbhu-hero-bg-image">
-        </picture>
+
+<!-- Professional Home Page with Image Slider -->
+<div class="rbhu-home-wrapper">
+
+    <!-- Premium Hero Section with Image Slider -->
+    <section class="hero-section-professional">
+        <div class="hero-background-slider">
+
+            <!-- Slide 2 - Power Tools Workshop -->
+            <div class="hero-slide"
+                 style="background-image: url('@Url.Content("~/images/carousel/cimatron-2025-home-hero.jpg")');">
+                <div class="slide-overlay"></div>
+            </div>
+
+            <!-- Slide 1 - Industrial Manufacturing -->
+            <div class="hero-slide active"
+                 style="background-image: url('@Url.Content("~/images/carousel/Dril-Back.jpg")');">
+                <div class="slide-overlay"></div>
+            </div>
+     
+
+            <!-- Slide 3 - Industrial Factory -->
+            <div class="hero-slide"
+                 style="background-image: url('@Url.Content("~/images/carousel/safety-Back.jpg")');">
+                <div class="slide-overlay"></div>
+            </div>
+            @* 
+            <!-- Slide 4 - Precision Manufacturing -->
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=1920&q=80');">
+                <div class="slide-overlay"></div>
+            </div> *@
+        </div>
 
         <div class="container">
-            <div class="rbhu-hero-content-cinematic">
-                <div class="rbhu-hero-eyebrow">
-                    <span class="rbhu-badge-premium">
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                            <circle cx="6" cy="6" r="6" fill="currentColor" />
-                        </svg>
-                        Industry Leading Solutions
-                    </span>
-                </div>
+            <div class="row">
+                <div class="col-lg-8 col-md-10">
+                    <div class="hero-content-professional">
+                        @* <div class="hero-badge-wrapper" data-aos="fade-up" data-aos-delay="100">
+                            <span class="hero-badge">
+                                <i class="fas fa-certificate"></i>
+                                Authorized Industrial Partners
+                            </span>
+                        </div> *@
 
-                <h1 class="rbhu-hero-heading-massive">
-                    <span class="rbhu-text-reveal">Empowering Industries</span><br>
-                    <span class="rbhu-text-reveal rbhu-text-gradient-premium">With Precision Tools</span>
-                </h1>
+                        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                            Powering Industries with
+                            <span class="hero-title-highlight">Professional Tools & Equipment</span>
+                        </h1>
 
-                <p class="rbhu-hero-subheading-large">
-                    Authorized dealer of world-class industrial equipment. Delivering excellence<br class="d-none d-lg-block">
-                    across pneumatics, power tools, and safety solutions for 22+ years.
-                </p>
-
-                <div class="rbhu-hero-cta-group">
-                    <a href="#products" class="rbhu-btn-premium-primary">
-                        <span>Explore Products</span>
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </a>
-                    <a asp-controller="Home" asp-action="Contact" class="rbhu-btn-premium-secondary">
-                        <span>Get in Touch</span>
-                    </a>
-                </div>
-
-                <div class="rbhu-hero-stats-inline">
-                    <div class="rbhu-stat-inline">
-                        <div class="rbhu-stat-value">22+</div>
-                        <div class="rbhu-stat-label">Years Experience</div>
-                    </div>
-                    <div class="rbhu-stat-divider"></div>
-                    <div class="rbhu-stat-inline">
-                        <div class="rbhu-stat-value">500+</div>
-                        <div class="rbhu-stat-label">Products</div>
-                    </div>
-                    <div class="rbhu-stat-divider"></div>
-                    <div class="rbhu-stat-inline">
-                        <div class="rbhu-stat-value">8+</div>
-                        <div class="rbhu-stat-label">Industries</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="rbhu-hero-scroll-indicator">
-            <div class="rbhu-scroll-icon">
-                <div class="rbhu-scroll-wheel"></div>
-            </div>
-            <span>Scroll to explore</span>
-        </div>
-    </section>
-
-    <!-- Premium Features Bar -->
-    <section class="rbhu-features-bar">
-        <div class="container-fluid">
-            <div class="rbhu-features-grid">
-                <div class="rbhu-feature-item">
-                    <div class="rbhu-feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                    <div class="rbhu-feature-text">
-                        <h4>Authorized Dealer</h4>
-                        <p>Official partnerships with global brands</p>
-                    </div>
-                </div>
-
-                <div class="rbhu-feature-item">
-                    <div class="rbhu-feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                    <div class="rbhu-feature-text">
-                        <h4>Fast Delivery</h4>
-                        <p>Quick dispatch across Goa</p>
-                    </div>
-                </div>
-
-                <div class="rbhu-feature-item">
-                    <div class="rbhu-feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M17 8L21 12M21 12L17 16M21 12H3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                    <div class="rbhu-feature-text">
-                        <h4>Expert Support</h4>
-                        <p>Technical guidance & consultation</p>
-                    </div>
-                </div>
-
-                <div class="rbhu-feature-item">
-                    <div class="rbhu-feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                    <div class="rbhu-feature-text">
-                        <h4>Quality Assured</h4>
-                        <p>Premium industrial equipment</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Premium Product Showcase -->
-    <section class="rbhu-products-premium" id="products">
-        <div class="container">
-            <div class="rbhu-section-header-premium">
-                <span class="rbhu-eyebrow-text">Product Categories</span>
-                <h2 class="rbhu-section-heading-large">
-                    Industrial Solutions<br>
-                    <span class="rbhu-text-gradient-premium">Built for Excellence</span>
-                </h2>
-            </div>
-
-            <div class="rbhu-products-grid-premium">
-                <!-- Pneumatic Tools -->
-                <div class="rbhu-product-card-premium" data-category="pneumatic">
-                    <div class="rbhu-card-image-container">
-                        <picture>
-                            <source media="(min-width: 1200px)" srcset="https://images.unsplash.com/photo-1581092583537-20d51876f4f7?w=1200&q=95&auto=format&fit=crop" type="image/jpeg">
-                            <source media="(min-width: 768px)" srcset="https://images.unsplash.com/photo-1581092583537-20d51876f4f7?w=900&q=95&auto=format&fit=crop" type="image/jpeg">
-                            <img src="https://images.unsplash.com/photo-1581092583537-20d51876f4f7?w=800&q=95&auto=format&fit=crop" alt="Chicago Pneumatic Industrial Air Tools" class="rbhu-card-image" loading="lazy">
-                        </picture>
-                        <div class="rbhu-card-overlay"></div>
-                        <div class="rbhu-card-badge">Premium</div>
-                    </div>
-                    <div class="rbhu-card-content-premium">
-                        <div class="rbhu-card-icon-premium">
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                <path d="M16 4L28 10V22L16 28L4 22V10L16 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        <h3 class="rbhu-card-title">Pneumatic Tools</h3>
-                        <p class="rbhu-card-description">
-                            Chicago Pneumatic & Fuji industrial-grade pneumatic solutions for demanding applications
+                        <p class="hero-description" data-aos="fade-up" data-aos-delay="300">
+                            Your trusted partner for premium industrial solutions from world-leading brands.
+                            Over 22 years of excellence in delivering cutting-edge equipment, expert service,
+                            and comprehensive support across multiple industries.
                         </p>
-                        <a href="/Product/Pneumatic" class="rbhu-card-link-premium">
-                            <span>Explore Category</span>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </a>
+
+                        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
+                            <a href="#products" class="btn-hero-primary">
+                                <span>Explore Our Products</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <a asp-controller="Home" asp-action="Contact" class="btn-hero-secondary">
+                                <i class="fas fa-phone"></i>
+                                <span>Get in Touch</span>
+                            </a>
+                        </div>
+
+                        <div class="hero-stats-container" data-aos="fade-up" data-aos-delay="500">
+                            <div class="hero-stat">
+                                <div class="stat-value" data-count="22">0+</div>
+                                <div class="stat-label">Years of Excellence</div>
+                            </div>
+                            <div class="stat-separator"></div>
+                            <div class="hero-stat">
+                                <div class="stat-value" data-count="500">0+</div>
+                                <div class="stat-label">Product Range</div>
+                            </div>
+                            <div class="stat-separator"></div>
+                            <div class="hero-stat">
+                                <div class="stat-value" data-count="8">0+</div>
+                                <div class="stat-label">Industries Served</div>
+                            </div>
+                            <div class="stat-separator"></div>
+                            <div class="hero-stat">
+                                <div class="stat-value" data-count="1000">0+</div>
+                                <div class="stat-label">Satisfied Clients</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider Navigation -->
+        <div class="slider-controls">
+            <button class="slider-control prev" aria-label="Previous slide">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="slider-indicators">
+                <span class="indicator active" data-slide="0"></span>
+                <span class="indicator" data-slide="1"></span>
+                <span class="indicator" data-slide="2"></span>
+                <span class="indicator" data-slide="3"></span>
+            </div>
+            <button class="slider-control next" aria-label="Next slide">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Premium Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-box">
+                        <div class="feature-icon-wrapper">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>Authorized Dealer</h3>
+                        <p>Official partnerships with leading global industrial brands</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-box">
+                        <div class="feature-icon-wrapper">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h3>Fast Delivery</h3>
+                        <p>Quick and reliable dispatch across all of India</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-box">
+                        <div class="feature-icon-wrapper">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>Expert Support</h3>
+                        <p>Professional technical guidance and consultation</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-box">
+                        <div class="feature-icon-wrapper">
+                            <i class="fas fa-shield-check"></i>
+                        </div>
+                        <h3>Quality Assured</h3>
+                        <p>Premium certified industrial equipment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Products Section -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">Our Product Categories</span>
+                <h2 class="section-title">
+                    Industrial Solutions for
+                    <span class="title-highlight">Every Application</span>
+                </h2>
+                <p class="section-subtitle">
+                    Comprehensive range of professional tools and equipment from the world's most trusted manufacturers
+                </p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Pneumatic Tools -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1581092583537-20d51876f4f7?w=600&q=80"
+                                 alt="Pneumatic Tools" loading="lazy">
+                            <div class="product-image-overlay"></div>
+                            <span class="product-tag">Premium</span>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-icon-box">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <h3>Pneumatic Tools & Systems</h3>
+                            <p>Chicago Pneumatic & Fuji industrial-grade pneumatic solutions</p>
+                            <a href="/Product/Pneumatic" class="product-link">
+                                View Products <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Power Tools -->
-                <div class="rbhu-product-card-premium" data-category="power">
-                    <div class="rbhu-card-image-container">
-                        <picture>
-                            <source media="(min-width: 1200px)" srcset="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=1200&q=95&auto=format&fit=crop" type="image/jpeg">
-                            <source media="(min-width: 768px)" srcset="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=900&q=95&auto=format&fit=crop" type="image/jpeg">
-                            <img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=800&q=95&auto=format&fit=crop" alt="Makita Bosch Professional Power Tools" class="rbhu-card-image" loading="lazy">
-                        </picture>
-                        <div class="rbhu-card-overlay"></div>
-                        <div class="rbhu-card-badge">Featured</div>
-                    </div>
-                    <div class="rbhu-card-content-premium">
-                        <div class="rbhu-card-icon-premium">
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&q=80"
+                                 alt="Power Tools" loading="lazy">
+                            <div class="product-image-overlay"></div>
+                            <span class="product-tag featured">Featured</span>
                         </div>
-                        <h3 class="rbhu-card-title">Electric Power Tools</h3>
-                        <p class="rbhu-card-description">
-                            Makita & Bosch professional power tools engineered for precision and durability
-                        </p>
-                        <a href="/Product/PowerTools" class="rbhu-card-link-premium">
-                            <span>Explore Category</span>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </a>
+                        <div class="product-info">
+                            <div class="product-icon-box">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h3>Power Tools & Accessories</h3>
+                            <p>Makita & Bosch professional power tools for precision work</p>
+                            <a href="/Product/PowerTools" class="product-link">
+                                View Products <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Abrasives -->
-                <div class="rbhu-product-card-premium" data-category="abrasives">
-                    <div class="rbhu-card-image-container">
-                        <picture>
-                            <source media="(min-width: 1200px)" srcset="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=1200&q=95&auto=format&fit=crop" type="image/jpeg">
-                            <source media="(min-width: 768px)" srcset="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=900&q=95&auto=format&fit=crop" type="image/jpeg">
-                            <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=95&auto=format&fit=crop" alt="Klingspor Industrial Grinding Abrasives" class="rbhu-card-image" loading="lazy">
-                        </picture>
-                        <div class="rbhu-card-overlay"></div>
-                    </div>
-                    <div class="rbhu-card-content-premium">
-                        <div class="rbhu-card-icon-premium">
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                <circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2" />
-                                <path d="M16 8V16L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                            </svg>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&q=80"
+                                 alt="Abrasives" loading="lazy">
+                            <div class="product-image-overlay"></div>
                         </div>
-                        <h3 class="rbhu-card-title">Abrasives</h3>
-                        <p class="rbhu-card-description">
-                            Klingspor premium coated and bonded abrasives for industrial grinding operations
-                        </p>
-                        <a href="/Product/Abrasives" class="rbhu-card-link-premium">
-                            <span>Explore Category</span>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </a>
+                        <div class="product-info">
+                            <div class="product-icon-box">
+                                <i class="fas fa-circle-notch"></i>
+                            </div>
+                            <h3>Industrial Abrasives</h3>
+                            <p>Klingspor premium coated and bonded abrasives</p>
+                            <a href="/Product/Abrasives" class="product-link">
+                                View Products <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Cutting Tools -->
-                <div class="rbhu-product-card-premium" data-category="cutting">
-                    <div class="rbhu-card-image-container">
-                        <picture>
-                            <source media="(min-width: 1200px)" srcset="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=1200&q=95&auto=format&fit=crop" type="image/jpeg">
-                            <source media="(min-width: 768px)" srcset="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=900&q=95&auto=format&fit=crop" type="image/jpeg">
-                            <img src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=800&q=95&auto=format&fit=crop" alt="Precision Metal Cutting Tools" class="rbhu-card-image" loading="lazy">
-                        </picture>
-                        <div class="rbhu-card-overlay"></div>
-                    </div>
-                    <div class="rbhu-card-content-premium">
-                        <div class="rbhu-card-icon-premium">
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                <path d="M4 4L28 28M28 4L4 28" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                            </svg>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=600&q=80"
+                                 alt="Cutting Tools" loading="lazy">
+                            <div class="product-image-overlay"></div>
                         </div>
-                        <h3 class="rbhu-card-title">Cutting Tools</h3>
-                        <p class="rbhu-card-description">
-                            Precision cutting tools for metalworking and advanced machining operations
-                        </p>
-                        <a href="/Product/CuttingTools" class="rbhu-card-link-premium">
-                            <span>Explore Category</span>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </a>
+                        <div class="product-info">
+                            <div class="product-icon-box">
+                                <i class="fas fa-cut"></i>
+                            </div>
+                            <h3>Precision Cutting Tools</h3>
+                            <p>Advanced metalworking and machining solutions</p>
+                            <a href="/Product/CuttingTools" class="product-link">
+                                View Products <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Safety Equipment -->
-                <div class="rbhu-product-card-premium" data-category="safety">
-                    <div class="rbhu-card-image-container">
-                        <picture>
-                            <source media="(min-width: 1200px)" srcset="https://images.unsplash.com/photo-1603796846097-bee99e4a601f?w=1200&q=95&auto=format&fit=crop" type="image/jpeg">
-                            <source media="(min-width: 768px)" srcset="https://images.unsplash.com/photo-1603796846097-bee99e4a601f?w=900&q=95&auto=format&fit=crop" type="image/jpeg">
-                            <img src="https://images.unsplash.com/photo-1603796846097-bee99e4a601f?w=800&q=95&auto=format&fit=crop" alt="Industrial Safety Equipment PPE" class="rbhu-card-image" loading="lazy">
-                        </picture>
-                        <div class="rbhu-card-overlay"></div>
-                        <div class="rbhu-card-badge">Essential</div>
-                    </div>
-                    <div class="rbhu-card-content-premium">
-                        <div class="rbhu-card-icon-premium">
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                <path d="M16 4L4 10V16C4 22 16 28 16 28C16 28 28 22 28 16V10L16 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1603796846097-bee99e4a601f?w=600&q=80"
+                                 alt="Safety Equipment" loading="lazy">
+                            <div class="product-image-overlay"></div>
+                            <span class="product-tag essential">Essential</span>
                         </div>
-                        <h3 class="rbhu-card-title">Safety Equipment</h3>
-                        <p class="rbhu-card-description">
-                            Complete safety solutions for comprehensive industrial worker protection
-                        </p>
-                        <a href="/Product/SafetyProducts" class="rbhu-card-link-premium">
-                            <span>Explore Category</span>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </a>
+                        <div class="product-info">
+                            <div class="product-icon-box">
+                                <i class="fas fa-hard-hat"></i>
+                            </div>
+                            <h3>Safety Equipment</h3>
+                            <p>Comprehensive industrial worker protection solutions</p>
+                            <a href="/Product/SafetyProducts" class="product-link">
+                                View Products <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Automation Valves -->
-                <div class="rbhu-product-card-premium" data-category="automation">
-                    <div class="rbhu-card-image-container">
-                        <picture>
-                            <source media="(min-width: 1200px)" srcset="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1200&q=95&auto=format&fit=crop" type="image/jpeg">
-                            <source media="(min-width: 768px)" srcset="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&q=95&auto=format&fit=crop" type="image/jpeg">
-                            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=95&auto=format&fit=crop" alt="Industrial Automation Control Valves" class="rbhu-card-image" loading="lazy">
-                        </picture>
-                        <div class="rbhu-card-overlay"></div>
-                    </div>
-                    <div class="rbhu-card-content-premium">
-                        <div class="rbhu-card-icon-premium">
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                <rect x="6" y="6" width="20" height="20" rx="2" stroke="currentColor" stroke-width="2" />
-                                <path d="M12 12H20M12 16H20M12 20H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                            </svg>
+                <!-- Hoses & Belts -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80"
+                                 alt="Hoses & Belts" loading="lazy">
+                            <div class="product-image-overlay"></div>
                         </div>
-                        <h3 class="rbhu-card-title">Automation Valves</h3>
-                        <p class="rbhu-card-description">
-                            Advanced automation valves for chemical, pharmaceutical, and marine industries
-                        </p>
-                        <a href="/Product/AutomationValves" class="rbhu-card-link-premium">
-                            <span>Explore Category</span>
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </a>
+                        <div class="product-info">
+                            <div class="product-icon-box">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h3>Hoses & Belt Systems</h3>
+                            <p>High-quality industrial transmission solutions</p>
+                            <a href="/Product/Hoses" class="product-link">
+                                View Products <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -323,225 +307,269 @@
     </section>
 
     <!-- Industries Section -->
-    <section class="rbhu-industries-premium">
+    <section class="industries-section">
         <div class="container">
-            <div class="rbhu-section-header-premium text-center">
-                <span class="rbhu-eyebrow-text">Industries We Serve</span>
-                <h2 class="rbhu-section-heading-large">
-                    Trusted Across<br>
-                    <span class="rbhu-text-gradient-premium">Multiple Sectors</span>
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">Industries We Serve</span>
+                <h2 class="section-title">
+                    Trusted Partners Across
+                    <span class="title-highlight">Multiple Sectors</span>
                 </h2>
+                <p class="section-subtitle">
+                    Delivering specialized solutions for diverse industrial applications
+                </p>
             </div>
 
-            <div class="rbhu-industries-marquee">
-                <div class="rbhu-industries-track">
-                    <div class="rbhu-industry-item-premium">
-                        <div class="rbhu-industry-icon-large">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                                <path d="M20 5L35 12.5V27.5L20 35L5 27.5V12.5L20 5Z" stroke="currentColor" stroke-width="2" />
-                            </svg>
+            <div class="row g-4">
+                <div class="col-lg-2 col-md-4 col-6" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="industry-box">
+                        <div class="industry-icon-wrapper">
+                            <i class="fas fa-pills"></i>
                         </div>
                         <h4>Pharmaceutical</h4>
                     </div>
-                    <div class="rbhu-industry-item-premium">
-                        <div class="rbhu-industry-icon-large">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                                <rect x="8" y="12" width="24" height="20" rx="2" stroke="currentColor" stroke-width="2" />
-                            </svg>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6" data-aos="zoom-in" data-aos-delay="150">
+                    <div class="industry-box">
+                        <div class="industry-icon-wrapper">
+                            <i class="fas fa-blender"></i>
                         </div>
                         <h4>White Goods</h4>
                     </div>
-                    <div class="rbhu-industry-item-premium">
-                        <div class="rbhu-industry-icon-large">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                                <path d="M10 20L20 10L30 20L20 30L10 20Z" stroke="currentColor" stroke-width="2" />
-                            </svg>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="industry-box">
+                        <div class="industry-icon-wrapper">
+                            <i class="fas fa-plane"></i>
                         </div>
                         <h4>Aerospace</h4>
                     </div>
-                    <div class="rbhu-industry-item-premium">
-                        <div class="rbhu-industry-icon-large">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                                <rect x="5" y="15" width="30" height="15" rx="2" stroke="currentColor" stroke-width="2" />
-                            </svg>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6" data-aos="zoom-in" data-aos-delay="250">
+                    <div class="industry-box">
+                        <div class="industry-icon-wrapper">
+                            <i class="fas fa-train"></i>
                         </div>
                         <h4>Railways</h4>
                     </div>
-                    <div class="rbhu-industry-item-premium">
-                        <div class="rbhu-industry-icon-large">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                                <circle cx="20" cy="20" r="12" stroke="currentColor" stroke-width="2" />
-                            </svg>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="industry-box">
+                        <div class="industry-icon-wrapper">
+                            <i class="fas fa-car"></i>
                         </div>
                         <h4>Automotive</h4>
                     </div>
-                    <div class="rbhu-industry-item-premium">
-                        <div class="rbhu-industry-icon-large">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                                <path d="M12 8H28V32H12V8Z" stroke="currentColor" stroke-width="2" />
-                            </svg>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6" data-aos="zoom-in" data-aos-delay="350">
+                    <div class="industry-box">
+                        <div class="industry-icon-wrapper">
+                            <i class="fas fa-industry"></i>
                         </div>
                         <h4>Metal Working</h4>
                     </div>
-                    <!-- Duplicate for seamless scroll -->
-                    <div class="rbhu-industry-item-premium">
-                        <div class="rbhu-industry-icon-large">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                                <path d="M20 5L35 12.5V27.5L20 35L5 27.5V12.5L20 5Z" stroke="currentColor" stroke-width="2" />
-                            </svg>
-                        </div>
-                        <h4>Pharmaceutical</h4>
-                    </div>
-                    <div class="rbhu-industry-item-premium">
-                        <div class="rbhu-industry-icon-large">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                                <rect x="8" y="12" width="24" height="20" rx="2" stroke="currentColor" stroke-width="2" />
-                            </svg>
-                        </div>
-                        <h4>White Goods</h4>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Premium Brand Showcase -->
-    <section class="rbhu-brands-premium">
+    <!-- Brand Partners Section -->
+    <section class="brands-section">
         <div class="container">
-            <div class="rbhu-section-header-premium text-center">
-                <span class="rbhu-eyebrow-text">Authorized Partners</span>
-                <h2 class="rbhu-section-heading-large">
-                    World-Class<br>
-                    <span class="rbhu-text-gradient-premium">Brand Portfolio</span>
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">Authorized Partners</span>
+                <h2 class="section-title">
+                    World-Class
+                    <span class="title-highlight">Brand Portfolio</span>
                 </h2>
-            </div>
-
-            <div class="rbhu-brands-grid-premium">
-                <div class="rbhu-brand-card-premium">
-                    <img src="~/images/brands/chicago-pneumatic.png" alt="Chicago Pneumatic">
-                </div>
-                <div class="rbhu-brand-card-premium">
-                    <img src="~/images/brands/fuji.png" alt="Fuji">
-                </div>
-                <div class="rbhu-brand-card-premium">
-                    <img src="~/images/brands/makita.png" alt="Makita">
-                </div>
-                <div class="rbhu-brand-card-premium">
-                    <img src="~/images/brands/bosch.png" alt="Bosch">
-                </div>
-                <div class="rbhu-brand-card-premium">
-                    <img src="~/images/brands/klingspor.png" alt="Klingspor">
-                </div>
-                <div class="rbhu-brand-card-premium">
-                    <img src="~/images/brands/norgren.png" alt="Norgren">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Premium CTA Section -->
-    <section class="rbhu-cta-premium">
-        <picture class="rbhu-cta-bg-picture">
-            <source media="(min-width: 1920px)" srcset="https://images.unsplash.com/photo-1581092162384-8987c1d64718?w=3840&q=90&auto=format&fit=crop" type="image/jpeg">
-            <source media="(min-width: 1200px)" srcset="https://images.unsplash.com/photo-1581092162384-8987c1d64718?w=2400&q=90&auto=format&fit=crop" type="image/jpeg">
-            <source media="(min-width: 768px)" srcset="https://images.unsplash.com/photo-1581092162384-8987c1d64718?w=1600&q=90&auto=format&fit=crop" type="image/jpeg">
-            <img src="https://images.unsplash.com/photo-1581092162384-8987c1d64718?w=2400&q=90&auto=format&fit=crop" alt="Industrial Manufacturing Excellence" class="rbhu-cta-bg-image">
-        </picture>
-
-        <div class="rbhu-cta-bg-video">
-            <video autoplay muted loop playsinline class="rbhu-cta-video" poster="https://images.unsplash.com/photo-1581092162384-8987c1d64718?w=2400&q=90&auto=format&fit=crop">
-                <source src="https://cdn.coverr.co/videos/coverr-industrial-factory-production-line-6293/1080p.mp4" type="video/mp4">
-            </video>
-            <div class="rbhu-cta-overlay"></div>
-        </div>
-
-        <div class="container">
-            <div class="rbhu-cta-content-center">
-                <h2 class="rbhu-cta-heading-large">
-                    Ready to Elevate Your<br>
-                    <span class="rbhu-text-gradient-premium">Industrial Operations?</span>
-                </h2>
-                <p class="rbhu-cta-description">
-                    Connect with our team of experts to discover the perfect solutions for your business
+                <p class="section-subtitle">
+                    Official distributor of premium industrial brands
                 </p>
-                <div class="rbhu-cta-buttons">
-                    <a asp-controller="Home" asp-action="Contact" class="rbhu-btn-premium-primary rbhu-btn-large">
-                        <span>Get Started</span>
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
+            </div>
+
+            <div class="brands-grid">
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="50">
+                    <img src="~/images/Product_Brands/Owner3.jpg" alt="Owner3" loading="lazy">
+                </div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="~/images/Product_Brands/Bipico.jpg" alt="Bipico" loading="lazy">
+                </div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="150">
+                    <img src="~/images/Product_Brands/CP.jpg" alt="Chicago Pneumatic" loading="lazy">
+                </div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="~/images/Product_Brands/Fuji.jpg" alt="Fuji" loading="lazy">
+                </div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="250">
+                    <img src="~/images/Product_Brands/Gates.jpg" alt="Gates" loading="lazy">
+                </div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="300">
+                    <img src="~/images/Product_Brands/Hilison.jpg" alt="Hilison" loading="lazy">
+                </div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="350">
+                    <img src="~/images/Product_Brands/IMI.jpg" alt="IMI" loading="lazy">
+                </div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="400">
+                    <img src="~/images/Product_Brands/klingspor.jpg" alt="Klingspor" loading="lazy">
+                </div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="450">
+                    <img src="~/images/Product_Brands/Kovax.jpg" alt="Kovax" loading="lazy">
+                </div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="500">
+                    <img src="~/images/Product_Brands/Makita.jpg" alt="Makita" loading="lazy">
+                </div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="550">
+                    <img src="~/images/Product_Brands/Megadyne.jpg" alt="Megadyne" loading="lazy">
+                </div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="600">
+                    <img src="~/images/Product_Brands/Norton.jpg" alt="Norton" loading="lazy">
+                </div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="650">
+                    <img src="~/images/Product_Brands/Oriem.jpg" alt="Oriem" loading="lazy">
+                </div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="700">
+                    <img src="~/images/Product_Brands/Parker.jpg" alt="Parker" loading="lazy">
+                </div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="750">
+                    <img src="~/images/Product_Brands/Polyhose.jpg" alt="Polyhose" loading="lazy">
+                </div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="800">
+                    <img src="~/images/Product_Brands/Safeweld.jpg" alt="Safeweld" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="cta-background">
+            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1920&q=80"
+                 alt="Industrial Excellence" loading="lazy">
+            <div class="cta-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="cta-content" data-aos="fade-up">
+                <h2 class="cta-title">
+                    Ready to Transform Your
+                    <span class="title-highlight">Industrial Operations?</span>
+                </h2>
+                <p class="cta-description">
+                    Partner with us to access premium tools, expert guidance, and comprehensive support
+                </p>
+                <div class="cta-buttons">
+                    <a asp-controller="Home" asp-action="Contact" class="btn-cta-primary">
+                        Get Started Today <i class="fas fa-arrow-right"></i>
                     </a>
-                    <a href="tel:+917090979999" class="rbhu-btn-premium-secondary rbhu-btn-large">
-                        <span>Call Us Now</span>
+                    <a href="tel:+917090979999" class="btn-cta-secondary">
+                        <i class="fas fa-phone"></i> +91 70909 79999
                     </a>
                 </div>
             </div>
         </div>
     </section>
+
 </div>
 
 <script>
-    // ===== PROFESSIONAL IMAGE CAROUSEL =====
+    // Hero Image Slider
     (function() {
-        const images = document.querySelectorAll('.rbhu-hero-bg-image');
-        let currentIndex = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const indicators = document.querySelectorAll('.slider-indicators .indicator');
+        const prevBtn = document.querySelector('.slider-control.prev');
+        const nextBtn = document.querySelector('.slider-control.next');
+        let currentSlide = 0;
+        let autoplayInterval;
 
-        // Only run carousel if there are multiple images
-        if (images.length > 1) {
-            function rotateImages() {
-                // Remove active and animation classes from current image
-                images[currentIndex].classList.remove('active', 'carousel-fade-in');
+        function showSlide(index) {
+            slides.forEach(s => s.classList.remove('active'));
+            indicators.forEach(i => i.classList.remove('active'));
 
-                // Move to next image
-                currentIndex = (currentIndex + 1) % images.length;
-
-                // Add active class and trigger animation on new image
-                images[currentIndex].classList.add('active', 'carousel-fade-in');
-            }
-
-            // Add initial animation class to first image
-            images[0].classList.add('carousel-fade-in');
-
-            // Rotate every 6 seconds for professional, non-distracting transitions
-            setInterval(rotateImages, 6000);
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
         }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function startAutoplay() {
+            autoplayInterval = setInterval(nextSlide, 5000);
+        }
+
+        function stopAutoplay() {
+            clearInterval(autoplayInterval);
+        }
+
+        // Event Listeners
+        if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); stopAutoplay(); startAutoplay(); });
+        if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); stopAutoplay(); startAutoplay(); });
+
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentSlide = index;
+                showSlide(currentSlide);
+                stopAutoplay();
+                startAutoplay();
+            });
+        });
+
+        // Start autoplay
+        startAutoplay();
     })();
 
-    // Smooth scroll
+    // Counter Animation
+    function animateValue(element, start, end, duration) {
+        const range = end - start;
+        const increment = range / (duration / 16);
+        let current = start;
+
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= end) {
+                element.textContent = end + '+';
+                clearInterval(timer);
+            } else {
+                element.textContent = Math.floor(current) + '+';
+            }
+        }, 16);
+    }
+
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                const target = parseInt(entry.target.getAttribute('data-count'));
+                animateValue(entry.target, 0, target, 2000);
+                entry.target.classList.add('counted');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.stat-value').forEach(stat => observer.observe(stat));
+
+    // Smooth Scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const offset = 80;
+                const targetPosition = target.offsetTop - offset;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
             }
         });
-    });
-
-    // Intersection Observer for animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.rbhu-product-card-premium, .rbhu-feature-item, .rbhu-section-header-premium').forEach(el => {
-        observer.observe(el);
-    });
-
-    // Parallax effect for hero
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const hero = document.querySelector('.rbhu-hero-video');
-        if (hero) {
-            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-        }
     });
 </script>
