@@ -5,7 +5,7 @@
 
 <div class="page-content">
     <section class="section-padding" style="margin-top: 80px;">
-        <div class="container-fluid">
+        <div class="container">
             <!-- Header Section -->
             <div class="row mb-4">
                 <div class="col-lg-12 text-center">
@@ -17,126 +17,138 @@
             </div>
 
             <div class="row">
-                <!-- Left Sidebar - Subcategory Tree -->
-                <div class="col-lg-3 col-md-4 mb-4">
-                    <div class="category-sidebar">
-                        <div class="sidebar-header">
-                            <h6 class="mb-0"><i class="fas fa-filter me-2"></i>Filter Products</h6>
-                            <button class="btn btn-sm btn-link text-decoration-none" onclick="clearFilters()">
-                                <i class="fas fa-redo"></i> Reset
+                <!-- Brand Cards Section - Full Width -->
+                <div class="col-12 mb-4">
+                    <div class="brands-section">
+                        <h3 class="brands-title">
+                            <i class="fas fa-star me-2"></i>Featured Brands
+                        </h3>
+                        <div class="brands-grid" id="brandShowcase">
+                            <!-- Hillson Brand -->
+                            <div class="brand-card-modern" data-brand="Hillson" onclick="filterByBrand('Hillson')">
+                                <div class="brand-image-wrapper">
+                                    <img src="~/images/Product_Brands/Hillson.jpg" alt="Hillson Brand">
+                                </div>
+                                <div class="brand-label">Hillson</div>
+                                <div class="brand-overlay">
+                                    <i class="fas fa-search-plus"></i>
+                                </div>
+                            </div>
+
+                            <!-- Safewell Brand -->
+                            <div class="brand-card-modern" data-brand="Safewell" onclick="filterByBrand('Safewell')">
+                                <div class="brand-image-wrapper">
+                                    <img src="~/images/Product_Brands/Safewell.jpg" alt="Safewell Brand">
+                                </div>
+                                <div class="brand-label">Safewell</div>
+                                <div class="brand-overlay">
+                                    <i class="fas fa-search-plus"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 mb-4">
+                    <div class="modern-filter-bar">
+                        <!-- Top Row: Title and Reset -->
+                        <div class="filter-header-row">
+                            <div class="filter-title">
+                                <i class="fas fa-sliders-h me-2"></i>
+                                <span>Filter Products</span>
+                            </div>
+                            <button class="btn-reset" onclick="clearFilters()">
+                                <i class="fas fa-redo me-1"></i>Reset All
                             </button>
                         </div>
 
-                        <!-- Show All Products Button -->
-                        <button class="btn btn-outline-secondary w-100 mb-3 btn-sm" onclick="showAllProducts()">
-                            <i class="fas fa-th-large me-2"></i>All Products
-                        </button>
-                        <a class="btn btn-outline-secondary w-100 mb-3 btn-sm" asp-action="Products" asp-controller="Home">
-                            <i class='fas fa-angle-left'></i> Go back to category page
-                        </a>
+                        <!-- Filter Content Row -->
+                        <div class="filter-content-row">
+                            <!-- Quick Actions -->
+                            <div class="quick-actions">
+                                <button class="quick-btn" onclick="showAllProducts()">
+                                    <i class="fas fa-th me-1"></i>All Products
+                                </button>
+                                <a class="quick-btn" asp-action="Products" asp-controller="Home">
+                                    <i class="fas fa-arrow-left me-1"></i>Categories
+                                </a>
+                            </div>
 
-                        <div class="subcategory-tree">
-                            @if (Model.SubCategories1 != null && Model.SubCategories1.Any())
-                            {
-                                @foreach (var subCat1 in Model.SubCategories1)
+                            <!-- Category Pills -->
+                            <div class="category-pills-container">
+                                @if (Model.SubCategories1 != null && Model.SubCategories1.Any())
                                 {
-                                    var subCat1Id = $"subcat1-{subCat1.Id}";
-                                    var subCategories2 = Model.SubCategories2Map.ContainsKey(subCat1.Id)
-                                    ? Model.SubCategories2Map[subCat1.Id]
-                                    : new List<RBHU_DbServices.Models.SubCategory2>();
+                                    @foreach (var subCat1 in Model.SubCategories1)
+                                    {
+                                        var subCat1Id = $"subcat1-{subCat1.Id}";
+                                        var subCategories2 = Model.SubCategories2Map.ContainsKey(subCat1.Id)
+                                        ? Model.SubCategories2Map[subCat1.Id]
+                                        : new List<RBHU_DbServices.Models.SubCategory2>();
 
-                                    <div class="category-level-1 mb-2">
-                                        <!-- SubCategory1 Header -->
-                                        <div class="category-header"
-                                             data-subcategory1-id="@subCat1.Id"
-                                             data-brand-name="@subCat1.Name"
-                                             onclick="toggleSubCategory1(@subCat1.Id, '@Html.Raw(subCat1.Name.Replace("'", "\\'"))'); event.stopPropagation();">
-                                            <div class="category-info">
-                                                <i class="fas fa-folder me-2"></i>
-                                                <span class="category-name">@subCat1.Name</span>
-                                            </div>
+                                        <div class="category-pill-wrapper">
+                                            <button class="category-pill"
+                                                    data-subcategory1-id="@subCat1.Id"
+                                                    data-brand-name="@subCat1.Name"
+                                                    data-has-subcat2="@(subCategories2.Any() ? "true" : "false")"
+                                                    onclick="toggleSubCategory1(@subCat1.Id, '@subCat1.Name')">
+                                                <i class="fas fa-tag me-2"></i>
+                                                <span>@subCat1.Name</span>
+                                                @if (subCategories2 != null && subCategories2.Any())
+                                                {
+                                                    <i class="fas fa-chevron-down ms-2 pill-arrow"></i>
+                                                }
+                                            </button>
+
                                             @if (subCategories2 != null && subCategories2.Any())
                                             {
-                                                <i class="fas fa-chevron-down toggle-icon"></i>
+                                                <div class="subcategory-dropdown" id="@subCat1Id" style="display: none;">
+                                                    @foreach (var subCat2 in subCategories2)
+                                                    {
+                                                        <div class="subcategory-option"
+                                                             data-subcategory2-id="@subCat2.Id"
+                                                             onclick="filterBySubCategory2(@subCat1.Id, @subCat2.Id, '@subCat1.Name', '@subCat2.Name')">
+                                                            <i class="fas fa-dot-circle me-2"></i>
+                                                            <span>@subCat2.Name</span>
+                                                        </div>
+                                                    }
+                                                </div>
                                             }
                                         </div>
-
-                                        <!-- SubCategory2 Container (Collapsible) -->
-                                        @if (subCategories2 != null && subCategories2.Any())
-                                        {
-                                            <div class="category-level-2" id="@subCat1Id" style="display: none;">
-                                                @foreach (var subCat2 in subCategories2)
-                                                {
-                                                    <div class="subcategory2-item"
-                                                         data-subcategory2-id="@subCat2.Id"
-                                                         onclick="filterBySubCategory2(@subCat1.Id, @subCat2.Id, '@Html.Raw(subCat1.Name.Replace("'", "\\'"))', '@Html.Raw(subCat2.Name.Replace("'", "\\'"))'); event.stopPropagation();">
-                                                        <i class="fas fa-circle me-2"></i>
-                                                        <span>@subCat2.Name</span>
-                                                    </div>
-                                                }
-                                            </div>
-                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="no-categories">
+                                        <i class="fas fa-info-circle me-2"></i>No filters available
                                     </div>
                                 }
-                            }
-                            else
-                            {
-                                <div class="alert alert-light border">
-                                    <small class="text-muted"><i class="fas fa-info-circle me-2"></i>No subcategories available</small>
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Side - Products Grid -->
-                <div class="col-lg-9 col-md-8">
-                    <!-- Brand Images Section -->
-                    <div class="brand-showcase mb-4" id="brandShowcase">
-                        <h5 class="brand-showcase-title text-center mb-3">
-                            <i class="fas fa-award me-2"></i>Featured Brands
-                        </h5>
-                        <div class="brand-container">
-                            <!-- Safewell Brand Button -->
-                            <div class="brand-item" data-brand="Safewell">
-                                <div class="brand-card" onclick="filterByBrand('Safewell')">
-                                    <img src="~/images/Product_Brands/Safewell.jpg" alt="Safewell Brand" class="brand-logo">
-                                    <div class="brand-name">Safewell</div>
-                                </div>
-                            </div>
-                            <!-- Hillson Brand Button -->
-                            <div class="brand-item" data-brand="Hillson">
-                                <div class="brand-card" onclick="filterByBrand('Hillson')">
-                                    <img src="~/images/Product_Brands/Hillson.jpg" alt="Hillson Brand" class="brand-logo">
-                                    <div class="brand-name">Hillson</div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                    <!-- Active Filter Display -->
+                <!-- Products Section - Full Width -->
+                <div class="col-12">
+                    <!-- Active Filter Badge -->
                     <div id="activeFilters" class="mb-3" style="display: @(Model.SelectedSubCategory1Id.HasValue || Model.SelectedSubCategory2Id.HasValue ? "block" : "none")">
-                        <div class="alert alert-light border d-flex justify-content-between align-items-center">
-                            <small>
-                                <i class="fas fa-filter me-2"></i>
-                                <strong>Filtered by:</strong> <span id="filterText">
-                                    @if (Model.SelectedSubCategory2Id.HasValue)
-                                    {
-                                        var subCat1 = Model.SubCategories1.FirstOrDefault(s => s.Id == Model.SelectedSubCategory1Id);
-                                        var subCat2 = Model.SubCategories2Map.ContainsKey(Model.SelectedSubCategory1Id.Value)
-                                        ? Model.SubCategories2Map[Model.SelectedSubCategory1Id.Value].FirstOrDefault(s => s.Id == Model.SelectedSubCategory2Id)
-                                        : null;
-                                        @($"{subCat1?.Name} → {subCat2?.Name}")
-                                    }
-                                    else if (Model.SelectedSubCategory1Id.HasValue)
-                                    {
-                                        var subCat1 = Model.SubCategories1.FirstOrDefault(s => s.Id == Model.SelectedSubCategory1Id);
-                                        @subCat1?.Name
-                                    }
-                                </span>
-                            </small>
-                            <button class="btn btn-sm btn-link text-decoration-none" onclick="clearFilters()">
+                        <div class="active-filter-badge">
+                            <i class="fas fa-filter me-2"></i>
+                            <strong>Active Filter:</strong>
+                            <span id="filterText" class="filter-value">
+                                @if (Model.SelectedSubCategory2Id.HasValue)
+                                {
+                                    var subCat1 = Model.SubCategories1.FirstOrDefault(s => s.Id == Model.SelectedSubCategory1Id);
+                                    var subCat2 = Model.SubCategories2Map.ContainsKey(Model.SelectedSubCategory1Id.Value)
+                                    ? Model.SubCategories2Map[Model.SelectedSubCategory1Id.Value].FirstOrDefault(s => s.Id == Model.SelectedSubCategory2Id)
+                                    : null;
+                                    @($"{subCat1?.Name} → {subCat2?.Name}")
+                                }
+                                else if (Model.SelectedSubCategory1Id.HasValue)
+                                {
+                                    var subCat1 = Model.SubCategories1.FirstOrDefault(s => s.Id == Model.SelectedSubCategory1Id);
+                                    @subCat1?.Name
+                                }
+                            </span>
+                            <button class="filter-close" onclick="clearFilters()">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
@@ -144,18 +156,28 @@
 
                     <!-- Products Count -->
                     <div class="mb-3">
-                        <small class="text-muted" id="productCount">
+                        <div class="product-count-badge" id="productCount">
                             <i class="fas fa-box me-1"></i>
-                            @Model.Products.Count Product@(Model.Products.Count != 1 ? "s" : "")
-                        </small>
+                            @Model.Products.Count Product@(Model.Products.Count != 1 ? "s" : "") Found
+                        </div>
                     </div>
 
                     <!-- Loading Indicator -->
                     <div id="loadingIndicator" class="text-center py-5" style="display: none;">
-                        <div class="spinner-border spinner-border-sm text-secondary" role="status">
+                        <div class="spinner-border text-primary" role="status">
                             <span class="visually-hidden">Loading...</span>
                         </div>
-                        <p class="mt-3 text-muted small">Loading products...</p>
+                        <p class="mt-3 text-muted">Loading products...</p>
+                    </div>
+
+                    <!-- Sample Products Grid -->
+                    <div id="sampleProductsContainer" style="display: none;">
+                        <h5 class="mb-4 section-title" id="sampleProductsTitle">
+                            <i class="fas fa-th me-2"></i>Select a Collection
+                        </h5>
+                        <div id="sampleProductsGrid" class="row">
+                            <!-- Sample products dynamically inserted -->
+                        </div>
                     </div>
 
                     <!-- Products Grid -->
@@ -164,32 +186,30 @@
                         {
                             @foreach (var product in Model.Products)
                             {
-                                <div class="col-lg-4 col-md-6 col-sm-6 mb-3">
-                                    <div class="card product-card h-100">
-                                        <div class="product-image-container">
+                                <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
+                                    <div class="product-card-modern">
+                                        <div class="product-image-box">
                                             @if (!string.IsNullOrEmpty(product.ImageUrl))
                                             {
-                                                <img src="@product.ImageUrl" alt="@product.Name" class="card-img-top product-image" onclick="GoToContact()">
+                                                <img src="@product.ImageUrl" alt="@product.Name" onclick="GoToContact()">
                                             }
                                             else
                                             {
-                                                <div class="no-image-placeholder">
-                                                    <i class="fas fa-hard-hat fa-2x text-muted"></i>
+                                                <div class="no-image">
+                                                    <i class="fas fa-image"></i>
                                                 </div>
                                             }
                                     </div>
 
-                                    <div class="card-body p-3">
-                                        <h6 class="product-title">@product.Name</h6>
-                                        <p class="product-description small text-muted mb-2">
-                                            @(string.IsNullOrEmpty(product.Description) ? "Professional safety equipment for workplace protection." :
+                                    <div class="product-info">
+                                        <h6 class="product-name">@product.Name</h6>
+                                        <p class="product-desc">
+                                            @(string.IsNullOrEmpty(product.Description) ? "Professional Safety tool for demanding applications." :
                                                                                     (product.Description.Length > 60 ? product.Description.Substring(0, 60) + "..." : product.Description))
                                     </p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <a asp-controller="Home" asp-action="Contact" class="btn btn-sm btn-outline-secondary">
-                                            <i class="fas fa-phone"></i> Enquire
-                                        </a>
-                                    </div>
+                                    <a asp-controller="Home" asp-action="Contact" class="product-btn">
+                                        <i class="fas fa-phone me-1"></i>Enquire Now
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -197,13 +217,15 @@
                         }
                         else
                         {
-                            <div class="col-12 text-center py-5">
-                                <i class="fas fa-hard-hat fa-3x text-muted mb-3"></i>
-                                <h5 class="text-muted">No Products Available</h5>
-                                <p class="text-muted">No products found in this category.</p>
-                                <a asp-controller="Home" asp-action="Contact" class="btn btn-secondary">
-                                    <i class="fas fa-envelope me-2"></i>Contact Us
-                                </a>
+                            <div class="col-12">
+                                <div class="empty-state">
+                                    <i class="fas fa-inbox"></i>
+                                    <h4>No Products Available</h4>
+                                    <p>No products found in this category.</p>
+                                    <a asp-controller="Home" asp-action="Contact" class="btn-contact-us">
+                                        <i class="fas fa-envelope me-2"></i>Contact Us
+                                    </a>
+                                </div>
                             </div>
                         }
                     </div>
@@ -267,89 +289,71 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <link href="~/css/product-cards.css" rel="stylesheet" />
 
-@section Scripts {
+@section Scripts
+{
     <script>
         const categoryId = @Model.CategoryId;
         let currentSubCategory1Id = @(Model.SelectedSubCategory1Id ?? 0);
         let currentSubCategory2Id = @(Model.SelectedSubCategory2Id ?? 0);
         let currentBrand = '';
+        let showingSampleProducts = false;
 
         function GoToContact() {
             window.location.href = '/Home/Contact';
         }
 
-        // Normalize brand name for consistent comparison (case-insensitive)
-        function normalizeBrandName(brandName) {
-            if (!brandName) return '';
-            return brandName.toLowerCase().trim();
-        }
-
-        // Find element by brand name (case-insensitive)
-        function findElementByBrandName(brandName) {
-            let foundElement = null;
-            $('[data-brand-name]').each(function () {
-                debugger
-                const elementBrand = $(this).data('brand-name');
-                if (normalizeBrandName(elementBrand) === normalizeBrandName(brandName)) {
-                    foundElement = $(this);
-                    return false;
-                }
-            });
-            return foundElement;
-        }
-
-        // Get actual brand name from database (preserves original casing)
-        function getActualBrandName(brandName) {
-            const element = findElementByBrandName(brandName);
-            if (element && element.length > 0) {
-                return element.data('brand-name');
-            }
-            return brandName;
-        }
-
-        // AUTO-DETECT ON PAGE LOAD
-        $(document).ready(function () {
+        // ===== AUTO-DETECT AND HIGHLIGHT LOGIC =====
+              $(document).ready(function () {
             console.log('=== Page Load - Auto-Detection ===');
             console.log('Current SubCat1 ID from Model:', currentSubCategory1Id);
             console.log('Current SubCat2 ID from Model:', currentSubCategory2Id);
-            console.log('Category ID:', categoryId);
 
+            // Auto-expand and highlight if selected
             if (currentSubCategory1Id > 0) {
-                console.log('Attempting to auto-expand SubCategory1 ID:', currentSubCategory1Id);
+                const wrapper = $('[data-subcategory1-id="' + currentSubCategory1Id + '"]').closest('.category-pill-wrapper');
 
-                const element = $('[data-subcategory1-id="' + currentSubCategory1Id + '"]');
-                console.log('Found elements:', element.length);
+                if (wrapper.length > 0) {
+                    const pill = wrapper.find('.category-pill');
+                    const arrow = wrapper.find('.pill-arrow');
+                    const dropdown = wrapper.find('.subcategory-dropdown');
 
-                if (element.length > 0) {
-                    const parent = element.closest('.category-level-1');
-                    const toggleIcon = parent.find('.toggle-icon');
-                    const subCat2Container = parent.find('.category-level-2');
+                    let brandName = pill.data('brand-name');
 
-                    let brandName = element.data('brand-name');
-                    if (!brandName) {
-                        brandName = element.find('.category-name').text().trim();
-                    }
-
-                    console.log('Brand Name:', brandName);
-
-                    toggleIcon.addClass('rotated');
-                    subCat2Container.slideDown(300);
-                    parent.addClass('active');
+                    // Expand dropdown and activate pill
+                    arrow.addClass('rotated');
+                    dropdown.slideDown(300);
+                    wrapper.addClass('active');
 
                     currentBrand = brandName;
 
+                    // Check if has SubCategory2
+                    const hasSubCat2 = pill.data('has-subcat2') === 'true' || pill.data('has-subcat2') === true;
+
+                    // Highlight brand
                     highlightBrand(brandName);
                     showOnlyBrand(brandName);
 
-                    if (currentSubCategory2Id > 0) {
-                        const subCat2Element = $('[data-subcategory2-id="' + currentSubCategory2Id + '"]');
-                        if (subCat2Element.length > 0) {
-                            const subCat2Name = subCat2Element.find('span').text().trim();
-                            updateActiveFilter(brandName, subCat2Name);
+                    // Show sample products or all products based on hasSubCat2
+                    if (hasSubCat2) {
+                        if (currentSubCategory2Id > 0) {
+                            // If SubCategory2 is selected, show all products for that SubCategory2
+                            $('#sampleProductsContainer').hide();
+                            $('#productsGrid').show();
+                            loadProducts(categoryId, currentSubCategory1Id, currentSubCategory2Id);
+
+                            // Highlight the selected SubCategory2
+                            $('[data-subcategory2-id="' + currentSubCategory2Id + '"]').addClass('active');
+                            const subCat2Text = $('[data-subcategory2-id="' + currentSubCategory2Id + '"] span').text().trim();
+                            updateActiveFilter(brandName, subCat2Text);
                         } else {
-                            updateActiveFilter(brandName, null);
+                            // If only SubCategory1 is selected, show sample products
+                            showSampleProducts(currentSubCategory1Id, brandName);
                         }
                     } else {
+                        // No SubCategory2, show all products for SubCategory1
+                        $('#sampleProductsContainer').hide();
+                        $('#productsGrid').show();
+                        loadProducts(categoryId, currentSubCategory1Id, null);
                         updateActiveFilter(brandName, null);
                     }
 
@@ -360,170 +364,314 @@
                             scrollTop: $('#brandShowcase').offset().top - 100
                         }, 500);
                     }, 300);
-
-                    console.log('Auto-expansion completed successfully');
                 }
-            }
-
-            if (currentSubCategory2Id > 0) {
-                console.log('Highlighting SubCategory2 ID:', currentSubCategory2Id);
-                $('[data-subcategory2-id="' + currentSubCategory2Id + '"]').addClass('active');
             }
         });
 
-        // Filter by clicking brand button
+        // Filter by brand button - Updated to handle sample products
         function filterByBrand(brandName) {
-            console.log('=== Brand Button Clicked ===');
-            console.log('Brand clicked:', brandName);
+            console.log('=== Brand Button Clicked:', brandName);
 
-            const actualBrandName = getActualBrandName(brandName);
-            const subCat1Element = findElementByBrandName(brandName);
+            const pill = $('[data-brand-name="' + brandName + '"]');
 
-            if (subCat1Element && subCat1Element.length) {
-                const subCat1Id = subCat1Element.data('subcategory1-id');
-                console.log('SubCategory1 ID:', subCat1Id);
+            if (pill.length) {
+                const subCat1Id = pill.data('subcategory1-id');
+                const hasSubCat2Data = pill.data('has-subcat2');
+                const hasSubCat2 = hasSubCat2Data === 'true' || hasSubCat2Data === true;
+                const wrapper = pill.closest('.category-pill-wrapper');
+                const arrow = wrapper.find('.pill-arrow');
+                const dropdown = wrapper.find('.subcategory-dropdown');
 
-                $('.category-level-1').each(function () {
-                    const $this = $(this);
-                    if ($this.find('[data-subcategory1-id="' + subCat1Id + '"]').length === 0) {
-                        $this.find('.toggle-icon').removeClass('rotated');
-                        $this.find('.category-level-2').hide();
-                        $this.removeClass('active');
-                    }
+                console.log('SubCat1 ID:', subCat1Id, 'Has SubCat2:', hasSubCat2);
+
+                // Close all other pills
+                $('.category-pill-wrapper').not(wrapper).each(function () {
+                    $(this).removeClass('active');
+                    $(this).find('.pill-arrow').removeClass('rotated');
+                    $(this).find('.subcategory-dropdown').hide();
                 });
 
-                const parent = subCat1Element.closest('.category-level-1');
-                const toggleIcon = parent.find('.toggle-icon');
-                const subCat2Container = parent.find('.category-level-2');
-
-                toggleIcon.addClass('rotated');
-                subCat2Container.slideDown(300);
-                parent.addClass('active');
+                // Open selected pill
+                arrow.addClass('rotated');
+                dropdown.slideDown(300);
+                wrapper.addClass('active');
 
                 currentSubCategory1Id = subCat1Id;
                 currentSubCategory2Id = 0;
-                currentBrand = actualBrandName;
+                currentBrand = brandName;
 
-                $('.subcategory2-item').removeClass('active');
+                $('.subcategory-option').removeClass('active');
 
                 highlightBrand(brandName);
                 showOnlyBrand(brandName);
 
-                updateActiveFilter(actualBrandName, null);
-                loadProducts(categoryId, subCat1Id, null);
+                // Show sample products or all products based on hasSubCat2
+                if (hasSubCat2) {
+                    console.log('Has SubCategory2 - showing sample products');
+                    showingSampleProducts = true;
+                    showSampleProducts(subCat1Id, brandName);
+                } else {
+                    console.log('No SubCategory2 - loading ALL products');
+                    showingSampleProducts = false;
+                    $('#sampleProductsContainer').hide();
+                    $('#productsGrid').show();
+                    updateActiveFilter(brandName, null);
+                    loadProducts(categoryId, subCat1Id, null);
+                }
 
-                console.log('Brand filter applied successfully');
-            } else {
-                console.error('Brand not found:', brandName);
+                $('#activeFilters').show();
             }
         }
 
-        // Highlight selected brand button
         function highlightBrand(brandName) {
-            console.log('Highlighting brand:', brandName);
-            $('.brand-card').removeClass('active');
+            $('.brand-card-modern').removeClass('active');
             if (brandName) {
-                const normalizedBrand = normalizeBrandName(brandName);
-                $('.brand-item').each(function () {
-                    const itemBrand = $(this).data('brand');
-                    if (normalizeBrandName(itemBrand) === normalizedBrand) {
-                        $(this).find('.brand-card').addClass('active');
-                    }
-                });
+                $('.brand-card-modern[data-brand="' + brandName + '"]').addClass('active');
             }
         }
 
-        // Show only selected brand
         function showOnlyBrand(brandName) {
-            console.log('Showing brand(s):', brandName || 'ALL');
-            const $brandItems = $('.brand-item');
+            const $brandCards = $('.brand-card-modern');
 
             if (!brandName || brandName === '') {
-                $brandItems.show();
-                $('.brand-card').removeClass('active');
+                $brandCards.show();
+                $('.brand-card-modern').removeClass('active');
             } else {
-                const normalizedBrand = normalizeBrandName(brandName);
-                $brandItems.each(function () {
-                    const $item = $(this);
-                    const itemBrand = $item.data('brand');
-                    if (normalizeBrandName(itemBrand) === normalizedBrand) {
-                        $item.show();
+                $brandCards.each(function () {
+                    const cardBrand = $(this).data('brand');
+                    if (cardBrand === brandName) {
+                        $(this).show();
                     } else {
-                        $item.hide();
+                        $(this).hide();
                     }
                 });
             }
         }
 
-        // Toggle SubCategory1
         function toggleSubCategory1(subCat1Id, subCat1Name) {
-            console.log('=== toggleSubCategory1 Called ===');
-            console.log('SubCat1 ID:', subCat1Id);
-            console.log('SubCat1 Name:', subCat1Name);
+            console.log('=== toggleSubCategory1:', subCat1Id, subCat1Name);
 
-            const element = $(event.currentTarget);
-            const parent = element.closest('.category-level-1');
-            const toggleIcon = parent.find('.toggle-icon');
-            const subCat2Container = parent.find('.category-level-2');
+            const wrapper = $(event.currentTarget).closest('.category-pill-wrapper');
+            const pill = wrapper.find('.category-pill');
+            const arrow = wrapper.find('.pill-arrow');
+            const dropdown = wrapper.find('.subcategory-dropdown');
+            const hasSubCat2Data = pill.data('has-subcat2');
+            const hasSubCat2 = hasSubCat2Data === 'true' || hasSubCat2Data === true;
+            const isExpanded = wrapper.hasClass('active');
 
-            const isCurrentlyExpanded = parent.hasClass('active');
-            console.log('Is currently expanded?', isCurrentlyExpanded);
+            console.log('Has SubCat2:', hasSubCat2, 'Is Expanded:', isExpanded);
 
-            $('.category-level-1').not(parent).each(function () {
-                $(this).find('.toggle-icon').removeClass('rotated');
-                $(this).find('.category-level-2').slideUp(300);
+            // Close all others
+            $('.category-pill-wrapper').not(wrapper).each(function () {
                 $(this).removeClass('active');
+                $(this).find('.pill-arrow').removeClass('rotated');
+                $(this).find('.subcategory-dropdown').slideUp(300);
             });
 
-            $('.subcategory2-item').removeClass('active');
+            $('.subcategory-option').removeClass('active');
 
-            if (!isCurrentlyExpanded) {
-                console.log('EXPANDING subcategory');
-
-                toggleIcon.addClass('rotated');
-                subCat2Container.slideDown(300);
-                parent.addClass('active');
+            if (!isExpanded) {
+                // EXPAND
+                arrow.addClass('rotated');
+                dropdown.slideDown(300);
+                wrapper.addClass('active');
 
                 currentSubCategory1Id = subCat1Id;
                 currentSubCategory2Id = 0;
                 currentBrand = subCat1Name;
 
-                updateActiveFilter(subCat1Name, null);
-                loadProducts(categoryId, subCat1Id, null);
-
                 highlightBrand(subCat1Name);
                 showOnlyBrand(subCat1Name);
-            } else {
-                console.log('COLLAPSING subcategory');
 
-                toggleIcon.removeClass('rotated');
-                subCat2Container.slideUp(300);
-                parent.removeClass('active');
+                $('#activeFilters').show();
+
+                // Show sample products or all products based on hasSubCat2
+                if (hasSubCat2) {
+                    console.log('Has SubCategory2 - showing sample products');
+                    showingSampleProducts = true;
+                    showSampleProducts(subCat1Id, subCat1Name);
+                } else {
+                    console.log('No SubCategory2 - loading ALL products');
+                    showingSampleProducts = false;
+                    updateActiveFilter(subCat1Name, null);
+                    $('#sampleProductsContainer').hide();
+                    $('#productsGrid').show();
+                    loadProducts(categoryId, subCat1Id, null);
+                }
+            } else {
+                // COLLAPSE
+                arrow.removeClass('rotated');
+                dropdown.slideUp(300);
+                wrapper.removeClass('active');
 
                 currentSubCategory1Id = 0;
                 currentSubCategory2Id = 0;
                 currentBrand = '';
+                showingSampleProducts = false;
                 $('#activeFilters').hide();
+                $('#sampleProductsContainer').hide();
+                $('#productsGrid').show();
                 loadProducts(categoryId, null, null);
-
                 showOnlyBrand('');
             }
         }
 
-        function filterBySubCategory2(subCat1Id, subCat2Id, subCat1Name, subCat2Name) {
-            console.log('=== filterBySubCategory2 Called ===');
-            console.log('SubCat2 ID:', subCat2Id);
+        // Show sample products (1 per SubCategory2) - EXPLORE MORE FUNCTIONALITY
+        function showSampleProducts(subCat1Id, subCat1Name) {
+            console.log('=== Loading Sample Products ===');
+            console.log('SubCat1 ID:', subCat1Id, 'SubCat1 Name:', subCat1Name);
+
+            // IMMEDIATELY hide products grid and show sample container
+            $('#productsGrid').hide();
+            $('#sampleProductsContainer').show();
+            $('#sampleProductsTitle').html('<i class="fas fa-th me-2"></i>' + subCat1Name + ' Collections');
+
+            // Show loading state in sample products grid
+            const $grid = $('#sampleProductsGrid');
+            $grid.html(`
+                <div class="col-12 text-center py-5">
+                    <div class="spinner-border text-secondary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-3 text-muted">Loading collections...</p>
+                </div>
+            `);
+
+            $.ajax({
+                url: '/Product/GetSampleProductsForSubCategories2',
+                type: 'GET',
+                data: { subCategory1Id: subCat1Id },
+                success: function (response) {
+                    console.log('Sample Products Response:', response);
+
+                    $grid.empty();
+
+                    if (response && response.length > 0) {
+                        response.forEach(function (item) {
+                            if (!item.product) {
+                                console.warn('No product for SubCategory2:', item.subCategory2Name);
+                                return;
+                            }
+
+                            const productImageHtml = item.product.imageUrl
+                                ? `<img src="${item.product.imageUrl}" alt="${item.subCategory2Name}">`
+                                : `<div class="no-image"><i class="fas fa-image"></i></div>`;
+
+                            const productDescription = item.product.description
+                                ? (item.product.description.length > 60
+                                    ? item.product.description.substring(0, 60) + '...'
+                                    : item.product.description)
+                                : 'Professional power tool for demanding applications.';
+
+                            const cardHtml = `
+                                <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
+                                    <div class="product-card-modern sample-product-card h-100">
+                                        <div class="product-image-box">
+                                            ${productImageHtml}
+                                        </div>
+                                        <div class="product-info">
+                                            <div class="category-badge mb-2">
+                                                <span class="badge bg-info">${item.subCategory2Name}</span>
+                                            </div>
+                                            <h6 class="product-name">${item.product.name}</h6>
+                                            <p class="product-desc">
+                                                ${productDescription}
+                                            </p>
+                                            <button class="product-btn w-100" onclick="exploreSubCategory(${subCat1Id}, ${item.subCategory2Id}, '${subCat1Name.replace(/'/g, "\\'")}', '${item.subCategory2Name.replace(/'/g, "\\'")}')">
+                                                <i class="fas fa-arrow-right me-2"></i>Explore More
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            $grid.append(cardHtml);
+                        });
+
+                        updateActiveFilter(subCat1Name, null);
+                        updateProductCount(response.length);
+                    } else {
+                        $grid.html(`
+                            <div class="col-12">
+                                <div class="empty-state">
+                                    <i class="fas fa-inbox"></i>
+                                    <h4>No Collections Available</h4>
+                                    <p>No product collections found for this category.</p>
+                                </div>
+                            </div>
+                        `);
+                        updateProductCount(0);
+                    }
+
+                    showingSampleProducts = true;
+                },
+                error: function (error) {
+                    console.error('Error loading sample products:', error);
+                    $grid.html(`
+                        <div class="col-12">
+                            <div class="empty-state">
+                                <i class="fas fa-exclamation-triangle" style="color: #f56565;"></i>
+                                <h4>Error Loading Collections</h4>
+                                <p>Please try again later.</p>
+                            </div>
+                        </div>
+                    `);
+                }
+            });
+        }
+
+        // Explore SubCategory - Show all products for that SubCategory2 - CORE EXPLORE MORE FUNCTION
+        function exploreSubCategory(subCat1Id, subCat2Id, subCat1Name, subCat2Name) {
+            console.log('=== Exploring SubCategory ===');
+            console.log('SubCat1 ID:', subCat1Id, 'SubCat2 ID:', subCat2Id);
+            console.log('SubCat1 Name:', subCat1Name, 'SubCat2 Name:', subCat2Name);
 
             currentSubCategory1Id = subCat1Id;
             currentSubCategory2Id = subCat2Id;
             currentBrand = subCat1Name;
+            showingSampleProducts = false;
 
-            $('.subcategory2-item').removeClass('active');
+            // Hide sample products and show main products grid
+            $('#sampleProductsContainer').hide();
+            $('#productsGrid').show();
+
+            // Update active filter display
+            updateActiveFilter(subCat1Name, subCat2Name);
+
+            // Load products for this SubCategory2
+            loadProducts(categoryId, subCat1Id, subCat2Id);
+
+            // Highlight the selected SubCategory2 option in dropdown
+            $('.subcategory-option').removeClass('active');
+            $('[data-subcategory2-id="' + subCat2Id + '"]').addClass('active');
+
+            // Keep brand highlighted
+            highlightBrand(subCat1Name);
+            showOnlyBrand(subCat1Name);
+
+            // Scroll to products
+            setTimeout(() => {
+                $('html, body').animate({
+                    scrollTop: $('#productsGrid').offset().top - 100
+                }, 500);
+            }, 300);
+        }
+
+        function filterBySubCategory2(subCat1Id, subCat2Id, subCat1Name, subCat2Name) {
+            console.log('=== filterBySubCategory2:', subCat2Id);
+
+            currentSubCategory1Id = subCat1Id;
+            currentSubCategory2Id = subCat2Id;
+            currentBrand = subCat1Name;
+            showingSampleProducts = false;
+
+            $('.subcategory-option').removeClass('active');
             $(event.currentTarget).addClass('active');
+
+            $('#sampleProductsContainer').hide();
+            $('#productsGrid').show();
 
             updateActiveFilter(subCat1Name, subCat2Name);
             loadProducts(categoryId, subCat1Id, subCat2Id);
-
             highlightBrand(subCat1Name);
             showOnlyBrand(subCat1Name);
         }
@@ -534,15 +682,18 @@
             currentSubCategory1Id = 0;
             currentSubCategory2Id = 0;
             currentBrand = '';
+            showingSampleProducts = false;
 
-            $('.category-level-1').each(function () {
-                $(this).find('.toggle-icon').removeClass('rotated');
-                $(this).find('.category-level-2').slideUp(300);
+            $('.category-pill-wrapper').each(function () {
                 $(this).removeClass('active');
+                $(this).find('.pill-arrow').removeClass('rotated');
+                $(this).find('.subcategory-dropdown').slideUp(300);
             });
 
-            $('.subcategory2-item').removeClass('active');
+            $('.subcategory-option').removeClass('active');
             $('#activeFilters').hide();
+            $('#sampleProductsContainer').hide();
+            $('#productsGrid').show();
 
             loadProducts(categoryId, null, null);
             showOnlyBrand('');
@@ -550,9 +701,7 @@
 
         function loadProducts(catId, subCat1Id, subCat2Id) {
             console.log('=== Loading Products ===');
-            console.log('Category ID:', catId);
-            console.log('SubCategory1 ID:', subCat1Id);
-            console.log('SubCategory2 ID:', subCat2Id);
+            console.log('Category ID:', catId, 'SubCat1:', subCat1Id, 'SubCat2:', subCat2Id);
 
             const $productsGrid = $('#productsGrid');
             const $loadingIndicator = $('#loadingIndicator');
@@ -569,9 +718,10 @@
                     subCategory2Id: subCat2Id
                 },
                 success: function (response) {
-                    console.log('Products loaded successfully:', response.data ? response.data.length : 0);
+                    console.log('Products loaded:', response.data ? response.data.length : 0);
 
                     $loadingIndicator.hide();
+                    $('#sampleProductsContainer').hide();
                     $productsGrid.show();
 
                     if (response.success && response.data && response.data.length > 0) {
@@ -579,13 +729,15 @@
                         updateProductCount(response.data.length);
                     } else {
                         $productsGrid.html(`
-                            <div class="col-12 text-center py-5">
-                                <i class="fas fa-hard-hat fa-3x text-muted mb-3"></i>
-                                <h5 class="text-muted">No Products Found</h5>
-                                <p class="text-muted">No products available for the selected filter.</p>
-                                <button class="btn btn-secondary" onclick="clearFilters()">
-                                    <i class="fas fa-redo me-2"></i>Show All Products
-                                </button>
+                            <div class="col-12">
+                                <div class="empty-state">
+                                    <i class="fas fa-inbox"></i>
+                                    <h4>No Products Found</h4>
+                                    <p>No products available for the selected filter.</p>
+                                    <button class="btn-contact-us" onclick="clearFilters()">
+                                        <i class="fas fa-redo me-2"></i>Show All Products
+                                    </button>
+                                </div>
                             </div>
                         `);
                         updateProductCount(0);
@@ -596,13 +748,15 @@
                     $loadingIndicator.hide();
                     $productsGrid.show();
                     $productsGrid.html(`
-                        <div class="col-12 text-center py-5">
-                            <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
-                            <h5 class="text-danger">Error Loading Products</h5>
-                            <p class="text-muted">Please try again later.</p>
-                            <button class="btn btn-secondary" onclick="loadProducts(${catId}, ${subCat1Id}, ${subCat2Id})">
-                                <i class="fas fa-redo me-2"></i>Retry
-                            </button>
+                        <div class="col-12">
+                            <div class="empty-state">
+                                <i class="fas fa-exclamation-triangle" style="color: #f56565;"></i>
+                                <h4>Error Loading Products</h4>
+                                <p>Please try again later.</p>
+                                <button class="btn-contact-us" onclick="loadProducts(${catId}, ${subCat1Id}, ${subCat2Id})">
+                                    <i class="fas fa-redo me-2"></i>Retry
+                                </button>
+                            </div>
                         </div>
                     `);
                 }
@@ -616,32 +770,22 @@
             products.forEach(function (product) {
                 const hasImage = product.imageUrl && product.imageUrl.trim() !== '';
 
-                let imageHtml = '';
-                if (hasImage) {
-                    imageHtml = `<img src="${product.imageUrl}" alt="${product.name}" class="product-image" onclick="GoToContact()">`;
-                } else {
-                    imageHtml = `
-                        <div class="no-image-placeholder">
-                            <i class="fas fa-hard-hat fa-2x text-muted"></i>
-                        </div>
-                    `;
-                }
+                let imageHtml = hasImage
+                    ? `<img src="${product.imageUrl}" alt="${product.name}" onclick="GoToContact()">`
+                    : `<div class="no-image"><i class="fas fa-image"></i></div>`;
 
                 const productHtml = `
-                    <div class="col-lg-4 col-md-6 col-sm-6 mb-3">
-                        <div class="card product-card h-100">
-                            <div class="product-image-container">
+                    <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
+                        <div class="product-card-modern">
+                            <div class="product-image-box">
                                 ${imageHtml}
                             </div>
-                            <div class="card-body p-3">
-                                <h6 class="product-title">${product.name}</h6>
-                                ${product.description ? `<p class="product-description small text-muted mb-2">${product.description.length > 60 ? product.description.substring(0, 60) + '...' : product.description}</p>` : '<p class="product-description small text-muted mb-2">Professional safety equipment for workplace protection.</p>'}
-
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <a href="/Home/Contact" class="btn btn-sm btn-outline-secondary">
-                                        <i class="fas fa-phone"></i> Enquire
-                                    </a>
-                                </div>
+                            <div class="product-info">
+                                <h6 class="product-name">${product.name}</h6>
+                                <p class="product-desc">${product.description ? (product.description.length > 60 ? product.description.substring(0, 60) + '...' : product.description) : 'Professional power tool for demanding applications.'}</p>
+                                <a href="/Home/Contact" class="product-btn">
+                                    <i class="fas fa-phone me-1"></i>Enquire Now
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -652,7 +796,7 @@
         }
 
         function updateProductCount(count) {
-            $('#productCount').html(`<i class="fas fa-box me-1"></i>${count} Product${count !== 1 ? 's' : ''}`);
+            $('#productCount').html(`<i class="fas fa-box me-1"></i>${count} Product${count !== 1 ? 's' : ''} Found`);
         }
 
         function updateActiveFilter(subCat1Name, subCat2Name) {
@@ -671,406 +815,684 @@
 
     <style>
         /* ===================================
-               PAGE BACKGROUND
-               =================================== */
+                                       PAGE BACKGROUND
+                                       =================================== */
         .page-content {
-            background: #f8f9fa;
+            background: #ffffff;
         }
 
         /* ===================================
-               BRAND SHOWCASE STYLES
-               =================================== */
-        .brand-showcase {
-            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
-            border: none;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                                       MODERN FILTER BAR
+                                       =================================== */
+        .modern-filter-bar {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 32px;
         }
 
-        .brand-showcase-title {
-            color: #ffffff;
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        }
-
-        .brand-container {
+        .filter-header-row {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            gap: 30px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .filter-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #111827;
+            display: flex;
+            align-items: center;
+        }
+
+            .filter-title i {
+                color: #6b7280;
+                font-size: 1rem;
+            }
+
+        .btn-reset {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            color: #374151;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+            .btn-reset:hover {
+                background: #f9fafb;
+                border-color: #9ca3af;
+                color: #111827;
+            }
+
+        .filter-content-row {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
             flex-wrap: wrap;
         }
 
-        .brand-item {
-            transition: all 0.3s ease;
-        }
-
-        .brand-card {
-            background: #ffffff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            text-align: center;
-            min-width: 220px;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-
-            .brand-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-                border-color: #4a5568;
-            }
-
-            .brand-card.active {
-                border-color: #4a5568;
-                background: linear-gradient(135deg, #f0f4f8 0%, #ffffff 100%);
-                box-shadow: 0 6px 16px rgba(74, 85, 104, 0.2);
-                transform: scale(1.03);
-            }
-
-        .brand-logo {
-            height: 100px;
-            width: auto;
-            max-width: 160px;
-            object-fit: contain;
-            transition: all 0.3s ease;
-            margin-bottom: 12px;
-        }
-
-        .brand-card:hover .brand-logo,
-        .brand-card.active .brand-logo {
-            transform: scale(1.08);
-        }
-
-        .brand-name {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #4a5568;
-            margin-top: 8px;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-        }
-
-        .brand-card.active .brand-name {
-            color: #2d3748;
-        }
-
-        /* ===================================
-               SIDEBAR STYLES
-               =================================== */
-        .category-sidebar {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 20px;
-            position: sticky;
-            top: 100px;
-            max-height: calc(100vh - 120px);
-            overflow-y: auto;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-            .category-sidebar::-webkit-scrollbar {
-                width: 5px;
-            }
-
-            .category-sidebar::-webkit-scrollbar-track {
-                background: #f8f9fa;
-            }
-
-            .category-sidebar::-webkit-scrollbar-thumb {
-                background: #cbd5e0;
-                border-radius: 5px;
-            }
-
-        .sidebar-header {
+        .quick-actions {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e2e8f0;
+            gap: 10px;
+            flex-shrink: 0;
         }
 
-            .sidebar-header h6 {
-                color: #2d3748;
-                font-weight: 600;
-            }
-
-        /* ===================================
-               CATEGORY TREE STYLES
-               =================================== */
-        .subcategory-tree {
-            margin-top: 15px;
-        }
-
-        .category-level-1 {
-            margin-bottom: 5px;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            background: transparent;
-        }
-
-        .category-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 12px;
-            background: #ffffff;
-            color: #4a5568;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            user-select: none;
-            border: 2px solid #e2e8f0;
-            position: relative;
-        }
-
-            .category-header:hover {
-                background: #f7fafc;
-                border-color: #cbd5e0;
-                transform: translateX(2px);
-            }
-
-        .category-level-1.active .category-header {
-            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+        .quick-btn {
+            background: #1f2937;
             color: #ffffff;
-            border-color: #2d3748;
-            box-shadow: 0 3px 10px rgba(45, 55, 72, 0.2);
-            font-weight: 600;
-            transform: translateX(3px);
+            border: none;
+            padding: 9px 18px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
         }
 
-            .category-level-1.active .category-header::before {
-                content: '';
-                position: absolute;
-                left: 0;
-                top: 0;
-                bottom: 0;
-                width: 4px;
-                background: #fff;
-                border-radius: 8px 0 0 8px;
+            .quick-btn:hover {
+                background: #111827;
+                color: #ffffff;
             }
 
-        .category-info {
+        /* Category Pills */
+        .category-pills-container {
             display: flex;
-            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
             flex: 1;
         }
 
-            .category-info i {
-                transition: all 0.3s ease;
+        .category-pill-wrapper {
+            position: relative;
+        }
+
+        .category-pill {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            color: #374151;
+            padding: 9px 16px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+            .category-pill:hover {
+                background: #f3f4f6;
+                border-color: #d1d5db;
             }
 
-        .category-level-1.active .category-info i {
-            color: #ffffff;
+            .category-pill.active,
+            .category-pill-wrapper.active .category-pill {
+                background: #1f2937;
+                border-color: #1f2937;
+                color: #ffffff;
+            }
+
+            .category-pill i.fas.fa-tag {
+                color: #6b7280;
+                font-size: 0.875rem;
+            }
+
+            .category-pill.active i,
+            .category-pill-wrapper.active .category-pill i {
+                color: #ffffff;
+            }
+
+        .pill-arrow {
+            transition: transform 0.2s ease;
+            font-size: 0.75rem;
         }
 
-        .category-name {
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .category-level-1.active .category-name {
-            font-weight: 700;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        }
-
-        .toggle-icon {
-            transition: transform 0.3s ease, color 0.3s ease;
-            font-size: 0.8rem;
-        }
-
-            .toggle-icon.rotated {
+            .pill-arrow.rotated {
                 transform: rotate(180deg);
             }
 
-        .category-level-1.active .toggle-icon {
-            color: #ffffff;
-        }
-
-        /* ===================================
-               SUBCATEGORY2 STYLES
-               =================================== */
-        .category-level-2 {
-            padding: 8px 0 5px 10px;
-            background: #f7fafc;
-            margin-top: 5px;
-            border-left: 3px solid #4a5568;
-        }
-
-        .subcategory2-item {
-            padding: 8px 12px;
-            margin: 3px 0;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            color: #4a5568;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
+        /* Subcategory Dropdown */
+        .subcategory-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
             background: #ffffff;
-            border: 2px solid #e2e8f0;
-            position: relative;
-        }
-
-            .subcategory2-item i {
-                font-size: 0.5rem;
-                transition: all 0.2s ease;
-                color: #a0aec0;
-            }
-
-            .subcategory2-item:hover {
-                background: #edf2f7;
-                border-color: #4a5568;
-                transform: translateX(3px);
-            }
-
-                .subcategory2-item:hover i {
-                    color: #4a5568;
-                    transform: scale(1.2);
-                }
-
-            .subcategory2-item.active {
-                background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
-                color: #ffffff;
-                border-color: #2d3748;
-                font-weight: 600;
-                box-shadow: 0 2px 6px rgba(45, 55, 72, 0.2);
-                transform: translateX(5px);
-            }
-
-                .subcategory2-item.active i {
-                    color: #ffffff;
-                    transform: scale(1.3);
-                }
-
-                .subcategory2-item.active::before {
-                    content: '';
-                    position: absolute;
-                    left: -3px;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    width: 6px;
-                    height: 60%;
-                    background: #ffffff;
-                    border-radius: 0 3px 3px 0;
-                }
-
-        /* ===================================
-               RESPONSIVE STYLES
-               =================================== */
-        @@media (max-width: 991px) {
-            .category-sidebar
-
-        {
-            position: relative;
-            top: 0;
-            margin-bottom: 25px;
-            max-height: none;
-        }
-
-        .brand-logo {
-            height: 90px;
-            max-width: 140px;
-        }
-
-        .brand-card {
-            padding: 18px;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 6px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            z-index: 100;
             min-width: 200px;
         }
 
-        .brand-showcase {
-            padding: 20px;
+        .subcategory-option {
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
         }
 
+            .subcategory-option:hover {
+                background: #f9fafb;
+                color: #111827;
+            }
+
+            .subcategory-option.active {
+                background: #1f2937;
+                color: #ffffff;
+            }
+
+                .subcategory-option.active i {
+                    color: #ffffff;
+                }
+
+            .subcategory-option i {
+                font-size: 0.5rem;
+                color: #9ca3af;
+            }
+
+        .no-categories {
+            color: #9ca3af;
+            font-size: 0.875rem;
+            padding: 10px 16px;
+        }
+
+        /* ===================================
+                           BRAND CARDS - UPDATED
+                           =================================== */
+        .brands-section {
+            margin-bottom: 40px;
+        }
+
+        .brands-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+            .brands-title i {
+                color: #6b7280;
+                font-size: 1.125rem;
+            }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .brand-card-modern {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+            .brand-card-modern:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                border-color: #d1d5db;
+            }
+
+                .brand-card-modern:hover .brand-overlay {
+                    opacity: 1;
+                }
+
+                .brand-card-modern:hover .brand-image-wrapper img {
+                    transform: scale(1.05);
+                }
+
+            .brand-card-modern.active {
+                border-color: #1f2937;
+                box-shadow: 0 0 0 2px rgba(31, 41, 55, 0.1);
+            }
+
+        .brand-image-wrapper {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            background: #f9fafb;
+            overflow: hidden;
+            position: relative;
+        }
+
+            .brand-image-wrapper img {
+                max-width: 180px;
+                max-height: 120px;
+                width: auto;
+                height: auto;
+                object-fit: contain;
+                transition: transform 0.3s ease;
+            }
+
+        .brand-label {
+            padding: 14px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #374151;
+            background: #ffffff;
+            border-top: 1px solid #f3f4f6;
+        }
+
+        .brand-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(31, 41, 55, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+            .brand-overlay i {
+                color: #ffffff;
+                font-size: 2rem;
+            }
+
+        /* ===================================
+                           RESPONSIVE - BRAND SECTION
+                           =================================== */
+        @@media (max-width: 991px) {
+            .brands-grid {
+                max-width: 600px;
+                gap: 20px;
+            }
+
+            .brand-image-wrapper {
+                height: 180px;
+                padding: 25px;
+            }
+
+                .brand-image-wrapper img {
+                    max-width: 160px;
+                    max-height: 100px;
+                }
         }
 
         @@media (max-width: 768px) {
-            .category-header
+            .brands-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+                max-width: 500px;
+            }
 
-        {
-            padding: 8px 10px;
-            font-size: 0.85rem;
-        }
+            .brand-image-wrapper {
+                height: 160px;
+                padding: 20px;
+            }
 
-        .subcategory2-item {
-            padding: 7px 10px;
-            font-size: 0.8rem;
-        }
+                .brand-image-wrapper img {
+                    max-width: 140px;
+                    max-height: 90px;
+                }
 
-        .brand-logo {
-            height: 80px;
-            max-width: 130px;
-        }
-
-        .brand-container {
-            gap: 25px;
-        }
-
-        .brand-card {
-            padding: 15px;
-            min-width: 180px;
-        }
-
-        .brand-showcase {
-            padding: 18px;
-        }
-
-        .brand-showcase-title {
-            font-size: 1.1rem;
-            margin-bottom: 18px;
-        }
-
-        .brand-name {
-            font-size: 0.95rem;
-        }
-
+            .brand-label {
+                font-size: 0.9375rem;
+                padding: 12px;
+            }
         }
 
         @@media (max-width: 576px) {
-            .category-sidebar
+            .brands-grid {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+            }
 
-        {
-            padding: 15px;
+            .brand-image-wrapper {
+                height: 180px;
+                padding: 25px;
+            }
+
+                .brand-image-wrapper img {
+                    max-width: 200px;
+                    max-height: 110px;
+                }
         }
 
-        .brand-logo {
-            height: 70px;
-            max-width: 110px;
+        /* ===================================
+                                       FILTER BADGES & INFO
+                                       =================================== */
+        .active-filter-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #1f2937;
+            color: #ffffff;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.875rem;
         }
 
-        .brand-showcase {
-            padding: 15px;
+        .filter-value {
+            font-weight: 500;
         }
 
-        .brand-container {
-            gap: 20px;
+        .filter-close {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: #ffffff;
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-left: 4px;
         }
 
-        .brand-card {
-            padding: 12px;
-            min-width: 150px;
+            .filter-close:hover {
+                background: rgba(255, 255, 255, 0.25);
+            }
+
+        .product-count-badge {
+            display: inline-flex;
+            align-items: center;
+            background: #f9fafb;
+            color: #374151;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 1px solid #e5e7eb;
         }
 
-        .brand-showcase-title {
-            font-size: 1rem;
-            margin-bottom: 15px;
+        /* ===================================
+                                       PRODUCT CARDS
+                                       =================================== */
+        .product-card-modern {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
-        .brand-name {
-            font-size: 0.9rem;
-            margin-top: 6px;
+            .product-card-modern:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                border-color: #d1d5db;
+            }
+
+        .product-image-box {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #f9fafb;
+            overflow: hidden;
         }
 
+            .product-image-box img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                transition: transform 0.3s ease;
+                cursor: pointer;
+            }
+
+        .product-card-modern:hover .product-image-box img {
+            transform: scale(1.05);
         }
+
+        .no-image {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d1d5db;
+            font-size: 3rem;
+        }
+
+        .product-info {
+            padding: 18px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-name {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            height: 44px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .product-desc {
+            color: #6b7280;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            height: 42px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            flex: 1;
+        }
+
+        .product-btn {
+            background: #1f2937;
+            color: #ffffff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+            .product-btn:hover {
+                background: #111827;
+                color: #ffffff;
+            }
+
+        /* ===================================
+                                       EMPTY STATE
+                                       =================================== */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: #f9fafb;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+
+            .empty-state i {
+                font-size: 3.5rem;
+                color: #d1d5db;
+                margin-bottom: 16px;
+            }
+
+            .empty-state h4 {
+                color: #111827;
+                font-weight: 600;
+                margin-bottom: 8px;
+                font-size: 1.125rem;
+            }
+
+            .empty-state p {
+                color: #6b7280;
+                margin-bottom: 20px;
+                font-size: 0.9375rem;
+            }
+
+        .btn-contact-us {
+            background: #1f2937;
+            color: #ffffff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.9375rem;
+        }
+
+            .btn-contact-us:hover {
+                background: #111827;
+                color: #ffffff;
+            }
+
+        /* ===================================
+                                       RESPONSIVE
+                                       =================================== */
+        @@media (max-width: 991px) {
+            .filter-content-row {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .quick-actions {
+                width: 100%;
+            }
+
+            .quick-btn {
+                flex: 1;
+                justify-content: center;
+            }
+
+            .brands-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 100%;
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .modern-filter-bar {
+                padding: 20px;
+            }
+
+            .filter-title {
+                font-size: 1.0625rem;
+            }
+
+            .brands-title {
+                font-size: 1.1875rem;
+            }
+
+            .brands-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-pills-container {
+                width: 100%;
+            }
+
+            .category-pill {
+                font-size: 0.8125rem;
+                padding: 8px 14px;
+            }
+
+            .product-image-box {
+                height: 180px;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .modern-filter-bar {
+                padding: 16px;
+            }
+
+            .filter-header-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .quick-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .quick-btn {
+                width: 100%;
+            }
+
+            .brands-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .brand-image-wrapper {
+                height: 120px;
+            }
+
+            .product-image-box {
+                height: 160px;
+            }
+        }
+        /* Sample Product Card Specific Styles */
+        .sample-product-card {
+            border: 2px solid #e5e7eb;
+        }
+
+            .sample-product-card:hover {
+                border-color: #1f2937;
+            }
+
+        .category-badge {
+            margin-bottom: 8px;
+        }
+
+            .category-badge .badge {
+                font-size: 0.75rem;
+                padding: 4px 10px;
+                font-weight: 600;
+            }
     </style>
 }

@@ -564,7 +564,7 @@ namespace RBHU.Controllers
 
         public IActionResult SafetyProducts(int? subCategory1Id = null, int? subCategory2Id = null)
         {
-            var categoryName = "SafetyTools";
+            var categoryName = "Safety Products";
             var categories = _productService.GetAllCategories();
             var category = categories.FirstOrDefault(c => c.Name.Contains(categoryName, StringComparison.OrdinalIgnoreCase));
 

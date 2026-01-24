@@ -6,23 +6,210 @@
 
 <!-- Professional Home Page with Image Slider -->
 <div class="rbhu-home-wrapper">
+    <!-- Catalog Modal -->
+    <div class="catalog-modal" id="catalogModal">
+        <div class="catalog-modal-overlay"></div>
+        <div class="catalog-modal-content">
+            <div class="catalog-modal-header">
+                <h3 class="catalog-modal-title">
+                    <i class="fas fa-layer-group me-2"></i>
+                    Browse Our Catalog
+                </h3>
+                <button class="catalog-modal-close" id="closeCatalogModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
 
+            <div class="catalog-modal-body">
+
+                <!-- Abrasives Category (Expandable) -->
+                <div class="modal-category">
+                    <div class="modal-category-header">
+                        <i class="fas fa-cog"></i>
+                        <span>Abrasives</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="modal-category-items">
+                        <a href="https://en.kovax.com/wp-content/themes/kovax/pdf/catalog/WP_AbrasivePaper.pdf"
+                           target="_blank"
+                           class="modal-item">
+                            <i class="fas fa-file-pdf"></i>
+                            Kovax
+                        </a>
+                        <a href="https://www.nortonabrasives.com/sites/mac3-acs-norton/files/2024-05/Norton_Industrial_Retail_Detail_Catalog-Jun-2023.pdf"
+                           target="_blank"
+                           class="modal-item">
+                            <i class="fas fa-file-pdf"></i>
+                            Norton
+                        </a>
+                        <a href="~/files/orient-catalog.pdf"
+                           target="_blank"
+                           class="modal-item">
+                            <i class="fas fa-file-pdf"></i>
+                            Orient
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CuttingTools (Bipico) - Direct Link -->
+                <div class="modal-category no-subcategories">
+                    <a href="https://www.bipico.com/data/Bipico%20Industries%20(Tools)%20Pvt.%20Ltd.%20Introduction%20Brochure.pdf"
+                       target="_blank"
+                       class="modal-category-header modal-category-link">
+                        <i class="fas fa-cut"></i>
+                        <i class="fas fa-file-pdf pdf-icon"></i>
+                        <span>CuttingTools (Bipico)</span>
+                    </a>
+                </div>
+
+                <!-- Pneumatics Category (Expandable) -->
+                <div class="modal-category">
+                    <div class="modal-category-header">
+                        <i class="fas fa-wind"></i>
+                        <span>Pneumatics</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="modal-category-items">
+                        <a href="https://www.cp.com/content/dam/brands/Chicago%20Pneumatic/cp-tools-literature/catalogues/industrial-tools/CP-INDUS_EN.pdf"
+                           target="_blank"
+                           class="modal-item">
+                            <i class="fas fa-file-pdf"></i>
+                            CP
+                        </a>
+                        <a href="https://cdn.norgren.com/pdf/en_NEX_LR.pdf"
+                           target="_blank"
+                           class="modal-item">
+                            <i class="fas fa-file-pdf"></i>
+                            IMI
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PowerTools (Makita) - Direct Link -->
+                <div class="modal-category no-subcategories">
+                    <a href="https://makita.in/wp-content/uploads/2024/05/Product-Catalogue_2024_view.pdf"
+                       target="_blank"
+                       class="modal-category-header modal-category-link">
+                        <i class="fas fa-bolt"></i>
+                        <i class="fas fa-file-pdf pdf-icon"></i>
+                        <span>PowerTools (Makita)</span>
+                    </a>
+                </div>
+
+            </div>
+
+           @*  <div class="catalog-modal-body">
+
+                <!-- Abrasives Category (Expandable) -->
+                <div class="modal-category no-subcategories">
+                    <a href="https://www.bipico.com/data/Bipico%20Industries%20(Tools)%20Pvt.%20Ltd.%20Introduction%20Brochure.pdf"
+                       target="_blank"
+                       class="modal-category-header modal-category-link">
+                        <i class="fas fa-cut"></i>
+                        <i class="fas fa-file-pdf pdf-icon"></i>
+                        <span>Abrasives(Kligspor)</span>
+                    </a>
+                </div>
+
+                <!-- Pneumatics Category (Expandable) -->
+                <div class="modal-category">
+                    <div class="modal-category-header">
+                        <i class="fas fa-wind"></i>
+                        <span>Pneumatics</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="modal-category-items">
+                        <a href="https://www.cp.com/content/dam/brands/Chicago%20Pneumatic/cp-tools-literature/catalogues/industrial-tools/CP-INDUS_EN.pdf"
+                           target="_blank"
+                           class="modal-item">
+                            <i class="fas fa-file-pdf"></i>
+                            CP
+                        </a>
+                        <a href="https://www.fujitools.com/en/products/processes/catalog-and-leaflets"
+                           target="_blank"
+                           class="modal-item">
+                            <i class="fas fa-file-pdf"></i>
+                            Fuji
+                        </a>
+                        <a href="https://cdn.norgren.com/pdf/en_NEX_LR.pdf"
+                           target="_blank"
+                           class="modal-item">
+                            <i class="fas fa-file-pdf"></i>
+                            IMI Norgren
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PowerTools (Makita) - Direct Link -->
+                <div class="modal-category">
+                    <div class="modal-category-header">
+                        <i class="fas fa-wind"></i>
+                        <span>Power Tools and Accessories</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="modal-category-items">
+                        <a href="https://qrco.de/beW2dK?trackSharing=1"
+                           target="_blank"
+                           class="modal-item">
+                            <i class="fas fa-file-pdf"></i>
+                            Bosch
+                        </a>
+                        <a href="https://makita.in/catalog/"
+                           target="_blank"
+                           class="modal-item">
+                            <i class="fas fa-file-pdf"></i>
+                            Makita
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Safety Products Category (Expandable) -->
+                <div class="modal-category">
+                    <div class="modal-category-header">
+                        <i class="fas fa-wind"></i>
+                        <span>Safety Products</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="modal-category-items">
+                        <a href="https://acmesafety.in/catalogues"
+                           target="_blank"
+                           class="modal-item">
+                            <i class="fas fa-file-pdf"></i>
+                            Safewell
+                        </a>
+                        <a href="https://www.hillsonshoes.com/"
+                           target="_blank"
+                           class="modal-item">
+                            <i class="fas fa-file-pdf"></i>
+                            Hillson
+                        </a>
+                    </div>
+                </div>
+            </div> *@
+
+            <div class="catalog-modal-footer">
+                <a asp-area="" asp-controller="Home" asp-action="Products" class="modal-view-all-btn">
+                    View All Products
+                    <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
     <!-- Premium Hero Section with Image Slider -->
     <section class="hero-section-professional">
         <div class="hero-background-slider">
 
             <!-- Slide 2 - Power Tools Workshop -->
-            <div class="hero-slide"
+            <div class="hero-slide active"
                  style="background-image: url('@Url.Content("~/images/carousel/cimatron-2025-home-hero.jpg")');">
                 <div class="slide-overlay"></div>
             </div>
 
             <!-- Slide 1 - Industrial Manufacturing -->
-            <div class="hero-slide active"
-                 style="background-image: url('@Url.Content("~/images/carousel/Dril-Back.jpg")');">
+            <div class="hero-slide"
+                 style="background-image: url('@Url.Content("~/images/carousel/PowerTools_Banners-Makita_.jpg")');">
                 <div class="slide-overlay"></div>
             </div>
-     
 
             <!-- Slide 3 - Industrial Factory -->
             <div class="hero-slide"
@@ -59,10 +246,10 @@
                         </p>
 
                         <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
-                            <a href="#products" class="btn-hero-primary">
-                                <span>Explore Our Products</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
+                            <button class="btn-hero-primary" id="openCatalogModal">
+                                Browse Catalog
+                                <i class="fas fa-chevron-down ms-2"></i>
+                            </button>
                             <a asp-controller="Home" asp-action="Contact" class="btn-hero-secondary">
                                 <i class="fas fa-phone"></i>
                                 <span>Get in Touch</span>
@@ -112,267 +299,6 @@
         </div>
     </section>
 
-    <!-- Premium Features Section -->
-    <section class="features-section">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="feature-box">
-                        <div class="feature-icon-wrapper">
-                            <i class="fas fa-certificate"></i>
-                        </div>
-                        <h3>Authorized Dealer</h3>
-                        <p>Official partnerships with leading global industrial brands</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature-box">
-                        <div class="feature-icon-wrapper">
-                            <i class="fas fa-shipping-fast"></i>
-                        </div>
-                        <h3>Fast Delivery</h3>
-                        <p>Quick and reliable dispatch across all of India</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="feature-box">
-                        <div class="feature-icon-wrapper">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <h3>Expert Support</h3>
-                        <p>Professional technical guidance and consultation</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="feature-box">
-                        <div class="feature-icon-wrapper">
-                            <i class="fas fa-shield-check"></i>
-                        </div>
-                        <h3>Quality Assured</h3>
-                        <p>Premium certified industrial equipment</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Professional Products Section -->
-    <section class="products-section" id="products">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-label">Our Product Categories</span>
-                <h2 class="section-title">
-                    Industrial Solutions for
-                    <span class="title-highlight">Every Application</span>
-                </h2>
-                <p class="section-subtitle">
-                    Comprehensive range of professional tools and equipment from the world's most trusted manufacturers
-                </p>
-            </div>
-
-            <div class="row g-4">
-                <!-- Pneumatic Tools -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="product-card">
-                        <div class="product-image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1581092583537-20d51876f4f7?w=600&q=80"
-                                 alt="Pneumatic Tools" loading="lazy">
-                            <div class="product-image-overlay"></div>
-                            <span class="product-tag">Premium</span>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-icon-box">
-                                <i class="fas fa-wind"></i>
-                            </div>
-                            <h3>Pneumatic Tools & Systems</h3>
-                            <p>Chicago Pneumatic & Fuji industrial-grade pneumatic solutions</p>
-                            <a href="/Product/Pneumatic" class="product-link">
-                                View Products <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Power Tools -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="product-card">
-                        <div class="product-image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=600&q=80"
-                                 alt="Power Tools" loading="lazy">
-                            <div class="product-image-overlay"></div>
-                            <span class="product-tag featured">Featured</span>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-icon-box">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                            <h3>Power Tools & Accessories</h3>
-                            <p>Makita & Bosch professional power tools for precision work</p>
-                            <a href="/Product/PowerTools" class="product-link">
-                                View Products <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Abrasives -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="product-card">
-                        <div class="product-image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&q=80"
-                                 alt="Abrasives" loading="lazy">
-                            <div class="product-image-overlay"></div>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-icon-box">
-                                <i class="fas fa-circle-notch"></i>
-                            </div>
-                            <h3>Industrial Abrasives</h3>
-                            <p>Klingspor premium coated and bonded abrasives</p>
-                            <a href="/Product/Abrasives" class="product-link">
-                                View Products <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cutting Tools -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="product-card">
-                        <div class="product-image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=600&q=80"
-                                 alt="Cutting Tools" loading="lazy">
-                            <div class="product-image-overlay"></div>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-icon-box">
-                                <i class="fas fa-cut"></i>
-                            </div>
-                            <h3>Precision Cutting Tools</h3>
-                            <p>Advanced metalworking and machining solutions</p>
-                            <a href="/Product/CuttingTools" class="product-link">
-                                View Products <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Safety Equipment -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                    <div class="product-card">
-                        <div class="product-image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1603796846097-bee99e4a601f?w=600&q=80"
-                                 alt="Safety Equipment" loading="lazy">
-                            <div class="product-image-overlay"></div>
-                            <span class="product-tag essential">Essential</span>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-icon-box">
-                                <i class="fas fa-hard-hat"></i>
-                            </div>
-                            <h3>Safety Equipment</h3>
-                            <p>Comprehensive industrial worker protection solutions</p>
-                            <a href="/Product/SafetyProducts" class="product-link">
-                                View Products <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hoses & Belts -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-                    <div class="product-card">
-                        <div class="product-image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80"
-                                 alt="Hoses & Belts" loading="lazy">
-                            <div class="product-image-overlay"></div>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-icon-box">
-                                <i class="fas fa-cogs"></i>
-                            </div>
-                            <h3>Hoses & Belt Systems</h3>
-                            <p>High-quality industrial transmission solutions</p>
-                            <a href="/Product/Hoses" class="product-link">
-                                View Products <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Industries Section -->
-    <section class="industries-section">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-label">Industries We Serve</span>
-                <h2 class="section-title">
-                    Trusted Partners Across
-                    <span class="title-highlight">Multiple Sectors</span>
-                </h2>
-                <p class="section-subtitle">
-                    Delivering specialized solutions for diverse industrial applications
-                </p>
-            </div>
-
-            <div class="row g-4">
-                <div class="col-lg-2 col-md-4 col-6" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="industry-box">
-                        <div class="industry-icon-wrapper">
-                            <i class="fas fa-pills"></i>
-                        </div>
-                        <h4>Pharmaceutical</h4>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-6" data-aos="zoom-in" data-aos-delay="150">
-                    <div class="industry-box">
-                        <div class="industry-icon-wrapper">
-                            <i class="fas fa-blender"></i>
-                        </div>
-                        <h4>White Goods</h4>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-6" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="industry-box">
-                        <div class="industry-icon-wrapper">
-                            <i class="fas fa-plane"></i>
-                        </div>
-                        <h4>Aerospace</h4>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-6" data-aos="zoom-in" data-aos-delay="250">
-                    <div class="industry-box">
-                        <div class="industry-icon-wrapper">
-                            <i class="fas fa-train"></i>
-                        </div>
-                        <h4>Railways</h4>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-6" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="industry-box">
-                        <div class="industry-icon-wrapper">
-                            <i class="fas fa-car"></i>
-                        </div>
-                        <h4>Automotive</h4>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-6" data-aos="zoom-in" data-aos-delay="350">
-                    <div class="industry-box">
-                        <div class="industry-icon-wrapper">
-                            <i class="fas fa-industry"></i>
-                        </div>
-                        <h4>Metal Working</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Brand Partners Section -->
     <section class="brands-section">
         <div class="container">
@@ -409,9 +335,6 @@
                 <div class="brand-item" data-aos="fade-up" data-aos-delay="400">
                     <img src="~/images/Product_Brands/klingspor.jpg" alt="Klingspor" loading="lazy">
                 </div>
-                <div class="brand-item" data-aos="fade-up" data-aos-delay="450">
-                    <img src="~/images/Product_Brands/Kovax.jpg" alt="Kovax" loading="lazy">
-                </div>
                 <div class="brand-item" data-aos="fade-up" data-aos-delay="500">
                     <img src="~/images/Product_Brands/Makita.jpg" alt="Makita" loading="lazy">
                 </div>
@@ -433,14 +356,129 @@
                 <div class="brand-item" data-aos="fade-up" data-aos-delay="800">
                     <img src="~/images/Product_Brands/Safewell.jpg" alt="Safeweld" loading="lazy">
                 </div>
+                <div class="brand-item" data-aos="fade-up" data-aos-delay="800">
+                    <img src="~/images/product_brands/bosch.jpg" alt="Bosch" loading="lazy"/>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Customer Carousel Section -->
+    <section class="customer-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">Our Valued Clients</span>
+                <h2 class="section-title">
+                    Trusted by
+                    <span class="title-highlight">Industry Leaders</span>
+                </h2>
+                <p class="section-subtitle">
+                    Partnering with leading organizations across multiple industries
+                </p>
+            </div>
+
+            <div class="customer-carousel-wrapper">
+                <button class="carousel-btn prev-btn" aria-label="Previous customers">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <div class="customer-carousel">
+                    <div class="customer-track">
+                        <div class="customer-logo-item">
+                            <img src="~/images/Customer logo/Commscope.jpg" alt="Commscope" loading="lazy">
+                        </div>
+                        <div class="customer-logo-item">
+                            <img src="~/images/Customer logo/Exel.jpg" alt="Exel" loading="lazy">
+                        </div>
+                        <div class="customer-logo-item">
+                            <img src="~/images/Customer logo/Global-Rail.jpg" alt="Global Rail" loading="lazy">
+                        </div>
+                        <div class="customer-logo-item">
+                            <img src="~/images/Customer logo/Goa-ship.jpg" alt="Goa Shipyard" loading="lazy">
+                        </div>
+                        <div class="customer-logo-item">
+                            <img src="~/images/Customer logo/Himcast.jpg" alt="Himcast" loading="lazy">
+                        </div>
+                        <div class="customer-logo-item">
+                            <img src="~/images/Customer logo/IFB.jpg" alt="IFB" loading="lazy">
+                        </div>
+                        <div class="customer-logo-item">
+                            <img src="~/images/Customer logo/Josmo.jpg" alt="Josmo" loading="lazy">
+                        </div>
+                        <div class="customer-logo-item">
+                            <img src="~/images/Customer logo/Kineco.jpg" alt="Kineco" loading="lazy">
+                        </div>
+                        <div class="customer-logo-item">
+                            <img src="~/images/Customer logo/MRF.png" alt="MRF" loading="lazy">
+                        </div>
+                        <div class="customer-logo-item">
+                            <img src="~/images/Customer logo/TechForce.jpg" alt="TechForce" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-btn next-btn" aria-label="Next customers">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industries Section -->
+    <section class="industries-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-label">Industries We Serve</span>
+                <h2 class="section-title">
+                    Trusted Partners Across
+                    <span class="title-highlight">Multiple Sectors</span>
+                </h2>
+                <p class="section-subtitle">
+                    Delivering specialized solutions for diverse industrial applications
+                </p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6 col-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="industry-box">
+                        <div class="industry-icon-wrapper">
+                            <img src="images/Industry/aerospace.jpg" alt="Aerospace Industry">
+                        </div>
+                        <h4>Aerospace</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-6" data-aos="zoom-in" data-aos-delay="250">
+                    <div class="industry-box">
+                        <div class="industry-icon-wrapper">
+                            <img src="images/Industry/railways.png" alt="Railways Industry">
+                        </div>
+                        <h4>Railways</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-6" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="industry-box">
+                        <div class="industry-icon-wrapper">
+                            <img src="images/Industry/automotive.jpeg" alt="Automotive Industry">
+                        </div>
+                        <h4>Automotive</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-6" data-aos="zoom-in" data-aos-delay="350">
+                    <div class="industry-box">
+                        <div class="industry-icon-wrapper">
+                            <img src="images/Industry/metal work.png" alt="Metal Working Industry">
+                        </div>
+                        <h4>Metal Working</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
     <!-- Call to Action Section -->
     <section class="cta-section">
         <div class="cta-background">
-            <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1920&q=80"
+            <img src="~/images/shake-hand.jpg"
                  alt="Industrial Excellence" loading="lazy">
             <div class="cta-overlay"></div>
         </div>
@@ -469,6 +507,69 @@
 
 <script>
     // Hero Image Slider
+     // Catalog Modal Functionality
+    document.addEventListener('DOMContentLoaded', function () {
+        const modal = document.getElementById('catalogModal');
+        const openBtn = document.getElementById('openCatalogModal');
+        const closeBtn = document.getElementById('closeCatalogModal');
+        const overlay = document.querySelector('.catalog-modal-overlay');
+        const categoryHeaders = document.querySelectorAll('.modal-category-header');
+
+
+
+       // Open modal
+        if (openBtn) {
+            openBtn.addEventListener('click', function () {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+
+        // Close modal function
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            // Close all open categories
+            document.querySelectorAll('.modal-category').forEach(cat => {
+                cat.classList.remove('active');
+            });
+        }
+
+        // Close on X button
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeModal);
+        }
+
+        // Close on overlay click
+        if (overlay) {
+            overlay.addEventListener('click', closeModal);
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // Toggle category items
+        categoryHeaders.forEach(header => {
+            header.addEventListener('click', function (e) {
+                // Skip if this is a link (category without subcategories)
+                if (this.tagName === 'A') {
+                    return; // Let the link work normally
+                }
+
+                const category = this.parentElement;
+
+                // Only toggle if category has subcategories
+                if (!category.classList.contains('no-subcategories')) {
+                    category.classList.toggle('active');
+                }
+            });
+        });
+    });
+
     (function() {
         const slides = document.querySelectorAll('.hero-slide');
         const indicators = document.querySelectorAll('.slider-indicators .indicator');
@@ -518,6 +619,66 @@
 
         // Start autoplay
         startAutoplay();
+    })();
+
+    // Customer Carousel
+    (function() {
+        const track = document.querySelector('.customer-track');
+        const prevBtn = document.querySelector('.customer-section .prev-btn');
+        const nextBtn = document.querySelector('.customer-section .next-btn');
+        const items = document.querySelectorAll('.customer-logo-item');
+
+        if (!track || !prevBtn || !nextBtn || items.length === 0) return;
+
+        let currentIndex = 0;
+        const totalItems = items.length;
+
+        function updateCarousel() {
+            const itemWidth = items[0].offsetWidth;
+            const gap = 24;
+            const offset = -(currentIndex * (itemWidth + gap));
+            track.style.transform = `translateX(${offset}px)`;
+
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex >= totalItems - getVisibleItems();
+        }
+
+        function getVisibleItems() {
+            if (window.innerWidth >= 1200) return 5;
+            if (window.innerWidth >= 992) return 4;
+            if (window.innerWidth >= 768) return 3;
+            if (window.innerWidth >= 576) return 2;
+            return 1;
+        }
+
+        function nextSlide() {
+            const maxIndex = totalItems - getVisibleItems();
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+                updateCarousel();
+            }
+        }
+
+        function prevSlide() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                currentIndex = 0;
+                updateCarousel();
+            }, 250);
+        });
+
+        updateCarousel();
     })();
 
     // Counter Animation
