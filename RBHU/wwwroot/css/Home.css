@@ -9,6 +9,10 @@
     width: 100%;
     overflow-x: hidden;
 }
+
+
+
+
 /* ===== CATALOG MODAL STYLES ===== */
 .catalog-modal {
     position: fixed;
@@ -367,7 +371,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 100%);
+    background: linear-gradient(90deg, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0.4) 100%);
 }
 
 /* Hero Content */
@@ -404,12 +408,6 @@
     color: #fff;
 }
 
-.hero-title-highlight {
-    display: block;
-    color: #3385c3;
-    margin-top: 8px;
-}
-
 .hero-description {
     font-size: 18px;
     line-height: 1.7;
@@ -430,19 +428,21 @@
     align-items: center;
     gap: 12px;
     padding: 16px 32px;
-    background: linear-gradient(0deg, #262626 0%, #0066B3 100%) !important;
+    background: linear-gradient(135deg, #3385C3 0%, #0066B3 100%) !important;
     color: #fff;
     font-size: 16px;
     font-weight: 600;
     text-decoration: none;
     border-radius: 4px;
     transition: all 0.3s ease;
+    box-shadow: none !important;
+    border: none !important;
 }
 
     .btn-hero-primary:hover {
-        background: linear-gradient(0deg, #262626 0%, #0066B3 100%) !important;
+        background: linear-gradient(135deg, #0066B3 0%, #004F8C 100%) !important;
         transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(224, 4, 32, 0.3);
+        box-shadow: 0 8px 20px rgba(0, 102, 179, 0.4);
         color: #fff;
         text-decoration: none;
     }
@@ -472,7 +472,7 @@
 .hero-stats-container {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: 20px;
     flex-wrap: wrap;
 }
 
@@ -481,16 +481,14 @@
 }
 
 .stat-value {
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 700;
-    color: #3385c3;
+    color: #0066B3;
     line-height: 1;
-    margin-bottom: 8px;
 }
 
 .stat-label {
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.8);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -550,6 +548,77 @@
         background: #3385c3;
         border-radius: 4px;
     }
+/* ========== STATS SECTION ========== */
+.stats-section {
+    position: relative;
+    padding: 80px 0;
+    background: linear-gradient(135deg, #004F8C 0%, #0066B3 50%, #004F8C 100%);
+    overflow: hidden;
+}
+
+    /* Background Image */
+    .stats-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('/images/cargoship.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: 0;
+    }
+
+    .stats-section::before {
+        opacity: 0.8;
+    }
+
+    .stats-section .container {
+        position: relative;
+        z-index: 2;
+    }
+
+.stat-box {
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+}
+
+.stat-number {
+    font-size: clamp(48px, 6vw, 72px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 16px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.stat-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* Separator Lines Between Stats */
+.stat-box::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.col-lg-3:last-child .stat-box::after {
+    display: none;
+}
 
 /* ========== FEATURES SECTION ========== */
 .features-section {
@@ -1179,25 +1248,25 @@ html {
     transition: all 0.3s ease;
 }
 
-.customer-logo-item:hover {
-    background: #fff;
-    border-color: #3385c3;
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
+    .customer-logo-item:hover {
+        background: #fff;
+        border-color: #3385c3;
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
 
-.customer-logo-item img {
-    max-width: 85%;
-    max-height: 100px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-}
+    .customer-logo-item img {
+        max-width: 85%;
+        max-height: 100px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+    }
 
-.customer-logo-item:hover img {
-    transform: scale(1.1);
-}
+    .customer-logo-item:hover img {
+        transform: scale(1.1);
+    }
 
 .carousel-btn {
     position: absolute;
@@ -1218,16 +1287,16 @@ html {
     z-index: 10;
 }
 
-.carousel-btn:hover:not(:disabled) {
-    background: #3385c3;
-    border-color: #3385c3;
-    color: #fff;
-}
+    .carousel-btn:hover:not(:disabled) {
+        background: #3385c3;
+        border-color: #3385c3;
+        color: #fff;
+    }
 
-.carousel-btn:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-}
+    .carousel-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
 
 .prev-btn {
     left: 0;
@@ -1248,33 +1317,33 @@ html {
     .customer-section {
         padding: 60px 0;
     }
-    
+
     .customer-logo-item {
         flex: 0 0 calc(33.333% - 16px);
         padding: 36px 20px;
         min-height: 160px;
     }
-    
-    .customer-logo-item img {
-        max-height: 90px;
-    }
+
+        .customer-logo-item img {
+            max-height: 90px;
+        }
 }
 
 @media (max-width: 767px) {
     .customer-carousel-wrapper {
         padding: 0 50px;
     }
-    
+
     .customer-logo-item {
         flex: 0 0 calc(50% - 12px);
         padding: 32px 20px;
         min-height: 150px;
     }
-    
-    .customer-logo-item img {
-        max-height: 80px;
-    }
-    
+
+        .customer-logo-item img {
+            max-height: 80px;
+        }
+
     .carousel-btn {
         width: 40px;
         height: 40px;
@@ -1286,20 +1355,20 @@ html {
     .customer-section {
         padding: 50px 0;
     }
-    
+
     .customer-carousel-wrapper {
         padding: 0 45px;
     }
-    
+
     .customer-logo-item {
         flex: 0 0 100%;
         min-height: 140px;
     }
-    
-    .customer-logo-item img {
-        max-height: 70px;
-    }
-    
+
+        .customer-logo-item img {
+            max-height: 70px;
+        }
+
     .carousel-btn {
         width: 36px;
         height: 36px;

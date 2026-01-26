@@ -32,7 +32,7 @@
                         <span>office@aniketsalesagencies.com</span>
                     </a>
                     <a href="tel:+917090979999" class="top-bar-item">
-                        <i class="fas fa-phone-alt"></i>
+                        <i class="fas fa-phone"></i>
                         <span>+91 7090979999</span>
                     </a>
                 </div>
@@ -70,13 +70,13 @@
                     </div>
                 </div>
             </a>
-            
+
             <button class="navbar-toggler-professional" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="toggler-line"></span>
                 <span class="toggler-line"></span>
                 <span class="toggler-line"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav-professional ms-auto">
                     <li class="nav-item-professional">
@@ -89,7 +89,7 @@
                             <span>About Us</span>
                         </a>
                     </li>
-                    
+
                     <li class="nav-item-professional products-nav-item">
                         <a class="nav-link-professional products-nav-trigger" asp-action="Products" asp-controller="Home">
                             <span>Products</span>
@@ -116,14 +116,14 @@
                             <span>Special Offers</span>
                         </a>
                     </li>
-                    
+
                     <li class="nav-item-professional">
                         <a class="nav-link-professional" asp-area="" asp-controller="Home" asp-action="Contact">
                             <span>Contact</span>
                         </a>
                     </li>
-                   
-                  
+
+
                     <li class="nav-item-professional nav-item-login">
                         <a class="nav-link-professional" onclick="AdminLogin()">
                             <i class="fas fa-user-circle"></i>
@@ -142,9 +142,9 @@
         <i class="fas fa-envelope"></i>
         <span class="fab-label">Contact</span>
     </button>
-    
+
     <input id="hiddenVar" value="@uniqueUserIdentifier" hidden />
-    
+
     <!-- Professional Contact Modal -->
     <div class="modal fade contact-modal-professional" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -315,11 +315,11 @@
                         </div>
                     </div>
 
-                   
+
                 </div>
             </div>
         </div>
-        
+
         <div class="footer-bottom">
             <div class="container">
                 <div class="footer-bottom-content">
@@ -337,7 +337,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
 
     @RenderSection("Scripts", required: false)
-    
+
     <script>
         let categoriesData = [];
         let hoverTimeouts = {};
@@ -503,12 +503,12 @@
             }
 
             const grid = $('<div>').addClass('mega-menu-grid');
-            
+
             categoriesData.forEach(function (category) {
                 const categoryCard = createCategoryCard(category);
                 grid.append(categoryCard);
             });
-            
+
             container.append(grid);
         }
 
