@@ -1,741 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Contact Us";
 }
-<style>
-    /* ==========================================
-       CONTACT PAGE - MODERN FLAT THEME
-       Clean, Industrial, Professional
-       ========================================== */
 
-    .page-content {
-        width: 100%;
-        overflow-x: hidden;
-        background: #f8fafc;
-        font-family: 'DM Sans', sans-serif;
-    }
-
-    .section-padding {
-        padding: 80px 0 !important;
-        margin-top: 80px !important;
-    }
-
-    .section-title {
-        font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
-        margin-bottom: 1rem !important;
-        font-weight: 700;
-        color: #1a1a1a;
-        text-transform: uppercase;
-        letter-spacing: -1px;
-    }
-
-    .lead {
-        font-size: clamp(1rem, 2vw, 1.25rem) !important;
-        margin-bottom: 3rem !important;
-        color: #6c757d;
-    }
-
-    /* ========== CONTACT FORM ========== */
-    .contact-form {
-        background: white;
-        padding: 40px;
-        border-radius: 0;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-        margin-bottom: 30px;
-        border-left: 4px solid linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-    }
-
-        .contact-form h4 {
-            font-size: clamp(1.05rem, 2.5vw, 1.5rem);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
-        }
-
-    .form-label {
-        font-weight: 600;
-        font-size: clamp(0.8rem, 1.8vw, 0.95rem);
-        margin-bottom: 0.5rem;
-        color: #2d3748;
-    }
-
-    .form-control {
-        padding: 12px 16px;
-        border: 2px solid #e5e5e5;
-        border-radius: 0;
-        font-size: clamp(0.8rem, 1.8vw, 1rem);
-        transition: all 0.3s ease;
-        background: white;
-        width: 100%;
-    }
-
-        .form-control:focus {
-            border-color: #FFA500;
-            box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.2);
-            background: white;
-            outline: none;
-        }
-
-        .form-control.is-invalid {
-            border-color: #e53e3e;
-            background: #fff5f5;
-        }
-
-    .invalid-feedback {
-        display: none;
-        color: #e53e3e;
-        font-size: clamp(0.75rem, 1.6vw, 0.875rem);
-        margin-top: 0.25rem;
-        font-weight: 500;
-    }
-
-    .form-text {
-        font-size: clamp(0.7rem, 1.4vw, 0.85rem);
-        color: #6c757d;
-    }
-
-    /* ========== SUBMIT BUTTON ========== */
-    .btn-submit {
-        background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-        border: 2px solid linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-        padding: 14px 40px;
-        border-radius: 0;
-        font-weight: 600;
-        font-size: clamp(0.9rem, 2vw, 1.1rem);
-        transition: all 0.3s ease;
-        color: white;
-        width: 100%;
-        max-width: 300px;
-        display: block;
-        margin: 0 auto;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-
-    @@media (min-width: 768px) {
-        .btn-submit
-
-    {
-        width: auto;
-        margin: 0;
-    }
-
-    }
-
-    .btn-submit:hover {
-        background: #fff;
-        color: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-        border-color: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-    }
-
-    .btn-submit:disabled {
-        background: #a0aec0;
-        border-color: #a0aec0;
-        transform: none;
-        box-shadow: none;
-        cursor: not-allowed;
-    }
-
-    /* ========== CONTACT INFO SIDEBAR ========== */
-    .contact-info {
-        background: #1a1a1a;
-        color: white;
-        padding: 40px;
-        border-radius: 0;
-        height: fit-content;
-        border: 4px solid linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-        border-left: 8px solid linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-    }
-
-    @@media (min-width: 992px) {
-        .contact-info
-
-    {
-        position: sticky;
-        top: 100px;
-    }
-
-    }
-
-    .contact-info h4 {
-        font-size: clamp(1.05rem, 2.5vw, 1.5rem);
-        font-weight: 700;
-        margin-bottom: 1.5rem;
-        text-transform: uppercase;
-        letter-spacing: -0.5px;
-    }
-
-    /* ========== OFFICE TABS ========== */
-    .office-tab {
-        background: rgba(255, 255, 255, 0.1);
-        color: white;
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        width: 100%;
-        text-align: left;
-        padding: 12px 15px;
-        margin-bottom: 8px;
-        border-radius: 0;
-        transition: all 0.3s ease;
-        font-weight: 600;
-        text-transform: uppercase;
-        font-size: 13px;
-        letter-spacing: 0.5px;
-    }
-
-        .office-tab:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            border-left-width: 4px;
-        }
-
-        .office-tab.active {
-            background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%) !important;
-            color: white;
-            font-weight: 700;
-            border-color: #fff;
-            border-left-width: 6px;
-        }
-
-    /* ========== OFFICE DETAILS ========== */
-    .office-details {
-        background: rgba(255, 255, 255, 0.1);
-        padding: 20px;
-        border-radius: 0;
-        border-left: 3px solid linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-    }
-
-        .office-details h5 {
-            color: white;
-            font-size: 1.1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
-            margin-bottom: 16px;
-        }
-
-        .office-details p {
-            color: white;
-            line-height: 1.8;
-        }
-
-    .quick-contact-btns .btn {
-        background: white;
-        color: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-        font-weight: 600;
-        transition: all 0.3s ease;
-        border-radius: 0;
-        border: 2px solid white;
-        text-transform: uppercase;
-        font-size: 13px;
-        letter-spacing: 0.5px;
-    }
-
-        .quick-contact-btns .btn:hover {
-            background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-            color: white;
-            border-color: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-        }
-
-    /* ========== CONTACT ITEMS ========== */
-    .contact-item {
-        display: flex;
-        align-items: flex-start;
-        margin-bottom: 20px;
-        padding: 15px;
-        border-radius: 0;
-        background: rgba(255, 255, 255, 0.1);
-        transition: all 0.3s ease;
-        border-left: 3px solid transparent;
-    }
-
-        .contact-item:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-left-color: #ffc107;
-        }
-
-        .contact-item i {
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            margin-right: 15px;
-            margin-top: 2px;
-            width: 30px;
-            flex-shrink: 0;
-        }
-
-        .contact-item strong {
-            display: block;
-            margin-bottom: 5px;
-            font-size: clamp(0.9rem, 1.8vw, 1.05rem);
-            text-transform: uppercase;
-        }
-
-        .contact-item div {
-            font-size: clamp(0.8rem, 1.6vw, 0.95rem);
-            line-height: 1.6;
-        }
-
-        .contact-item a {
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            word-break: break-word;
-        }
-
-            .contact-item a:hover {
-                color: #ffc107;
-            }
-
-    /* ========== SOCIAL LINKS ========== */
-    .social-links {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-        margin-top: 15px;
-    }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border-radius: 0;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            font-size: clamp(0.9rem, 1.8vw, 1.1rem);
-        }
-
-            .social-links a:hover {
-                background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-                color: white;
-                border-color: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-            }
-
-    /* ========== QUICK CONTACT CARDS ========== */
-    .quick-contact-card {
-        background: rgba(255, 255, 255, 0.1);
-        padding: 15px;
-        border-radius: 0;
-        transition: all 0.3s ease;
-        margin-bottom: 12px;
-        border-left: 3px solid transparent;
-    }
-
-        .quick-contact-card:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-left-color: #ffc107;
-        }
-
-        .quick-contact-card i {
-            font-size: clamp(1.2rem, 2.2vw, 1.5rem);
-        }
-
-        .quick-contact-card strong {
-            display: block;
-            font-size: clamp(0.85rem, 1.8vw, 1rem);
-            text-transform: uppercase;
-        }
-
-        .quick-contact-card small {
-            font-size: clamp(0.75rem, 1.6vw, 0.85rem);
-            opacity: 0.9;
-        }
-
-    /* ========== MAP CONTAINER ========== */
-    .map-container1 {
-        border-radius: 0;
-        overflow: hidden;
-        height: 400px;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-        transition: all 0.3s ease;
-        max-width: 100%;
-        border: 4px solid linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-    }
-
-        .map-container1:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        }
-
-        .map-container1 iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-    /* ========== FAQ ITEMS ========== */
-    .faq-item {
-        background: white;
-        padding: 20px;
-        border-radius: 0;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        transition: all 0.3s ease;
-        height: 100%;
-        border-left: 3px solid #e5e5e5;
-    }
-
-        .faq-item:hover {
-            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-            border-left-color: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-        }
-
-        .faq-item h6 {
-            font-size: clamp(0.9rem, 1.8vw, 1.05rem);
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #2d3748;
-            text-transform: uppercase;
-        }
-
-        .faq-item p {
-            margin: 0;
-            font-size: clamp(0.8rem, 1.6vw, 0.95rem);
-            line-height: 1.6;
-            color: #6c757d;
-        }
-
-    /* ========== BUSINESS HOURS ========== */
-    .contact-info > div[style*="border-top"] {
-        border-top: 2px solid rgba(255,255,255,0.2) !important;
-        padding-top: 16px;
-        margin-top: 24px;
-    }
-
-    /* ========== RESPONSIVE BREAKPOINTS ========== */
-
-    /* Tablet Landscape & Small Desktop (992px - 1199px) */
-    @@media (max-width: 1199px) {
-        .section-padding
-
-    {
-        padding: 70px 0 !important;
-        margin-top: 70px !important;
-    }
-
-    .contact-form {
-        padding: 35px;
-    }
-
-    .contact-info {
-        padding: 35px;
-        margin-top: 30px;
-    }
-
-    }
-
-    /* Tablet Portrait (768px - 991px) */
-    @@media (max-width: 991px) {
-        .section-padding
-
-    {
-        padding: 60px 0 !important;
-        margin-top: 65px !important;
-    }
-
-    .contact-form {
-        padding: 30px;
-        margin-bottom: 25px;
-    }
-
-    .contact-info {
-        padding: 30px;
-        margin-top: 0;
-        margin-bottom: 25px;
-        border-left-width: 4px;
-    }
-
-    .contact-item {
-        padding: 12px;
-        margin-bottom: 15px;
-    }
-
-    .map-container1 {
-        height: 350px;
-        border-width: 3px;
-    }
-
-    .btn-submit {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .office-tab {
-        padding: 10px 12px;
-        font-size: 0.9rem;
-    }
-
-    }
-
-    /* Large Mobile & Small Tablet (576px - 767px) */
-    @@media (max-width: 767px) {
-        .section-padding
-
-    {
-        padding: 50px 0 !important;
-        margin-top: 60px !important;
-    }
-
-    .contact-form {
-        padding: 25px;
-        margin-bottom: 20px;
-        border-left-width: 3px;
-    }
-
-    .contact-info {
-        padding: 25px;
-        margin-bottom: 20px;
-        border-left-width: 4px;
-        border-width: 3px;
-    }
-
-    .contact-item {
-        padding: 12px;
-        margin-bottom: 12px;
-    }
-
-    .social-links {
-        gap: 10px;
-    }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-        }
-
-    .map-container1 {
-        height: 300px;
-        border-width: 3px;
-    }
-
-    .faq-item {
-        padding: 18px;
-        margin-bottom: 15px;
-    }
-
-    .office-details {
-        padding: 15px;
-    }
-
-    }
-
-    /* Medium Mobile (480px - 575px) */
-    @@media (max-width: 575px) {
-        .section-padding
-
-    {
-        padding: 45px 0 !important;
-        margin-top: 55px !important;
-    }
-
-    .contact-form {
-        padding: 20px;
-        margin-bottom: 20px;
-    }
-
-    .contact-info {
-        padding: 20px;
-        margin-bottom: 20px;
-    }
-
-    .contact-item {
-        padding: 10px;
-        margin-bottom: 10px;
-    }
-
-    .social-links {
-        gap: 8px;
-    }
-
-        .social-links a {
-            width: 38px;
-            height: 38px;
-        }
-
-    .quick-contact-card {
-        padding: 10px;
-        margin-bottom: 8px;
-    }
-
-    .map-container1 {
-        height: 280px;
-    }
-
-    .faq-item {
-        padding: 15px;
-        margin-bottom: 12px;
-    }
-
-    }
-
-    /* Small Mobile (375px - 479px) */
-    @@media (max-width: 479px) {
-        .section-padding
-
-    {
-        padding: 40px 0 !important;
-        margin-top: 50px !important;
-    }
-
-    .contact-form {
-        padding: 18px;
-        margin-bottom: 18px;
-    }
-
-    .contact-info {
-        padding: 18px;
-        margin-bottom: 18px;
-        border-width: 2px;
-        border-left-width: 4px;
-    }
-
-    .contact-item {
-        padding: 9px;
-        margin-bottom: 9px;
-    }
-
-    .social-links a {
-        width: 36px;
-        height: 36px;
-    }
-
-    .quick-contact-card {
-        padding: 9px;
-    }
-
-    .map-container1 {
-        height: 250px;
-        border-width: 2px;
-    }
-
-    .faq-item {
-        padding: 14px;
-    }
-
-    textarea.form-control {
-        min-height: 100px;
-    }
-
-    }
-
-    /* Extra Small Mobile (320px - 374px) */
-    @@media (max-width: 374px) {
-        .section-padding
-
-    {
-        padding: 35px 0 !important;
-        margin-top: 50px !important;
-    }
-
-    .contact-form {
-        padding: 15px;
-        margin-bottom: 15px;
-    }
-
-    .contact-info {
-        padding: 15px;
-        margin-bottom: 15px;
-    }
-
-    .contact-item {
-        padding: 8px;
-        margin-bottom: 8px;
-    }
-
-    .social-links {
-        gap: 6px;
-    }
-
-        .social-links a {
-            width: 34px;
-            height: 34px;
-        }
-
-    .quick-contact-card {
-        padding: 8px;
-        margin-bottom: 7px;
-    }
-
-    .map-container1 {
-        height: 220px;
-    }
-
-    .faq-item {
-        padding: 12px;
-    }
-
-    textarea.form-control {
-        min-height: 90px;
-    }
-
-    .form-control {
-        padding: 8px 10px;
-    }
-
-    }
-
-    /* Touch Device Optimizations */
-    @@media (hover: none) and (pointer: coarse) {
-        .form-control
-
-    {
-        min-height: 44px;
-    }
-
-    .btn-submit {
-        min-height: 48px;
-        padding: 14px 30px;
-    }
-
-    select.form-control {
-        min-height: 44px;
-    }
-
-    .social-links a {
-        min-width: 44px;
-        min-height: 44px;
-    }
-
-    }
-
-    /* Focus Styles */
-    a:focus-visible,
-    button:focus-visible,
-    .form-control:focus-visible {
-        outline: 2px solid #FFA500;
-        outline-offset: 2px;
-        box-shadow: 0 0 0 4px rgba(255, 165, 0, 0.2);
-    }
-
-    /* Print Styles */
-    @@media print {
-        .contact-form, .contact-info
-
-    {
-        box-shadow: none;
-        border: 1px solid #ddd;
-    }
-
-    .map-container1 {
-        display: none;
-    }
-
-    .btn-submit {
-        display: none;
-    }
-
-    .social-links {
-        display: none;
-    }
-
-    .section-padding {
-        margin-top: 0 !important;
-    }
-
-    }
-</style>
+<link href="~/css/contact.css" rel="stylesheet" />
 
 <div class="page-content">
     <section class="section-padding">
@@ -752,7 +19,7 @@
             <div class="row">
                 <div class="col-lg-8 mb-4">
                     <div class="contact-form" data-aos="fade-right">
-                        <h4 class="mb-4" style="color: #c20303;">
+                        <h4 class="mb-4">
                             <i class="fas fa-envelope me-2"></i>Send us a Message
                         </h4>
 
@@ -815,7 +82,7 @@
                             </div>
 
                             <button type="button" id="submitBtn" class="btn btn-submit btn-primary" onclick="sendContactEmail()">
-                                <i class="fas fa-paper-plane me-2"></i>Send Message
+                                <span><i class="fas fa-paper-plane me-2"></i>Send Message</span>
                             </button>
                         </div>
                     </div>
@@ -825,156 +92,53 @@
                     <div class="contact-info" data-aos="fade-left">
                         <h4 class="mb-4"><i class="fas fa-info-circle me-2"></i>Get in Touch</h4>
                         
-                        <!-- Office Tabs -->
-                        <ul class="nav nav-pills mb-3 flex-column" id="officeTabs" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active office-tab" id="belgaum-tab" data-bs-toggle="pill" data-bs-target="#belgaum" type="button">
-                                    <i class="fas fa-building me-2"></i>Belgaum (Head Office)
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link office-tab" id="hyderabad-tab" data-bs-toggle="pill" data-bs-target="#hyderabad" type="button">
-                                    <i class="fas fa-map-marker-alt me-2"></i>Hyderabad
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link office-tab" id="bangalore-tab" data-bs-toggle="pill" data-bs-target="#bangalore" type="button">
-                                    <i class="fas fa-map-marker-alt me-2"></i>Bangalore
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link office-tab" id="chennai-tab" data-bs-toggle="pill" data-bs-target="#chennai" type="button">
-                                    <i class="fas fa-map-marker-alt me-2"></i>Chennai
-                                </button>
-                            </li>
-                        </ul>
-
-                        <!-- Office Details -->
-                        <div class="tab-content" id="officeTabContent">
-                            <!-- Belgaum Office -->
-                            <div class="tab-pane fade show active" id="belgaum" role="tabpanel">
-                                <div class="office-details">
-                                    <h5 class="mb-3"><i class="fas fa-map-marker-alt me-2"></i>Belgaum Office</h5>
-                                    <p class="mb-3">
-                                        <small>
-                                            Aniket Sales Agencies<br>
-                                            RS No: 345, Plot No: 122/2A,<br>
-                                            Udyambag Industrial Estate,<br>
-                                            Belgaum, Karnataka - 590008
-                                        </small>
-                                    </p>
-                                    <div class="quick-contact-btns">
-                                        <a href="tel:+917090979999" class="btn btn-light btn-sm mb-2 w-100">
-                                            <i class="fas fa-phone me-2"></i>+91 7090979999
-                                        </a>
-                                        <a href="mailto:office@aniketsales.com" class="btn btn-light btn-sm w-100">
-                                            <i class="fas fa-envelope me-2"></i>office@aniketsales.com
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Hyderabad Office -->
-                            <div class="tab-pane fade" id="hyderabad" role="tabpanel">
-                                <div class="office-details">
-                                    <h5 class="mb-3"><i class="fas fa-map-marker-alt me-2"></i>Hyderabad Office</h5>
-                                    <p class="mb-3">
-                                        <small>
-                                            Plot No. 3, Ratna Co-op Society,<br>
-                                            Opp. Hanuman Temple, Tankbund,<br>
-                                            Chandulal Bowli, Secunderabad,<br>
-                                            Telangana, Hyderabad - 500029
-                                        </small>
-                                    </p>
-                                    <div class="quick-contact-btns">
-                                        <a href="tel:+918520063964" class="btn btn-light btn-sm mb-2 w-100">
-                                            <i class="fas fa-phone me-2"></i>+91 8520063964
-                                        </a>
-                                        <a href="mailto:hyderabad@aniketsales.com" class="btn btn-light btn-sm w-100">
-                                            <i class="fas fa-envelope me-2"></i>hyderabad@aniketsales.com
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Bangalore Office -->
-                            <div class="tab-pane fade" id="bangalore" role="tabpanel">
-                                <div class="office-details">
-                                    <h5 class="mb-3"><i class="fas fa-map-marker-alt me-2"></i>Bangalore Office</h5>
-                                    <p class="mb-3">
-                                        <small>
-                                            SY No. 31, Ground Floor, 278,<br>
-                                            Ashraya Badavane, 6th Cross Road,<br>
-                                            Kodigehalli North,<br>
-                                            Bengaluru Urban, Karnataka - 560091
-                                        </small>
-                                    </p>
-                                    <div class="quick-contact-btns">
-                                        <a href="tel:+919164633373" class="btn btn-light btn-sm mb-2 w-100">
-                                            <i class="fas fa-phone me-2"></i>+91 9164633373
-                                        </a>
-                                        <a href="mailto:sweekar@aniketsales.com" class="btn btn-light btn-sm w-100">
-                                            <i class="fas fa-envelope me-2"></i>sweekar@aniketsales.com
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Chennai Office -->
-                            <div class="tab-pane fade" id="chennai" role="tabpanel">
-                                <div class="office-details">
-                                    <h5 class="mb-3"><i class="fas fa-map-marker-alt me-2"></i>Chennai Office</h5>
-                                    <p class="mb-3">
-                                        <small>
-                                            No. 4/253, Suresh Nagar, 2nd Street,<br>
-                                            Ganesh Avenue, Porur,<br>
-                                            Chennai, Tamil Nadu - 600116
-                                        </small>
-                                    </p>
-                                    <div class="quick-contact-btns">
-                                        <a href="tel:+919952049587" class="btn btn-light btn-sm mb-2 w-100">
-                                            <i class="fas fa-phone me-2"></i>+91 9952049587
-                                        </a>
-                                        <a href="mailto:chennai@aniketsales.com" class="btn btn-light btn-sm w-100">
-                                            <i class="fas fa-envelope me-2"></i>chennai@aniketsales.com
-                                        </a>
-                                    </div>
-                                </div>
+                        <!-- Contact Information -->
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Our Address</strong>
+                                <span>
+                                    S-43, SOUZA ENCLAVE,<br>
+                                    MARGAON SALCETE,<br>
+                                    SOUTH GOA, GOA-403601
+                                </span>
                             </div>
                         </div>
 
-                        <!-- Business Hours -->
-                        <div class="mt-4 pt-3" style="border-top: 1px solid rgba(255,255,255,0.2);">
-                            <small>
-                                <i class="fas fa-clock me-2"></i><strong>Business Hours</strong><br>
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <strong>Phone</strong>
+                                <a href="tel:+917090979999">+91 7090979999</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email</strong>
+                                <a href="mailto:rbhugoa@gmail.com">rbhugoa@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Business Hours</strong>
                                 Mon - Sat: 9:00 AM - 6:00 PM
-                            </small>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Map Section -->
-            <div class="row mt-5">
-                <div class="col-lg-12">
-                    <h4 class="text-center mb-4">Find Us</h4>
-                    <div class="map-container1" data-aos="fade-up">
-                        <iframe width="100%"
-                                height="400"
-                                style="border:0"
-                                loading="lazy"
-                                allowfullscreen
-                                referrerpolicy="no-referrer-when-downgrade"
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7624.772!2d74.49229!3d15.81718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbf65b7be6dca61%3A0x412f7c54e9a0ddd0!2sAniket%20Sales%20Agencies!5e1!3m2!1sen!2sin!4v1723718400">
-                        </iframe>
-                    </div>
-                    <div class="text-center mt-3">
-                        <p class="text-muted">
-                            <i class="fas fa-directions me-2"></i>
-                            <a href="https://maps.google.com/?q=Aniket+Sales+Agencies+Belagavi" target="_blank" class="text-primary text-decoration-none">
-                                Get Directions to Our Office
-                            </a>
-                        </p>
+                        <!-- Social Links -->
+                        <div class="mt-4">
+                            <strong class="d-block mb-3"><i class="fas fa-share-alt me-2"></i>Connect With Us</strong>
+                            <div class="social-links">
+                                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1181,7 +345,6 @@
         }
 
         function initializeValidation() {
-            // Full Name validation
             document.getElementById('FullName').addEventListener('blur', validateFullName);
             document.getElementById('FullName').addEventListener('input', function() {
                 if (this.value.trim().length > 0) {
@@ -1191,7 +354,6 @@
                 }
             });
 
-            // Email validation
             document.getElementById('Email').addEventListener('blur', validateEmail);
             document.getElementById('Email').addEventListener('input', function() {
                 if (this.value.trim().length > 0) {
@@ -1201,7 +363,6 @@
                 }
             });
 
-            // Phone validation
             document.getElementById('PhoneNumber').addEventListener('blur', validatePhoneNumber);
             document.getElementById('PhoneNumber').addEventListener('input', function() {
                 if (this.value.trim().length > 0) {
@@ -1211,19 +372,15 @@
                 }
             });
 
-            // Company validation
             document.getElementById('Company').addEventListener('blur', validateCompany);
             document.getElementById('Company').addEventListener('input', validateCompany);
 
-            // GST validation
             document.getElementById('GSTNumber').addEventListener('blur', validateGSTNumber);
             document.getElementById('GSTNumber').addEventListener('input', validateGSTNumber);
 
-            // Subject validation
             document.getElementById('Subject').addEventListener('change', validateSubject);
             document.getElementById('Subject').addEventListener('blur', validateSubject);
 
-            // Message validation
             document.getElementById('Message').addEventListener('blur', validateMessage);
             document.getElementById('Message').addEventListener('input', function() {
                 if (this.value.trim().length > 0) {
@@ -1235,7 +392,6 @@
         }
 
         function sendContactEmail() {
-            // Validate form before submission
             if (!validateForm()) {
                 alert('Please correct the validation errors before submitting.');
                 
@@ -1249,14 +405,11 @@
 
             var btn = document.getElementById('submitBtn');
             
-            // Prevent double submission
             if (btn.disabled) return;
             
-            // Set loading state
             btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+            btn.innerHTML = '<span><i class="fas fa-spinner fa-spin me-2"></i>Sending...</span>';
             
-            // Prepare contact data object
             var contactData = {
                 FullName: document.getElementById('FullName').value.trim(),
                 Email: document.getElementById('Email').value.trim(),
@@ -1267,24 +420,20 @@
                 Message: document.getElementById('Message').value.trim()
             };
             
-            // AJAX call using jQuery (consistent with your other files)
             $.ajax({
                 url: '/Home/SendMail',
                 type: 'POST',
                 data: { model: contactData },
                 success: function(response) {
-                    // Reset button
                     btn.disabled = false;
-                    btn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Send Message';
+                    btn.innerHTML = '<span><i class="fas fa-paper-plane me-2"></i>Send Message</span>';
                     
                     if (response.success) {
                         alert('Message sent successfully!');
-                        // Clear form
                         document.getElementById('contactFormContainer').querySelectorAll('input, select, textarea').forEach(function(field) {
                             field.value = '';
                             field.classList.remove('is-invalid');
                         });
-                        // Clear all validation messages
                         document.querySelectorAll('.invalid-feedback').forEach(function(feedback) {
                             feedback.style.display = 'none';
                         });
@@ -1293,9 +442,8 @@
                     }
                 },
                 error: function(xhr, status, error) {
-                    // Reset button
                     btn.disabled = false;
-                    btn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Send Message';
+                    btn.innerHTML = '<span><i class="fas fa-paper-plane me-2"></i>Send Message</span>';
                     
                     let errorMessage = 'Error sending message. Please try again.';
                     if (xhr.responseJSON && xhr.responseJSON.message) {
@@ -1308,7 +456,6 @@
             });
         }
 
-        // Initialize validation when document is ready
         document.addEventListener('DOMContentLoaded', function() {
             initializeValidation();
         });
