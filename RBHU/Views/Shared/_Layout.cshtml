@@ -28,7 +28,7 @@
         <div class="container-fluid">
             <div class="top-bar-content">
                 <div class="top-bar-left">
-                    <a href="mailto:office@aniketsalesagencies.com" class="top-bar-item">
+                    <a href="mailto:rbhugoa@gmail.com" class="top-bar-item">
                         <i class="fas fa-envelope"></i>
                         <span>office@aniketsalesagencies.com</span>
                     </a>
@@ -352,7 +352,7 @@
             'Power Tools and Accessories': '/images/products/Power_general2.jpg',
             'Cutting Tools': '/images/products/Cutting_general.jpg',
             'Pneumatic tools and Systems': '/images/products/Pneumatic_general.png',
-            'Safety Products and Equipment': '/images/products/Safety_general.jpg',
+            'PPE & Safety Equipments': '/images/products/Safety_general.jpg',
             'Hoses': '/images/products/Hoses-general.jpg',
             'Belts': '/images/products/Belts_general.jpg'
         };
@@ -363,7 +363,7 @@
             'Power Tools and Accessories': 'PowerTools',
             'Cutting Tools': 'CuttingTools',
             'Pneumatic tools and Systems': 'Pneumatic',
-            'Safety Products and Equipment': 'SafetyProducts',
+            'PPE & Safety Equipments': 'SafetyProducts',
             'Hoses': 'Hoses',
             'Belts': 'Belts'
         };
@@ -478,6 +478,7 @@
                 url: '/Product/GetCategories',
                 type: 'POST',
                 success: function (response) {
+                    debugger
                     if (response.success && response.data) {
                         categoriesData = response.data;
                         renderCategoryGrid();
@@ -511,6 +512,7 @@
         }
 
         function createCategoryCard(category) {
+            debugger
             const card = $('<div>').addClass('category-professional');
             const imageUrl = getCategoryImage(category.name);
             const categoryRoute = getCategoryRoute(category.name);

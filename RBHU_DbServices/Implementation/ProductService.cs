@@ -199,8 +199,10 @@ namespace RBHU_DbServices.Implementation
                 using (var db = new RBHUContext(_dbConnection))
                 {
                     return db.Categories
-                        .OrderBy(c => c.Name)
-                        .ToList();
+                          .OrderBy(c => c.Name == "PPE & Safety Equipments" ? 0 : 1)
+                          .ThenBy(c => c.Name)
+                          .ToList();
+
                 }
             }
             catch (Exception ex)

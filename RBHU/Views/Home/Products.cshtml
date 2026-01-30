@@ -2,22 +2,20 @@
     ViewData["Title"] = "Products - RBHU Solutions LLP";
 }
 
-<link href="~/css/products.css" rel="stylesheet" />
-
-<!-- Products Page with Professional Bosch Theme -->
-<div class="products-wrapper">
+<!-- Products Page with Professional Industrial Theme -->
+<div class="products-page-wrapper">
 
     <!-- Hero Section -->
-    <section class="products-hero-section">
-        <div class="hero-overlay"></div>
+    <section class="products-hero">
+        <div class="hero-background-overlay"></div>
         <div class="container">
-            <div class="hero-content" data-aos="fade-up">
-                <span class="hero-label">Our Product Range</span>
-                <h1 class="hero-title">
+            <div class="hero-content-wrapper" data-aos="fade-up">
+                <div class="hero-badge">Our Product Range</div>
+                <h1 class="hero-main-title">
                     Professional Industrial
-                    <span class="title-accent">Tools & Equipment</span>
+                    <span class="title-highlight">Tools & Equipment</span>
                 </h1>
-                <p class="hero-description">
+                <p class="hero-subtitle">
                     Comprehensive range of premium industrial solutions from world-leading manufacturers
                 </p>
             </div>
@@ -25,37 +23,37 @@
     </section>
 
     <!-- Product Categories Grid -->
-    <section class="products-grid-section">
+    <section class="products-catalog-section">
         <div class="container">
             <div class="row g-4">
                 <!-- Pneumatic Tools -->
                 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="product-card">
-                        <a asp-controller="Product" asp-action="Pneumatic" class="card-link">
-                            <div class="product-image-container">
-                                <img src="~/images/products/pneumatic_general.png" alt="Pneumatic Tools" class="product-image">
-                                <div class="image-overlay"></div>
+                    <div class="product-category-card">
+                        <a asp-controller="Product" asp-action="Pneumatic" class="category-card-link">
+                            <div class="category-image1-wrapper">
+                                <img src="~/images/products/pneumatic_general.png" alt="Pneumatic Tools" class="category-image1">
+                                <div class="category-image1-gradient"></div>
                             </div>
                         </a>
-                        <div class="product-content">
-                            <div class="product-icon">
+                        <div class="category-card-body">
+                            <div class="category-icon-wrapper">
                                 <i class="fas fa-wind"></i>
                             </div>
-                            <h3 class="product-title">
+                            <h3 class="category-card-title">
                                 <a asp-controller="Product" asp-action="Pneumatic">Pneumatic Tools & Systems</a>
                             </h3>
-                            <p class="product-description">
+                            <p class="category-card-description">
                                 High-performance pneumatic tools including air compressors, impact wrenches, and pneumatic drills for industrial applications.
                             </p>
-                            <ul class="product-features">
+                            <ul class="category-feature-list">
                                 <li>Air Impact Wrenches</li>
                                 <li>Pneumatic Drills</li>
                                 <li>Air Compressors</li>
                                 <li>Pneumatic Sanders</li>
                             </ul>
-                            <div class="product-badges">
-                                <span class="badge badge-primary">Professional Grade</span>
-                                <span class="badge badge-success">In Stock</span>
+                            <div class="category-status-badges">
+                                <span class="status-badge badge-professional">Professional Grade</span>
+                                <span class="status-badge badge-available">In Stock</span>
                             </div>
                         </div>
                     </div>
@@ -63,32 +61,32 @@
 
                 <!-- Power Tools -->
                 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="product-card">
-                        <a asp-controller="Product" asp-action="PowerTools" class="card-link">
-                            <div class="product-image-container">
-                                <img src="~/images/products/power_general2.jpg" alt="Power Tools" class="product-image">
-                                <div class="image-overlay"></div>
+                    <div class="product-category-card">
+                        <a asp-controller="Product" asp-action="PowerTools" class="category-card-link">
+                            <div class="category-image1-wrapper">
+                                <img src="~/images/products/power_general2.jpg" alt="Power Tools" class="category-image1">
+                                <div class="category-image1-gradient"></div>
                             </div>
                         </a>
-                        <div class="product-content">
-                            <div class="product-icon">
+                        <div class="category-card-body">
+                            <div class="category-icon-wrapper">
                                 <i class="fas fa-bolt"></i>
                             </div>
-                            <h3 class="product-title">
+                            <h3 class="category-card-title">
                                 <a asp-controller="Product" asp-action="PowerTools">Power Tools & Accessories</a>
                             </h3>
-                            <p class="product-description">
+                            <p class="category-card-description">
                                 Electric and battery-powered tools designed for heavy-duty industrial use with superior performance and durability.
                             </p>
-                            <ul class="product-features">
+                            <ul class="category-feature-list">
                                 <li>Electric Drills</li>
                                 <li>Angle Grinders</li>
                                 <li>Circular Saws</li>
                                 <li>Impact Drivers</li>
                             </ul>
-                            <div class="product-badges">
-                                <span class="badge badge-primary">Heavy Duty</span>
-                                <span class="badge badge-success">In Stock</span>
+                            <div class="category-status-badges">
+                                <span class="status-badge badge-professional">Heavy Duty</span>
+                                <span class="status-badge badge-available">In Stock</span>
                             </div>
                         </div>
                     </div>
@@ -96,32 +94,32 @@
 
                 <!-- Cutting Tools -->
                 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="product-card">
-                        <a asp-controller="Product" asp-action="CuttingTools" class="card-link">
-                            <div class="product-image-container">
-                                <img src="~/images/products/cutting_general.jpg" alt="Cutting Tools" class="product-image">
-                                <div class="image-overlay"></div>
+                    <div class="product-category-card">
+                        <a asp-controller="Product" asp-action="CuttingTools" class="category-card-link">
+                            <div class="category-image1-wrapper">
+                                <img src="~/images/products/cutting_general.jpg" alt="Cutting Tools" class="category-image1">
+                                <div class="category-image1-gradient"></div>
                             </div>
                         </a>
-                        <div class="product-content">
-                            <div class="product-icon">
+                        <div class="category-card-body">
+                            <div class="category-icon-wrapper">
                                 <i class="fas fa-cut"></i>
                             </div>
-                            <h3 class="product-title">
+                            <h3 class="category-card-title">
                                 <a asp-controller="Product" asp-action="CuttingTools">Precision Cutting Tools</a>
                             </h3>
-                            <p class="product-description">
+                            <p class="category-card-description">
                                 Precision cutting tools and blades for metal, wood, and composite materials. Built for accuracy and longevity.
                             </p>
-                            <ul class="product-features">
+                            <ul class="category-feature-list">
                                 <li>Carbide End Mills</li>
                                 <li>HSS Drill Bits</li>
                                 <li>Saw Blades</li>
                                 <li>Router Bits</li>
                             </ul>
-                            <div class="product-badges">
-                                <span class="badge badge-primary">Precision</span>
-                                <span class="badge badge-success">In Stock</span>
+                            <div class="category-status-badges">
+                                <span class="status-badge badge-professional">Precision</span>
+                                <span class="status-badge badge-available">In Stock</span>
                             </div>
                         </div>
                     </div>
@@ -129,32 +127,32 @@
 
                 <!-- Abrasives -->
                 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="product-card">
-                        <a asp-controller="Product" asp-action="Abrasives" class="card-link">
-                            <div class="product-image-container">
-                                <img src="~/images/products/abrasive_general.jpg" alt="Abrasives" class="product-image">
-                                <div class="image-overlay"></div>
+                    <div class="product-category-card">
+                        <a asp-controller="Product" asp-action="Abrasives" class="category-card-link">
+                            <div class="category-image1-wrapper">
+                                <img src="~/images/products/abrasive_general.jpg" alt="Abrasives" class="category-image1">
+                                <div class="category-image1-gradient"></div>
                             </div>
                         </a>
-                        <div class="product-content">
-                            <div class="product-icon">
+                        <div class="category-card-body">
+                            <div class="category-icon-wrapper">
                                 <i class="fas fa-circle-notch"></i>
                             </div>
-                            <h3 class="product-title">
+                            <h3 class="category-card-title">
                                 <a asp-controller="Product" asp-action="Abrasives">Industrial Abrasives</a>
                             </h3>
-                            <p class="product-description">
+                            <p class="category-card-description">
                                 Industrial-grade abrasive products including grinding wheels, sandpaper, and polishing compounds for surface finishing.
                             </p>
-                            <ul class="product-features">
+                            <ul class="category-feature-list">
                                 <li>Grinding Wheels</li>
                                 <li>Sanding Discs</li>
                                 <li>Wire Brushes</li>
                                 <li>Polishing Compounds</li>
                             </ul>
-                            <div class="product-badges">
-                                <span class="badge badge-primary">Industrial Grade</span>
-                                <span class="badge badge-success">In Stock</span>
+                            <div class="category-status-badges">
+                                <span class="status-badge badge-professional">Industrial Grade</span>
+                                <span class="status-badge badge-available">In Stock</span>
                             </div>
                         </div>
                     </div>
@@ -162,32 +160,32 @@
 
                 <!-- Safety Products -->
                 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                    <div class="product-card">
-                        <a asp-controller="Product" asp-action="SafetyProducts" class="card-link">
-                            <div class="product-image-container">
-                                <img src="~/images/products/safety_general.jpg" alt="Safety Equipment" class="product-image">
-                                <div class="image-overlay"></div>
+                    <div class="product-category-card">
+                        <a asp-controller="Product" asp-action="SafetyProducts" class="category-card-link">
+                            <div class="category-image1-wrapper">
+                                <img src="~/images/products/safety_general.jpg" alt="Safety Equipment" class="category-image1">
+                                <div class="category-image1-gradient"></div>
                             </div>
                         </a>
-                        <div class="product-content">
-                            <div class="product-icon">
+                        <div class="category-card-body">
+                            <div class="category-icon-wrapper">
                                 <i class="fas fa-hard-hat"></i>
                             </div>
-                            <h3 class="product-title">
+                            <h3 class="category-card-title">
                                 <a asp-controller="Product" asp-action="SafetyProducts">Safety Equipment</a>
                             </h3>
-                            <p class="product-description">
+                            <p class="category-card-description">
                                 Comprehensive safety equipment and protective gear to ensure workplace safety and regulatory compliance.
                             </p>
-                            <ul class="product-features">
+                            <ul class="category-feature-list">
                                 <li>Safety Helmets</li>
                                 <li>Protective Eyewear</li>
                                 <li>Work Gloves</li>
                                 <li>Safety Harnesses</li>
                             </ul>
-                            <div class="product-badges">
-                                <span class="badge badge-primary">Safety First</span>
-                                <span class="badge badge-success">In Stock</span>
+                            <div class="category-status-badges">
+                                <span class="status-badge badge-professional">Safety First</span>
+                                <span class="status-badge badge-available">In Stock</span>
                             </div>
                         </div>
                     </div>
@@ -195,32 +193,32 @@
 
                 <!-- Hoses -->
                 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="600">
-                    <div class="product-card">
-                        <a asp-controller="Product" asp-action="Hoses" class="card-link">
-                            <div class="product-image-container">
-                                <img src="~/images/products/Hoses-general.jpg" alt="Industrial Hoses" class="product-image">
-                                <div class="image-overlay"></div>
+                    <div class="product-category-card">
+                        <a asp-controller="Product" asp-action="Hoses" class="category-card-link">
+                            <div class="category-image1-wrapper">
+                                <img src="~/images/products/Hoses-general.jpg" alt="Industrial Hoses" class="category-image1">
+                                <div class="category-image1-gradient"></div>
                             </div>
                         </a>
-                        <div class="product-content">
-                            <div class="product-icon">
+                        <div class="category-card-body">
+                            <div class="category-icon-wrapper">
                                 <i class="fas fa-cogs"></i>
                             </div>
-                            <h3 class="product-title">
+                            <h3 class="category-card-title">
                                 <a asp-controller="Product" asp-action="Hoses">Industrial Hoses</a>
                             </h3>
-                            <p class="product-description">
+                            <p class="category-card-description">
                                 Premium hydraulic and industrial hoses for reliable fluid transfer and high-pressure applications.
                             </p>
-                            <ul class="product-features">
+                            <ul class="category-feature-list">
                                 <li>Hydraulic Hoses</li>
                                 <li>Air Hoses</li>
                                 <li>Industrial Hoses</li>
                                 <li>Hose Fittings</li>
                             </ul>
-                            <div class="product-badges">
-                                <span class="badge badge-primary">High Pressure</span>
-                                <span class="badge badge-success">In Stock</span>
+                            <div class="category-status-badges">
+                                <span class="status-badge badge-professional">High Pressure</span>
+                                <span class="status-badge badge-available">In Stock</span>
                             </div>
                         </div>
                     </div>
@@ -228,32 +226,32 @@
 
                 <!-- Belts -->
                 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="700">
-                    <div class="product-card">
-                        <a asp-controller="Product" asp-action="Belts" class="card-link">
-                            <div class="product-image-container">
-                                <img src="~/images/products/belts_general.jpg" alt="Power Transmission Belts" class="product-image">
-                                <div class="image-overlay"></div>
+                    <div class="product-category-card">
+                        <a asp-controller="Product" asp-action="Belts" class="category-card-link">
+                            <div class="category-image1-wrapper">
+                                <img src="~/images/products/belts_general.jpg" alt="Power Transmission Belts" class="category-image1">
+                                <div class="category-image1-gradient"></div>
                             </div>
                         </a>
-                        <div class="product-content">
-                            <div class="product-icon">
+                        <div class="category-card-body">
+                            <div class="category-icon-wrapper">
                                 <i class="fas fa-sync-alt"></i>
                             </div>
-                            <h3 class="product-title">
+                            <h3 class="category-card-title">
                                 <a asp-controller="Product" asp-action="Belts">Power Transmission Belts</a>
                             </h3>
-                            <p class="product-description">
+                            <p class="category-card-description">
                                 High-performance power transmission belts for industrial and automotive applications with superior durability.
                             </p>
-                            <ul class="product-features">
+                            <ul class="category-feature-list">
                                 <li>V-Belts</li>
                                 <li>Timing Belts</li>
                                 <li>Flat Belts</li>
                                 <li>Serpentine Belts</li>
                             </ul>
-                            <div class="product-badges">
-                                <span class="badge badge-primary">Heavy Duty</span>
-                                <span class="badge badge-success">In Stock</span>
+                            <div class="category-status-badges">
+                                <span class="status-badge badge-professional">Heavy Duty</span>
+                                <span class="status-badge badge-available">In Stock</span>
                             </div>
                         </div>
                     </div>
@@ -262,79 +260,82 @@
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features-highlight-section">
+    <!-- Value Proposition Section -->
+    <section class="value-proposition-section">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-label">Why Choose Us</span>
-                <h2 class="section-title">
+            <div class="section-header-center" data-aos="fade-up">
+                <div class="section-tag">Why Choose Us</div>
+                <h2 class="section-main-title">
                     Excellence in Every
-                    <span class="title-accent">Product</span>
+                    <span class="title-highlight">Product</span>
                 </h2>
+                <p class="section-description">
+                    Your trusted partner for premium industrial tools and equipment
+                </p>
             </div>
 
             <div class="row g-4 mt-4">
                 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="feature-highlight-box">
-                        <div class="feature-highlight-icon">
+                    <div class="value-prop-card">
+                        <div class="value-icon-container">
                             <i class="fas fa-certificate"></i>
                         </div>
-                        <h4>Certified Quality</h4>
-                        <p>All products are ISO certified and meet international quality standards</p>
+                        <h4 class="value-card-title">Certified Quality</h4>
+                        <p class="value-card-text">All products are ISO certified and meet international quality standards</p>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature-highlight-box">
-                        <div class="feature-highlight-icon">
+                    <div class="value-prop-card">
+                        <div class="value-icon-container">
                             <i class="fas fa-shipping-fast"></i>
                         </div>
-                        <h4>Fast Delivery</h4>
-                        <p>Quick and reliable delivery to your doorstep with tracking support</p>
+                        <h4 class="value-card-title">Fast Delivery</h4>
+                        <p class="value-card-text">Quick and reliable delivery to your doorstep with tracking support</p>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="feature-highlight-box">
-                        <div class="feature-highlight-icon">
+                    <div class="value-prop-card">
+                        <div class="value-icon-container">
                             <i class="fas fa-headset"></i>
                         </div>
-                        <h4>Expert Support</h4>
-                        <p>Technical assistance and product guidance from our expert team</p>
+                        <h4 class="value-card-title">Expert Support</h4>
+                        <p class="value-card-text">Technical assistance and product guidance from our expert team</p>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="feature-highlight-box">
-                        <div class="feature-highlight-icon">
+                    <div class="value-prop-card">
+                        <div class="value-icon-container">
                             <i class="fas fa-medal"></i>
                         </div>
-                        <h4>Warranty Coverage</h4>
-                        <p>Comprehensive warranty coverage on all our industrial products</p>
+                        <h4 class="value-card-title">Warranty Coverage</h4>
+                        <p class="value-card-text">Comprehensive warranty coverage on all our industrial products</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
+    <!-- Call to Action Section -->
     <section class="products-cta-section">
-        <div class="cta-background-overlay"></div>
+        <div class="cta-overlay"></div>
         <div class="container">
-            <div class="cta-content" data-aos="fade-up">
-                <h2 class="cta-title">
+            <div class="cta-content-wrapper" data-aos="fade-up">
+                <h2 class="cta-main-title">
                     Need Custom
-                    <span class="title-accent">Industrial Solutions?</span>
+                    <span class="title-highlight">Industrial Solutions?</span>
                 </h2>
-                <p class="cta-description">
+                <p class="cta-subtitle">
                     We offer customized industrial tool solutions tailored to your specific requirements
                 </p>
-                <div class="cta-buttons">
-                    <a asp-controller="Home" asp-action="Contact" class="btn-cta-primary">
+                <div class="cta-action-buttons">
+                    <a asp-controller="Home" asp-action="Contact" class="cta-btn cta-btn-primary">
                         <i class="fas fa-envelope"></i>
                         <span>Contact Us</span>
                     </a>
-                    <a asp-controller="Home" asp-action="Offers" class="btn-cta-secondary">
+                    <a asp-controller="Home" asp-action="Offers" class="cta-btn cta-btn-secondary">
                         <i class="fas fa-tags"></i>
                         <span>View Special Offers</span>
                     </a>
@@ -344,469 +345,512 @@
     </section>
 
 </div>
-    
-                        <style>
+
+<style>
     /* ==========================================
-       PRODUCTS PAGE - PROFESSIONAL BOSCH THEME
-       Clean, Modern, Industrial Excellence
+       PRODUCTS PAGE - PROFESSIONAL STYLING
+       Clean, Modern, Industrial B2B Design
        ========================================== */
 
-    .products-wrapper {
-        background: #fff;
+    .products-page-wrapper {
+        background: var(--white);
         width: 100%;
         overflow-x: hidden;
     }
 
-    /* ========== PRODUCTS HERO SECTION ========== */
-    .products-hero-section {
+    /* ========== HERO SECTION ========== */
+    .products-hero {
         position: relative;
-        padding: 140px 0 80px;
-        background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+        padding: 120px 0 70px;
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
         overflow: hidden;
     }
 
-    .hero-overlay {
+    .hero-background-overlay {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: repeating-linear-gradient( 90deg, rgba(255, 255, 255, 0.02) 0px, transparent 1px, transparent 40px, rgba(255, 255, 255, 0.02) 41px );
+        background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0px, transparent 1px, transparent 40px, rgba(255, 255, 255, 0.03) 41px), repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0px, transparent 1px, transparent 40px, rgba(255, 255, 255, 0.03) 41px);
+        opacity: 0.5;
     }
 
-    .hero-content {
+    .hero-content-wrapper {
         position: relative;
         z-index: 10;
         text-align: center;
-        max-width: 800px;
+        max-width: 850px;
         margin: 0 auto;
-        color: #fff;
     }
 
-    .hero-label {
+    .hero-badge {
         display: inline-block;
-        padding: 8px 20px;
+        padding: 10px 24px;
         background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-        color: #fff;
-        font-size: 13px;
+        color: var(--white);
+        font-family: 'Inter', sans-serif;
+        font-size: 0.875rem;
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 1.5px;
         border-radius: 4px;
-        margin-bottom: 24px;
+        margin-bottom: 28px;
+        box-shadow: 0 4px 12px rgba(0, 102, 179, 0.3);
     }
 
-    .hero-title {
-        font-size: clamp(32px, 5vw, 56px);
+    .hero-main-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: clamp(2rem, 5vw, 3.5rem);
         font-weight: 700;
         line-height: 1.2;
-        margin-bottom: 20px;
-        color: #fff;
+        margin-bottom: 24px;
+        color: var(--white);
     }
 
-    .title-accent {
-        color: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
+    .title-highlight {
         display: block;
+        background: linear-gradient(135deg, #21a0a0 0%, #5ce1e6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         margin-top: 8px;
     }
 
-    .hero-description {
-        font-size: 18px;
+    .hero-subtitle {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.125rem;
         line-height: 1.7;
         color: rgba(255, 255, 255, 0.9);
-        max-width: 700px;
+        max-width: 650px;
         margin: 0 auto;
     }
 
-    /* ========== PRODUCTS GRID SECTION ========== */
-    .products-grid-section {
+    /* ========== PRODUCTS CATALOG SECTION ========== */
+    .products-catalog-section {
         padding: 80px 0;
-        background: #fff;
+        background: var(--white);
     }
 
-    /* Product Cards - Modern Side Accent Design */
-    .product-card {
-        background: #fff;
-        border: none;
-        border-radius: 0;
+    /* Product Category Cards */
+    .product-category-card {
+        background: var(--white);
+        border-radius: 8px;
         overflow: hidden;
         height: 100%;
         display: flex;
         flex-direction: column;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
         position: relative;
-        transition: box-shadow 0.3s ease;
     }
 
-        .product-card::before {
+        .product-category-card::before {
             content: '';
             position: absolute;
             left: 0;
             top: 0;
             width: 4px;
             height: 100%;
-            background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
+            background: linear-gradient(180deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
             transform: scaleY(0);
             transform-origin: bottom;
             transition: transform 0.3s ease;
         }
 
-        .product-card:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        .product-category-card:hover {
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
         }
 
-            .product-card:hover::before {
+            .product-category-card:hover::before {
                 transform: scaleY(1);
             }
 
-    .card-link {
+    .category-card-link {
         display: block;
         text-decoration: none;
-        position: relative;
     }
 
-    .product-image-container {
+    .category-image1-wrapper {
         position: relative;
         height: 220px;
         overflow: hidden;
         background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     }
 
-    .product-image {
+    .category-image1 {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        filter: grayscale(20%);
-        transition: filter 0.3s ease;
+        transition: transform 0.4s ease;
     }
 
-    .product-card:hover .product-image {
-        filter: grayscale(0%);
+    .product-category-card:hover .category-image1 {
+        transform: scale(1.08);
     }
 
-    .image-overlay {
+    .category-image1-gradient {
         position: absolute;
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 60px;
-        background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+        height: 80px;
+        background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+        pointer-events: none;
     }
 
-    /* Product Content */
-    .product-content {
+    /* Category Card Body */
+    .category-card-body {
         padding: 28px 24px 24px;
         flex: 1;
         display: flex;
         flex-direction: column;
-        background: #fff;
     }
 
-    .product-icon {
-        width: 48px;
-        height: 48px;
+    .category-icon-wrapper {
+        width: 56px;
+        height: 56px;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #f8f9fa;
-        color: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-        font-size: 22px;
-        border-radius: 0;
-        margin-bottom: 16px;
-        border-left: 3px solid linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-        padding-left: 8px;
+        background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-200) 100%);
+        color: var(--bosch-red);
+        font-size: 26px;
+        border-radius: 8px;
+        margin-bottom: 18px;
+        border: 2px solid var(--bosch-red);
+        transition: all 0.3s ease;
     }
 
-    .product-card:hover .product-icon {
-        background: #fff5f5;
+    .product-category-card:hover .category-icon-wrapper {
+        background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
+        color: var(--white);
+        transform: rotate(5deg) scale(1.05);
     }
 
-    .product-title {
-        font-size: 18px;
+    .category-card-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.125rem;
         font-weight: 700;
-        color: #1a1a1a;
-        margin-bottom: 12px;
-        min-height: 50px;
+        color: var(--gray-900);
+        margin-bottom: 14px;
+        min-height: 54px;
         line-height: 1.4;
-        text-transform: uppercase;
-        letter-spacing: -0.5px;
+        letter-spacing: -0.02em;
     }
 
-        .product-title a {
-            color: #1a1a1a;
+        .category-card-title a {
+            color: var(--gray-900);
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
-            .product-title a:hover {
-                color: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
+            .category-card-title a:hover {
+                color: var(--bosch-red);
             }
 
-    .product-description {
-        font-size: 14px;
-        color: #6c757d;
+    .category-card-description {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9375rem;
+        color: var(--gray-600);
         line-height: 1.7;
-        margin-bottom: 16px;
-        min-height: 75px;
+        margin-bottom: 18px;
+        min-height: 80px;
     }
 
-    .product-features {
+    .category-feature-list {
         list-style: none;
-        padding: 12px 16px;
+        padding: 14px 18px;
         margin: 0 0 20px;
-        min-height: 88px;
-        background: #f8f9fa;
-        border-radius: 4px;
+        min-height: 96px;
+        background: var(--gray-50);
+        border-radius: 6px;
+        border-left: 3px solid var(--bosch-red);
     }
 
-        .product-features li {
-            font-size: 14px;
-            color: #495057;
-            padding: 6px 0;
-            padding-left: 24px;
+        .category-feature-list li {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            color: var(--gray-700);
+            padding: 6px 0 6px 26px;
             position: relative;
             line-height: 1.5;
         }
 
-            .product-features li::before {
+            .category-feature-list li::before {
                 content: '✓';
                 position: absolute;
                 left: 0;
-                color: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
+                color: var(--bosch-red);
                 font-weight: bold;
                 font-size: 16px;
             }
 
-    /* Product Badges */
-    .product-badges {
+    /* Category Status Badges */
+    .category-status-badges {
         margin-top: auto;
-        padding-top: 16px;
-        border-top: 2px solid #f0f0f0;
+        padding-top: 18px;
+        border-top: 2px solid var(--gray-200);
         display: flex;
-        gap: 8px;
+        gap: 10px;
         flex-wrap: wrap;
     }
 
-    .badge {
-        padding: 8px 14px;
-        font-size: 11px;
+    .status-badge {
+        padding: 8px 16px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.6875rem;
         font-weight: 700;
-        border-radius: 0;
+        border-radius: 4px;
         text-transform: uppercase;
         letter-spacing: 0.8px;
         border: 2px solid;
+        transition: all 0.3s ease;
     }
 
-    .badge-primary {
-        background: #fff;
-        color: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-        border-color: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
+    .badge-professional {
+        background: var(--white);
+        color: var(--bosch-red);
+        border-color: var(--bosch-red);
     }
 
-    .badge-success {
-        background: #fff;
+    .badge-available {
+        background: var(--white);
         color: #16a34a;
         border-color: #16a34a;
     }
 
-    /* ========== FEATURES HIGHLIGHT SECTION ========== */
-    .features-highlight-section {
+    .product-category-card:hover .badge-professional {
+        background: var(--bosch-red);
+        color: var(--white);
+    }
+
+    .product-category-card:hover .badge-available {
+        background: #16a34a;
+        color: var(--white);
+    }
+
+    /* ========== VALUE PROPOSITION SECTION ========== */
+    .value-proposition-section {
         padding: 80px 0;
-        background: #f8f9fa;
+        background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
     }
 
-    .section-header {
+    .section-header-center {
         text-align: center;
-        max-width: 700px;
-        margin: 0 auto 60px;
+        max-width: 750px;
+        margin: 0 auto 50px;
     }
 
-    .section-label {
+    .section-tag {
         display: inline-block;
-        padding: 6px 16px;
-        background: #fff5f5;
-        color: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-        font-size: 13px;
+        padding: 8px 20px;
+        background: rgba(0, 102, 179, 0.1);
+        color: var(--bosch-red);
+        font-family: 'Inter', sans-serif;
+        font-size: 0.8125rem;
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 1.2px;
         border-radius: 20px;
+        margin-bottom: 18px;
+    }
+
+    .section-main-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: clamp(1.75rem, 4vw, 2.625rem);
+        font-weight: 700;
+        color: var(--gray-900);
+        line-height: 1.3;
         margin-bottom: 16px;
     }
 
-    .section-title {
-        font-size: clamp(28px, 4vw, 42px);
-        font-weight: 700;
-        color: #2c3e50;
-        line-height: 1.3;
+    .section-description {
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        color: var(--gray-600);
+        line-height: 1.7;
+        margin: 0;
     }
 
-    .feature-highlight-box {
-        background: #fff;
-        padding: 36px 24px;
-        border: none;
-        border-radius: 0;
+    .value-prop-card {
+        background: var(--white);
+        padding: 38px 28px;
+        border-radius: 8px;
         text-align: center;
         height: 100%;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         position: relative;
         overflow: hidden;
+        transition: all 0.3s ease;
     }
 
-        .feature-highlight-box::after {
+        .value-prop-card::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 3px;
-            background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
+            height: 4px;
+            background: linear-gradient(90deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 0.3s ease;
         }
 
-        .feature-highlight-box:hover::after {
-            transform: scaleX(1);
+        .value-prop-card:hover {
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+            transform: translateY(-6px);
         }
 
-        .feature-highlight-box:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-        }
+            .value-prop-card:hover::after {
+                transform: scaleX(1);
+            }
 
-    .feature-highlight-icon {
-        width: 72px;
-        height: 72px;
+    .value-icon-container {
+        width: 80px;
+        height: 80px;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #f8f9fa;
-        color: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-        font-size: 32px;
-        border-radius: 0;
+        background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-200) 100%);
+        color: var(--bosch-red);
+        font-size: 36px;
+        border-radius: 50%;
         margin: 0 auto 24px;
-        border: 3px solid linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
+        border: 3px solid var(--bosch-red);
+        transition: all 0.3s ease;
     }
 
-    .feature-highlight-box h4 {
-        font-size: 18px;
+    .value-prop-card:hover .value-icon-container {
+        background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
+        color: var(--white);
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    .value-card-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.125rem;
         font-weight: 700;
-        color: #1a1a1a;
-        margin-bottom: 12px;
-        text-transform: uppercase;
-        letter-spacing: -0.5px;
+        color: var(--gray-900);
+        margin-bottom: 14px;
+        letter-spacing: -0.02em;
     }
 
-    .feature-highlight-box p {
-        font-size: 14px;
-        color: #6c757d;
+    .value-card-text {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9375rem;
+        color: var(--gray-600);
         line-height: 1.7;
         margin: 0;
     }
 
-    /* ========== CTA SECTION ========== */
+    /* ========== CALL TO ACTION SECTION ========== */
     .products-cta-section {
         position: relative;
         padding: 100px 0;
-        background: #1a1a1a;
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
         overflow: hidden;
     }
 
-    .cta-background-overlay {
+    .cta-overlay {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(224,4,32,0.3) 100%);
+        background: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0px, transparent 1px, transparent 40px, rgba(255, 255, 255, 0.03) 41px), repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0px, transparent 1px, transparent 40px, rgba(255, 255, 255, 0.03) 41px)
     }
 
-    .cta-content {
+    .cta-content-wrapper {
         position: relative;
         z-index: 10;
         text-align: center;
-        max-width: 800px;
+        max-width: 850px;
         margin: 0 auto;
-        color: #fff;
     }
 
-    .cta-title {
-        font-size: clamp(28px, 5vw, 48px);
+    .cta-main-title {
+        font-family: 'Poppins', sans-serif;
+        font-size: clamp(1.75rem, 5vw, 3rem);
         font-weight: 700;
         line-height: 1.2;
-        margin-bottom: 20px;
-        color: #fff;
+        margin-bottom: 22px;
+        color: var(--white);
     }
 
-    .cta-description {
-        font-size: 18px;
+    .cta-subtitle {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.125rem;
         line-height: 1.7;
         color: rgba(255, 255, 255, 0.9);
         margin-bottom: 40px;
+        max-width: 650px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    .cta-buttons {
+    .cta-action-buttons {
         display: flex;
-        gap: 16px;
+        gap: 18px;
         justify-content: center;
         flex-wrap: wrap;
     }
 
-    .btn-cta-primary {
+    .cta-btn {
         display: inline-flex;
         align-items: center;
         gap: 12px;
-        padding: 16px 32px;
-        background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-        color: #fff;
-        font-size: 16px;
+        padding: 16px 34px;
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
         font-weight: 600;
         text-decoration: none;
-        border-radius: 4px;
+        border-radius: 6px;
         transition: all 0.3s ease;
+        letter-spacing: 0.02em;
     }
 
-        .btn-cta-primary:hover {
-            background: #004F8C;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(224, 4, 32, 0.3);
-            color: #fff;
+    .cta-btn-primary {
+        background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
+        color: var(--white);
+        box-shadow: 0 6px 20px rgba(0, 102, 179, 0.3);
+    }
+
+        .cta-btn-primary:hover {
+            background: linear-gradient(135deg, var(--bosch-red-dark) 0%, var(--bosch-red) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 102, 179, 0.4);
+            color: var(--white);
             text-decoration: none;
         }
 
-    .btn-cta-secondary {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        padding: 16px 32px;
+    .cta-btn-secondary {
         background: transparent;
-        color: #fff;
-        font-size: 16px;
-        font-weight: 600;
-        text-decoration: none;
-        border: 2px solid #fff;
-        border-radius: 4px;
-        transition: all 0.3s ease;
+        color: var(--white);
+        border: 2px solid var(--white);
     }
 
-        .btn-cta-secondary:hover {
-            background: #fff;
-            color: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
+        .cta-btn-secondary:hover {
+            background: var(--white);
+            color: var(--bosch-red);
+            transform: translateY(-3px);
             text-decoration: none;
         }
 
     /* ========== RESPONSIVE DESIGN ========== */
 
-    /* Tablets */
+    /* Tablets (max-width: 991px) */
     @@media (max-width: 991px) {
-        .products-hero-section
+        .products-hero
 
     {
-        padding: 120px 0 60px;
+        padding: 100px 0 60px;
     }
 
-    .products-grid-section,
-    .features-highlight-section {
+    .products-catalog-section,
+    .value-proposition-section {
         padding: 60px 0;
     }
 
@@ -814,27 +858,27 @@
         padding: 80px 0;
     }
 
-    .product-image-container {
+    .category-image1-wrapper {
         height: 200px;
     }
 
     }
 
-    /* Mobile */
+    /* Mobile (max-width: 767px) */
     @@media (max-width: 767px) {
-        .products-hero-section
+        .products-hero
 
     {
-        padding: 100px 0 50px;
+        padding: 80px 0 50px;
     }
 
-    .hero-label {
-        font-size: 12px;
-        padding: 6px 16px;
+    .hero-badge {
+        font-size: 0.75rem;
+        padding: 8px 18px;
     }
 
-    .products-grid-section,
-    .features-highlight-section {
+    .products-catalog-section,
+    .value-proposition-section {
         padding: 50px 0;
     }
 
@@ -842,104 +886,113 @@
         padding: 60px 0;
     }
 
-    .product-image-container {
+    .category-image1-wrapper {
         height: 180px;
     }
 
-    .product-content {
-        padding: 20px;
+    .category-card-body {
+        padding: 24px 20px 20px;
     }
 
-    .product-title {
-        font-size: 17px;
-        min-height: 48px;
+    .category-card-title {
+        font-size: 1.0625rem;
+        min-height: 50px;
     }
 
-    .product-description {
-        font-size: 14px;
-        min-height: 70px;
+    .category-card-description {
+        font-size: 0.875rem;
+        min-height: 75px;
     }
 
-    .product-features {
-        min-height: 80px;
+    .category-feature-list {
+        min-height: 90px;
     }
 
-        .product-features li {
-            font-size: 13px;
+        .category-feature-list li {
+            font-size: 0.8125rem;
         }
 
-    .cta-buttons {
+    .cta-action-buttons {
         flex-direction: column;
         width: 100%;
-        padding: 0 20px;
+        max-width: 400px;
+        margin: 0 auto;
     }
 
-    .btn-cta-primary,
-    .btn-cta-secondary {
+    .cta-btn {
         width: 100%;
         justify-content: center;
     }
 
     }
 
-    /* Small Mobile */
+    /* Small Mobile (max-width: 575px) */
     @@media (max-width: 575px) {
-        .products-hero-section
+        .products-hero
 
     {
-        padding: 90px 0 40px;
+        padding: 70px 0 40px;
     }
 
-    .product-image-container {
+    .category-image1-wrapper {
         height: 160px;
     }
 
-    .product-content {
-        padding: 16px;
+    .category-card-body {
+        padding: 20px 16px 16px;
     }
 
-    .product-icon {
-        width: 48px;
-        height: 48px;
-        font-size: 20px;
+    .category-icon-wrapper {
+        width: 52px;
+        height: 52px;
+        font-size: 24px;
         margin-bottom: 16px;
     }
 
-    .product-title {
-        font-size: 16px;
-        min-height: 44px;
+    .category-card-title {
+        font-size: 1rem;
+        min-height: 48px;
     }
 
-    .product-description {
-        font-size: 13px;
-        min-height: 65px;
+    .category-card-description {
+        font-size: 0.8125rem;
+        min-height: 70px;
     }
 
-    .product-features {
-        min-height: 75px;
+    .category-feature-list {
+        min-height: 85px;
+        padding: 12px 16px;
         margin-bottom: 16px;
     }
 
-        .product-features li {
-            font-size: 12px;
+        .category-feature-list li {
+            font-size: 0.75rem;
+            padding: 5px 0 5px 24px;
         }
 
-    .badge {
-        font-size: 11px;
-        padding: 5px 10px;
+    .status-badge {
+        font-size: 0.625rem;
+        padding: 6px 12px;
+    }
+
+    .value-icon-container {
+        width: 70px;
+        height: 70px;
+        font-size: 32px;
     }
 
     }
 
-    /* Focus Styles */
-    .product-card:focus-within {
-        outline: 2px solid #FFA500;
+    /* Focus Styles for Accessibility */
+    .product-category-card:focus-within {
+        outline: 2px solid var(--bosch-red);
         outline-offset: 2px;
     }
 
-    a:focus-visible {
-        outline: 2px solid #FFA500;
-        outline-offset: 2px;
-        box-shadow: 0 0 0 4px rgba(255, 165, 0, 0.2);
+    a:focus-visible,
+    button:focus-visible {
+        outline: 2px solid var(--bosch-red);
+        outline-offset: 3px;
+        box-shadow: 0 0 0 4px rgba(0, 102, 179, 0.2);
     }
-                        </style>
+</style>

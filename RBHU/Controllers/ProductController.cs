@@ -793,7 +793,7 @@ namespace RBHU.Controllers
                     "Cutting Tools" => "CuttingTools",
                     "Pneumatic tools and Systems" => "Pneumatic",
                     "Power Tools and Accessories" => "PowerTools",
-                    "Safety Products and Equipment" => "SafetyProducts",
+                    "PPE & Safety Equipments" => "SafetyProducts",
                     "Hoses" => "Hoses",
                     "Belts" => "Belts",
                     _ => "Category" // fallback
