@@ -198,29 +198,6 @@
     padding-bottom: 3rem;
 }
 
-.rbhu-image-main {
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: var(--rbhu-shadow-xl);
-    position: relative;
-}
-
-    .rbhu-image-main::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(135deg, rgba(30, 58, 95, 0.1), rgba(62, 177, 200, 0.1));
-    }
-
-    .rbhu-image-main img {
-        width: 100%;
-        height: auto;
-        display: block;
-    }
-
 .rbhu-stats-card {
     position: absolute;
     bottom: 0;

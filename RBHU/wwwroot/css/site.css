@@ -223,7 +223,7 @@ body.top-bar-hidden .navbar-professional {
     padding: 0 40px;
 }
 
-/* Professional Brand */
+/* Professional Brand with 3-Stripe Background */
 .navbar-brand-professional {
     display: flex;
     align-items: center;
@@ -231,11 +231,34 @@ body.top-bar-hidden .navbar-professional {
     padding: 0;
     margin-right: 80px;
     transition: opacity var(--transition-base);
+    position: relative;
+    padding-left: 10px;
 }
+
+    .navbar-brand-professional::before {
+        content: '';
+        position: absolute;
+        left: -25px;
+        top: 50%;
+        transform: translateY(-50%) skewX(135deg);
+        width: 400px;
+        height: 82px;
+/*        linear-gradient(95deg, #FF6B35 0%, #ffede5 31%, #FFFFFF 33%, #FFFFFF 66%, #e4f2ff 68%, #0066B3 100%)*/
+        /*        linear-gradient(95deg, #ffffff 0%, #ff6d2b 31%, #FFFFFF 33%, #FFFFFF 66%, #ecf6ff 68%, #0077d0 100%)*/
+        /*        linear-gradient(95deg, #f18934 0%, #f38d3a 31%, #ffffff 33%, #FFFFFF 66%, #2b80c1 68%, #1579c4 100%)*/
+        background: linear-gradient(95deg, #ffffff 0%, #db4400 31%, #FFFFFF 33%, #FFFFFF 66%, #ecf6ff 68%, #0062ab 100%);
+        z-index: -1;
+        opacity: 1;
+        /*        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);*/
+    }
 
     .navbar-brand-professional:hover {
         opacity: 0.9;
     }
+
+        .navbar-brand-professional:hover::before {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
 
 .brand-logo-container {
     display: flex;
@@ -248,6 +271,8 @@ body.top-bar-hidden .navbar-professional {
     width: auto;
     object-fit: contain;
     transition: transform var(--transition-base);
+    position: relative;
+    z-index: 1;
 }
 
 .navbar-brand-professional:hover .brand-logo-image {
@@ -257,6 +282,8 @@ body.top-bar-hidden .navbar-professional {
 .brand-text-container {
     display: flex;
     flex-direction: column;
+    position: relative;
+    z-index: 1;
 }
 
 .brand-name {
@@ -1032,19 +1059,9 @@ body.top-bar-hidden .mega-menu-backdrop {
 .footer-professional {
     background: linear-gradient(135deg, #1a2a6c 0%, #1e3a5f 50%, #0f1724 100%);
     color: white;
-    margin-top: 100px;
+    margin-top: 0px;
     position: relative;
 }
-
-    .footer-professional::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: linear-gradient(90deg, #21a0a0 0%, var(--bosch-red) 50%, #21a0a0 100%);
-    }
 
 .footer-top {
     padding: 70px 0 50px;
@@ -1062,7 +1079,9 @@ body.top-bar-hidden .mega-menu-backdrop {
     width: auto;
     object-fit: contain;
     margin-bottom: 18px;
-    filter: brightness(1.1);
+    background: white;
+    padding: 2px 4px;
+    border-radius: 8px;
 }
 
 .footer-brand-name {
@@ -1208,9 +1227,14 @@ body.top-bar-hidden .mega-menu-backdrop {
 .footer-bottom-content {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 18px;
+}
+
+.copyright::after {
+    content: '|';
+    margin: 0 12px;
+    color: rgba(255, 255, 255, 0.3);
 }
 
 .copyright,
@@ -1351,7 +1375,15 @@ body.top-bar-hidden .mega-menu-backdrop {
 
     .navbar-brand-professional {
         margin-right: auto;
+        padding-left: 8px;
     }
+
+        .navbar-brand-professional::before {
+            width: 280px;
+            height: 95px;
+            left: -45px;
+            transform: translateY(-50%) skewX(-15deg);
+        }
 
     .brand-logo-image {
         height: 45px;
@@ -1565,6 +1597,13 @@ body.top-bar-hidden .mega-menu-backdrop {
         height: calc(100vh - 60px);
     }
 
+    .navbar-brand-professional::before {
+        width: 260px;
+        height: 85px;
+        left: -40px;
+        transform: translateY(-50%) skewX(-15deg);
+    }
+
     .brand-logo-image {
         height: 40px;
     }
@@ -1700,6 +1739,13 @@ body.top-bar-hidden .mega-menu-backdrop {
 
     .brand-logo-container {
         gap: 12px;
+    }
+
+    .navbar-brand-professional::before {
+        width: 230px;
+        height: 75px;
+        left: -35px;
+        transform: translateY(-50%) skewX(-15deg);
     }
 
     .brand-logo-image {
@@ -1841,6 +1887,13 @@ body.top-bar-hidden .mega-menu-backdrop {
 @media (max-width: 375px) {
     :root {
         --content-padding-x: 12px;
+    }
+
+    .navbar-brand-professional::before {
+        width: 210px;
+        height: 70px;
+        left: -30px;
+        transform: translateY(-50%) skewX(-15deg);
     }
 
     .brand-logo-image {

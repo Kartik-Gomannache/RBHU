@@ -159,19 +159,19 @@
             <div class="row">
                 <div class="col-lg-8 col-md-10">
                     <div class="hero-content-professional">
-                        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                        <h1 class="hero-title">
                             @* Powering Industries with Professional Tools & Equipment *@
                             @* Strength You Can Trust. Tools You Can Rely On. *@
                             Empowering the Makers of Tomorrow
                         </h1>
 
-                        <p class="hero-description" data-aos="fade-up" data-aos-delay="300">
-                            Bringing the world’s best industrial tools to your doorstep. For over 5 years,
-                            we’ve helped businesses grow by providing top-tier equipment, expert maintenance,
+                        <p class="hero-description">
+                            Bringing the world's best industrial tools to your doorstep. For over 5 years,
+                            we've helped businesses grow by providing top-tier equipment, expert maintenance,
                             and the reliable support you need to build with confidence.
                         </p>
 
-                        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
+                        <div class="hero-buttons">
                             <button class="btn-hero-primary" id="openCatalogModal">
                                 Browse Catalog
                                 <i class="fas fa-chevron-down ms-2"></i>
@@ -443,6 +443,25 @@
 </div>
 
 <script>
+    // Trigger hero animations on page load
+    window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            const heroTitle = document.querySelector('.hero-title');
+            const heroDescription = document.querySelector('.hero-description');
+            const heroButtons = document.querySelector('.hero-buttons');
+
+            if (heroTitle) {
+                heroTitle.classList.add('animate');
+            }
+            if (heroDescription) {
+                heroDescription.classList.add('animate');
+            }
+            if (heroButtons) {
+                heroButtons.classList.add('animate');
+            }
+        }, 50);
+    });
+
     // Hero Image Slider
      // Catalog Modal Functionality
     document.addEventListener('DOMContentLoaded', function () {
