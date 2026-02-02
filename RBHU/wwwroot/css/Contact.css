@@ -108,7 +108,7 @@
     justify-content: center;
     gap: 12px;
     padding: 16px 40px;
-    background: linear-gradient(135deg, #3385C3 0%, #0066B3 100%);
+    background: linear-gradient(0deg, #004F8C 0%, #0066B3 50%, #004F8C 90%);
     color: #fff;
     font-size: 1rem;
     font-weight: 600;
@@ -177,7 +177,7 @@
 
 /* ========== CONTACT INFO SIDEBAR ========== */
 .contact-info {
-    background: linear-gradient(135deg, #3385C3 0%, #0066B3 100%);
+    background: linear-gradient(0deg, #004F8C 0%, #0066B3 50%, #004F8C 90%);
     color: white;
     padding: 40px;
     border-radius: 8px;

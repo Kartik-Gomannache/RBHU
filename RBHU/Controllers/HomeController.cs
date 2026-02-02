@@ -27,7 +27,7 @@ namespace RBHU.Controllers
         private const bool UseSsl = true;
         private const string SmtpUsername = "eternalvision2025@gmail.com"; // your Gmail address
         private const string SmtpAppPassword = "gvvy enkz fjjo iccp"; // 16-char App Password
-        private const string AdminEmail = "office@aniketsales.com";     // where you receive messages
+        private const string AdminEmail = "rbhugoa@gmail.com";     // where you receive messages
         private const string FromDisplayName = "Contact from Website";      // display name shown to admin
         public HomeController(ILogger<HomeController> logger, IEService emailService, IProductService productService)
         {
