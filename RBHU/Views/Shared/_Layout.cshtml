@@ -52,7 +52,7 @@
                     <img src="~/images/RBHU-logo.png" class="brand-logo-image" alt="RBHU Solutions LLP Logo" />
                     <div class="brand-text-container">
                         <span class="brand-name">RBHU Solutions LLP</span>
-                        <span class="brand-tagline">Industrial Equipment & Tools</span>
+                        <span class="brand-tagline">Industrial Engineering Solutions</span>
                     </div>
                 </div>
             </a>
@@ -222,7 +222,7 @@
                                 <i class="fas fa-envelope"></i>
                                 <div>
                                     <strong>Email</strong>
-                                    <a href="mailto:office@aniketsalesagencies.com">office@aniketsalesagencies.com</a>
+                                    <a href="mailto:rbhugoa@gmail.com">rbhugoa@gmail.com</a>
                                 </div>
                             </div>
                             <div class="info-box-item">
@@ -277,13 +277,13 @@
                         <div class="footer-section">
                             <h6 class="footer-heading">Products</h6>
                             <ul class="footer-links">
-                                <li><a asp-area="" asp-controller="Product" asp-action="Pneumatic">Pneumatic Tools</a></li>
-                                <li><a asp-area="" asp-controller="Product" asp-action="PowerTools">Power Tools</a></li>
-                                <li><a asp-area="" asp-controller="Product" asp-action="CuttingTools">Cutting Tools</a></li>
+                                <li><a asp-area="" asp-controller="Product" asp-action="SafetyProducts">PPE and Safety Equipment</a></li>
                                 <li><a asp-area="" asp-controller="Product" asp-action="Abrasives">Abrasives</a></li>
-                                <li><a asp-area="" asp-controller="Product" asp-action="SafetyProducts">SafetyProducts</a></li>
                                 <li><a asp-area="" asp-controller="Product" asp-action="Belts">Belts</a></li>
+                                <li><a asp-area="" asp-controller="Product" asp-action="CuttingTools">Cutting Tools</a></li>
                                 <li><a asp-area="" asp-controller="Product" asp-action="Hoses">Hoses</a></li>
+                                <li><a asp-area="" asp-controller="Product" asp-action="Pneumatic">Pneumatic Tools and Systems</a></li>
+                                <li><a asp-area="" asp-controller="Product" asp-action="PowerTools">Power Tools and Accessories</a></li>
                             </ul>
                         </div>
                     </div>
@@ -473,7 +473,6 @@
                 url: '/Product/GetCategories',
                 type: 'POST',
                 success: function (response) {
-                    debugger
                     if (response.success && response.data) {
                         categoriesData = response.data;
                         renderCategoryGrid();
@@ -507,7 +506,6 @@
         }
 
         function createCategoryCard(category) {
-            debugger
             const card = $('<div>').addClass('category-professional');
             const imageUrl = getCategoryImage(category.name);
             const categoryRoute = getCategoryRoute(category.name);
@@ -747,7 +745,7 @@
             });
         }
 
-        // Mobile menu close function - from reference code
+        // Mobile menu close function
         function closeMobileNav() {
             const navbarCollapse = document.getElementById('navbarNav');
             const navbarToggler = document.querySelector('.navbar-toggler-professional');
@@ -762,7 +760,7 @@
             }
         }
 
-        // Mobile menu handling - from reference code
+        // Mobile menu handling
         document.addEventListener('DOMContentLoaded', function () {
             const navbarCollapse = document.getElementById('navbarNav');
             const navbarToggler = document.querySelector('.navbar-toggler-professional');
