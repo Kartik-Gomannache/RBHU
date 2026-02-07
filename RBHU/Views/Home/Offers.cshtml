@@ -1,6 +1,7 @@
 ﻿@model List<RBHU_DbServices.Models.Product>
 @{
-    ViewData["Title"] = "Special Offers";
+    ViewData["Title"] = "Special Offers | Exclusive Deals on Industrial Tools Goa";
+    ViewData["Description"] = "Save big on premium industrial tools! Limited time offers on Makita, Bosch, Chicago Pneumatic equipment in Goa. PPE safety gear, power tools, pneumatic systems at unbeatable prices. Bulk discounts available.";
 }
 
 <link href="~/css/offers.css" rel="stylesheet" />
@@ -298,11 +299,17 @@
                                         <div class="image-container">
                                             @if (!string.IsNullOrEmpty(product.ImageUrl))
                                             {
-                                                <img src="@product.ImageUrl" alt="@product.Name" class="product-image">
+                                                <img src="@product.ImageUrl"
+                                                     alt="@product.Name - @(product.Category?.Name ?? "Industrial Tool") on special offer at RBHU Solutions Goa"
+                                                     class="product-image"
+                                                     loading="lazy">
                                             }
                                             else
                                             {
-                                                <img src="https://via.placeholder.com/400x400?text=No+Image" alt="@product.Name" class="product-image">
+                                                <img src="https://via.placeholder.com/400x400?text=No+Image"
+                                                     alt="@product.Name - Product image placeholder"
+                                                     class="product-image"
+                                                     loading="lazy">
                                             }
                                         </div>
                                     </div>

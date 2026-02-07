@@ -38,8 +38,8 @@ namespace RBHU.Controllers
 
         public IActionResult Home()
         {
-            ViewData["Title"] = "Home";
-          //  var Categories = _productService.GetAllCategoriesForHome();
+            ViewData["Title"] = "Industrial Tools & Equipment Goa | RBHU Solutions LLP";
+            ViewData["Description"] = "Premium industrial tools and engineering solutions in Goa. Authorized distributor of Makita, Bosch, Chicago Pneumatic, Klingspor. PPE safety equipment, power tools, pneumatic systems, abrasives. Expert service across South Goa.";
             return View();
         }
 
@@ -50,19 +50,22 @@ namespace RBHU.Controllers
 
         public IActionResult About()
         {
-            ViewData["Title"] = "About Us";
+            ViewData["Title"] = "About Us | Industrial Tools Supplier Goa | RBHU Solutions LLP";
+            ViewData["Description"] = "Meet the founders of RBHU Solutions LLP - Rupesh Bothra and Aniket Pawashe. Established in 2022, delivering premium industrial tools, PPE equipment, and engineering solutions across Goa with 26+ years combined experience.";
             return View();
         }
 
         public IActionResult Products()
         {
-            ViewData["Title"] = "Products";
+            ViewData["Title"] = "Industrial Products | Tools, PPE Equipment & Pneumatic Systems Goa";
+            ViewData["Description"] = "Browse 500+ industrial products in Goa. Premium power tools, PPE safety equipment, pneumatic systems, abrasives, cutting tools from Makita, Bosch, Chicago Pneumatic. Authorized dealer with warranty coverage.";
             return View();
         }
 
         public IActionResult Offers()
         {
-            ViewData["Title"] = "Special Offers";
+            ViewData["Title"] = "Special Offers | Exclusive Deals on Industrial Tools Goa";
+            ViewData["Description"] = "Save big on premium industrial tools! Limited time offers on Makita, Bosch, Chicago Pneumatic equipment in Goa. PPE safety gear, power tools, pneumatic systems at unbeatable prices. Bulk discounts available.";
 
             // Get products with offer prices
             var productsWithOffers = _productService.GetSpecialOffers();
@@ -72,8 +75,9 @@ namespace RBHU.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["Title"] = "Contact Us";
-            return View(); // No model passed
+            ViewData["Title"] = "Contact Us | Get Industrial Equipment Quote Goa";
+            ViewData["Description"] = "Contact RBHU Solutions LLP for industrial tools, PPE equipment, and engineering solutions in Goa. Call +91 9968068454 or visit us at Margao, South Goa. Mon-Sat 9 AM - 6 PM. Quick response guaranteed.";
+            return View();
         }
 
         [HttpPost]

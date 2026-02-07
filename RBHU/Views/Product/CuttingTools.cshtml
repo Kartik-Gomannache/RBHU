@@ -1,6 +1,6 @@
 ﻿@model RBHU_DbServices.ViewModel.CategoryViewModel
 @{
-    ViewData["Title"] = "Cutting Tools";
+    ViewData["Title"] = "Cutting Tools - Bipico Drill Bits End Mills HSS Tools | RBHU Solutions LLP";
 }
 
 <div class="page-content">
@@ -27,7 +27,9 @@
                             <!-- Bipico Brand -->
                             <div class="brand-card-modern" data-brand="Bipico" onclick="filterByBrand('Bipico')">
                                 <div class="brand-image-wrapper">
-                                    <img src="~/images/Product_Brands/Bipico.jpg" alt="Bipico Brand">
+                                    <img src="~/images/Product_Brands/Bipico.png"
+                                         alt="Bipico Cutting Tools - Drill Bits, End Mills, Carbide Tools by RBHU Solutions Goa"
+                                         loading="lazy">
                                 </div>
                                 <div class="brand-label">Bipico</div>
                                 <div class="brand-overlay">
@@ -180,7 +182,10 @@
                                         <div class="product-image-box">
                                             @if (!string.IsNullOrEmpty(product.ImageUrl))
                                             {
-                                                <img src="@product.ImageUrl" alt="@product.Name" onclick="GoToContact()">
+                                                <img src="@product.ImageUrl"
+                                                     alt="@product.Name - Cutting Tool by RBHU Solutions Goa"
+                                                     onclick="GoToContact()"
+                                                     loading="lazy">
                                             }
                                             else
                                             {
@@ -560,7 +565,9 @@
                             }
 
                             const productImageHtml = item.product.imageUrl
-                                ? `<img src="${item.product.imageUrl}" alt="${item.subCategory2Name}">`
+                                ? `<img src="${item.product.imageUrl}"
+                                       alt="${item.product.name} - ${item.subCategory2Name} Cutting Tool by RBHU Solutions Goa"
+                                       loading="lazy">`
                                 : `<div class="no-image"><i class="fas fa-image"></i></div>`;
 
                             const productDescription = item.product.description
@@ -777,7 +784,10 @@
                 const hasImage = product.imageUrl && product.imageUrl.trim() !== '';
 
                 let imageHtml = hasImage
-                    ? `<img src="${product.imageUrl}" alt="${product.name}" onclick="GoToContact()">`
+                    ? `<img src="${product.imageUrl}"
+                           alt="${product.name} - Professional Cutting Tool Goa"
+                           onclick="GoToContact()"
+                           loading="lazy">`
                     : `<div class="no-image"><i class="fas fa-image"></i></div>`;
 
                 const productHtml = `

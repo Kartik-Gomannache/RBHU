@@ -1,25 +1,249 @@
 ﻿@model ErrorViewModel
 @{
-    ViewData["Title"] = "Error";
+    ViewData["Title"] = "Error - Page Not Found | RBHU Solutions LLP";
+    ViewData["Description"] = "The page you are looking for could not be found. Browse our industrial tools, power tools, safety equipment and more at RBHU Solutions LLP Goa.";
+    ViewData["Robots"] = "noindex, nofollow";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<div class="error-page-container">
+    <div class="container">
+        <div class="row justify-content-center align-items-center min-vh-100">
+            <div class="col-lg-8 col-md-10 text-center">
+                <!-- Error Icon -->
+                <div class="error-icon mb-4" data-aos="zoom-in">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
 
-@if (Model.ShowRequestId)
-{
-    <p>
-        <strong>Request ID:</strong> <code>@Model.RequestId</code>
-    </p>
-}
+                <!-- Error Code -->
+                <h1 class="error-code" data-aos="fade-up">
+                    404
+                </h1>
 
-<h3>Development Mode</h3>
-<p>
-    Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
-</p>
-<p>
-    <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
-    It can result in displaying sensitive information from exceptions to end users.
-    For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
-    and restarting the app.
-</p>
+                <!-- Error Title -->
+                <h2 class="error-title" data-aos="fade-up" data-aos-delay="100">
+                    Oops! Page Not Found
+                </h2>
+
+                <!-- Error Description -->
+                <p class="error-description" data-aos="fade-up" data-aos-delay="200">
+                    The page you are looking for might have been removed, had its name changed,
+                    or is temporarily unavailable.
+                </p>
+
+                @if (Model?.ShowRequestId == true)
+                {
+                    <div class="request-id-box" data-aos="fade-up" data-aos-delay="300">
+                        <small class="text-muted">
+                            <strong>Request ID:</strong> <code>@Model.RequestId</code>
+                        </small>
+                    </div>
+                }
+
+                <!-- Action Buttons -->
+                <div class="error-actions mt-5" data-aos="fade-up" data-aos-delay="400">
+                    <a asp-controller="Home" asp-action="Home" class="btn btn-primary btn-lg me-3">
+                        <i class="fas fa-home me-2"></i>Go to Homepage
+                    </a>
+                    <a asp-controller="Home" asp-action="Products" class="btn btn-outline-secondary btn-lg">
+                        <i class="fas fa-box me-2"></i>Browse Products
+                    </a>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="quick-links mt-5" data-aos="fade-up" data-aos-delay="500">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <div class="row">
+                        <div class="col-md-3 col-6 mb-3">
+                            <a asp-controller="Product" asp-action="PowerTools" class="quick-link-card">
+                                <i class="fas fa-tools"></i>
+                                <span>Power Tools</span>
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <a asp-controller="Product" asp-action="SafetyProducts" class="quick-link-card">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Safety Equipment</span>
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <a asp-controller="Product" asp-action="Abrasives" class="quick-link-card">
+                                <i class="fas fa-circle"></i>
+                                <span>Abrasives</span>
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <a asp-controller="Home" asp-action="Contact" class="quick-link-card">
+                                <i class="fas fa-envelope"></i>
+                                <span>Contact Us</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .error-page-container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 80px 0 40px;
+    }
+
+    .error-icon {
+        font-size: 6rem;
+        color: #dc3545;
+        animation: pulse 2s infinite;
+    }
+
+    @@keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 0.7;
+            transform: scale(1.05);
+        }
+    }
+
+    .error-code {
+        font-size: 8rem;
+        font-weight: 900;
+        color: #343a40;
+        margin: 0;
+        line-height: 1;
+        background: linear-gradient(135deg, var(--bosch-red) 0%, #dc3545 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .error-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #343a40;
+        margin: 20px 0;
+    }
+
+    .error-description {
+        font-size: 1.125rem;
+        color: #6c757d;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    .request-id-box {
+        background: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 20px;
+        display: inline-block;
+    }
+
+    .error-actions .btn {
+        border-radius: 8px;
+        padding: 12px 30px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .error-actions .btn-primary {
+        background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
+        border: none;
+    }
+
+    .error-actions .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 102, 179, 0.3);
+    }
+
+    .error-actions .btn-outline-secondary {
+        border: 2px solid #6c757d;
+        color: #6c757d;
+    }
+
+    .error-actions .btn-outline-secondary:hover {
+        background: #6c757d;
+        color: #fff;
+        transform: translateY(-2px);
+    }
+
+    .quick-links h5 {
+        color: #343a40;
+        font-weight: 700;
+    }
+
+    .quick-link-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        padding: 20px;
+        text-decoration: none;
+        color: #495057;
+        transition: all 0.3s ease;
+        height: 120px;
+    }
+
+    .quick-link-card:hover {
+        border-color: var(--bosch-red);
+        color: var(--bosch-red);
+        transform: translateY(-4px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .quick-link-card i {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .quick-link-card span {
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    @@media (max-width: 768px) {
+        .error-code {
+            font-size: 5rem;
+        }
+
+        .error-title {
+            font-size: 1.75rem;
+        }
+
+        .error-description {
+            font-size: 1rem;
+        }
+
+        .error-actions .btn {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .error-actions .btn.me-3 {
+            margin-right: 0 !important;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .error-icon {
+            font-size: 4rem;
+        }
+
+        .error-code {
+            font-size: 4rem;
+        }
+
+        .error-title {
+            font-size: 1.5rem;
+        }
+    }
+</style>

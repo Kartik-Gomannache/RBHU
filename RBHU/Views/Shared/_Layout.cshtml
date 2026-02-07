@@ -2,7 +2,10 @@
 
 @{
     var uniqueUserIdentifier = User.Claims.FirstOrDefault()?.Value;
-    var newl = "";
+    var pageTitle = ViewData["Title"]?.ToString() ?? "Home";
+    var pageDescription = ViewData["Description"]?.ToString() ?? "RBHU Solutions LLP - Leading provider of industrial tools, PPE safety equipment, power tools, cutting tools, pneumatic systems, abrasives, hoses and belts. Quality industrial solutions for manufacturing and engineering sectors.";
+    var pageKeywords = ViewData["Keywords"]?.ToString() ?? "industrial tools, PPE safety equipment, power tools, cutting tools, pneumatic tools, abrasives, industrial hoses, industrial belts, RBHU Solutions";
+    var currentUrl = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}";
 }
 
 <!DOCTYPE html>
@@ -10,8 +13,166 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] RBHU Solutions LLP</title>
-    <link rel="icon" type="image/x-icon" href="~/images/Bars.png">
+    <title>@(pageTitle == "Home" ? "RBHU Solutions LLP - Industrial Engineering Solutions & Equipment Supplier" : pageTitle + " - RBHU Solutions LLP")</title>
+    <meta name="description" content="@pageDescription" />
+    <meta name="keywords" content="@pageKeywords" />
+    <meta name="robots" content="@(ViewData["Robots"] ?? "index, follow")" />
+    <meta name="author" content="RBHU Solutions LLP" />
+    <link rel="canonical" href="@currentUrl" />
+
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="@currentUrl">
+    <meta property="og:title" content="@(pageTitle == "Home" ? "RBHU Solutions LLP - Industrial Engineering Solutions" : pageTitle + " - RBHU Solutions LLP")">
+    <meta property="og:description" content="@pageDescription">
+    <meta property="og:image" content="https://rbhu.co.in/images/RBHU-logo.png">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="@currentUrl">
+    <meta name="twitter:title" content="@(pageTitle == "Home" ? "RBHU Solutions LLP - Industrial Engineering Solutions" : pageTitle + " - RBHU Solutions LLP")">
+    <meta name="twitter:description" content="@pageDescription">
+    <meta name="twitter:image" content="https://rbhu.co.in/images/RBHU-logo.png">
+
+    <!-- Structured Data - Organization Schema -->
+    <script type="application/ld+json">
+        {
+          "@@context": "https://schema.org",
+          "@@type": "Organization",
+          "name": "RBHU Solutions LLP",
+          "legalName": "RBHU Solutions LLP",
+          "url": "https://rbhu.co.in",
+          "logo": {
+            "@@type": "ImageObject",
+            "url": "https://rbhu.co.in/images/RBHU-logo.png",
+            "width": 250,
+            "height": 60
+          },
+          "description": "Leading provider of industrial tools and manufacturing equipment with over 25 years of excellence in serving industries across Goa",
+          "foundingDate": "2022",
+          "address": {
+            "@@type": "PostalAddress",
+            "streetAddress": "S-43, Souza Enclave, Margoan Salcete",
+            "addressLocality": "South Goa",
+            "addressRegion": "Goa",
+            "postalCode": "403601",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@@type": "GeoCoordinates",
+            "latitude": "15.2676",
+            "longitude": "73.9497"
+          },
+          "contactPoint": [
+            {
+              "@@type": "ContactPoint",
+              "telephone": "+91-9968068454",
+              "contactType": "customer service",
+              "email": "rbhugoa@gmail.com",
+              "areaServed": "IN",
+              "availableLanguage": ["en", "hi"]
+            },
+            {
+              "@@type": "ContactPoint",
+              "telephone": "+91-9108048901",
+              "contactType": "sales",
+              "areaServed": "IN",
+              "availableLanguage": ["en", "hi"]
+            }
+          ],
+          "sameAs": [
+            "https://www.linkedin.com/in/rupesh-bothra"
+          ],
+          "areaServed": {
+            "@@type": "State",
+            "name": "Goa"
+          }
+        }
+    </script>
+
+    <!-- Structured Data - WebSite Schema -->
+    <script type="application/ld+json">
+        {
+          "@@context": "https://schema.org",
+          "@@type": "WebSite",
+          "name": "RBHU Solutions LLP",
+          "alternateName": ["RBHU Solutions", "RBHU"],
+          "url": "https://rbhu.co.in",
+          "description": "Industrial Engineering Solutions & Equipment Supplier in Goa, India",
+          "inLanguage": "en-IN",
+          "publisher": {
+            "@@type": "Organization",
+            "name": "RBHU Solutions LLP",
+            "url": "https://rbhu.co.in",
+            "logo": {
+              "@@type": "ImageObject",
+              "url": "https://rbhu.co.in/images/RBHU-logo.png"
+            }
+          }
+        }
+    </script>
+
+    <!-- Structured Data - LocalBusiness Schema -->
+    <script type="application/ld+json">
+        {
+          "@@context": "https://schema.org",
+          "@@type": "LocalBusiness",
+          "name": "RBHU Solutions LLP",
+          "image": "https://rbhu.co.in/images/RBHU-logo.png",
+          "@@id": "https://rbhu.co.in",
+          "url": "https://rbhu.co.in",
+          "telephone": "+91-9968068454",
+          "priceRange": "$$",
+          "address": {
+            "@@type": "PostalAddress",
+            "streetAddress": "S-43, Souza Enclave, Margoan Salcete",
+            "addressLocality": "South Goa",
+            "addressRegion": "Goa",
+            "postalCode": "403601",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@@type": "GeoCoordinates",
+            "latitude": "15.2676",
+            "longitude": "73.9497"
+          },
+          "openingHoursSpecification": {
+            "@@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          "sameAs": [
+            "https://www.linkedin.com/in/rupesh-bothra"
+          ]
+        }
+    </script>
+
+    <link rel="icon" type="image/png" href="~/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="~/favicon.svg" />
+    <link rel="shortcut icon" href="~/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="~/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="RBHU" />
+    <link rel="manifest" href="~/site.webmanifest" />
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://code.jquery.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://cdn.datatables.net" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+    <link rel="preload" href="~/images/RBHU-logo.png" as="image" type="image/png">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
@@ -215,7 +376,7 @@
                                 <i class="fas fa-phone"></i>
                                 <div>
                                     <strong>Phone</strong>
-                                    <a href="tel:+917090979999">+91 7090979999</a>
+                                    <a href="tel:+919968068454">+91 9968068454</a>
                                 </div>
                             </div>
                             <div class="info-box-item">
@@ -256,20 +417,6 @@
                             <p class="footer-brand-description">
                                 Leading provider of industrial tools and manufacturing equipment with over 5 years of excellence in serving industries worldwide.
                             </p>
-                            @* <div class="social-links-professional">
-                                <a target="_blank" href="https://www.facebook.com/share/1DPGuZv8Hy/?mibextid=wwXIfr" class="social-link" title="Facebook">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a target="_blank" href="https://www.linkedin.com/in/aniket-pawashe-8b478137/" class="social-link" title="LinkedIn">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                                <a target="_blank" href="https://www.instagram.com/aniket_sales?igsh=MWdudGd1dWZjeXFnaA==" class="social-link" title="Instagram">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <a target="_blank" href="https://youtube.com/@@aniketsalesagencies" class="social-link" title="YouTube">
-                                    <i class="fab fa-youtube"></i>
-                                </a>
-                            </div> *@
                         </div>
                     </div>
 
@@ -322,7 +469,7 @@
         <div class="footer-bottom">
             <div class="container">
                 <div class="footer-bottom-content">
-                    <p class="copyright">&copy; 2025 RBHU Solutions LLP. All rights reserved.</p>
+                    <p class="copyright">&copy; 2026 RBHU Solutions LLP. All rights reserved.</p>
                     <p class="developer-credit">
                         Designed and developed by <a href="https://tridenttech.bsite.net" target="_blank">Trident Tech</a>
                     </p>

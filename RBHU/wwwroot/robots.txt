@@ -1,0 +1,20 @@
+# RBHU Solutions LLP - robots.txt
+# This file tells search engines which pages to crawl and which to ignore
+
+# ===== ALLOW ALL SEARCH ENGINES TO CRAWL PUBLIC PAGES =====
+User-agent: *
+Allow: /
+
+# ===== BLOCK ADMIN & LOGIN PAGES (Private Areas) =====
+Disallow: /Admin/
+Disallow: /Login/
+Disallow: /Account/
+
+# ===== ALLOW IMPORTANT FILES (For Better SEO) =====
+Allow: /css/
+Allow: /js/
+Allow: /images/
+Allow: /favicon.ico
+
+# ===== SITEMAP LOCATION (REQUIRED FOR GOOGLE) =====
+Sitemap: https://rbhu.co.in/sitemap.xml

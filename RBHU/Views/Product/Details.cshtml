@@ -38,7 +38,9 @@
                 <div class="card-body text-center">
                     @if (!string.IsNullOrEmpty(Model.ImageUrl))
                     {
-                        <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid rounded shadow product-image" />
+                        <img src="@Model.ImageUrl"
+                             alt="@Model.Name - Product Details View"
+                             class="img-fluid rounded shadow product-image" />
                     }
                     else
                     {

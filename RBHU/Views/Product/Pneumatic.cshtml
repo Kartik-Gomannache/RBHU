@@ -1,6 +1,6 @@
 ﻿@model RBHU_DbServices.ViewModel.CategoryViewModel
 @{
-    ViewData["Title"] = "Pneumatic Tools";
+    ViewData["Title"] = "Pneumatic Tools - Chicago Pneumatic Fuji IMI Norgren | RBHU Solutions LLP";
 }
 
 <div class="page-content">
@@ -28,7 +28,9 @@
                             <!-- CP Brand -->
                             <div class="brand-card-modern" data-brand="Chicago Pneumatic" onclick="filterByBrand('Chicago Pneumatic')">
                                 <div class="brand-image-wrapper">
-                                    <img src="~/images/Product_Brands/CP.jpg" alt="CP Brand">
+                                    <img src="~/images/Product_Brands/CP.png"
+                                         alt="Chicago Pneumatic Tools - Impact Wrenches, Air Compressors, Pneumatic Drills Goa"
+                                         loading="lazy">
                                 </div>
                                 <div class="brand-label">CP</div>
                                 <div class="brand-overlay">
@@ -39,7 +41,9 @@
                             <!-- FUJI Brand -->
                             <div class="brand-card-modern" data-brand="Fuji" onclick="filterByBrand('Fuji')">
                                 <div class="brand-image-wrapper">
-                                    <img src="~/images/Product_Brands/FUJI.jpg" alt="FUJI Brand">
+                                    <img src="~/images/Product_Brands/fuji.png"
+                                         alt="Chicago Pneumatic Tools - Impact Wrenches, Air Compressors, Pneumatic Drills Goa"
+                                         loading="lazy">
                                 </div>
                                 <div class="brand-label">FUJI</div>
                                 <div class="brand-overlay">
@@ -50,7 +54,9 @@
                             <!-- IMI Brand -->
                             <div class="brand-card-modern" data-brand="IMI Norgren" onclick="filterByBrand('IMI Norgren')">
                                 <div class="brand-image-wrapper">
-                                    <img src="~/images/Product_Brands/IMI.jpg" alt="IMI Brand">
+                                    <img src="~/images/Product_Brands/IMI.png"
+                                         alt="IMI Norgren Pneumatic Components - Valves, Cylinders, Air Preparation Goa"
+                                         loading="lazy">
                                 </div>
                                 <div class="brand-label">IMI Norgren</div>
                                 <div class="brand-overlay">
@@ -203,7 +209,10 @@
                                         <div class="product-image-box">
                                             @if (!string.IsNullOrEmpty(product.ImageUrl))
                                             {
-                                                <img src="@product.ImageUrl" alt="@product.Name" onclick="GoToContact()">
+                                                <img src="@product.ImageUrl"
+                                                     alt="@product.Name - Pneumatic Tool by RBHU Solutions Goa"
+                                                     onclick="GoToContact()"
+                                                     loading="lazy">
                                             }
                                             else
                                             {
@@ -566,7 +575,9 @@
                             }
 
                             const productImageHtml = item.product.imageUrl
-                                ? `<img src="${item.product.imageUrl}" alt="${item.subCategory2Name}">`
+                                ? `<img src="${item.product.imageUrl}"
+                                       alt="${item.product.name} - ${item.subCategory2Name} Pneumatic Tool by RBHU Solutions Goa"
+                                       loading="lazy">`
                                 : `<div class="no-image"><i class="fas fa-image"></i></div>`;
 
                             const productDescription = item.product.description
@@ -783,7 +794,10 @@
                 const hasImage = product.imageUrl && product.imageUrl.trim() !== '';
 
                 let imageHtml = hasImage
-                    ? `<img src="${product.imageUrl}" alt="${product.name}" onclick="GoToContact()">`
+                    ? `<img src="${product.imageUrl}"
+                           alt="${product.name} - Professional Pneumatic Tool Goa"
+                           onclick="GoToContact()"
+                           loading="lazy">`
                     : `<div class="no-image"><i class="fas fa-image"></i></div>`;
 
                 const productHtml = `
