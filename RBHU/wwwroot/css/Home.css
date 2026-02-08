@@ -405,6 +405,7 @@
 }
 
 .hero-title {
+    font-family: 'Poppins', sans-serif;
     font-size: clamp(36px, 5vw, 64px);
     font-weight: 700;
     line-height: 1.15;
@@ -413,10 +414,10 @@
     opacity: 0;
 }
 
-    .hero-title.animate {
-        animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-        animation-delay: 0.1s;
-    }
+.hero-title.animate {
+    animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: 0.1s;
+}
 
 .hero-description {
     font-size: 18px;
@@ -840,6 +841,7 @@
 }
 
 .section-title {
+    font-family: 'Poppins', sans-serif;
     font-size: clamp(32px, 4vw, 48px);
     font-weight: 700;
     color: #3385c3;
@@ -1002,24 +1004,6 @@
     margin-bottom: 4rem;
 }
 
-.section-title {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(2rem, 4vw, 2.75rem);
-    font-weight: 700;
-    color: black;
-    margin-bottom: 1rem;
-    letter-spacing: -0.02em;
-}
-
-.section-subtitle {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1.125rem;
-    line-height: 1.7;
-    color: black;
-    max-width: 700px;
-    margin: 0 auto;
-}
-
 .industries-section .row.g-4 {
     display: flex;
     flex-wrap: wrap;
@@ -1078,7 +1062,7 @@
 
     /* Title styling - above overlays, white color for contrast */
     .industry-box h4 {
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'Poppins', sans-serif;
         font-size: 1.5rem;
         font-weight: 700;
         color: white;
@@ -1337,6 +1321,7 @@
 }
 
 .cta-title {
+    font-family: 'Poppins', sans-serif;
     font-size: clamp(32px, 5vw, 56px);
     font-weight: 700;
     line-height: 1.2;
