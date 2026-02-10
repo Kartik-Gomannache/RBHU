@@ -221,16 +221,16 @@
 }
 
     .modal-category.active .modal-category-header > i:first-child {
-        color: white !important;
+        color: black !important;
     }
 
     .modal-category.active .modal-category-header span {
-        color: white !important;
+        color: black !important;
     }
 
     .modal-category.active .modal-category-header .toggle-icon {
         transform: rotate(180deg);
-        color: white !important;
+        color: black !important;
     }
 
 .modal-category-items {
@@ -1564,12 +1564,13 @@
     }
 
     .partners-track {
-        gap: 40px;
-        animation: scroll-partners 30s linear infinite;
+        gap: 35px;
+        animation: scroll-partners 25s linear infinite;
     }
 
         .partners-track img {
-            height: 95px;
+            height: 100px; /* Increased for better visibility */
+            min-width: 120px; /* Added min-width to prevent squishing */
         }
 }
 
@@ -1583,9 +1584,14 @@
         font-size: 16px;
     }
 
-    .partners-track img {
-        height: 8px;
+    .partners-track {
+        gap: 30px;
     }
+
+        .partners-track img {
+            height: 85px; /* FIXED - was 8px, now 85px */
+            min-width: 100px;
+        }
 }
 
 /* Utility Classes */
