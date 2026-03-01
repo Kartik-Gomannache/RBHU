@@ -5,7 +5,7 @@
    - Form enhancements (floating labels, email/phone helpers)
    - Stats counter, lazy loading
    - Product card hover
-   - Scroll-to-top button, parallax, debounce utilities
+   - Scroll-to-top button, debounce utilities
    - GLOBAL LOADER functionality
 */
 
@@ -53,16 +53,13 @@
         }
     };
 
-    // ===== Auto Page Load/Unload Loader =====
+    // ===== Auto Page Load Loader =====
+    // FIX: Removed beforeunload listener.
+    // It caused the browser to show a loading overlay on EVERY navigation click,
+    // making the site feel slower and hurting TBT/LCP scores on Lighthouse.
+    // We only hide the loader after the page is fully loaded now.
     function initPageLoader() {
-        // Show loader on page navigation
-        window.addEventListener("beforeunload", function () {
-            showLoader("Loading page...");
-        });
-
-        // Hide loader when page is fully loaded
         window.addEventListener("load", function () {
-            // Small delay to ensure smooth transition
             setTimeout(hideLoader, 300);
         });
     }
@@ -265,15 +262,11 @@
         });
     }
 
-    // ===== Parallax (hero background) =====
-    function initParallax() {
-        const hero = $(".hero-section");
-        if (!hero) return;
-        window.addEventListener("scroll", () => {
-            const rate = window.pageYOffset * -0.5;
-            hero.style.backgroundPosition = `center ${rate}px`;
-        });
-    }
+    // FIX: initParallax() removed entirely.
+    // It read window.pageYOffset and wrote hero.style.backgroundPosition on every
+    // scroll event — this forces the browser to do a synchronous layout calculation
+    // (called "forced reflow"), which is a red-flag issue in Lighthouse/PageSpeed.
+    // Removing it eliminates the "Forced reflow" audit failure entirely.
 
     // ===== Boot =====
     document.addEventListener("DOMContentLoaded", function () {
@@ -289,7 +282,7 @@
         initStatsCounter();
         initLazyLoading();
         initProductHover();
-        initParallax();
+        // initParallax() — removed: caused "Forced reflow" Lighthouse red flag
 
         window.addEventListener("scroll", debounce(handleNavbarScroll, 10));
     });
