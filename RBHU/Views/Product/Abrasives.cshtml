@@ -16,10 +16,9 @@
                 </div>
             </div>
 
-            <!-- Modern Filter Section - Full Width -->
-            <div class="row">
-                <!-- Brand Cards Section - Full Width -->
-                <div class="col-12 mb-4">
+            <!-- Featured Brands Section - Centered at Top -->
+            <div class="row mb-4">
+                <div class="col-12">
                     <div class="brands-section">
                         <h3 class="brands-title">
                             <i class="fas fa-star me-2"></i>Featured Brands
@@ -53,87 +52,89 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-12 mb-4">
-                    <div class="modern-filter-bar">
-                        <!-- Top Row: Title and Reset -->
-                        <div class="filter-header-row">
-                            <div class="filter-title">
-                                <i class="fas fa-sliders-h me-2"></i>
-                                <span>Filter Products</span>
-                            </div>
-                            <button class="btn-reset" onclick="clearFilters()">
-                                <i class="fas fa-redo me-1"></i>Reset All
+            <!-- Modern Filter Section - Sidebar Layout -->
+            <div class="row">
+                <!-- Sidebar Filter Section -->
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <div class="filter-sidebar">
+                        <div class="filter-header">
+                            <h5 class="filter-title-sidebar">
+                                <i class="fas fa-filter me-2"></i>Filter Products
+                            </h5>
+                            <button class="btn-reset-sidebar" onclick="clearFilters()">
+                                <i class="fas fa-redo"></i> Reset
                             </button>
                         </div>
 
-                        <!-- Filter Content Row -->
-                        <div class="filter-content-row">
-                            <!-- Quick Actions -->
-                            <div class="quick-actions">
-                                <button class="quick-btn" onclick="showAllProducts()">
-                                    <i class="fas fa-th me-1"></i>All Products
-                                </button>
-                                <a class="quick-btn" asp-action="Products" asp-controller="Home">
-                                    <i class="fas fa-arrow-left me-1"></i>Categories
-                                </a>
+                        <!-- Quick Actions -->
+                        <div class="filter-section">
+                            <button class="filter-btn-full" onclick="showAllProducts()">
+                                <i class="fas fa-th me-2"></i>All Products
+                            </button>
+                            <a class="filter-btn-full filter-btn-outline" asp-action="Products" asp-controller="Home">
+                                <i class="fas fa-arrow-left me-2"></i>Go back to category page
+                            </a>
+                        </div>
+
+                        <!-- Brand Filter Section -->
+                        <div class="filter-section" id="brandShowcase">
+                            <div class="filter-section-header">
+                                <i class="fas fa-star me-2"></i>Brands
                             </div>
-
-                            <!-- Category Pills -->
-                            <div class="category-pills-container">
-                                @if (Model.SubCategories1 != null && Model.SubCategories1.Any())
+                            @if (Model.SubCategories1 != null && Model.SubCategories1.Any())
+                            {
+                                @foreach (var subCat1 in Model.SubCategories1)
                                 {
-                                    @foreach (var subCat1 in Model.SubCategories1)
-                                    {
-                                        var subCat1Id = $"subcat1-{subCat1.Id}";
-                                        var subCategories2 = Model.SubCategories2Map.ContainsKey(subCat1.Id)
-                                        ? Model.SubCategories2Map[subCat1.Id]
-                                        : new List<RBHU_DbServices.Models.SubCategory2>();
+                                    var subCat1Id = $"subcat1-{subCat1.Id}";
+                                    var subCategories2 = Model.SubCategories2Map.ContainsKey(subCat1.Id)
+                                    ? Model.SubCategories2Map[subCat1.Id]
+                                    : new List<RBHU_DbServices.Models.SubCategory2>();
 
-                                        <div class="category-pill-wrapper">
-                                            <button class="category-pill"
-                                                    data-subcategory1-id="@subCat1.Id"
-                                                    data-brand-name="@subCat1.Name"
-                                                    data-has-subcat2="@(subCategories2.Any() ? "true" : "false")"
-                                                    onclick="toggleSubCategory1(@subCat1.Id, '@subCat1.Name')">
-                                                <i class="fas fa-tag me-2"></i>
-                                                <span>@subCat1.Name</span>
-                                                @if (subCategories2 != null && subCategories2.Any())
-                                                {
-                                                    <i class="fas fa-chevron-down ms-2 pill-arrow"></i>
-                                                }
-                                            </button>
-
+                                    <div class="brand-filter-item">
+                                        <button class="brand-filter-btn"
+                                                data-subcategory1-id="@subCat1.Id"
+                                                data-brand-name="@subCat1.Name"
+                                                data-has-subcat2="@(subCategories2.Any() ? "true" : "false")"
+                                                onclick="toggleSubCategory1(@subCat1.Id, '@subCat1.Name')">
+                                            <i class="fas fa-folder me-2"></i>
+                                            <span>@subCat1.Name</span>
                                             @if (subCategories2 != null && subCategories2.Any())
                                             {
-                                                <div class="subcategory-dropdown" id="@subCat1Id" style="display: none;">
-                                                    @foreach (var subCat2 in subCategories2)
-                                                    {
-                                                        <div class="subcategory-option"
-                                                             data-subcategory2-id="@subCat2.Id"
-                                                             onclick="filterBySubCategory2(@subCat1.Id, @subCat2.Id, '@subCat1.Name', '@subCat2.Name')">
-                                                            <i class="fas fa-dot-circle me-2"></i>
-                                                            <span>@subCat2.Name</span>
-                                                        </div>
-                                                    }
-                                                </div>
+                                                <i class="fas fa-chevron-down ms-auto brand-arrow"></i>
                                             }
-                                        </div>
-                                    }
-                                }
-                                else
-                                {
-                                    <div class="no-categories">
-                                        <i class="fas fa-info-circle me-2"></i>No filters available
+                                        </button>
+
+                                        @if (subCategories2 != null && subCategories2.Any())
+                                        {
+                                            <div class="brand-subcategory-list" id="@subCat1Id" style="display: none;">
+                                                @foreach (var subCat2 in subCategories2)
+                                                {
+                                                    <div class="brand-subcategory-item"
+                                                         data-subcategory2-id="@subCat2.Id"
+                                                         onclick="filterBySubCategory2(@subCat1.Id, @subCat2.Id, '@subCat1.Name', '@subCat2.Name')">
+                                                        <i class="fas fa-caret-right me-2"></i>
+                                                        <span>@subCat2.Name</span>
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
                                     </div>
                                 }
-                            </div>
+                            }
+                            else
+                            {
+                                <div class="no-categories-sidebar">
+                                    <i class="fas fa-info-circle me-2"></i>No filters available
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
 
-                <!-- Products Section - Full Width Row -->
-                <div class="col-12">
+                <!-- Products Section -->
+                <div class="col-lg-9 col-md-8">
                     <!-- Active Filter Badge -->
                     <div id="activeFilters" class="mb-3" style="display: @(Model.SelectedSubCategory1Id.HasValue || Model.SelectedSubCategory2Id.HasValue ? "block" : "none")">
                         <div class="active-filter-badge">
@@ -312,35 +313,35 @@
         }
 
         // ===== AUTO-DETECT AND HIGHLIGHT LOGIC =====
-              $(document).ready(function () {
+        $(document).ready(function () {
             console.log('=== Page Load - Auto-Detection ===');
             console.log('Current SubCat1 ID from Model:', currentSubCategory1Id);
             console.log('Current SubCat2 ID from Model:', currentSubCategory2Id);
 
             // Auto-expand and highlight if selected
             if (currentSubCategory1Id > 0) {
-                const wrapper = $('[data-subcategory1-id="' + currentSubCategory1Id + '"]').closest('.category-pill-wrapper');
+                const filterItem = $('[data-subcategory1-id="' + currentSubCategory1Id + '"]').closest('.brand-filter-item');
 
-                if (wrapper.length > 0) {
-                    const pill = wrapper.find('.category-pill');
-                    const arrow = wrapper.find('.pill-arrow');
-                    const dropdown = wrapper.find('.subcategory-dropdown');
+                if (filterItem.length > 0) {
+                    const filterBtn = filterItem.find('.brand-filter-btn');
+                    const arrow = filterItem.find('.brand-arrow');
+                    const subcategoryList = filterItem.find('.brand-subcategory-list');
 
-                    let brandName = pill.data('brand-name');
+                    let brandName = filterBtn.data('brand-name');
 
-                    // Expand dropdown and activate pill
+                    // Expand dropdown and activate button
                     arrow.addClass('rotated');
-                    dropdown.slideDown(300);
-                    wrapper.addClass('active');
+                    subcategoryList.slideDown(300);
+                    filterBtn.addClass('active');
 
                     currentBrand = brandName;
 
-                    // Check if has SubCategory2
-                    const hasSubCat2 = pill.data('has-subcat2') === 'true' || pill.data('has-subcat2') === true;
-
-                    // Highlight brand
+                    // Highlight brand card and show only selected brand
                     highlightBrand(brandName);
                     showOnlyBrand(brandName);
+
+                    // Check if has SubCategory2
+                    const hasSubCat2 = filterBtn.data('has-subcat2') === 'true' || filterBtn.data('has-subcat2') === true;
 
                     // Show sample products or all products based on hasSubCat2
                     if (hasSubCat2) {
@@ -377,40 +378,68 @@
             }
         });
 
+        function highlightBrand(brandName) {
+            $('.brand-card-modern').removeClass('active');
+            if (brandName) {
+                $('.brand-card-modern[data-brand="' + brandName + '"]').addClass('active');
+            }
+        }
+
+        function showOnlyBrand(brandName) {
+            const $brandCards = $('.brand-card-modern');
+
+            if (!brandName || brandName === '') {
+                // Show all brands
+                $brandCards.show();
+                $('.brand-card-modern').removeClass('active');
+            } else {
+                // Show only selected brand, hide others
+                $brandCards.each(function () {
+                    const cardBrand = $(this).data('brand');
+                    if (cardBrand === brandName) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+        }
+
         // Filter by brand button - Updated to handle sample products
         function filterByBrand(brandName) {
             console.log('=== Brand Button Clicked:', brandName);
 
-            const pill = $('[data-brand-name="' + brandName + '"]');
+            const filterBtn = $('[data-brand-name="' + brandName + '"]');
 
-            if (pill.length) {
-                const subCat1Id = pill.data('subcategory1-id');
-                const hasSubCat2Data = pill.data('has-subcat2');
+            if (filterBtn.length) {
+                const subCat1Id = filterBtn.data('subcategory1-id');
+                const hasSubCat2Data = filterBtn.data('has-subcat2');
                 const hasSubCat2 = hasSubCat2Data === 'true' || hasSubCat2Data === true;
-                const wrapper = pill.closest('.category-pill-wrapper');
-                const arrow = wrapper.find('.pill-arrow');
-                const dropdown = wrapper.find('.subcategory-dropdown');
+                const filterItem = filterBtn.closest('.brand-filter-item');
+                const arrow = filterItem.find('.brand-arrow');
+                const subcategoryList = filterItem.find('.brand-subcategory-list');
 
                 console.log('SubCat1 ID:', subCat1Id, 'Has SubCat2:', hasSubCat2);
 
-                // Close all other pills
-                $('.category-pill-wrapper').not(wrapper).each(function () {
-                    $(this).removeClass('active');
-                    $(this).find('.pill-arrow').removeClass('rotated');
-                    $(this).find('.subcategory-dropdown').hide();
+                // Close all other filters
+                $('.brand-filter-item').not(filterItem).each(function () {
+                    $(this).find('.brand-filter-btn').removeClass('active');
+                    $(this).find('.brand-arrow').removeClass('rotated');
+                    $(this).find('.brand-subcategory-list').hide();
                 });
 
-                // Open selected pill
+                // Open selected filter
                 arrow.addClass('rotated');
-                dropdown.slideDown(300);
-                wrapper.addClass('active');
+                subcategoryList.slideDown(300);
+                filterBtn.addClass('active');
 
                 currentSubCategory1Id = subCat1Id;
                 currentSubCategory2Id = 0;
                 currentBrand = brandName;
 
-                $('.subcategory-option').removeClass('active');
+                $('.brand-subcategory-item').removeClass('active');
 
+                // Highlight brand card and show only selected brand
                 highlightBrand(brandName);
                 showOnlyBrand(brandName);
 
@@ -432,63 +461,39 @@
             }
         }
 
-        function highlightBrand(brandName) {
-            $('.brand-card-modern').removeClass('active');
-            if (brandName) {
-                $('.brand-card-modern[data-brand="' + brandName + '"]').addClass('active');
-            }
-        }
-
-        function showOnlyBrand(brandName) {
-            const $brandCards = $('.brand-card-modern');
-
-            if (!brandName || brandName === '') {
-                $brandCards.show();
-                $('.brand-card-modern').removeClass('active');
-            } else {
-                $brandCards.each(function () {
-                    const cardBrand = $(this).data('brand');
-                    if (cardBrand === brandName) {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
-                });
-            }
-        }
-
         function toggleSubCategory1(subCat1Id, subCat1Name) {
             console.log('=== toggleSubCategory1:', subCat1Id, subCat1Name);
 
-            const wrapper = $(event.currentTarget).closest('.category-pill-wrapper');
-            const pill = wrapper.find('.category-pill');
-            const arrow = wrapper.find('.pill-arrow');
-            const dropdown = wrapper.find('.subcategory-dropdown');
-            const hasSubCat2Data = pill.data('has-subcat2');
+            const filterItem = $(event.currentTarget).closest('.brand-filter-item');
+            const filterBtn = filterItem.find('.brand-filter-btn');
+            const arrow = filterItem.find('.brand-arrow');
+            const subcategoryList = filterItem.find('.brand-subcategory-list');
+            const hasSubCat2Data = filterBtn.data('has-subcat2');
             const hasSubCat2 = hasSubCat2Data === 'true' || hasSubCat2Data === true;
-            const isExpanded = wrapper.hasClass('active');
+            const isExpanded = filterBtn.hasClass('active');
 
             console.log('Has SubCat2:', hasSubCat2, 'Is Expanded:', isExpanded);
 
             // Close all others
-            $('.category-pill-wrapper').not(wrapper).each(function () {
-                $(this).removeClass('active');
-                $(this).find('.pill-arrow').removeClass('rotated');
-                $(this).find('.subcategory-dropdown').slideUp(300);
+            $('.brand-filter-item').not(filterItem).each(function () {
+                $(this).find('.brand-filter-btn').removeClass('active');
+                $(this).find('.brand-arrow').removeClass('rotated');
+                $(this).find('.brand-subcategory-list').slideUp(300);
             });
 
-            $('.subcategory-option').removeClass('active');
+            $('.brand-subcategory-item').removeClass('active');
 
             if (!isExpanded) {
                 // EXPAND
                 arrow.addClass('rotated');
-                dropdown.slideDown(300);
-                wrapper.addClass('active');
+                subcategoryList.slideDown(300);
+                filterBtn.addClass('active');
 
                 currentSubCategory1Id = subCat1Id;
                 currentSubCategory2Id = 0;
                 currentBrand = subCat1Name;
 
+                // Highlight brand card and show only selected brand
                 highlightBrand(subCat1Name);
                 showOnlyBrand(subCat1Name);
 
@@ -510,18 +515,22 @@
             } else {
                 // COLLAPSE
                 arrow.removeClass('rotated');
-                dropdown.slideUp(300);
-                wrapper.removeClass('active');
+                subcategoryList.slideUp(300);
+                filterBtn.removeClass('active');
 
                 currentSubCategory1Id = 0;
                 currentSubCategory2Id = 0;
                 currentBrand = '';
                 showingSampleProducts = false;
+
+                // Remove brand card highlighting and show all brands
+                highlightBrand('');
+                showOnlyBrand('');
+
                 $('#activeFilters').hide();
                 $('#sampleProductsContainer').hide();
                 $('#productsGrid').show();
                 loadProducts(categoryId, null, null);
-                showOnlyBrand('');
             }
         }
 
@@ -652,10 +661,10 @@
             loadProducts(categoryId, subCat1Id, subCat2Id);
 
             // Highlight the selected SubCategory2 option in dropdown
-            $('.subcategory-option').removeClass('active');
+            $('.brand-subcategory-item').removeClass('active');
             $('[data-subcategory2-id="' + subCat2Id + '"]').addClass('active');
 
-            // Keep brand highlighted
+            // Keep brand highlighted and show only selected brand
             highlightBrand(subCat1Name);
             showOnlyBrand(subCat1Name);
 
@@ -675,7 +684,7 @@
             currentBrand = subCat1Name;
             showingSampleProducts = false;
 
-            $('.subcategory-option').removeClass('active');
+            $('.brand-subcategory-item').removeClass('active');
             $(event.currentTarget).addClass('active');
 
             $('#sampleProductsContainer').hide();
@@ -683,6 +692,8 @@
 
             updateActiveFilter(subCat1Name, subCat2Name);
             loadProducts(categoryId, subCat1Id, subCat2Id);
+
+            // Keep brand highlighted and show only selected brand
             highlightBrand(subCat1Name);
             showOnlyBrand(subCat1Name);
         }
@@ -695,19 +706,23 @@
             currentBrand = '';
             showingSampleProducts = false;
 
-            $('.category-pill-wrapper').each(function () {
-                $(this).removeClass('active');
-                $(this).find('.pill-arrow').removeClass('rotated');
-                $(this).find('.subcategory-dropdown').slideUp(300);
+            $('.brand-filter-item').each(function () {
+                $(this).find('.brand-filter-btn').removeClass('active');
+                $(this).find('.brand-arrow').removeClass('rotated');
+                $(this).find('.brand-subcategory-list').slideUp(300);
             });
 
-            $('.subcategory-option').removeClass('active');
+            $('.brand-subcategory-item').removeClass('active');
+
+            // Remove brand card highlighting and show all brands
+            highlightBrand('');
+            showOnlyBrand('');
+
             $('#activeFilters').hide();
             $('#sampleProductsContainer').hide();
             $('#productsGrid').show();
 
             loadProducts(categoryId, null, null);
-            showOnlyBrand('');
         }
 
         function loadProducts(catId, subCat1Id, subCat2Id) {
@@ -836,217 +851,7 @@
         }
 
         /* ===================================
-                   MODERN FILTER BAR
-                   =================================== */
-        .modern-filter-bar {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            border: 1px solid #e5e7eb;
-            margin-bottom: 32px;
-            transition: box-shadow 0.3s ease;
-        }
-
-            .modern-filter-bar:hover {
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-            }
-
-        .filter-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 2px solid #f3f4f6;
-        }
-
-        .filter-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.125rem;
-            font-weight: 700;
-            color: #111827;
-            display: flex;
-            align-items: center;
-        }
-
-            .filter-title i {
-                color: var(--bosch-red);
-                font-size: 1.1rem;
-            }
-
-        .btn-reset {
-            background: #ffffff;
-            border: 2px solid #d1d5db;
-            color: #374151;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-            .btn-reset:hover {
-                background: var(--bosch-red);
-                border-color: var(--bosch-red);
-                color: #ffffff;
-                transform: translateY(-2px);
-            }
-
-        .filter-content-row {
-            display: flex;
-            gap: 16px;
-            align-items: flex-start;
-            flex-wrap: wrap;
-        }
-
-        .quick-actions {
-            display: flex;
-            gap: 12px;
-            flex-shrink: 0;
-        }
-
-        .quick-btn {
-            background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-            color: #ffffff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-        }
-
-            .quick-btn:hover {
-                background: linear-gradient(135deg, var(--bosch-red-dark) 0%, var(--bosch-red) 100%);
-                color: #ffffff;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(0, 102, 179, 0.3);
-            }
-
-        /* Category Pills */
-        .category-pills-container {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            flex: 1;
-        }
-
-        .category-pill-wrapper {
-            position: relative;
-        }
-
-        .category-pill {
-            background: #f9fafb;
-            border: 2px solid #e5e7eb;
-            color: #374151;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            white-space: nowrap;
-        }
-
-            .category-pill:hover {
-                background: #f3f4f6;
-                border-color: var(--bosch-red);
-                transform: translateY(-2px);
-            }
-
-            .category-pill.active,
-            .category-pill-wrapper.active .category-pill {
-                background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-                border-color: var(--bosch-red);
-                color: #ffffff;
-            }
-
-            .category-pill i.fas.fa-tag {
-                color: #6b7280;
-                font-size: 0.875rem;
-            }
-
-            .category-pill.active i,
-            .category-pill-wrapper.active .category-pill i {
-                color: #ffffff;
-            }
-
-        .pill-arrow {
-            transition: transform 0.3s ease;
-            font-size: 0.75rem;
-        }
-
-            .pill-arrow.rotated {
-                transform: rotate(180deg);
-            }
-
-        /* Subcategory Dropdown */
-        .subcategory-dropdown {
-            position: absolute;
-            top: calc(100% + 8px);
-            left: 0;
-            background: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 8px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-            z-index: 100;
-            min-width: 220px;
-        }
-
-        .subcategory-option {
-            padding: 10px 14px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: #374151;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.875rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-        }
-
-            .subcategory-option:hover {
-                background: #f9fafb;
-                color: var(--bosch-red);
-                padding-left: 18px;
-            }
-
-            .subcategory-option.active {
-                background: var(--bosch-red);
-                color: #ffffff;
-            }
-
-                .subcategory-option.active i {
-                    color: #ffffff;
-                }
-
-            .subcategory-option i {
-                font-size: 0.6rem;
-                color: #9ca3af;
-            }
-
-        .no-categories {
-            color: #9ca3af;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.875rem;
-            padding: 10px 16px;
-        }
-
-        /* ===================================
-                   BRAND CARDS
+                   FEATURED BRANDS SECTION
                    =================================== */
         .brands-section {
             margin-bottom: 40px;
@@ -1156,6 +961,234 @@
                 color: #ffffff;
                 font-size: 2.5rem;
             }
+
+        /* ===================================
+                   FILTER SIDEBAR
+                   =================================== */
+        .filter-sidebar {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 2px solid #e5e7eb;
+            overflow: hidden;
+            position: sticky;
+            top: 20px;
+        }
+
+        .filter-header {
+            background: #f9fafb;
+            padding: 20px;
+            border-bottom: 2px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-title-sidebar {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #111827;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+            .filter-title-sidebar i {
+                color: var(--bosch-red);
+            }
+
+        .btn-reset-sidebar {
+            background: #ffffff;
+            border: 2px solid #d1d5db;
+            color: #374151;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+            .btn-reset-sidebar:hover {
+                background: var(--bosch-red);
+                border-color: var(--bosch-red);
+                color: #ffffff;
+            }
+
+        .filter-section {
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+            .filter-section:last-child {
+                border-bottom: none;
+            }
+
+        .filter-section-header {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9375rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+            .filter-section-header i {
+                color: var(--bosch-red);
+            }
+
+        .filter-btn-full {
+            width: 100%;
+            background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
+            color: #ffffff;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+            .filter-btn-full:last-child {
+                margin-bottom: 0;
+            }
+
+            .filter-btn-full:hover {
+                background: linear-gradient(135deg, var(--bosch-red-dark) 0%, var(--bosch-red) 100%);
+                color: #ffffff;
+                transform: translateY(-2px);
+            }
+
+            .filter-btn-full.filter-btn-outline {
+                background: #ffffff;
+                border: 2px solid var(--bosch-red);
+                color: var(--bosch-red);
+            }
+
+                .filter-btn-full.filter-btn-outline:hover {
+                    background: var(--bosch-red);
+                    color: #ffffff;
+                }
+
+        /* Brand Filter Items */
+        .brand-filter-item {
+            margin-bottom: 8px;
+        }
+
+            .brand-filter-item:last-child {
+                margin-bottom: 0;
+            }
+
+        .brand-filter-btn {
+            width: 100%;
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            color: #374151;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+
+            .brand-filter-btn:hover {
+                background: #f3f4f6;
+                border-color: var(--bosch-red);
+            }
+
+            .brand-filter-btn.active {
+                background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
+                border-color: var(--bosch-red);
+                color: #ffffff;
+            }
+
+                .brand-filter-btn.active i {
+                    color: #ffffff;
+                }
+
+            .brand-filter-btn i.fas.fa-folder {
+                color: #9ca3af;
+                font-size: 0.875rem;
+            }
+
+            .brand-filter-btn.active i.fas.fa-folder {
+                color: #ffffff;
+            }
+
+        .brand-arrow {
+            margin-left: auto;
+            transition: transform 0.3s ease;
+            font-size: 0.75rem;
+        }
+
+            .brand-arrow.rotated {
+                transform: rotate(180deg);
+            }
+
+        /* Brand Subcategory List */
+        .brand-subcategory-list {
+            margin-top: 8px;
+            margin-left: 16px;
+            padding-left: 16px;
+            border-left: 2px solid #e5e7eb;
+        }
+
+        .brand-subcategory-item {
+            padding: 10px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #374151;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+            .brand-subcategory-item:hover {
+                background: #f9fafb;
+                color: var(--bosch-red);
+                padding-left: 18px;
+            }
+
+            .brand-subcategory-item.active {
+                background: var(--bosch-red);
+                color: #ffffff;
+            }
+
+                .brand-subcategory-item.active i {
+                    color: #ffffff;
+                }
+
+            .brand-subcategory-item i {
+                font-size: 0.75rem;
+                color: #9ca3af;
+            }
+
+        .no-categories-sidebar {
+            color: #9ca3af;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            padding: 10px 0;
+        }
 
         /* ===================================
                    FILTER BADGES & INFO
@@ -1439,22 +1472,14 @@
                    RESPONSIVE DESIGN
                    =================================== */
 
-        /* Large Tablets (max-width: 991px) */
+        /* Tablets (max-width: 991px) */
         @@media (max-width: 991px) {
-            .filter-content-row
+            .filter-sidebar
 
         {
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .quick-actions {
-            width: 100%;
-        }
-
-        .quick-btn {
-            flex: 1;
-            justify-content: center;
+            position: relative;
+            top: 0;
+            margin-bottom: 24px;
         }
 
         .brands-grid {
@@ -1462,23 +1487,22 @@
             max-width: 100%;
         }
 
-        .category-pills-container {
-            width: 100%;
         }
 
-        }
-
-        /* Tablets (max-width: 768px) */
+        /* Mobile (max-width: 768px) */
         @@media (max-width: 768px) {
-            .modern-filter-bar
+            .filter-header
 
         {
-            padding: 20px;
-            border-radius: 10px;
+            padding: 16px;
         }
 
-        .filter-title {
-            font-size: 1.0625rem;
+        .filter-title-sidebar {
+            font-size: 1rem;
+        }
+
+        .filter-section {
+            padding: 16px;
         }
 
         .brands-title {
@@ -1504,44 +1528,24 @@
             padding: 14px;
         }
 
-        .category-pill {
-            font-size: 0.8125rem;
-            padding: 9px 16px;
-        }
-
         .product-image-box {
             height: 200px;
         }
 
         }
 
-        /* Mobile (max-width: 576px) */
+        /* Small Mobile (max-width: 576px) */
         @@media (max-width: 576px) {
-            .modern-filter-bar
+            .filter-header
 
         {
-            padding: 16px;
-            border-radius: 8px;
-        }
-
-        .filter-header-row {
             flex-direction: column;
-            align-items: flex-start;
-            gap: 12px;
+            align-items: stretch;
         }
 
-        .btn-reset {
+        .btn-reset-sidebar {
             width: 100%;
             justify-content: center;
-        }
-
-        .quick-actions {
-            flex-direction: column;
-            width: 100%;
-        }
-
-        .quick-btn {
-            width: 100%;
         }
 
         .brands-grid {
@@ -1562,31 +1566,12 @@
             font-size: 1.125rem;
         }
 
-        .category-pills-container {
-            flex-direction: column;
-        }
-
-        .category-pill {
-            width: 100%;
-            justify-content: center;
-        }
-
-        .subcategory-dropdown {
-            width: 100%;
-            left: 0;
-            right: 0;
-        }
-
         .product-image-box {
             height: 180px;
         }
 
         .product-info {
             padding: 18px;
-        }
-
-        .active-filter-badge {
-            flex-wrap: wrap;
         }
 
         .empty-state {
@@ -1612,8 +1597,8 @@
             font-size: 1.25rem;
         }
 
-        .filter-title {
-            font-size: 1rem;
+        .filter-title-sidebar {
+            font-size: 0.9375rem;
         }
 
         .brand-image-wrapper {
