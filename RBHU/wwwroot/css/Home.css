@@ -241,7 +241,7 @@
 }
 
 .modal-category.active .modal-category-items {
-    max-height: 600px;
+    max-height: 1000px;
 }
 
 /* Modal Items */
@@ -331,6 +331,81 @@
     .modal-view-all-btn:hover i {
         transform: translateX(4px);
     }
+
+/* ===== NESTED SUB-CATEGORY (e.g. Makita inside Power Tools) ===== */
+.modal-sub-category {
+    border-top: 1px solid #f1f5f9;
+    background: white;
+}
+
+.modal-sub-category-header {
+    display: flex;
+    align-items: center;
+    padding: 14px 18px 14px 54px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+    gap: 12px;
+    user-select: none;
+    background: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+    .modal-sub-category-header:hover {
+        background: #e2e8f0;
+        color: var(--primary-color);
+    }
+
+    .modal-sub-category-header i:first-child {
+        color: var(--primary-color);
+        font-size: 1.1rem;
+        width: 20px;
+        text-align: center;
+    }
+
+    .modal-sub-category-header span {
+        flex: 1;
+    }
+
+    .modal-sub-category-header .toggle-icon {
+        font-size: 0.85rem;
+        color: #94a3b8;
+        transition: transform 0.3s ease;
+    }
+
+.modal-sub-category.active .modal-sub-category-header {
+    background: #e2e8f0;
+    color: var(--primary-color);
+}
+
+    .modal-sub-category.active .modal-sub-category-header .toggle-icon {
+        transform: rotate(180deg);
+        color: var(--primary-color);
+    }
+
+.modal-sub-category-items {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: white;
+}
+
+.modal-sub-category.active .modal-sub-category-items {
+    max-height: 300px;
+}
+
+/* Deeper indentation for nested items */
+.modal-item--nested {
+    padding-left: 72px;
+}
+
+    .modal-item--nested:hover {
+        padding-left: 76px;
+    }
+
 
 /* ========== HERO SECTION ========== */
 .hero-section-professional {

@@ -22,7 +22,7 @@
             </div>
             <div class="catalog-modal-body">
                 <div class="modal-category no-subcategories">
-                    <a href="https://acmesafety.in/catalogues"
+                    <a href="~/catelogues/safewell catalogue - 12th edition sq 1.1.pdf"
                        target="_blank"
                        class="modal-category-header modal-category-link">
                         <i class="fas fa-cut"></i>
@@ -33,7 +33,7 @@
 
                 <!-- Abrasives Category (Expandable) -->
                 <div class="modal-category no-subcategories">
-                    <a href="https://www.bipico.com/data/Bipico%20Industries%20(Tools)%20Pvt.%20Ltd.%20Introduction%20Brochure.pdf"
+                    <a href="~/catelogues/KLINGSPOR Catalogue_2025.pdf"
                        target="_blank"
                        class="modal-category-header modal-category-link">
                         <i class="fas fa-cut"></i>
@@ -50,7 +50,7 @@
                         <i class="fas fa-chevron-down toggle-icon"></i>
                     </div>
                     <div class="modal-category-items">
-                        <a href="https://www.cp.com/content/dam/brands/Chicago%20Pneumatic/cp-tools-literature/catalogues/industrial-tools/CP-INDUS_EN.pdf"
+                        <a href="~/catelogues/CP-General-Industry_ENG New 2025 Nov 75mb (1).pdf"
                            target="_blank"
                            class="modal-item">
                             <i class="fas fa-file-pdf"></i>
@@ -71,7 +71,6 @@
                     </div>
                 </div>
 
-                <!-- PowerTools (Makita) - Direct Link -->
                 <div class="modal-category">
                     <div class="modal-category-header">
                         <i class="fas fa-wind"></i>
@@ -79,18 +78,38 @@
                         <i class="fas fa-chevron-down toggle-icon"></i>
                     </div>
                     <div class="modal-category-items">
-                        <a href="https://qrco.de/beW2dK?trackSharing=1"
+
+                        <!-- Bosch - direct PDF link -->
+                        <a href="~/catelogues/BPT-2080_GT Catalogue Revised 2026_V3 (1).pdf"
                            target="_blank"
                            class="modal-item">
                             <i class="fas fa-file-pdf"></i>
                             Bosch
                         </a>
-                        <a href="https://makita.in/catalog/"
-                           target="_blank"
-                           class="modal-item">
-                            <i class="fas fa-file-pdf"></i>
-                            Makita
-                        </a>
+
+                        <!-- Makita - nested expandable (NOT modal-category) -->
+                        <div class="modal-sub-category">
+                            <div class="modal-sub-category-header">
+                                <i class="fas fa-wind"></i>
+                                <span>Makita</span>
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </div>
+                            <div class="modal-sub-category-items">
+                                <a href="~/catelogues/Mini_Catalogue_2025_26 (4).pdf"
+                                   target="_blank"
+                                   class="modal-item modal-item--nested">
+                                    <i class="fas fa-file-pdf"></i>
+                                    Power Tools
+                                </a>
+                                <a href="~/catelogues/Acc_Catalogue-Price-List_2026-27.pdf"
+                                   target="_blank"
+                                   class="modal-item modal-item--nested">
+                                    <i class="fas fa-file-pdf"></i>
+                                    Accessories
+                                </a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -150,7 +169,7 @@
                 <div class="slide-overlay"></div>
             </div>
 
-           
+
         </div>
 
         <div class="container">
@@ -280,7 +299,7 @@
                          loading="lazy"
                          width="160" height="80">
                 </a>
-@* 
+                @* 
                 <!-- IMI Norgren -->
                 <a asp-controller="Product"
                    asp-action="CategoryByBrand"
@@ -648,6 +667,13 @@
                 }
             });
         });
+
+        document.querySelectorAll('.modal-sub-category-header').forEach(header => {
+        header.addEventListener('click', function () {
+            const subCat = this.closest('.modal-sub-category');
+            subCat.classList.toggle('active');
+        });
+    });
     });
 
     (function() {
@@ -750,4 +776,5 @@
             }
         });
     });
+
 </script>
