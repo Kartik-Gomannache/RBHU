@@ -2,18 +2,14 @@
 
 /* ===== PROFESSIONAL COLOR SYSTEM ===== */
 :root {
-    /* Primary Brand Colors - Refined Professional Palette */
     --bosch-red: #0066B3;
     --bosch-red-dark: #004F8C;
     --bosch-red-light: #3385C3;
     --bosch-red-hover: #004F8C;
-    /* Accent Colors */
     --accent-orange: #FF6B35;
     --accent-orange-dark: #E55A2B;
-    /* Focus Color */
     --focus-color: #0066B3;
     --focus-color-light: rgba(0, 102, 179, 0.15);
-    /* Professional Grays */
     --gray-platinum: #DFE2E4;
     --gray-x11: #B6BBBE;
     --gray-quick-silver: #9DA5A8;
@@ -29,25 +25,20 @@
     --gray-200: #EBEBEB;
     --gray-100: #F5F5F5;
     --gray-50: #FAFAFA;
-    /* Neutrals */
     --white: #FFFFFF;
     --black: #000000;
-    /* Functional Colors */
     --success: #28A745;
     --warning: #FFC107;
     --danger: #DC3545;
     --info: #17A2B8;
-    /* Shadows & Effects */
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15);
     --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
     --shadow-navbar: 0 2px 12px rgba(0, 0, 0, 0.08);
-    /* Transitions */
     --transition-fast: 0.15s ease;
     --transition-base: 0.25s ease;
     --transition-slow: 0.4s ease;
-    /* Content Alignment - Responsive container max-width matching Bootstrap */
     --content-max-width: 1320px;
     --content-padding-x: 80px;
 }
@@ -76,7 +67,6 @@ body {
         padding-top: 80px;
     }
 
-/* ===== TYPOGRAPHY - Poppins for Headings, Inter for Body ===== */
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: 'Poppins', sans-serif;
@@ -91,7 +81,7 @@ p, span, a, li, td, th, label, input, textarea, select, button {
     min-height: calc(100vh - 130px);
 }
 
-/* ===== TOP BAR - IMPROVED READABILITY ===== */
+/* ===== TOP BAR ===== */
 .top-bar-professional {
     background: #0066B3;
     color: var(--white);
@@ -213,7 +203,6 @@ body.top-bar-hidden .navbar-professional {
     align-items: center;
 }
 
-/* Professional Brand with 3-Stripe Background */
 .navbar-brand-professional {
     display: flex;
     align-items: center;
@@ -236,7 +225,7 @@ body.top-bar-hidden .navbar-professional {
 .brand-logo-container {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 5px;
 }
 
 .brand-logo-image {
@@ -277,7 +266,6 @@ body.top-bar-hidden .navbar-professional {
     margin-top: 2px;
 }
 
-/* Professional Navigation Links - FIXED SPACING */
 .navbar-nav-professional {
     display: flex;
     align-items: center;
@@ -332,7 +320,6 @@ body.top-bar-hidden .navbar-professional {
         transform: translateX(-50%) scaleX(1);
     }
 
-/* CTA Button Style (Get A Quote) */
 .nav-link-cta {
     font-family: 'Space Grotesk', sans-serif;
     background: linear-gradient(0deg, #004F8C 0%, #0066B3 50%, #004F8C 90%) !important;
@@ -381,7 +368,6 @@ body.top-bar-hidden .navbar-professional {
         z-index: 1;
     }
 
-/* Login Icon */
 .nav-item-login .nav-link-professional {
     font-size: 1.4rem;
     padding: 10px 16px;
@@ -392,7 +378,6 @@ body.top-bar-hidden .navbar-professional {
         color: var(--bosch-red);
     }
 
-/* Products Mega Menu */
 .products-nav-item {
     position: relative;
 }
@@ -686,7 +671,6 @@ body.top-bar-hidden .navbar-professional {
         padding-left: 16px;
     }
 
-/* Loading & Error States */
 .loading-state,
 .loading-state-small {
     display: flex;
@@ -717,7 +701,6 @@ body.top-bar-hidden .navbar-professional {
     font-size: 0.875rem;
 }
 
-/* Mega Menu Backdrop */
 .mega-menu-backdrop {
     position: fixed;
     top: 130px;
@@ -742,7 +725,6 @@ body.top-bar-hidden .mega-menu-backdrop {
     visibility: visible;
 }
 
-/* Mobile Toggle */
 .navbar-toggler-professional {
     display: none;
     flex-direction: column;
@@ -782,7 +764,6 @@ body.top-bar-hidden .mega-menu-backdrop {
     background: var(--bosch-red);
 }
 
-/* Hamburger to X animation */
 .navbar-toggler-professional[aria-expanded="true"] .toggler-line:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
     background: var(--bosch-red);
@@ -1082,7 +1063,7 @@ body.top-bar-hidden .mega-menu-backdrop {
             color: var(--bosch-red);
         }
 
-/* ===== PROFESSIONAL FOOTER - LIGHT DESIGN ===== */
+/* ===== PROFESSIONAL FOOTER ===== */
 .footer-professional {
     background: linear-gradient(135deg, #d6d8db 0%, #c7c8c9 100%);
     color: var(--gray-800);
@@ -1105,7 +1086,7 @@ body.top-bar-hidden .mega-menu-backdrop {
     height: 55px;
     width: auto;
     object-fit: contain;
-    margin-bottom: 18px;
+    margin-bottom: 5px;
 }
 
 .footer-brand-name {
@@ -1261,7 +1242,6 @@ body.top-bar-hidden .mega-menu-backdrop {
                 transform: translateX(0);
             }
 
-
 .footer-bottom {
     padding: 28px 0;
     margin-top: 40px;
@@ -1303,7 +1283,6 @@ body.top-bar-hidden .mega-menu-backdrop {
 
 /* ===== RESPONSIVE DESIGN ===== */
 
-/* Extra Large Screens (1400px+) */
 @media (min-width: 1400px) {
     :root {
         --content-max-width: 1320px;
@@ -1311,7 +1290,6 @@ body.top-bar-hidden .mega-menu-backdrop {
     }
 }
 
-/* Large Desktops (1200px - 1399px) */
 @media (max-width: 1399px) {
     :root {
         --content-max-width: 1140px;
@@ -1319,7 +1297,6 @@ body.top-bar-hidden .mega-menu-backdrop {
     }
 }
 
-/* Large Tablets & Small Desktops (992px - 1199px) */
 @media (max-width: 1199px) {
     :root {
         --content-max-width: 960px;
@@ -1362,7 +1339,6 @@ body.top-bar-hidden .mega-menu-backdrop {
     }
 }
 
-/* Tablets (768px - 991px) */
 @media (max-width: 991px) {
     :root {
         --content-max-width: 720px;
@@ -1493,7 +1469,6 @@ body.top-bar-hidden .mega-menu-backdrop {
         margin-top: 8px;
     }
 
-    /* FIXED: Products dropdown in mobile - Hidden by default */
     .products-mega-menu {
         position: static !important;
         width: 100% !important;
@@ -1576,7 +1551,6 @@ body.top-bar-hidden .mega-menu-backdrop {
     }
 }
 
-/* Large Mobile (576px - 767px) */
 @media (max-width: 767px) {
     :root {
         --content-max-width: 540px;
@@ -1679,7 +1653,6 @@ body.top-bar-hidden .mega-menu-backdrop {
         font-size: 0.68rem;
     }
 
-    /* FIXED: Products mega menu in mobile - smaller max-height */
     .products-nav-item.active .products-mega-menu {
         max-height: 350px !important;
     }
@@ -1738,7 +1711,6 @@ body.top-bar-hidden .mega-menu-backdrop {
     }
 }
 
-/* Medium Mobile (max-width: 575px) */
 @media (max-width: 575px) {
     :root {
         --content-max-width: 100%;
@@ -1814,7 +1786,7 @@ body.top-bar-hidden .mega-menu-backdrop {
     }
 
     .brand-logo-container {
-        gap: 12px;
+        gap: 8px;
     }
 
     .navbar-brand-professional::before {
@@ -1825,11 +1797,24 @@ body.top-bar-hidden .mega-menu-backdrop {
     }
 
     .brand-logo-image {
-        height: 38px;
+        height: 36px;
     }
 
     .brand-text-container {
-        display: none;
+        display: flex;
+    }
+
+    .brand-name {
+        font-size: 0.88rem;
+        line-height: 1.15;
+        white-space: nowrap;
+        letter-spacing: -0.01em;
+    }
+
+    .brand-tagline {
+        font-size: 0.60rem;
+        white-space: nowrap;
+        letter-spacing: 0.01em;
     }
 
     .navbar-toggler-professional {
@@ -1856,11 +1841,10 @@ body.top-bar-hidden .mega-menu-backdrop {
     }
 
     .nav-link-professional {
-        padding: 13px 14px;
+        padding: 13px 14px !important;
         font-size: 0.9rem;
     }
 
-    /* FIXED: Products mega menu - even smaller for mobile */
     .products-nav-item.active .products-mega-menu {
         max-height: 320px !important;
     }
@@ -1960,7 +1944,6 @@ body.top-bar-hidden .mega-menu-backdrop {
     }
 }
 
-/* Small Mobile (max-width: 375px) */
 @media (max-width: 375px) {
     :root {
         --content-padding-x: 12px;
@@ -1974,7 +1957,17 @@ body.top-bar-hidden .mega-menu-backdrop {
     }
 
     .brand-logo-image {
-        height: 36px;
+        height: 30px;
+    }
+
+    .brand-name {
+        font-size: 0.78rem;
+        white-space: nowrap;
+    }
+
+    .brand-tagline {
+        font-size: 0.54rem;
+        white-space: nowrap;
     }
 
     .navbar-toggler-professional {
@@ -1990,7 +1983,6 @@ body.top-bar-hidden .mega-menu-backdrop {
         padding: 14px;
     }
 
-    /* FIXED: Products mega menu - smallest size */
     .products-nav-item.active .products-mega-menu {
         max-height: 300px !important;
     }
@@ -2040,7 +2032,6 @@ body.top-bar-hidden .mega-menu-backdrop {
     }
 }
 
-/* Focus Styles */
 :focus-visible {
     outline: 2px solid var(--focus-color);
     outline-offset: 3px;
@@ -2103,12 +2094,18 @@ textarea:focus-visible {
         background: var(--bosch-red);
     }
 
-
-
+/* ===== MOBILE CLOSE BUTTON ===== */
+/*
+ * The close button sits INSIDE the sidebar (position: absolute, relative to sidebar).
+ * The sidebar itself starts from top:0 of viewport and slides in from the right.
+ * We place the button at top:20px, right:20px within the sidebar panel.
+ * The sidebar padding-top is set to 80px so nav links start well below the button.
+ * The button has a high z-index to stay on top of any nav link backgrounds.
+ */
 .mobile-close-btn {
     display: none;
-    position: absolute;
-    top: 20px;
+    position: fixed;
+    top: 110px;
     right: 20px;
     background: linear-gradient(135deg, #edf2f7 0%, #e2e8f0 100%);
     border: 2px solid #cbd5e1;
@@ -2119,7 +2116,7 @@ textarea:focus-visible {
     font-size: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
-    z-index: 1055;
+    z-index: 1200;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -2130,6 +2127,12 @@ textarea:focus-visible {
     display: flex;
 }
 
+/* When top bar is hidden (scrolled), navbar sits at top:0 (~65px tall), so button needs less offset */
+body.top-bar-hidden .navbar-collapse.show .mobile-close-btn,
+body.top-bar-hidden .navbar-collapse.collapsing .mobile-close-btn {
+    top: 75px;
+}
+
 .mobile-close-btn:hover {
     background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
     border-color: var(--bosch-red);
@@ -2138,9 +2141,8 @@ textarea:focus-visible {
     box-shadow: 0 6px 20px rgba(0, 102, 179, 0.3);
 }
 
-/* Critical Mobile Menu Fixes */
+/* ===== CRITICAL MOBILE MENU FIXES ===== */
 @media (max-width: 991px) {
-    /* Mobile sidebar from reference */
     .navbar-collapse {
         position: fixed !important;
         top: 0 !important;
@@ -2149,7 +2151,9 @@ textarea:focus-visible {
         max-width: 380px !important;
         height: 100vh !important;
         background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
-        padding: 80px 0 30px !important;
+        /* padding-top: 170px = button top(110px) + button height(45px) + gap(15px)
+           This ensures the first nav link (Home) starts clearly below the close button */
+        padding: 170px 0 30px !important;
         transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
         z-index: 1050 !important;
         overflow-y: auto !important;
@@ -2200,7 +2204,6 @@ textarea:focus-visible {
         pointer-events: auto !important;
     }
 
-    /* Mobile nav styling */
     .navbar-nav-professional {
         flex-direction: column;
         align-items: stretch;
@@ -2262,6 +2265,17 @@ textarea:focus-visible {
             box-shadow: 0 6px 20px rgba(0, 102, 179, 0.4);
             border-color: var(--bosch-red-dark);
         }
+
+    /* Close button: position fixed so it floats above top bar + navbar.
+       top: 120px = top-bar (~36px) + navbar (~65px) + 20px gap.
+       This puts it clearly below the fixed header stack on tablets. */
+    .mobile-close-btn {
+        top: 120px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
 }
 
 @media (max-width: 575px) {
@@ -2270,9 +2284,11 @@ textarea:focus-visible {
         max-width: 320px !important;
     }
 
+    /* Samsung Galaxy S8+ (360px) and similar:
+       top-bar (~36px) + navbar (~60px) = ~96px total. Use 110px for comfort. */
     .mobile-close-btn {
+        top: 110px;
         right: 15px;
-        top: 15px;
         width: 40px;
         height: 40px;
         font-size: 18px;
@@ -2290,199 +2306,8 @@ textarea:focus-visible {
     }
 }
 
-/* ===== HERO SLIDER CONTROLS - MOBILE REPOSITIONING ===== */
+/* ===== CONTACT MODAL RESPONSIVE ===== */
 
-/* Keep vertical positioning on desktop */
-@media (min-width: 992px) {
-    .slider-controls {
-        position: absolute;
-        top: 50%;
-        right: 30px;
-        transform: translateY(-50%);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        z-index: 20;
-    }
-
-    .slider-indicators {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .indicator {
-        width: 10px;
-        height: 10px;
-    }
-
-        .indicator.active {
-            height: 30px;
-            width: 10px;
-        }
-}
-
-/* Mobile - Position horizontally at bottom right */
-@media (max-width: 991px) {
-    .slider-controls {
-        position: absolute !important;
-        top: auto !important;
-        bottom: 25px !important;
-        right: 20px !important;
-        left: auto !important;
-        transform: none !important;
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        gap: 12px !important;
-        z-index: 20 !important;
-    }
-
-    .slider-control {
-        width: 44px !important;
-        height: 44px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        background: rgba(0, 102, 179, 0.9) !important;
-        border: 2px solid rgba(255, 255, 255, 0.8) !important;
-        color: #fff !important;
-        cursor: pointer !important;
-        border-radius: 50% !important;
-        transition: all 0.3s ease !important;
-        flex-shrink: 0 !important;
-    }
-
-        .slider-control:hover {
-            background: var(--bosch-red) !important;
-            border-color: #fff !important;
-            transform: scale(1.1) !important;
-        }
-
-        .slider-control i {
-            font-size: 1rem;
-        }
-
-    .slider-indicators {
-        display: flex !important;
-        flex-direction: row !important;
-        gap: 8px !important;
-        align-items: center !important;
-        order: 2 !important;
-    }
-
-    .slider-control.prev {
-        order: 1 !important;
-    }
-
-    .slider-control.next {
-        order: 3 !important;
-    }
-
-    .indicator {
-        width: 10px !important;
-        height: 10px !important;
-        background: rgba(255, 255, 255, 0.5) !important;
-        border: 1px solid rgba(255, 255, 255, 0.7) !important;
-        border-radius: 50% !important;
-        cursor: pointer !important;
-        transition: all 0.3s ease !important;
-    }
-
-        .indicator.active {
-            width: 28px !important;
-            height: 10px !important;
-            background: #3385c3 !important;
-            border-color: #fff !important;
-            border-radius: 5px !important;
-        }
-}
-
-@media (max-width: 767px) {
-    .slider-controls {
-        bottom: 20px !important;
-        right: 15px !important;
-        gap: 10px !important;
-    }
-
-    .slider-control {
-        width: 40px !important;
-        height: 40px !important;
-    }
-
-        .slider-control i {
-            font-size: 0.9rem;
-        }
-
-    .indicator {
-        width: 8px !important;
-        height: 8px !important;
-    }
-
-        .indicator.active {
-            width: 24px !important;
-            height: 8px !important;
-        }
-}
-
-@media (max-width: 575px) {
-    .slider-controls {
-        bottom: 18px !important;
-        right: 12px !important;
-        gap: 8px !important;
-    }
-
-    .slider-control {
-        width: 38px !important;
-        height: 38px !important;
-    }
-
-        .slider-control i {
-            font-size: 0.85rem;
-        }
-
-    .indicator {
-        width: 7px !important;
-        height: 7px !important;
-    }
-
-        .indicator.active {
-            width: 20px !important;
-            height: 7px !important;
-        }
-}
-
-@media (max-width: 375px) {
-    .slider-controls {
-        bottom: 15px !important;
-        right: 10px !important;
-        gap: 6px !important;
-    }
-
-    .slider-control {
-        width: 36px !important;
-        height: 36px !important;
-    }
-
-        .slider-control i {
-            font-size: 0.8rem;
-        }
-
-    .indicator {
-        width: 6px !important;
-        height: 6px !important;
-    }
-
-        .indicator.active {
-            width: 18px !important;
-            height: 6px !important;
-        }
-}
-
-/* Contact Modal - Improved Responsiveness for All Screen Sizes */
-
-/* Desktop - Better viewport handling */
 @media (min-width: 992px) {
     .contact-modal-professional .modal-dialog {
         max-width: 600px;
@@ -2503,7 +2328,6 @@ textarea:focus-visible {
         max-height: calc(100vh - 200px);
     }
 
-        /* Custom scrollbar for modal body */
         .modal-body-professional::-webkit-scrollbar {
             width: 8px;
         }
@@ -2523,7 +2347,6 @@ textarea:focus-visible {
             }
 }
 
-/* Tablets (768px - 991px) - Improved */
 @media (max-width: 991px) {
     .contact-modal-professional .modal-dialog {
         margin: 1rem auto;
@@ -2608,7 +2431,6 @@ textarea:focus-visible {
     }
 }
 
-/* Mobile Landscape & Small Tablets (576px - 767px) */
 @media (max-width: 767px) {
     .contact-modal-professional .modal-dialog {
         margin: 0.75rem auto;
@@ -2684,7 +2506,6 @@ textarea:focus-visible {
     }
 }
 
-/* Mobile Portrait (max-width: 575px) */
 @media (max-width: 575px) {
     .contact-modal-professional .modal-dialog {
         margin: 0.5rem auto;
@@ -2787,7 +2608,6 @@ textarea:focus-visible {
         }
 }
 
-/* Extra Small Mobile (max-width: 375px) */
 @media (max-width: 375px) {
     .contact-modal-professional .modal-dialog {
         margin: 0.25rem auto;
@@ -2848,14 +2668,12 @@ textarea:focus-visible {
     }
 }
 
-/* Large Desktop Screens - Ensure modal doesn't get too big */
 @media (min-width: 1400px) {
     .contact-modal-professional .modal-dialog {
         max-width: 650px;
     }
 }
 
-/* Very Large Screens */
 @media (min-width: 1920px) {
     .contact-modal-professional .modal-dialog {
         max-width: 700px;
@@ -2863,7 +2681,6 @@ textarea:focus-visible {
     }
 }
 
-/* Modal backdrop fix for all screen sizes */
 .modal-backdrop {
     position: fixed;
     top: 0;
@@ -2878,7 +2695,6 @@ textarea:focus-visible {
     z-index: 1055;
 }
 
-/* Ensure proper modal display */
 .modal.show {
     display: flex !important;
     align-items: center;
@@ -2889,7 +2705,6 @@ textarea:focus-visible {
         transform: none;
     }
 
-/* Fix for iOS devices */
 @supports (-webkit-touch-callout: none) {
     .contact-modal-professional .modal-content {
         max-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 2rem);
@@ -2900,7 +2715,7 @@ textarea:focus-visible {
     }
 }
 
-/* Contact FAB - Better positioning for all screen sizes */
+/* Contact FAB responsive */
 .contact-fab {
     position: fixed;
     bottom: 35px;
@@ -2974,7 +2789,7 @@ textarea:focus-visible {
         }
 }
 
-/* Form validation feedback - better visibility */
+/* Form validation feedback */
 .form-control-professional.is-invalid {
     border-color: var(--danger);
     padding-right: calc(1.5em + 0.75rem);
@@ -2996,7 +2811,6 @@ textarea:focus-visible {
     display: block;
 }
 
-/* Better spacing for form rows on mobile */
 @media (max-width: 767px) {
     .contact-modal-professional .mb-3 {
         margin-bottom: 1rem !important;

@@ -433,7 +433,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 132%;
+    height: 100%;
     background-size: cover;
     background-position: center;
     opacity: 0;
@@ -489,10 +489,10 @@
     opacity: 0;
 }
 
-.hero-title.animate {
-    animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    animation-delay: 0.1s;
-}
+    .hero-title.animate {
+        animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        animation-delay: 0.1s;
+    }
 
 .hero-description {
     font-size: 18px;
@@ -649,17 +649,20 @@
     background: rgba(255, 255, 255, 0.3);
 }
 
-/* Slider Controls */
+/* =============================================
+   ORDER 2: Slider Controls — Bottom Centre
+   ============================================= */
 .slider-controls {
     position: absolute;
-    bottom: auto; /* Remove bottom positioning */
-    top: 50%; /* Center vertically on the screen */
-    right: 30px; /* Distance from right edge */
-    transform: translateY(-50%); /* Perfect vertical centering */
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: auto;
+    right: auto;
     display: flex;
-    flex-direction: column; /* Stack vertically instead of horizontally */
+    flex-direction: row;
     align-items: center;
-    gap: 20px; /* Space between arrows and indicators */
+    gap: 16px;
     z-index: 20;
 }
 
@@ -675,22 +678,24 @@
     cursor: pointer;
     border-radius: 50%;
     transition: all 0.3s ease;
+    flex-shrink: 0;
 }
 
     .slider-control:hover {
         background: #3385c3;
         border-color: #3385c3;
-        transform: scale(1.1); /* Add scale effect on hover */
+        transform: scale(1.1);
     }
 
 .slider-indicators {
     display: flex;
-    flex-direction: column; /* Stack indicators vertically */
-    gap: 12px; /* Space between dots */
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
 }
 
 .indicator {
-    width: 10px; /* Slightly larger for better visibility */
+    width: 10px;
     height: 10px;
     background: rgba(255, 255, 255, 0.4);
     border-radius: 50%;
@@ -699,17 +704,16 @@
 }
 
     .indicator.active {
-        height: 30px; /* Grow vertically instead of horizontally */
-        width: 10px; /* Keep width same */
+        width: 28px;
+        height: 10px;
         background: #3385c3;
-        border-radius: 5px; /* Pill shape */
+        border-radius: 5px;
     }
 
-/* Responsive adjustments */
 @media (max-width: 991px) {
     .slider-controls {
-        right: 20px; /* Closer to edge on tablets */
-        gap: 16px;
+        bottom: 22px;
+        gap: 14px;
     }
 
     .slider-control {
@@ -718,25 +722,48 @@
     }
 
     .indicator {
-        width: 8px;
-        height: 8px;
+        width: 9px;
+        height: 9px;
     }
 
         .indicator.active {
-            height: 24px;
-            width: 8px;
+            width: 24px;
+            height: 9px;
         }
 }
 
 @media (max-width: 767px) {
     .slider-controls {
-        right: 15px;
-        gap: 14px;
+        bottom: 18px;
+        gap: 12px;
+    }
+
+    .slider-control {
+        width: 38px;
+        height: 38px;
+    }
+
+    .indicator {
+        width: 8px;
+        height: 8px;
+    }
+
+        .indicator.active {
+            width: 22px;
+            height: 8px;
+        }
+}
+
+@media (max-width: 575px) {
+    .slider-controls {
+        bottom: 14px;
+        gap: 10px;
     }
 
     .slider-control {
         width: 36px;
         height: 36px;
+        font-size: 0.85rem;
     }
 
     .indicator {
@@ -745,22 +772,32 @@
     }
 
         .indicator.active {
-            height: 20px;
-            width: 7px;
+            width: 18px;
+            height: 7px;
         }
 }
 
-@media (max-width: 575px) {
+@media (max-width: 375px) {
     .slider-controls {
-        right: 10px;
-        gap: 12px;
+        bottom: 12px;
+        gap: 8px;
     }
 
     .slider-control {
         width: 34px;
         height: 34px;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
+
+    .indicator {
+        width: 6px;
+        height: 6px;
+    }
+
+        .indicator.active {
+            width: 16px;
+            height: 6px;
+        }
 }
 
 /* ========== STATS SECTION ========== */
@@ -1203,7 +1240,6 @@
     justify-content: center;
     min-height: 140px;
     width: 100%;
-    /* REMOVED max-width: 240px — this was causing the 4-column wrap */
     transition: all 0.3s ease;
     overflow: hidden;
 }
@@ -1528,11 +1564,6 @@
         display: none;
     }
 
-    .slider-controls {
-        bottom: 24px;
-        right: 24px;
-    }
-
     .features-section,
     .products-section,
     .industries-section,
@@ -1587,12 +1618,6 @@
         gap: 20px;
     }
 
-    .slider-controls {
-        bottom: 16px;
-        right: 50%;
-        transform: translateX(50%);
-    }
-
     .features-section {
         padding: 50px 0;
     }
@@ -1641,8 +1666,8 @@
     }
 
         .partners-track img {
-            height: 100px; /* Increased for better visibility */
-            min-width: 120px; /* Added min-width to prevent squishing */
+            height: 100px;
+            min-width: 120px;
         }
 }
 
@@ -1661,7 +1686,7 @@
     }
 
         .partners-track img {
-            height: 85px; /* FIXED - was 8px, now 85px */
+            height: 85px;
             min-width: 100px;
         }
 }
