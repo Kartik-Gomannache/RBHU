@@ -113,7 +113,6 @@
     padding: 20px 28px;
 }
 
-    /* Custom Scrollbar for Modal */
     .catalog-modal-body::-webkit-scrollbar {
         width: 8px;
     }
@@ -132,7 +131,6 @@
             background: var(--secondary-color);
         }
 
-/* Modal Categories */
 .modal-category {
     margin-bottom: 12px;
     border-radius: 10px;
@@ -146,7 +144,6 @@
         margin-bottom: 0;
     }
 
-    /* Categories without subcategories - as PDF link */
     .modal-category.no-subcategories .modal-category-header {
         cursor: default;
     }
@@ -173,7 +170,6 @@
         transform: scale(1.15);
     }
 
-/* Hide chevron for categories without subcategories */
 .modal-category.no-subcategories .toggle-icon {
     display: none;
 }
@@ -244,7 +240,6 @@
     max-height: 1000px;
 }
 
-/* Modal Items */
 .modal-item {
     display: flex;
     align-items: center;
@@ -293,7 +288,6 @@
         transform: scale(1.1);
     }
 
-/* Modal Footer */
 .catalog-modal-footer {
     padding: 20px 28px;
     background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
@@ -332,7 +326,7 @@
         transform: translateX(4px);
     }
 
-/* ===== NESTED SUB-CATEGORY (e.g. Makita inside Power Tools) ===== */
+/* ===== NESTED SUB-CATEGORY ===== */
 .modal-sub-category {
     border-top: 1px solid #f1f5f9;
     background: white;
@@ -397,7 +391,6 @@
     max-height: 300px;
 }
 
-/* Deeper indentation for nested items */
 .modal-item--nested {
     padding-left: 72px;
 }
@@ -419,7 +412,6 @@
     overflow: hidden;
 }
 
-/* Hero Background Slider */
 .hero-background-slider {
     position: absolute;
     top: 0;
@@ -453,7 +445,6 @@
     background: linear-gradient(90deg, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0.4) 100%);
 }
 
-/* Hero Content */
 .hero-content-professional {
     position: relative;
     z-index: 10;
@@ -507,7 +498,6 @@
         animation-delay: 0.3s;
     }
 
-/* Hero Buttons */
 .hero-buttons {
     display: flex;
     gap: 16px;
@@ -618,7 +608,6 @@
         z-index: 1;
     }
 
-/* Hero Stats */
 .hero-stats-container {
     display: flex;
     align-items: center;
@@ -650,48 +639,74 @@
 }
 
 /* =============================================
-   ORDER 2: Slider Controls — Bottom Centre
+   SLIDER CONTROLS
+   - .slider-control.prev  → left edge, vertically centered
+   - .slider-control.next  → right edge, vertically centered
+   - .slider-indicators    → bottom center
    ============================================= */
-.slider-controls {
+
+/* Prev button — pinned to left edge, vertically centered */
+.slider-control.prev {
     position: absolute;
-    bottom: 120px;
-    left: 50%;
-    transform: translateX(-50%);
-    top: auto;
-    right: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 16px;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 20;
 }
 
+/* Next button — pinned to right edge, vertically centered */
+.slider-control.next {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+}
+
+/* Shared button styles */
 .slider-control {
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     color: #fff;
     cursor: pointer;
     border-radius: 50%;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     flex-shrink: 0;
+    font-size: 1rem;
+    backdrop-filter: blur(4px);
 }
 
     .slider-control:hover {
         background: #3385c3;
         border-color: #3385c3;
-        transform: scale(1.1);
+        box-shadow: 0 4px 16px rgba(51, 133, 195, 0.5);
     }
 
+    /* Hover must preserve the translateY so the button doesn't jump */
+    .slider-control.prev:hover {
+        transform: translateY(-50%);
+    }
+
+    .slider-control.next:hover {
+        transform: translateY(-50%);
+    }
+
+/* Indicators — pinned to bottom center */
 .slider-indicators {
+    position: absolute;
+    bottom: 130px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     flex-direction: row;
     gap: 10px;
     align-items: center;
+    z-index: 20;
 }
 
 .indicator {
@@ -710,15 +725,23 @@
         border-radius: 5px;
     }
 
+/* ---- Responsive slider controls ---- */
 @media (max-width: 991px) {
-    .slider-controls {
-        bottom: 22px;
-        gap: 14px;
+    .slider-control.prev {
+        left: 14px;
+    }
+
+    .slider-control.next {
+        right: 14px;
     }
 
     .slider-control {
-        width: 40px;
-        height: 40px;
+        width: 42px;
+        height: 42px;
+    }
+
+    .slider-indicators {
+        bottom: 24px;
     }
 
     .indicator {
@@ -733,14 +756,23 @@
 }
 
 @media (max-width: 767px) {
-    .slider-controls {
-        bottom: 18px;
-        gap: 12px;
+    .slider-control.prev {
+        left: 10px;
+    }
+
+    .slider-control.next {
+        right: 10px;
     }
 
     .slider-control {
         width: 38px;
         height: 38px;
+        font-size: 0.9rem;
+    }
+
+    .slider-indicators {
+        bottom: 20px;
+        gap: 8px;
     }
 
     .indicator {
@@ -755,15 +787,23 @@
 }
 
 @media (max-width: 575px) {
-    .slider-controls {
-        bottom: 14px;
-        gap: 10px;
+    .slider-control.prev {
+        left: 8px;
+    }
+
+    .slider-control.next {
+        right: 8px;
     }
 
     .slider-control {
-        width: 36px;
-        height: 36px;
-        font-size: 0.85rem;
+        width: 34px;
+        height: 34px;
+        font-size: 0.8rem;
+    }
+
+    .slider-indicators {
+        bottom: 16px;
+        gap: 7px;
     }
 
     .indicator {
@@ -778,15 +818,23 @@
 }
 
 @media (max-width: 375px) {
-    .slider-controls {
-        bottom: 12px;
-        gap: 8px;
+    .slider-control.prev {
+        left: 6px;
+    }
+
+    .slider-control.next {
+        right: 6px;
     }
 
     .slider-control {
-        width: 34px;
-        height: 34px;
-        font-size: 0.8rem;
+        width: 30px;
+        height: 30px;
+        font-size: 0.75rem;
+    }
+
+    .slider-indicators {
+        bottom: 12px;
+        gap: 6px;
     }
 
     .indicator {
@@ -808,7 +856,6 @@
     overflow: hidden;
 }
 
-    /* Background Image */
     .stats-section::before {
         content: '';
         position: absolute;
@@ -821,9 +868,6 @@
         background-position: center;
         background-repeat: no-repeat;
         z-index: 0;
-    }
-
-    .stats-section::before {
         opacity: 0.8;
     }
 
@@ -856,7 +900,6 @@
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
-/* Separator Lines Between Stats */
 .stat-box::after {
     content: '';
     position: absolute;
@@ -971,7 +1014,6 @@
     line-height: 1.7;
 }
 
-/* Product Cards */
 .product-card {
     background: #fff;
     border: 1px solid #e5e5e5;
@@ -1094,7 +1136,7 @@
         text-decoration: none;
     }
 
-/* ===== INDUSTRIES SECTION - STATIC IMAGE WITH TEXT OVERLAY (RED THEME) ===== */
+/* ===== INDUSTRIES SECTION ===== */
 .industries-section {
     padding: 100px 0;
     background: white;
@@ -1141,7 +1183,6 @@
     justify-content: flex-end;
 }
 
-    /* Background image layer - VISIBLE by default */
     .industry-box .industry-icon-wrapper {
         display: block;
         position: absolute;
@@ -1159,7 +1200,6 @@
             object-position: center;
         }
 
-    /* Dark overlay - ALWAYS visible for text readability */
     .industry-box::after {
         content: '';
         position: absolute;
@@ -1172,7 +1212,6 @@
         pointer-events: none;
     }
 
-    /* Title styling - above overlays, white color for contrast */
     .industry-box h4 {
         font-family: 'Poppins', sans-serif;
         font-size: 1.5rem;
@@ -1185,7 +1224,6 @@
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
 
-/* Responsive adjustments */
 @media (max-width: 991px) {
     .industry-box {
         min-height: 240px;
@@ -1217,6 +1255,7 @@
             font-size: 1rem;
         }
 }
+
 /* ========== BRANDS SECTION ========== */
 .brands-section {
     padding: 100px 0;
@@ -1261,7 +1300,7 @@
     .brand-item:hover img {
         transform: scale(1.1);
     }
-/* Responsive adjustments */
+
 @media (min-width: 1400px) {
     .brands-grid {
         grid-template-columns: repeat(5, 1fr);
@@ -1295,7 +1334,8 @@
         margin-top: 40px;
     }
 }
-/* ========== PARTNERS SLIDER SECTION (FROM ASA) ========== */
+
+/* ========== PARTNERS SLIDER SECTION ========== */
 .partners-section {
     padding: 120px 0 100px;
     background: #f8f9fa;
@@ -1303,7 +1343,6 @@
     overflow: hidden;
 }
 
-    /* Move heading section higher */
     .partners-section .row.mb-5 {
         margin-bottom: 4rem !important;
         padding-top: 20px;
@@ -1318,7 +1357,6 @@
     position: relative;
 }
 
-    /* Gradient fade on edges */
     .partners-slider::before {
         content: '';
         position: absolute;
@@ -1547,8 +1585,6 @@
     }
 
 /* ========== RESPONSIVE DESIGN ========== */
-
-/* Tablets */
 @media (max-width: 991px) {
     .hero-section-professional {
         height: auto;
@@ -1596,7 +1632,6 @@
     }
 }
 
-/* Mobile */
 @media (max-width: 767px) {
     .hero-section-professional {
         min-height: 500px;
@@ -1671,7 +1706,6 @@
         }
 }
 
-/* Small Mobile */
 @media (max-width: 575px) {
     .stat-value {
         font-size: 36px;
@@ -1731,7 +1765,6 @@ html {
     }
 }
 
-/* Accessibility - Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

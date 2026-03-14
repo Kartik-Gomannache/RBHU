@@ -168,8 +168,6 @@
                  aria-label="Fuji Tools - Industrial Pneumatic Tools and Assembly Solutions">
                 <div class="slide-overlay"></div>
             </div>
-
-
         </div>
 
         <div class="container">
@@ -200,21 +198,24 @@
             </div>
         </div>
 
-        <!-- Slider Navigation -->
-        <div class="slider-controls">
-            <button class="slider-control prev" aria-label="Previous slide">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <div class="slider-indicators">
-                <span class="indicator active" data-slide="0"></span>
-                <span class="indicator" data-slide="1"></span>
-                <span class="indicator" data-slide="2"></span>
-                <span class="indicator" data-slide="3"></span>
-            </div>
-            <button class="slider-control next" aria-label="Next slide">
-                <i class="fas fa-chevron-right"></i>
-            </button>
+        <!-- Prev Button — left edge, vertically centered -->
+        <button class="slider-control prev" aria-label="Previous slide">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <!-- Indicators — bottom center -->
+        <div class="slider-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+            <span class="indicator" data-slide="3"></span>
         </div>
+
+        <!-- Next Button — right edge, vertically centered -->
+        <button class="slider-control next" aria-label="Next slide">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
     </section>
 
     <!-- Brand Partners Section -->
@@ -605,8 +606,7 @@
         }, 50);
     });
 
-    // Hero Image Slider
-     // Catalog Modal Functionality
+    // Catalog Modal Functionality
     document.addEventListener('DOMContentLoaded', function () {
         const modal = document.getElementById('catalogModal');
         const openBtn = document.getElementById('openCatalogModal');
@@ -614,9 +614,7 @@
         const overlay = document.querySelector('.catalog-modal-overlay');
         const categoryHeaders = document.querySelectorAll('.modal-category-header');
 
-
-
-       // Open modal
+        // Open modal
         if (openBtn) {
             openBtn.addEventListener('click', function () {
                 modal.classList.add('active');
@@ -654,14 +652,10 @@
         // Toggle category items
         categoryHeaders.forEach(header => {
             header.addEventListener('click', function (e) {
-                // Skip if this is a link (category without subcategories)
                 if (this.tagName === 'A') {
-                    return; // Let the link work normally
+                    return;
                 }
-
                 const category = this.parentElement;
-
-                // Only toggle if category has subcategories
                 if (!category.classList.contains('no-subcategories')) {
                     category.classList.toggle('active');
                 }
@@ -669,13 +663,14 @@
         });
 
         document.querySelectorAll('.modal-sub-category-header').forEach(header => {
-        header.addEventListener('click', function () {
-            const subCat = this.closest('.modal-sub-category');
-            subCat.classList.toggle('active');
+            header.addEventListener('click', function () {
+                const subCat = this.closest('.modal-sub-category');
+                subCat.classList.toggle('active');
+            });
         });
     });
-    });
 
+    // Hero Image Slider
     (function() {
         const slides = document.querySelectorAll('.hero-slide');
         const indicators = document.querySelectorAll('.slider-indicators .indicator');
@@ -687,7 +682,6 @@
         function showSlide(index) {
             slides.forEach(s => s.classList.remove('active'));
             indicators.forEach(i => i.classList.remove('active'));
-
             slides[index].classList.add('active');
             indicators[index].classList.add('active');
         }
@@ -710,7 +704,6 @@
             clearInterval(autoplayInterval);
         }
 
-        // Event Listeners
         if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); stopAutoplay(); startAutoplay(); });
         if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); stopAutoplay(); startAutoplay(); });
 
@@ -723,7 +716,6 @@
             });
         });
 
-        // Start autoplay
         startAutoplay();
     })();
 
@@ -776,5 +768,4 @@
             }
         });
     });
-
 </script>
