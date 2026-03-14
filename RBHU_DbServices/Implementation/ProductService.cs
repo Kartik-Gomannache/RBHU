@@ -204,8 +204,7 @@ namespace RBHU_DbServices.Implementation
                                       c.Name == "Pneumatic tools and Systems" ? 2 :
                                       c.Name == "Power Tools and Accessories" ? 3 :
                                       c.Name == "Hoses" ? 4 :
-                                      c.Name == "Belts" ? 5 :
-                                      c.Name == "Cutting Tools" ? 6 : 7)
+                                      c.Name == "Belts" ? 5 : 7)
                         .ToList();
                 }
             }
