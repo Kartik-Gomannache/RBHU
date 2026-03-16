@@ -3,8 +3,8 @@
 @{
     var uniqueUserIdentifier = User.Claims.FirstOrDefault()?.Value;
     var pageTitle = ViewData["Title"]?.ToString() ?? "Home";
-    var pageDescription = ViewData["Description"]?.ToString() ?? "RBHU Solutions LLP - Leading provider of industrial tools, PPE safety equipment, power tools, cutting tools, pneumatic systems, abrasives, hoses and belts. Quality industrial solutions for manufacturing and engineering sectors.";
-    var pageKeywords = ViewData["Keywords"]?.ToString() ?? "industrial tools, PPE safety equipment, power tools, cutting tools, pneumatic tools, abrasives, industrial hoses, industrial belts, RBHU Solutions";
+    var pageDescription = ViewData["Description"]?.ToString() ?? "RBHU Solutions LLP - Leading provider of industrial tools, PPE safety equipment, power tools, pneumatic systems, abrasives, hoses and belts. Quality industrial solutions for manufacturing and engineering sectors.";
+    var pageKeywords = ViewData["Keywords"]?.ToString() ?? "industrial tools, PPE safety equipment, power tools, pneumatic tools, abrasives, industrial hoses, industrial belts, RBHU Solutions";
     var currentUrl = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}";
 }
 

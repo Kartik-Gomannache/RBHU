@@ -50,7 +50,23 @@
 
 	<!-- ==================== CATEGORY PAGES (SEO CRITICAL) ==================== -->
 
-	<!-- 1. Abrasives Category -->
+	<!-- 1. Safety Products Category -->
+	<url>
+		<loc>https://rbhu.co.in/Product/SafetyProducts</loc>
+		<lastmod>2026-02-07</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
+		<image:image>
+			<image:loc>https://rbhu.co.in/images/products/Safety_general.jpg</image:loc>
+			<image:title>Safewell Safety Products PPE - Helmets Gloves Equipment Goa</image:title>
+		</image:image>
+		<image:image>
+			<image:loc>https://rbhu.co.in/images/Product_Brands/Safewell.jpg</image:loc>
+			<image:title>Safewell Safety Products Brand</image:title>
+		</image:image>
+	</url>
+	
+	<!-- 2. Abrasives Category -->
 	<url>
 		<loc>https://rbhu.co.in/Product/Abrasives</loc>
 		<lastmod>2026-02-07</lastmod>
@@ -70,63 +86,7 @@
 		</image:image>
 	</url>
 
-	<!-- 2. Belts Category -->
-	<url>
-		<loc>https://rbhu.co.in/Product/Belts</loc>
-		<lastmod>2026-02-07</lastmod>
-		<changefreq>weekly</changefreq>
-		<priority>0.9</priority>
-		<image:image>
-			<image:loc>https://rbhu.co.in/images/products/Belts_general.jpg</image:loc>
-			<image:title>Megadyne Gates Power Transmission Belts Goa</image:title>
-		</image:image>
-		<image:image>
-			<image:loc>https://rbhu.co.in/images/Product_Brands/Megadyne.jpg</image:loc>
-			<image:title>Megadyne Belts Brand</image:title>
-		</image:image>
-		<image:image>
-			<image:loc>https://rbhu.co.in/images/Product_Brands/Gates.jpg</image:loc>
-			<image:title>Gates Belts Brand</image:title>
-		</image:image>
-	</url>
-
-	<!-- 3. Cutting Tools Category -->
-	<url>
-		<loc>https://rbhu.co.in/Product/CuttingTools</loc>
-		<lastmod>2026-02-07</lastmod>
-		<changefreq>weekly</changefreq>
-		<priority>0.9</priority>
-		<image:image>
-			<image:loc>https://rbhu.co.in/images/products/Cutting_general.jpg</image:loc>
-			<image:title>Bipico Cutting Tools - Drill Bits End Mills Goa</image:title>
-		</image:image>
-		<image:image>
-			<image:loc>https://rbhu.co.in/images/Product_Brands/Bipico.jpg</image:loc>
-			<image:title>Bipico Cutting Tools Brand</image:title>
-		</image:image>
-	</url>
-
-	<!-- 4. Hoses Category -->
-	<url>
-		<loc>https://rbhu.co.in/Product/Hoses</loc>
-		<lastmod>2026-02-07</lastmod>
-		<changefreq>weekly</changefreq>
-		<priority>0.9</priority>
-		<image:image>
-			<image:loc>https://rbhu.co.in/images/products/Hoses-general.jpg</image:loc>
-			<image:title>Parker Polyhose Industrial Hoses - Hydraulic Air Hoses Goa</image:title>
-		</image:image>
-		<image:image>
-			<image:loc>https://rbhu.co.in/images/Product_Brands/Parker.jpg</image:loc>
-			<image:title>Parker Hoses Brand</image:title>
-		</image:image>
-		<image:image>
-			<image:loc>https://rbhu.co.in/images/Product_Brands/Polyhose.jpg</image:loc>
-			<image:title>Polyhose Brand</image:title>
-		</image:image>
-	</url>
-
-	<!-- 5. Pneumatic Tools Category -->
+	<!-- 3. Pneumatic Tools Category -->
 	<url>
 		<loc>https://rbhu.co.in/Product/Pneumatic</loc>
 		<lastmod>2026-02-07</lastmod>
@@ -150,7 +110,7 @@
 		</image:image>
 	</url>
 
-	<!-- 6. Power Tools Category -->
+	<!-- 4. Power Tools Category -->
 	<url>
 		<loc>https://rbhu.co.in/Product/PowerTools</loc>
 		<lastmod>2026-02-07</lastmod>
@@ -170,19 +130,43 @@
 		</image:image>
 	</url>
 
-	<!-- 7. Safety Products Category -->
+	<!-- 5. Hoses Category -->
 	<url>
-		<loc>https://rbhu.co.in/Product/SafetyProducts</loc>
+		<loc>https://rbhu.co.in/Product/Hoses</loc>
 		<lastmod>2026-02-07</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.9</priority>
 		<image:image>
-			<image:loc>https://rbhu.co.in/images/products/Safety_general.jpg</image:loc>
-			<image:title>Safewell Safety Products PPE - Helmets Gloves Equipment Goa</image:title>
+			<image:loc>https://rbhu.co.in/images/products/Hoses-general.jpg</image:loc>
+			<image:title>Parker Polyhose Industrial Hoses - Hydraulic Air Hoses Goa</image:title>
 		</image:image>
 		<image:image>
-			<image:loc>https://rbhu.co.in/images/Product_Brands/Safewell.jpg</image:loc>
-			<image:title>Safewell Safety Products Brand</image:title>
+			<image:loc>https://rbhu.co.in/images/Product_Brands/Parker.jpg</image:loc>
+			<image:title>Parker Hoses Brand</image:title>
+		</image:image>
+		<image:image>
+			<image:loc>https://rbhu.co.in/images/Product_Brands/Polyhose.jpg</image:loc>
+			<image:title>Polyhose Brand</image:title>
+		</image:image>
+	</url>
+	
+	<!-- 6. Belts Category -->
+	<url>
+		<loc>https://rbhu.co.in/Product/Belts</loc>
+		<lastmod>2026-02-07</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.9</priority>
+		<image:image>
+			<image:loc>https://rbhu.co.in/images/products/Belts_general.jpg</image:loc>
+			<image:title>Megadyne Gates Power Transmission Belts Goa</image:title>
+		</image:image>
+		<image:image>
+			<image:loc>https://rbhu.co.in/images/Product_Brands/Megadyne.jpg</image:loc>
+			<image:title>Megadyne Belts Brand</image:title>
+		</image:image>
+		<image:image>
+			<image:loc>https://rbhu.co.in/images/Product_Brands/Gates.jpg</image:loc>
+			<image:title>Gates Belts Brand</image:title>
 		</image:image>
 	</url>
 

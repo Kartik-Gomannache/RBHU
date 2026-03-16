@@ -58,7 +58,7 @@ namespace RBHU.Controllers
         public IActionResult Products()
         {
             ViewData["Title"] = "Industrial Products | Tools, PPE Equipment & Pneumatic Systems Goa";
-            ViewData["Description"] = "Browse 500+ industrial products in Goa. Premium power tools, PPE safety equipment, pneumatic systems, abrasives, cutting tools from Makita, Bosch, Chicago Pneumatic. Authorized dealer with warranty coverage.";
+            ViewData["Description"] = "Browse 500+ industrial products in Goa. Premium power tools, PPE safety equipment, pneumatic systems, abrasives, Bosch, Chicago Pneumatic. Authorized dealer with warranty coverage.";
             return View();
         }
 
