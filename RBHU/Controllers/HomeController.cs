@@ -159,9 +159,6 @@ namespace RBHU.Controllers
                 // 2. Send email notification
                 await SendEmailNotification(model, email.UniqueEmailId);
 
-
-
-
                 return Json(new { success = isSaved, message = "Thank you for your message! We'll get back to you soon." });
             }
             catch (Exception ex)
@@ -179,7 +176,6 @@ namespace RBHU.Controllers
             var bodyHtml = new StringBuilder()
                 .AppendLine("<div style='font-family:Segoe UI,Arial,sans-serif;font-size:14px;color:#222'>")
                 .AppendLine($"<h2>New Contact Form Submission For {E(model.Subject)}</h2>")
-                //  .AppendLine($"<p><strong>Reference ID:</strong> {E(referenceId)}</p>")
                 .AppendLine($"<p><strong>Subject : </strong>{E(model.Subject)}</p>")
                 .AppendLine("<table style='border-collapse:collapse'>")
                 .AppendLine($"<tr><td style='padding-right:10px'><b>Name</b></td><td>{E(model.FullName)}</td></tr>")
@@ -187,7 +183,6 @@ namespace RBHU.Controllers
                 .AppendLine($"<tr><td><b>Phone</b></td><td>{E(model.PhoneNumber)}</td></tr>")
                 .AppendLine($"<tr><td><b>Company</b></td><td>{E(model.Company ?? "-")}</td></tr>")
                 .AppendLine($"<tr><td><b>GST</b></td><td>{E(model.GSTNumber ?? "-")}</td></tr>")
-                //.AppendLine($"<tr><td><b>Subject</b></td><td>{E(model.Subject)}</td></tr>")
                 .AppendLine("</table>")
                 .AppendLine("<hr/>")
                 .AppendLine("<div><b>Message:</b></div>")
@@ -226,11 +221,15 @@ namespace RBHU.Controllers
 
             _logger.LogInformation("Email notification sent for contact form submission {ReferenceId}", referenceId);
         }
-
+        [Route("Home/Error")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(int? statusCode = null)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (statusCode.HasValue)
+            {
+                Response.StatusCode = statusCode.Value;
+            }
+            return View("Error");
         }
     }
 }
