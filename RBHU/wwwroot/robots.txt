@@ -9,6 +9,14 @@ Allow: /
 Disallow: /Admin/
 Disallow: /Login/
 Disallow: /Account/
+Disallow: /Product/GetSubCategories1
+Disallow: /Product/GetSubCategories2
+Disallow: /Product/GetCategories
+Disallow: /Product/GetProductsByFilter
+Disallow: /Product/GetProductsByCategory
+Disallow: /Product/GetSampleProductsForSubCategories2
+Disallow: /Product/GetProduct
+Disallow: /Product/SearchProducts
 
 # ===== ALLOW IMPORTANT FILES (For Better SEO) =====
 Allow: /css/
