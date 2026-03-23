@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Catelogues\" />
+    <Folder Include="wwwroot\Catalogue\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://www.schemastore.org/asmdef.json" /></VisualStudio></ProjectExtensions>
