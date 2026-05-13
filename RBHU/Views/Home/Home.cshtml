@@ -32,14 +32,26 @@
                 </div>
 
                 <!-- Abrasives Category (Expandable) -->
-                <div class="modal-category no-subcategories">
-                    <a href="~/catalogue/klingspor-catalogue-2025.pdf"
-                       target="_blank"
-                       class="modal-category-header modal-category-link">
+                <div class="modal-category">
+                    <div class="modal-category-header">
                         <i class="fas fa-circle"></i>
-                        <i class="fas fa-file-pdf pdf-icon"></i>
-                        <span>Abrasives(Klingspor)</span>
-                    </a>
+                        <span>Abrasives</span>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="modal-category-items">
+                        <a href="~/catalogue/klingspor-catalogue-2025.pdf"
+                               target="_blank"
+                               class="modal-item">
+                            <i class="fas fa-file-pdf"></i>
+                            Klingspor
+                        </a>
+                        <a href="~/catalogue/Kovax-Brochure-2022.pdf"
+                               target="_blank"
+                               class="modal-item">
+                            <i class="fas fa-file-pdf"></i>
+                            Kovax
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Pneumatics Category (Expandable) -->
@@ -166,6 +178,13 @@
                  style="background-image: url('@Url.Content("~/images/carousel/fuji.webp")');"
                  role="img"
                  aria-label="Fuji Tools - Industrial Pneumatic Tools and Assembly Solutions">
+                <div class="slide-overlay"></div>
+            </div>
+
+            <div class="hero-slide"
+                 style="background-image: url('@Url.Content("~/images/carousel/uflow gemini.png")');"
+                 role="img"
+                 aria-label="UFLOW Automation India - Solenoid Valves and Automation Solution">
                 <div class="slide-overlay"></div>
             </div>
         </div>
@@ -300,21 +319,21 @@
                          loading="lazy"
                          width="160" height="80">
                 </a>
-                @* 
-                <!-- IMI Norgren -->
+
+                <!-- UFLOW -->
                 <a asp-controller="Product"
                    asp-action="CategoryByBrand"
                    asp-route-categoryName="Pneumatic"
-                   asp-route-brandName="IMI Norgren"
+                   asp-route-brandName="UFLOW"
                    class="brand-item"
                    data-aos="fade-up"
                    data-aos-delay="600">
-                    <img src="~/images/Product_Brands/IMI.png"
-                         alt="IMI Norgren - Pneumatic Automation Solutions Provider"
+                    <img src="~/images/Product_Brands/uflow.webp"
+                                         alt="UFLOW Automation India - Solenoid Valves and Automation Solution"
                          loading="lazy"
                          width="160" height="80">
                 </a>
-
+                                    @*
                 <!-- Makita -->
                 <a asp-controller="Product"
                    asp-action="CategoryByBrand"
