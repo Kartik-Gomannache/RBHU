@@ -1796,3 +1796,94 @@ html {
         animation: scroll-partners 60s linear infinite !important;
     }
 }
+
+
+/* ===== RESPONSIVE HERO IMAGE FIXES ===== */
+@media (max-width: 1199px) {
+    .hero-slide {
+        background-size: cover;
+        background-position: center center;
+    }
+
+        .hero-slide[aria-label*="UFLOW"] {
+            background-size: contain;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-color: #000;
+        }
+}
+
+@media (max-width: 991px) {
+    .hero-section-professional {
+        min-height: 620px;
+        height: 100vh;
+    }
+
+    .hero-slide-mobile {
+        background-size: cover !important;
+        background-position: center top !important;
+        background-repeat: no-repeat;
+    }
+
+    .hero-slide[aria-label*="UFLOW"] {
+        background-size: contain !important;
+        background-position: center center !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-section-professional {
+        min-height: 100vh;
+        height: 100vh;
+    }
+
+    .hero-slide-mobile {
+        background-size: cover !important;
+        background-position: center center !important;
+    }
+
+        .hero-slide-mobile[aria-label*="Safewell"] {
+            background-position: center top !important;
+        }
+
+        .hero-slide-mobile[aria-label*="Kovax"] {
+            background-position: center center !important;
+        }
+
+        .hero-slide-mobile[aria-label*="Klingspor"] {
+            background-position: center center !important;
+        }
+
+        .hero-slide-mobile[aria-label*="Chicago Pneumatic"] {
+            background-position: center center !important;
+        }
+
+        .hero-slide-mobile[aria-label*="Fuji"] {
+            background-position: center center !important;
+        }
+
+        .hero-slide-mobile[aria-label*="UFLOW"] {
+            background-size: contain !important;
+            background-position: center center !important;
+            background-repeat: no-repeat !important;
+            background-color: #000 !important;
+        }
+}
+
+@media (max-width: 575px) {
+    .hero-slide-mobile {
+        background-size: cover !important;
+        background-position: center center !important;
+    }
+
+        .hero-slide-mobile[aria-label*="UFLOW"] {
+            background-size: contain !important;
+            padding: 0 10px;
+        }
+}
+
+@media (max-width: 375px) {
+    .hero-slide-mobile[aria-label*="UFLOW"] {
+        background-size: 100% auto !important;
+    }
+}
