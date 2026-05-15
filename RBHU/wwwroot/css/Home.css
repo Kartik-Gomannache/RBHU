@@ -436,6 +436,24 @@
         opacity: 1;
     }
 
+.hero-slide-mobile {
+    display: none;
+}
+
+.hero-slide-desktop {
+    display: block;
+}
+
+@media (max-width: 767px) {
+    .hero-slide-desktop {
+        display: none;
+    }
+
+    .hero-slide-mobile {
+        display: block;
+    }
+}
+
 .slide-overlay {
     position: absolute;
     top: 0;
