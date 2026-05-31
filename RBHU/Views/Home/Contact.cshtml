@@ -5,12 +5,80 @@
 
 <link href="~/css/contact.css" rel="stylesheet" />
 
+<!-- LocalBusiness schema for Contact page -->
+<script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@type": "LocalBusiness",
+      "name": "RBHU Solutions LLP",
+      "image": "https://rbhu.co.in/images/RBHU-logo.png",
+      "@@id": "https://rbhu.co.in",
+      "url": "https://rbhu.co.in",
+      "telephone": "+91-9968068454",
+      "email": "rbhugoa@gmail.com",
+      "priceRange": "$$",
+      "description": "RBHU Solutions LLP is an authorised dealer of industrial tools, PPE safety equipment, pneumatic systems, abrasives, hoses, and power transmission belts in Goa. Serving industries across South Goa and North Goa.",
+      "address": {
+        "@@type": "PostalAddress",
+        "streetAddress": "S-43, Souza Enclave, Margoan Salcete",
+        "addressLocality": "Margao",
+        "addressRegion": "Goa",
+        "postalCode": "403601",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@@type": "GeoCoordinates",
+        "latitude": "15.2676",
+        "longitude": "73.9497"
+      },
+      "openingHoursSpecification": {
+        "@@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      "areaServed": [
+        {
+          "@@type": "City",
+          "name": "Margao"
+        },
+        {
+          "@@type": "City",
+          "name": "Vasco da Gama"
+        },
+        {
+          "@@type": "City",
+          "name": "Panaji"
+        },
+        {
+          "@@type": "City",
+          "name": "Ponda"
+        },
+        {
+          "@@type": "State",
+          "name": "Goa"
+        }
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/rupesh-bothra"
+      ]
+    }
+</script>
+
 <div class="page-content">
     <section class="section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center mb-5">
-                    <h2 class="section-title" data-aos="fade-up">Contact Us</h2>
+                    <!-- CHANGE: H2 → H1 with geo keyword -->
+                    <h1 class="section-title" data-aos="fade-up">Contact RBHU Solutions LLP — Industrial Equipment Supplier in Goa</h1>
                     <p class="lead" data-aos="fade-up" data-aos-delay="100">
                         Get in touch with our team for all your industrial tool requirements
                     </p>
@@ -92,7 +160,7 @@
                 <div class="col-lg-4">
                     <div class="contact-info" data-aos="fade-left">
                         <h4 class="mb-4">Get in Touch</h4>
-                        
+
                         <!-- Contact Information -->
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
@@ -101,7 +169,8 @@
                                 <span>
                                     S-43, Souza Enclave,<br>
                                     Margoan Salcete,<br>
-                                    South Gao, Goa-403601
+                                    <!-- CHANGE: Typo fixed "South Gao" → "South Goa" -->
+                                    South Goa, Goa - 403601
                                 </span>
                             </div>
                         </div>

@@ -1,7 +1,36 @@
 ﻿@model RBHU_DbServices.ViewModel.CategoryViewModel
 @{
-    ViewData["Title"] = "Industrial Hoses - Parker Polyhose Hydraulic Air Hoses | RBHU Solutions LLP";
+    ViewData["Title"] = "Industrial Hoses in Goa | Parker & Polyhose Hydraulic Hoses Dealer | RBHU Solutions LLP";
+    ViewData["Description"] = "Authorised dealer of Parker and Polyhose industrial hoses in Goa. Hydraulic hoses, air hoses, high-pressure hoses, and fittings for manufacturing, shipbuilding, and industrial applications across Goa.";
 }
+
+<!-- BreadcrumbList schema -->
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://rbhu.co.in"
+    },
+    {
+      "@@type": "ListItem",
+      "position": 2,
+      "name": "Products",
+      "item": "https://rbhu.co.in/Home/Products"
+    },
+    {
+      "@@type": "ListItem",
+      "position": 3,
+      "name": "Hoses",
+      "item": "https://rbhu.co.in/Product/Category/Hoses"
+    }
+  ]
+}
+</script>
 
 <div class="page-content">
     <section class="section-padding" style="margin-top: 80px;">
@@ -9,9 +38,9 @@
             <!-- Header Section -->
             <div class="row mb-4">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-title" data-aos="fade-up">@Model.CategoryName</h2>
+                    <h1 class="section-title" data-aos="fade-up">Industrial Hoses Supplier in Goa</h1>
                     <p class="lead text-muted" data-aos="fade-up" data-aos-delay="100">
-                        Premium hydraulic and industrial hoses for reliable fluid transfer and power transmission
+                        RBHU Solutions LLP is the authorised dealer of Parker and Polyhose industrial hoses in Goa, supplying hydraulic hoses, air hoses, and high-pressure fittings to industries across Goa.
                     </p>
                 </div>
             </div>
@@ -28,7 +57,7 @@
                             <div class="brand-card-modern" data-brand="Parker" onclick="filterByBrand('Parker')">
                                 <div class="brand-image-wrapper">
                                     <img src="~/images/Product_Brands/Parker.png"
-                                         alt="Parker Hoses - Hydraulic Hoses, Industrial Hoses, High Pressure Hoses Goa"
+                                         alt="Parker Hoses - Authorised Dealer in Goa, Hydraulic and High Pressure Hoses"
                                          loading="lazy">
                                 </div>
                                 <div class="brand-label">Parker</div>
@@ -41,7 +70,7 @@
                             <div class="brand-card-modern" data-brand="Polyhose" onclick="filterByBrand('Polyhose')">
                                 <div class="brand-image-wrapper">
                                     <img src="~/images/Product_Brands/Polyhose.jpg"
-                                         alt="Polyhose Industrial Hoses - Air Hoses, Water Hoses, Chemical Hoses Goa"
+                                         alt="Polyhose Industrial Hoses - Authorised Dealer in Goa, Air and Water Hoses"
                                          loading="lazy">
                                 </div>
                                 <div class="brand-label">Polyhose</div>
@@ -214,7 +243,7 @@
                                     <div class="product-info">
                                         <h6 class="product-name">@product.Name</h6>
                                         <p class="product-desc">
-                                            @(string.IsNullOrEmpty(product.Description) ? "Professional power tool for demanding applications." :
+                                            @(string.IsNullOrEmpty(product.Description) ? "Premium industrial hose for fluid transfer applications." :
                                                                                     (product.Description.Length > 60 ? product.Description.Substring(0, 60) + "..." : product.Description))
                                     </p>
                                     <a asp-controller="Home" asp-action="Contact" class="product-btn">
@@ -242,10 +271,11 @@
                 </div>
             </div>
 
-            <!-- Features Section -->
+            <!-- CHANGE: Why Choose section - H4 -> H3, geo sentence added -->
             <div class="row mt-5 pt-4 border-top">
                 <div class="col-lg-12">
-                    <h4 class="text-center mb-4">Why Choose Our Hoses?</h4>
+                    <h3 class="text-center mb-2">Why Choose Our Hoses?</h3>
+                    <p class="text-center text-muted mb-4">RBHU Solutions LLP is the authorised dealer of Parker and Polyhose industrial hoses in Goa, supplying hydraulic hoses, air hoses, and fittings to manufacturing and industrial clients across the state.</p>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
                     <div class="text-center">
@@ -277,21 +307,55 @@
                 </div>
             </div>
 
-            <!-- CTA Section -->
-            <div class="row mt-4">
-                <div class="col-lg-12 text-center">
-                    <div class="bg-light p-4 rounded border">
-                        <h5>Need the Right Hose Solution?</h5>
-                        <p class="text-muted mb-3">Our team can help you select the perfect hose for your hydraulic and industrial needs.</p>
-                        <a asp-controller="Home" asp-action="Contact" class="btn btn-secondary me-2">
-                            <i class="fas fa-phone me-2"></i>Contact Us
-                        </a>
-                        <a asp-controller="Home" asp-action="Products" class="btn btn-outline-secondary">
-                            <i class="fas fa-arrow-left me-2"></i>Go Back
-                        </a>
+            <!-- CHANGE: FAQ accordion replacing CTA box -->
+            <div class="row mt-2 mb-5">
+                <div class="col-lg-10 mx-auto">
+                    <div class="hoses-faq-accordion">
+
+                        <div class="hoses-faq-item">
+                            <button class="hoses-faq-question" aria-expanded="false" aria-controls="hfaq1">
+                                <span>Do you supply Parker hydraulic hoses in Goa?</span>
+                                <i class="fas fa-chevron-down hoses-faq-icon"></i>
+                            </button>
+                            <div class="hoses-faq-answer" id="hfaq1" hidden>
+                                <p>Yes, RBHU Solutions LLP is an authorised dealer of Parker hoses in Goa. We supply Parker hydraulic hoses, fittings, and assemblies for industrial and mobile applications across South Goa and North Goa. Contact us at <a href="tel:+919968068454">+91 9968068454</a> for specifications and pricing.</p>
+                            </div>
+                        </div>
+
+                        <div class="hoses-faq-item">
+                            <button class="hoses-faq-question" aria-expanded="false" aria-controls="hfaq2">
+                                <span>Is Polyhose available through RBHU Solutions in Goa?</span>
+                                <i class="fas fa-chevron-down hoses-faq-icon"></i>
+                            </button>
+                            <div class="hoses-faq-answer" id="hfaq2" hidden>
+                                <p>Yes, RBHU Solutions LLP supplies Polyhose industrial hoses in Goa. Polyhose products include pneumatic hoses, air brake hoses, water hoses, and chemical-resistant hoses for a wide range of industrial applications. We stock standard sizes and can source custom lengths on order.</p>
+                            </div>
+                        </div>
+
+                        <div class="hoses-faq-item">
+                            <button class="hoses-faq-question" aria-expanded="false" aria-controls="hfaq3">
+                                <span>What industries in Goa use Parker and Polyhose products?</span>
+                                <i class="fas fa-chevron-down hoses-faq-icon"></i>
+                            </button>
+                            <div class="hoses-faq-answer" id="hfaq3" hidden>
+                                <p>Our industrial hoses are used across Goa's shipbuilding, aerospace, pharmaceutical, railway, and manufacturing sectors. We serve clients including Goa Shipyard, IFB Industries, Kineco, and Commscope, as well as maintenance teams and OEM manufacturers across the state.</p>
+                            </div>
+                        </div>
+
+                        <div class="hoses-faq-item">
+                            <button class="hoses-faq-question" aria-expanded="false" aria-controls="hfaq4">
+                                <span>How can I get a quotation for industrial hoses in Goa?</span>
+                                <i class="fas fa-chevron-down hoses-faq-icon"></i>
+                            </button>
+                            <div class="hoses-faq-answer" id="hfaq4" hidden>
+                                <p>Contact RBHU Solutions LLP at <a href="tel:+919968068454">+91 9968068454</a> or email <a href="mailto:rbhugoa@gmail.com">rbhugoa@gmail.com</a> with your hose specification — bore size, pressure rating, and length. We are based in Margao, South Goa, and serve the full Goa region.</p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 </div>
@@ -376,6 +440,28 @@
                     }, 300);
                 }
             }
+
+            // FAQ accordion
+            document.querySelectorAll('.hoses-faq-question').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const expanded = this.getAttribute('aria-expanded') === 'true';
+                    const answerId = this.getAttribute('aria-controls');
+                    const answer = document.getElementById(answerId);
+                    document.querySelectorAll('.hoses-faq-question').forEach(function(other) {
+                        other.setAttribute('aria-expanded', 'false');
+                        const icon = other.querySelector('.hoses-faq-icon');
+                        if (icon) icon.style.transform = 'rotate(0deg)';
+                        const otherAnswer = document.getElementById(other.getAttribute('aria-controls'));
+                        if (otherAnswer) otherAnswer.hidden = true;
+                    });
+                    if (!expanded) {
+                        this.setAttribute('aria-expanded', 'true');
+                        const icon = this.querySelector('.hoses-faq-icon');
+                        if (icon) icon.style.transform = 'rotate(180deg)';
+                        answer.hidden = false;
+                    }
+                });
+            });
         });
 
         // Filter by brand button - Updated to handle sample products
@@ -1421,147 +1507,62 @@
             color: #111827;
         }
 
+        /* FAQ */
+        .hoses-faq-accordion { display: flex; flex-direction: column; gap: 10px; }
+        .hoses-faq-item { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; transition: border-color 0.25s ease, box-shadow 0.25s ease; }
+        .hoses-faq-item:has(.hoses-faq-question[aria-expanded="true"]) { border-color: #0066B3; box-shadow: 0 4px 16px rgba(0,102,179,0.1); }
+        .hoses-faq-question { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; background: transparent; border: none; cursor: pointer; text-align: left; font-family: 'Poppins', sans-serif; font-size: 0.97rem; font-weight: 600; color: #1a1a1a; line-height: 1.5; transition: background 0.2s ease, color 0.2s ease; }
+        .hoses-faq-question:hover { background: #f0f7ff; color: #0066B3; }
+        .hoses-faq-question[aria-expanded="true"] { background: #f0f7ff; color: #0066B3; }
+        .hoses-faq-icon { flex-shrink: 0; font-size: 0.85rem; color: #0066B3; transition: transform 0.3s ease; }
+        .hoses-faq-answer { padding: 0 22px 18px; border-top: 1px solid #e2e8f0; }
+        .hoses-faq-answer p { font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #4a5568; line-height: 1.75; margin: 14px 0 0; }
+        .hoses-faq-answer a { color: #0066B3; text-decoration: none; font-weight: 500; }
+        .hoses-faq-answer a:hover { text-decoration: underline; }
+
         /* RESPONSIVE DESIGN */
         @@media (max-width: 991px) {
-            .filter-sidebar
-
-        {
-            position: relative;
-            top: 0;
-            margin-bottom: 24px;
-        }
-
-        .brands-grid {
-            grid-template-columns: repeat(2, 1fr);
-            max-width: 100%;
-        }
-
+            .filter-sidebar { position: relative; top: 0; margin-bottom: 24px; }
+            .brands-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
         }
 
         @@media (max-width: 768px) {
-            .filter-header
-
-        {
-            padding: 16px;
-        }
-
-        .filter-title-sidebar {
-            font-size: 1rem;
-        }
-
-        .filter-section {
-            padding: 16px;
-        }
-
-        .brands-title {
-            font-size: 1.375rem;
-        }
-
-        .brand-image-wrapper {
-            height: 180px;
-            padding: 25px;
-        }
-
-            .brand-image-wrapper img {
-                max-width: 160px;
-                max-height: 100px;
-            }
-
-        .brand-label {
-            font-size: 1.0625rem;
-            padding: 14px;
-        }
-
-        .product-image-box {
-            height: 200px;
-        }
-
+            .filter-header { padding: 16px; }
+            .filter-title-sidebar { font-size: 1rem; }
+            .filter-section { padding: 16px; }
+            .brands-title { font-size: 1.375rem; }
+            .brand-image-wrapper { height: 180px; padding: 25px; }
+            .brand-image-wrapper img { max-width: 160px; max-height: 100px; }
+            .brand-label { font-size: 1.0625rem; padding: 14px; }
+            .product-image-box { height: 200px; }
+            .hoses-faq-question { padding: 15px 16px; font-size: 0.9rem; }
+            .hoses-faq-answer { padding: 0 16px 16px; }
+            .hoses-faq-answer p { font-size: 0.88rem; }
         }
 
         @@media (max-width: 576px) {
-            .filter-header
-
-        {
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        .btn-reset-sidebar {
-            width: 100%;
-            justify-content: center;
-        }
-
-        .brands-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .brand-image-wrapper {
-            height: 200px;
-            padding: 30px;
-        }
-
-            .brand-image-wrapper img {
-                max-width: 200px;
-                max-height: 120px;
-            }
-
-        .brand-label {
-            font-size: 1.125rem;
-        }
-
-        .product-image-box {
-            height: 180px;
-        }
-
-        .product-info {
-            padding: 18px;
-        }
-
-        .empty-state {
-            padding: 50px 20px;
-        }
-
+            .filter-header { flex-direction: column; align-items: stretch; }
+            .btn-reset-sidebar { width: 100%; justify-content: center; }
+            .brands-grid { grid-template-columns: 1fr; }
+            .brand-image-wrapper { height: 200px; padding: 30px; }
+            .brand-image-wrapper img { max-width: 200px; max-height: 120px; }
+            .brand-label { font-size: 1.125rem; }
+            .product-image-box { height: 180px; }
+            .product-info { padding: 18px; }
+            .empty-state { padding: 50px 20px; }
+            .hoses-faq-question { padding: 13px 14px; font-size: 0.85rem; gap: 10px; }
+            .hoses-faq-answer { padding: 0 14px 14px; }
         }
 
         @@media (max-width: 375px) {
-            .brands-title
-
-        {
-            font-size: 1.25rem;
-        }
-
-        .filter-title-sidebar {
-            font-size: 0.9375rem;
-        }
-
-        .brand-image-wrapper {
-            height: 180px;
-            padding: 25px;
-        }
-
-            .brand-image-wrapper img {
-                max-width: 180px;
-                max-height: 110px;
-            }
-
-        .product-image-box {
-            height: 160px;
-            padding: 16px;
-        }
-
-        .product-name {
-            font-size: 0.9375rem;
-        }
-
-        .product-desc {
-            font-size: 0.8125rem;
-        }
-
-        .product-btn {
-            font-size: 0.875rem;
-            padding: 10px 16px;
-        }
-
+            .brands-title { font-size: 1.25rem; }
+            .filter-title-sidebar { font-size: 0.9375rem; }
+            .brand-image-wrapper { height: 180px; padding: 25px; }
+            .brand-image-wrapper img { max-width: 180px; max-height: 110px; }
+            .product-image-box { height: 160px; padding: 16px; }
+            .product-name { font-size: 0.9375rem; }
+            .product-desc { font-size: 0.8125rem; }
+            .product-btn { font-size: 0.875rem; padding: 10px 16px; }
         }
     </style>
 }

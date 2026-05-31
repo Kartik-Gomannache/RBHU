@@ -4,7 +4,7 @@
     var uniqueUserIdentifier = User.Claims.FirstOrDefault()?.Value;
     var pageTitle = ViewData["Title"]?.ToString() ?? "Home";
     var pageDescription = ViewData["Description"]?.ToString() ?? "RBHU Solutions LLP - Leading provider of industrial tools, PPE safety equipment, power tools, pneumatic systems, abrasives, hoses and belts. Quality industrial solutions for manufacturing and engineering sectors.";
-    var pageKeywords = ViewData["Keywords"]?.ToString() ?? "industrial tools, PPE safety equipment, power tools, pneumatic tools, abrasives, industrial hoses, industrial belts, RBHU Solutions";
+    var pageKeywords = ViewData["Keywords"]?.ToString() ?? "pneumatic dealer Goa, PPE supplier Goa, Safewell dealer Goa, Chicago Pneumatic Goa, industrial tools Margao, safety equipment Goa, RBHU Solutions";
     var currentUrl = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}";
 }
 
@@ -13,7 +13,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@(pageTitle == "Home" ? "RBHU Solutions LLP - Industrial Engineering Solutions & Equipment Supplier" : pageTitle + " - RBHU Solutions LLP")</title>
+
+    
+    <title>@(pageTitle == "Home" ? "Industrial Tools & PPE Equipment Supplier in Goa | RBHU Solutions LLP" : pageTitle + " | RBHU Solutions LLP")</title>
+
     <meta name="description" content="@pageDescription" />
     <meta name="keywords" content="@pageKeywords" />
     <meta name="robots" content="@(ViewData["Robots"] ?? "index, follow")" />
@@ -24,115 +27,238 @@
     <!-- Open Graph Meta Tags for Social Media -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="@currentUrl">
-    <meta property="og:title" content="@(pageTitle == "Home" ? "RBHU Solutions LLP - Industrial Engineering Solutions" : pageTitle + " - RBHU Solutions LLP")">
+    
+    <meta property="og:title" content="@(pageTitle == "Home" ? "Industrial Tools & PPE Equipment Supplier in Goa | RBHU Solutions LLP" : pageTitle + " | RBHU Solutions LLP")">
     <meta property="og:description" content="@pageDescription">
     <meta property="og:image" content="https://rbhu.co.in/images/RBHU-logo.png">
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="@currentUrl">
-    <meta name="twitter:title" content="@(pageTitle == "Home" ? "RBHU Solutions LLP - Industrial Engineering Solutions" : pageTitle + " - RBHU Solutions LLP")">
+    
+    <meta name="twitter:title" content="@(pageTitle == "Home" ? "Industrial Tools & PPE Equipment Supplier in Goa | RBHU Solutions LLP" : pageTitle + " | RBHU Solutions LLP")">
     <meta name="twitter:description" content="@pageDescription">
     <meta name="twitter:image" content="https://rbhu.co.in/images/RBHU-logo.png">
 
     <!-- Structured Data - Organization Schema -->
     <script type="application/ld+json">
-        {
-          "@@context": "https://schema.org",
-          "@@type": "Organization",
-          "name": "RBHU Solutions LLP",
-          "legalName": "RBHU Solutions LLP",
-          "url": "https://rbhu.co.in",
-          "logo": {
-            "@@type": "ImageObject",
-            "url": "https://rbhu.co.in/images/RBHU-logo.png",
-            "width": 250,
-            "height": 60
-          },
-          "description": "Leading provider of industrial tools and manufacturing equipment with over 25 years of excellence in serving industries across Goa",
-          "foundingDate": "2022",
-          "address": {
-            "@@type": "PostalAddress",
-            "streetAddress": "S-43, Souza Enclave, Margoan Salcete",
-            "addressLocality": "South Goa",
-            "addressRegion": "Goa",
-            "postalCode": "403601",
-            "addressCountry": "IN"
-          },
-          "geo": {
-            "@@type": "GeoCoordinates",
-            "latitude": "15.2676",
-            "longitude": "73.9497"
-          },
-          "contactPoint": [
             {
-              "@@type": "ContactPoint",
-              "telephone": "+91-9968068454",
-              "contactType": "customer service",
-              "email": "rbhugoa@gmail.com",
-              "areaServed": "IN",
-              "availableLanguage": ["en", "hi"]
-            },
-            {
-              "@@type": "ContactPoint",
-              "telephone": "+91-9108048901",
-              "contactType": "sales",
-              "areaServed": "IN",
-              "availableLanguage": ["en", "hi"]
+              "@@context": "https://schema.org",
+              "@@type": "Organization",
+              "name": "RBHU Solutions LLP",
+              "legalName": "RBHU Solutions LLP",
+              "url": "https://rbhu.co.in",
+              "logo": {
+                "@@type": "ImageObject",
+                "url": "https://rbhu.co.in/images/RBHU-logo.png",
+                "width": 250,
+                "height": 60
+              },
+          
+              "description": "RBHU Solutions LLP is an authorised dealer of industrial tools, PPE safety equipment, pneumatic systems, abrasives, and power tools, serving industries across Goa since 2022.",
+              "foundingDate": "2022",
+              "address": {
+                "@@type": "PostalAddress",
+                "streetAddress": "S-43, Souza Enclave, Margoan Salcete",
+                "addressLocality": "South Goa",
+                "addressRegion": "Goa",
+                "postalCode": "403601",
+                "addressCountry": "IN"
+              },
+              "geo": {
+                "@@type": "GeoCoordinates",
+                "latitude": "15.2676",
+                "longitude": "73.9497"
+              },
+              "contactPoint": [
+                {
+                  "@@type": "ContactPoint",
+                  "telephone": "+91-9968068454",
+                  "contactType": "customer service",
+                  "email": "rbhugoa@gmail.com",
+                  "areaServed": "IN",
+                  "availableLanguage": ["en", "hi"]
+                },
+                {
+                  "@@type": "ContactPoint",
+                  "telephone": "+91-9108048901",
+                  "contactType": "sales",
+                  "areaServed": "IN",
+                  "availableLanguage": ["en", "hi"]
+                }
+              ],
+              "sameAs": [
+                "https://www.linkedin.com/in/rupesh-bothra"
+              ],
+              "knowsAbout": [
+                "Safewell PPE safety equipment",
+                "Chicago Pneumatic pneumatic tools",
+                "Fuji pneumatic tools",
+                "UFLOW pneumatic valves",
+                "Klingspor abrasives",
+                "Kovax abrasives",
+                "Bosch power tools",
+                "Makita power tools",
+                "Parker hydraulic hoses",
+                "Polyhose industrial hoses",
+                "Megadyne power transmission belts",
+                "Gates power transmission belts",
+                "Bipico cutting tools"
+              ],
+              "hasCredential": [
+                {
+                  "@@type": "EducationalOccupationalCredential",
+                  "name": "Authorised Dealer — Safewell PPE",
+                  "credentialCategory": "Authorised Dealership",
+                  "recognizedBy": { "@@type": "Organization", "name": "Safewell" }
+                },
+                {
+                  "@@type": "EducationalOccupationalCredential",
+                  "name": "Authorised Distributor — Chicago Pneumatic",
+                  "credentialCategory": "Authorised Dealership",
+                  "recognizedBy": { "@@type": "Organization", "name": "Chicago Pneumatic" }
+                },
+                {
+                  "@@type": "EducationalOccupationalCredential",
+                  "name": "Authorised Dealer — Klingspor Abrasives",
+                  "credentialCategory": "Authorised Dealership",
+                  "recognizedBy": { "@@type": "Organization", "name": "Klingspor" }
+                },
+                {
+                  "@@type": "EducationalOccupationalCredential",
+                  "name": "Authorised Dealer — Bosch Power Tools",
+                  "credentialCategory": "Authorised Dealership",
+                  "recognizedBy": { "@@type": "Organization", "name": "Bosch" }
+                },
+                {
+                  "@@type": "EducationalOccupationalCredential",
+                  "name": "Authorised Dealer — Makita Power Tools",
+                  "credentialCategory": "Authorised Dealership",
+                  "recognizedBy": { "@@type": "Organization", "name": "Makita" }
+                },
+                {
+                  "@@type": "EducationalOccupationalCredential",
+                  "name": "Authorised Dealer — Parker Hoses",
+                  "credentialCategory": "Authorised Dealership",
+                  "recognizedBy": { "@@type": "Organization", "name": "Parker" }
+                },
+                {
+                  "@@type": "EducationalOccupationalCredential",
+                  "name": "Authorised Dealer — Megadyne Belts",
+                  "credentialCategory": "Authorised Dealership",
+                  "recognizedBy": { "@@type": "Organization", "name": "Megadyne" }
+                }
+              ],
+              "areaServed": {
+                "@@type": "State",
+                "name": "Goa"
+              }
             }
-          ],
-          "sameAs": [
-            "https://www.linkedin.com/in/rupesh-bothra"
-          ],
-          "areaServed": {
-            "@@type": "State",
-            "name": "Goa"
-          }
-        }
     </script>
 
     <!-- Structured Data - LocalBusiness Schema -->
     <script type="application/ld+json">
-        {
-          "@@context": "https://schema.org",
-          "@@type": "LocalBusiness",
-          "name": "RBHU Solutions LLP",
-          "image": "https://rbhu.co.in/images/RBHU-logo.png",
-          "@@id": "https://rbhu.co.in",
-          "url": "https://rbhu.co.in",
-          "telephone": "+91-9968068454",
-          "priceRange": "$$",
-          "address": {
-            "@@type": "PostalAddress",
-            "streetAddress": "S-43, Souza Enclave, Margoan Salcete",
-            "addressLocality": "South Goa",
-            "addressRegion": "Goa",
-            "postalCode": "403601",
-            "addressCountry": "IN"
-          },
-          "geo": {
-            "@@type": "GeoCoordinates",
-            "latitude": "15.2676",
-            "longitude": "73.9497"
-          },
-          "openingHoursSpecification": {
-            "@@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday"
-            ],
-            "opens": "09:00",
-            "closes": "18:00"
-          },
-          "sameAs": [
-            "https://www.linkedin.com/in/rupesh-bothra"
-          ]
-        }
+            {
+              "@@context": "https://schema.org",
+              "@@type": "LocalBusiness",
+              "name": "RBHU Solutions LLP",
+              "image": "https://rbhu.co.in/images/RBHU-logo.png",
+              "@@id": "https://rbhu.co.in",
+              "url": "https://rbhu.co.in",
+              "telephone": "+91-9968068454",
+              "priceRange": "$$",
+              "address": {
+                "@@type": "PostalAddress",
+                "streetAddress": "S-43, Souza Enclave, Margoan Salcete",
+                "addressLocality": "South Goa",
+                "addressRegion": "Goa",
+                "postalCode": "403601",
+                "addressCountry": "IN"
+              },
+              "geo": {
+                "@@type": "GeoCoordinates",
+                "latitude": "15.2676",
+                "longitude": "73.9497"
+              },
+              "openingHoursSpecification": {
+                "@@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday"
+                ],
+                "opens": "09:00",
+                "closes": "18:00"
+              },
+              "sameAs": [
+                "https://www.linkedin.com/in/rupesh-bothra"
+              ]
+            }
     </script>
+
+    
+    @if (pageTitle == "Home")
+    {
+        <script type="application/ld+json">
+                {
+                  "@@context": "https://schema.org",
+                  "@@type": "FAQPage",
+                  "mainEntity": [
+                    {
+                      "@@type": "Question",
+                      "name": "Who is the authorised Safewell dealer in Goa?",
+                      "acceptedAnswer": {
+                        "@@type": "Answer",
+                        "text": "RBHU Solutions LLP is the authorised dealer and distributor of Safewell PPE and safety equipment in Goa. We supply Safewell safety shoes, helmets, gloves, and full PPE kits to industries across South Goa and North Goa. Contact us at +91 9968068454."
+                      }
+                    },
+                    {
+                      "@@type": "Question",
+                      "name": "Where can I buy pneumatic tools in Goa?",
+                      "acceptedAnswer": {
+                        "@@type": "Answer",
+                        "text": "RBHU Solutions LLP supplies pneumatic tools and systems in Goa. We are authorised distributors of Chicago Pneumatic, Fuji, and UFLOW pneumatic equipment, serving industries in Margao, Vasco, Panaji, and across Goa."
+                      }
+                    },
+                    {
+                      "@@type": "Question",
+                      "name": "Which brands of PPE equipment does RBHU Solutions supply in Goa?",
+                      "acceptedAnswer": {
+                        "@@type": "Answer",
+                        "text": "RBHU Solutions LLP is an authorised dealer for Safewell PPE products in Goa, including safety shoes, hard hats, high-visibility jackets, safety gloves, and respiratory protection. We serve manufacturing, shipbuilding, pharma, and construction industries."
+                      }
+                    },
+                    {
+                      "@@type": "Question",
+                      "name": "Is RBHU Solutions an authorised distributor of Chicago Pneumatic in Goa?",
+                      "acceptedAnswer": {
+                        "@@type": "Answer",
+                        "text": "Yes, RBHU Solutions LLP is an authorised distributor of Chicago Pneumatic air tools and pneumatic equipment in Goa. We supply CP impact wrenches, air grinders, and assembly tools to industries across Goa."
+                      }
+                    },
+                    {
+                      "@@type": "Question",
+                      "name": "Where is RBHU Solutions LLP located?",
+                      "acceptedAnswer": {
+                        "@@type": "Answer",
+                        "text": "RBHU Solutions LLP is located at S-43, Souza Enclave, Madel, Margao, South Goa - 403601. We serve clients across all of Goa including Margao, Vasco da Gama, Panaji, Mapusa, and Ponda. Call us at +91 9968068454 or email rbhugoa@gmail.com."
+                      }
+                    },
+                    {
+                      "@@type": "Question",
+                      "name": "Does RBHU Solutions supply Klingspor abrasives in Goa?",
+                      "acceptedAnswer": {
+                        "@@type": "Answer",
+                        "text": "Yes, RBHU Solutions LLP is an authorised dealer of Klingspor abrasives in Goa. We supply Klingspor grinding wheels, cutting discs, flap discs, and sanding products for metalworking, shipbuilding, and fabrication industries in Goa."
+                      }
+                    }
+                  ]
+                }
+        </script>
+    }
 
     <link rel="icon" type="image/png" href="~/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="~/favicon.svg" />
@@ -148,1012 +274,799 @@
     <link rel="dns-prefetch" href="https://unpkg.com">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="preload" href="~/images/carousel/makita.png" as="image" fetchpriority="high">
-    <link rel="preload" href="~/images/RBHU-logo.png" as="image" type="image/png">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
-    <!-- Top Bar with Contact Info -->
-    <div class="top-bar-professional">
-        <div class="container-fluid">
-            <div class="top-bar-content">
-                <a href="tel:+919968068454" class="top-bar-item">
-                    <i class="fas fa-phone"></i>
-                    <span>+91 9968068454</span>
-                </a>
-                <a href="tel:+919108048901" class="top-bar-item">
-                    <i class="fas fa-phone"></i>
-                    <span>+91 9108048901</span>
-                </a>
-                <a href="mailto:rbhugoa@gmail.com" class="top-bar-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>rbhugoa@gmail.com</span>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-professional fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand-professional" asp-area="" asp-controller="Home" asp-action="Home">
-                <!-- Logo with Professional presentation -->
-                <div class="brand-logo-container">
-                    <img src="~/images/newlogo.webp" class="brand-logo-image" alt="RBHU Solutions LLP - Industrial Engineering Solutions Goa" width="180" height="60" />
-                    <div class="brand-text-container">
-                        <span class="brand-name">RBHU Solutions LLP</span>
-                        <span class="brand-tagline">Industrial Engineering Solutions</span>
+        <link rel="preload" href="~/images/RBHU-logo.png" as="image" type="image/png">
+            <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+            <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+            <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+            <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        </head>
+        <body>
+            <!-- Top Bar with Contact Info -->
+            <div class="top-bar-professional">
+                <div class="container-fluid">
+                    <div class="top-bar-content">
+                        <a href="tel:+919968068454" class="top-bar-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 9968068454</span>
+                        </a>
+                        <a href="tel:+919108048901" class="top-bar-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 9108048901</span>
+                        </a>
+                        <a href="mailto:rbhugoa@gmail.com" class="top-bar-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>rbhugoa@gmail.com</span>
+                        </a>
                     </div>
                 </div>
-            </a>
+            </div>
 
-            <button class="navbar-toggler-professional collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="toggler-line"></span>
-                <span class="toggler-line"></span>
-                <span class="toggler-line"></span>
+            <!-- Main Navigation Bar -->
+            <nav class="navbar navbar-expand-lg navbar-professional fixed-top">
+                <div class="container-fluid">
+                    <a class="navbar-brand-professional" asp-area="" asp-controller="Home" asp-action="Home">
+                        <div class="brand-logo-container">
+                            <img src="~/images/newlogo.webp" class="brand-logo-image" alt="RBHU Solutions LLP - Industrial Engineering Solutions Goa" width="180" height="60" />
+                            <div class="brand-text-container">
+                                <span class="brand-name">RBHU Solutions LLP</span>
+                                <span class="brand-tagline">Industrial Engineering Solutions</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <button class="navbar-toggler-professional collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="toggler-line"></span>
+                        <span class="toggler-line"></span>
+                        <span class="toggler-line"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <button class="mobile-close-btn" type="button" onclick="closeMobileNav()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <ul class="navbar-nav-professional ms-auto">
+                            <li class="nav-item-professional">
+                                <a class="nav-link-professional" asp-area="" asp-controller="Home" asp-action="Home">
+                                    <span>Home</span>
+                                </a>
+                            </li>
+                            <li class="nav-item-professional">
+                                <a class="nav-link-professional" asp-area="" asp-controller="Home" asp-action="About">
+                                    <span>About Us</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item-professional products-nav-item">
+                                <a class="nav-link-professional products-nav-trigger" asp-action="Products" asp-controller="Home">
+                                    <span>Products</span>
+                                    <i class="fas fa-chevron-down nav-arrow"></i>
+                                </a>
+                                <div class="products-mega-menu">
+                                    <div class="mega-menu-container">
+                                        <div class="mega-menu-header">
+                                            <h3 class="mega-menu-title">Product Categories</h3>
+                                            <p class="mega-menu-subtitle">Explore our comprehensive range of industrial solutions</p>
+                                        </div>
+                                        <div class="mega-menu-content" id="productCategoriesContainer">
+                                            <div class="loading-state">
+                                                <i class="fas fa-spinner fa-spin"></i>
+                                                <span>Loading categories...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="nav-item-professional">
+                                <a class="nav-link-professional nav-link-cta" asp-area="" asp-controller="Home" asp-action="Offers">
+                                    <span>Special Offers</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item-professional">
+                                <a class="nav-link-professional" asp-area="" asp-controller="Home" asp-action="Contact">
+                                    <span>Contact</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Mega Menu Backdrop -->
+            <div class="mega-menu-backdrop" onclick="closeMegaMenu()"></div>
+
+            <!-- Professional Contact Button -->
+            <button class="contact-fab" type="button" data-bs-toggle="modal" data-bs-target="#contactModal">
+                <i class="fas fa-envelope"></i>
+                <span class="fab-label">Contact</span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <button class="mobile-close-btn" type="button" onclick="closeMobileNav()">
-                    <i class="fas fa-times"></i>
-                </button>
-                <ul class="navbar-nav-professional ms-auto">
-                    <li class="nav-item-professional">
-                        <a class="nav-link-professional" asp-area="" asp-controller="Home" asp-action="Home">
-                            <span>Home</span>
-                        </a>
-                    </li>
-                    <li class="nav-item-professional">
-                        <a class="nav-link-professional" asp-area="" asp-controller="Home" asp-action="About">
-                            <span>About Us</span>
-                        </a>
-                    </li>
+            <input id="hiddenVar" value="@uniqueUserIdentifier" hidden />
 
-                    <li class="nav-item-professional products-nav-item">
-                        <a class="nav-link-professional products-nav-trigger" asp-action="Products" asp-controller="Home">
-                            <span>Products</span>
-                            <i class="fas fa-chevron-down nav-arrow"></i>
-                        </a>
-                        <div class="products-mega-menu">
-                            <div class="mega-menu-container">
-                                <div class="mega-menu-header">
-                                    <h3 class="mega-menu-title">Product Categories</h3>
-                                    <p class="mega-menu-subtitle">Explore our comprehensive range of industrial solutions</p>
+            <!-- Professional Contact Modal -->
+            <div class="modal fade contact-modal-professional" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header-professional">
+                            <div class="modal-header-content">
+                                <i class="fas fa-envelope modal-header-icon"></i>
+                                <div>
+                                    <h5 class="modal-title" id="contactModalLabel">Get in Touch</h5>
+                                    <p class="modal-subtitle">We're here to help with your industrial needs</p>
                                 </div>
-                                <div class="mega-menu-content" id="productCategoriesContainer">
-                                    <div class="loading-state">
-                                        <i class="fas fa-spinner fa-spin"></i>
-                                        <span>Loading categories...</span>
+                            </div>
+                            <button type="button" class="btn-close-professional" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body-professional">
+                            <div id="modalValidationSummary" class="alert alert-danger" style="display: none;">
+                                <ul id="modalValidationList"></ul>
+                            </div>
+
+                            <form id="contactModalForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="modalFullName" class="form-label-professional">Full Name *</label>
+                                        <input id="modalFullName" name="FullName" class="form-control-professional" placeholder="Enter your full name" />
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="modalPhoneNumber" class="form-label-professional">Phone Number *</label>
+                                        <input id="modalPhoneNumber" name="PhoneNumber" class="form-control-professional" type="tel" placeholder="Enter your phone number" />
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="modalEmail" class="form-label-professional">Email Address *</label>
+                                        <input id="modalEmail" name="Email" class="form-control-professional" type="email" placeholder="Enter your email address" />
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="modalSubject" class="form-label-professional">Subject *</label>
+                                        <select id="modalSubject" name="Subject" class="form-control-professional">
+                                            <option value="">Select Subject</option>
+                                            <option value="Product Inquiry">Product Inquiry</option>
+                                            <option value="Bulk Order">Bulk Order</option>
+                                            <option value="Technical Support">Technical Support</option>
+                                            <option value="Partnership Opportunity">Partnership Opportunity</option>
+                                            <option value="Warranty Claim">Warranty Claim</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="modalCompany" class="form-label-professional">Company Name</label>
+                                    <input id="modalCompany" name="Company" class="form-control-professional" placeholder="Enter your company name" />
+                                    <div class="invalid-feedback"></div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="modalMessage" class="form-label-professional">Message *</label>
+                                    <textarea id="modalMessage" name="Message" class="form-control-professional" rows="4" placeholder="Please describe your requirements..."></textarea>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+
+                                <button type="button" id="modalSubmitBtn" class="btn-submit-professional w-100" onclick="sendModalContactEmail()">
+                                    <span>Send Message</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </form>
+
+                            <div class="contact-info-box">
+                                <h6 class="info-box-title">Direct Contact</h6>
+                                <div class="info-box-items">
+                                    <div class="info-box-item">
+                                        <i class="fas fa-phone"></i>
+                                        <div>
+                                            <strong>Phone</strong>
+                                            <a href="tel:+919968068454">+91 9968068454</a>
+                                        </div>
+                                        <i class="fas fa-phone"></i>
+                                        <div>
+                                            <strong>Phone</strong>
+                                            <a href="tel:+9108048901">+91 9108048901</a>
+                                        </div>
+                                    </div>
+                                    <div class="info-box-item">
+                                        <i class="fas fa-envelope"></i>
+                                        <div>
+                                            <strong>Email</strong>
+                                            <a href="mailto:rbhugoa@gmail.com">rbhugoa@gmail.com</a>
+                                        </div>
+                                    </div>
+                                    <div class="info-box-item">
+                                        <i class="fas fa-clock"></i>
+                                        <div>
+                                            <strong>Business Hours</strong>
+                                            <span>Mon-Sat: 9:00 AM - 6:00 PM</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </li>
-
-                    <li class="nav-item-professional">
-                        <a class="nav-link-professional nav-link-cta" asp-area="" asp-controller="Home" asp-action="Offers">
-                            <span>Special Offers</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item-professional">
-                        <a class="nav-link-professional" asp-area="" asp-controller="Home" asp-action="Contact">
-                            <span>Contact</span>
-                        </a>
-                    </li>
-
-                    @* <li class="nav-item-professional nav-item-login">
-                        <a class="nav-link-professional" onclick="AdminLogin()">
-                            <i class="fas fa-user-circle"></i>
-                        </a>
-                    </li> *@
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Mega Menu Backdrop -->
-    <div class="mega-menu-backdrop" onclick="closeMegaMenu()"></div>
-
-    <!-- Professional Contact Button -->
-    <button class="contact-fab" type="button" data-bs-toggle="modal" data-bs-target="#contactModal">
-        <i class="fas fa-envelope"></i>
-        <span class="fab-label">Contact</span>
-    </button>
-
-    <input id="hiddenVar" value="@uniqueUserIdentifier" hidden />
-
-    <!-- Professional Contact Modal -->
-    <div class="modal fade contact-modal-professional" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header-professional">
-                    <div class="modal-header-content">
-                        <i class="fas fa-envelope modal-header-icon"></i>
-                        <div>
-                            <h5 class="modal-title" id="contactModalLabel">Get in Touch</h5>
-                            <p class="modal-subtitle">We're here to help with your industrial needs</p>
-                        </div>
                     </div>
-                    <button type="button" class="btn-close-professional" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="fas fa-times"></i>
-                    </button>
                 </div>
-                <div class="modal-body-professional">
-                    <div id="modalValidationSummary" class="alert alert-danger" style="display: none;">
-                        <ul id="modalValidationList"></ul>
-                    </div>
+            </div>
 
-                    <form id="contactModalForm">
+            <!-- Main Content -->
+            <main role="main" class="main-content">
+                @RenderBody()
+            </main>
+
+            <!-- Professional Footer -->
+            <footer class="footer-professional">
+                <div class="footer-top">
+                    <div class="container">
                         <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="modalFullName" class="form-label-professional">Full Name *</label>
-                                <input id="modalFullName" name="FullName" class="form-control-professional" placeholder="Enter your full name" />
-                                <div class="invalid-feedback"></div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="modalPhoneNumber" class="form-label-professional">Phone Number *</label>
-                                <input id="modalPhoneNumber" name="PhoneNumber" class="form-control-professional" type="tel" placeholder="Enter your phone number" />
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="modalEmail" class="form-label-professional">Email Address *</label>
-                                <input id="modalEmail" name="Email" class="form-control-professional" type="email" placeholder="Enter your email address" />
-                                <div class="invalid-feedback"></div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="modalSubject" class="form-label-professional">Subject *</label>
-                                <select id="modalSubject" name="Subject" class="form-control-professional">
-                                    <option value="">Select Subject</option>
-                                    <option value="Product Inquiry">Product Inquiry</option>
-                                    <option value="Bulk Order">Bulk Order</option>
-                                    <option value="Technical Support">Technical Support</option>
-                                    <option value="Partnership Opportunity">Partnership Opportunity</option>
-                                    <option value="Warranty Claim">Warranty Claim</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="modalCompany" class="form-label-professional">Company Name</label>
-                            <input id="modalCompany" name="Company" class="form-control-professional" placeholder="Enter your company name" />
-                            <div class="invalid-feedback"></div>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="modalMessage" class="form-label-professional">Message *</label>
-                            <textarea id="modalMessage" name="Message" class="form-control-professional" rows="4" placeholder="Please describe your requirements..."></textarea>
-                            <div class="invalid-feedback"></div>
-                        </div>
-
-                        <button type="button" id="modalSubmitBtn" class="btn-submit-professional w-100" onclick="sendModalContactEmail()">
-                            <span>Send Message</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </form>
-
-                    <div class="contact-info-box">
-                        <h6 class="info-box-title">Direct Contact</h6>
-                        <div class="info-box-items">
-                            <div class="info-box-item">
-                                <i class="fas fa-phone"></i>
-                                <div>
-                                    <strong>Phone</strong>
-                                    <a href="tel:+919968068454">+91 9968068454</a>
-                                </div>
-                                <i class="fas fa-phone"></i>
-                                <div>
-                                    <strong>Phone</strong>
-                                    <a href="tel:+9108048901">+91 9108048901</a>
+                            <div class="col-lg-6 col-md-6 mb-4 mb-lg-0">
+                                <div class="footer-brand">
+                                    <img src="~/images/newlogo.webp" class="footer-logo" alt="RBHU Solutions LLP Logo" width="160" height="55" loading="lazy" />
+                                    <h5 class="footer-brand-name">RBHU Solutions LLP</h5>
+                                    <p class="footer-brand-description">
+                                        Your trusted partner in engineering innovation & industrial excellence.
+                                    </p>
                                 </div>
                             </div>
-                            <div class="info-box-item">
-                                <i class="fas fa-envelope"></i>
-                                <div>
-                                    <strong>Email</strong>
-                                    <a href="mailto:rbhugoa@gmail.com">rbhugoa@gmail.com</a>
+
+                            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                                <div class="footer-section">
+                                    <h6 class="footer-heading">Products</h6>
+                                    <ul class="footer-links">
+                                        <li><a href="/Product/Category/SafetyProducts">PPE and Safety Equipment</a></li>
+                                        <li><a href="/Product/Category/Abrasives">Abrasives</a></li>
+                                        <li><a href="/Product/Category/Pneumatic">Pneumatic Tools and Systems</a></li>
+                                        <li><a href="/Product/Category/PowerTools">Power Tools and Accessories</a></li>
+                                        <li><a href="/Product/Category/Hoses">Hoses</a></li>
+                                        <li><a href="/Product/Category/Belts">Belts</a></li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="info-box-item">
-                                <i class="fas fa-clock"></i>
-                                <div>
-                                    <strong>Business Hours</strong>
-                                    <span>Mon-Sat: 9:00 AM - 6:00 PM</span>
+
+                            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                                <div class="footer-section">
+                                    <h6 class="footer-heading">Contact Information</h6>
+                                    <ul class="footer-contact">
+                                        <li>
+                                            <a href="tel:+919968068454">
+                                                <i class="fas fa-phone"></i>
+                                                <span>9968068454</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="tel:+919108048901">
+                                                <i class="fas fa-phone"></i>
+                                                <span>9108048901</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="mailto:rbhugoa@gmail.com">
+                                                <i class="fas fa-envelope"></i>
+                                                <span>rbhugoa@gmail.com</span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Main Content -->
-    <main role="main" class="main-content">
-        @RenderBody()
-    </main>
-
-    <!-- Professional Footer -->
-    <footer class="footer-professional">
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 mb-4 mb-lg-0">
-                        <div class="footer-brand">
-                            <img src="~/images/newlogo.webp" class="footer-logo" alt="RBHU Solutions LLP Logo" width="160" height="55" loading="lazy" />
-                            <h5 class="footer-brand-name">RBHU Solutions LLP</h5>
-                            <p class="footer-brand-description">
-                                Your trusted partner in engineering innovation & industrial excellence.
+                <div class="footer-bottom">
+                    <div class="container">
+                        <div class="footer-bottom-content">
+                            <p class="copyright">&copy; 2026 RBHU Solutions LLP. All rights reserved.</p>
+                            <p class="developer-credit">
+                                Designed and developed by <a href="https://tridenttech.bsite.net" target="_blank">Trident Tech</a>
                             </p>
                         </div>
                     </div>
-
-                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                        <div class="footer-section">
-                            <h6 class="footer-heading">Products</h6>
-                            <ul class="footer-links">
-                                <li><a asp-area="" asp-controller="Product" asp-action="SafetyProducts">PPE and Safety Equipment</a></li>
-                                <li><a asp-area="" asp-controller="Product" asp-action="Abrasives">Abrasives</a></li>
-                                <li><a asp-area="" asp-controller="Product" asp-action="Pneumatic">Pneumatic Tools and Systems</a></li>
-                                <li><a asp-area="" asp-controller="Product" asp-action="PowerTools">Power Tools and Accessories</a></li>
-                                <li><a asp-area="" asp-controller="Product" asp-action="Hoses">Hoses</a></li>
-                                <li><a asp-area="" asp-controller="Product" asp-action="Belts">Belts</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                        <div class="footer-section">
-                            <h6 class="footer-heading">Contact Information</h6>
-                            <ul class="footer-contact">
-                                <li>
-                                    <a href="tel:+919968068454">
-                                        <i class="fas fa-phone"></i>
-                                        <span>9968068454</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="tel:+919108048901">
-                                        <i class="fas fa-phone"></i>
-                                        <span>9108048901</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="mailto:rbhugoa@gmail.com">
-                                        <i class="fas fa-envelope"></i>
-                                        <span>rbhugoa@gmail.com</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-
                 </div>
-            </div>
-        </div>
+            </footer>
 
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="footer-bottom-content">
-                    <p class="copyright">&copy; 2026 RBHU Solutions LLP. All rights reserved.</p>
-                    <p class="developer-credit">
-                        Designed and developed by <a href="https://tridenttech.bsite.net" target="_blank">Trident Tech</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
+            <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js" defer></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js" defer></script>
 
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js" defer></script>
+            @RenderSection("Scripts", required: false)
 
-    @RenderSection("Scripts", required: false)
+            <script>
+                let categoriesData = [];
+                let hoverTimeouts = {};
 
-    <script>
-        let categoriesData = [];
-        let hoverTimeouts = {};
+                const categoryImages = {
+                'Abrasives': '/images/products/Abrasive_general.jpg',
+                'Power Tools and Accessories': '/images/products/Power_general2.jpg',
+                'Pneumatic tools and Systems': '/images/products/Pneumatic_general.png',
+                'PPE & Safety Equipments': '/images/products/Safety_general.jpg',
+                'Hoses': '/images/products/Hoses-general.jpg',
+                'Belts': '/images/products/Belts_general.jpg'
+                };
 
-        // Category images mapping
-        const categoryImages = {
-            'Abrasives': '/images/products/Abrasive_general.jpg',
-            'Power Tools and Accessories': '/images/products/Power_general2.jpg',
-            'Pneumatic tools and Systems': '/images/products/Pneumatic_general.png',
-            'PPE & Safety Equipments': '/images/products/Safety_general.jpg',
-            'Hoses': '/images/products/Hoses-general.jpg',
-            'Belts': '/images/products/Belts_general.jpg'
-        };
+                const categoryRoutes = {
+                'Abrasives': 'Abrasives',
+                'Power Tools and Accessories': 'PowerTools',
+                'Pneumatic tools and Systems': 'Pneumatic',
+                'PPE & Safety Equipments': 'SafetyProducts',
+                'Hoses': 'Hoses',
+                'Belts': 'Belts'
+                };
 
-        // Category routes mapping
-        const categoryRoutes = {
-            'Abrasives': 'Abrasives',
-            'Power Tools and Accessories': 'PowerTools',
-            'Pneumatic tools and Systems': 'Pneumatic',
-            'PPE & Safety Equipments': 'SafetyProducts',
-            'Hoses': 'Hoses',
-            'Belts': 'Belts'
-        };
-
-        function getCategoryImage(categoryName) {
-            if (categoryImages[categoryName]) return categoryImages[categoryName];
-            for (let key in categoryImages) {
+                function getCategoryImage(categoryName) {
+                if (categoryImages[categoryName]) return categoryImages[categoryName];
+                for (let key in categoryImages) {
                 if (categoryName.toLowerCase().includes(key.toLowerCase()) ||
-                    key.toLowerCase().includes(categoryName.toLowerCase())) {
-                    return categoryImages[key];
+                key.toLowerCase().includes(categoryName.toLowerCase())) {
+                return categoryImages[key];
                 }
-            }
-            return null;
-        }
+                }
+                return null;
+                }
 
-        function getCategoryRoute(categoryName) {
-            if (categoryRoutes[categoryName]) return categoryRoutes[categoryName];
-            for (let key in categoryRoutes) {
+                function getCategoryRoute(categoryName) {
+                if (categoryRoutes[categoryName]) return categoryRoutes[categoryName];
+                for (let key in categoryRoutes) {
                 if (categoryName.toLowerCase().includes(key.toLowerCase()) ||
-                    key.toLowerCase().includes(categoryName.toLowerCase())) {
-                    return categoryRoutes[key];
+                key.toLowerCase().includes(categoryName.toLowerCase())) {
+                return categoryRoutes[key];
                 }
-            }
-            return null;
-        }
+                }
+                return null;
+                }
 
-        function AdminLogin() {
-            if (localStorage.getItem('IsLoggedIn') == "true") {
+                function AdminLogin() {
+                if (localStorage.getItem('IsLoggedIn') == "true") {
                 $.ajax({
-                    url: '/Login/LoginUser',
-                    type: 'GET',
-                    data: { userName: "ASA", password: "admin123" },
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.href = "/Admin/Dashboard";
-                        } else {
-                            window.location.href = "/Login/Login"
-                        }
-                    },
-                    error: function () {
-                        window.location.href = "/Login/Login";
-                    }
-                });
-            }
-            else {
+                url: '/Login/LoginUser',
+                type: 'GET',
+                data: { userName: "ASA", password: "admin123" },
+                success: function (response) {
+                if (response.success) {
+                window.location.href = "/Admin/Dashboard";
+                } else {
+                window.location.href = "/Login/Login"
+                }
+                },
+                error: function () {
                 window.location.href = "/Login/Login";
-            }
-        }
+                }
+                });
+                }
+                else {
+                window.location.href = "/Login/Login";
+                }
+                }
 
-        $(document).ready(function () {
-            loadProductCategories();
-            setupProductsDropdownHover();
-            initializeModalValidation();
-        });
+                $(document).ready(function () {
+                loadProductCategories();
+                setupProductsDropdownHover();
+                initializeModalValidation();
+                });
 
-        function setupProductsDropdownHover() {
-            const dropdownToggle = $('.products-nav-trigger');
-            const dropdown = $('.products-mega-menu');
+                function setupProductsDropdownHover() {
+                const dropdownToggle = $('.products-nav-trigger');
+                const dropdown = $('.products-mega-menu');
 
-            dropdownToggle.on('mouseenter', function () {
-                openMegaMenu();
-            });
+                dropdownToggle.on('mouseenter', function () { openMegaMenu(); });
+                dropdown.on('mouseenter', function () { clearTimeout(hoverTimeouts['dropdown-close']); });
+                dropdownToggle.on('mouseleave', function () {
+                hoverTimeouts['dropdown-close'] = setTimeout(function () {
+                if (!dropdown.is(':hover')) { closeMegaMenu(); }
+                }, 300);
+                });
+                dropdown.on('mouseleave', function () {
+                hoverTimeouts['dropdown-close'] = setTimeout(function () { closeMegaMenu(); }, 300);
+                });
+                }
 
-            dropdown.on('mouseenter', function () {
+                function openMegaMenu() {
                 clearTimeout(hoverTimeouts['dropdown-close']);
-            });
+                const wrapper = $('.products-nav-item');
+                const backdrop = $('.mega-menu-backdrop');
+                wrapper.addClass('active');
+                if (backdrop && window.innerWidth <= 991) { backdrop.addClass('active'); }
+                }
 
-            dropdownToggle.on('mouseleave', function () {
-                hoverTimeouts['dropdown-close'] = setTimeout(function () {
-                    if (!dropdown.is(':hover')) {
-                        closeMegaMenu();
-                    }
-                }, 300);
-            });
+                function closeMegaMenu() {
+                const wrapper = $('.products-nav-item');
+                const backdrop = $('.mega-menu-backdrop');
+                wrapper.removeClass('active');
+                if (backdrop) backdrop.removeClass('active');
+                $('.category-professional').removeClass('open');
+                $('.subcategory-professional').removeClass('open');
+                for (let key in hoverTimeouts) { clearTimeout(hoverTimeouts[key]); }
+                hoverTimeouts = {};
+                }
 
-            dropdown.on('mouseleave', function () {
-                hoverTimeouts['dropdown-close'] = setTimeout(function () {
-                    closeMegaMenu();
-                }, 300);
-            });
-        }
-
-        function openMegaMenu() {
-            clearTimeout(hoverTimeouts['dropdown-close']);
-            const wrapper = $('.products-nav-item');
-            const backdrop = $('.mega-menu-backdrop');
-
-            wrapper.addClass('active');
-            if (backdrop && window.innerWidth <= 991) {
-                backdrop.addClass('active');
-            }
-        }
-
-        function closeMegaMenu() {
-            const wrapper = $('.products-nav-item');
-            const backdrop = $('.mega-menu-backdrop');
-
-            wrapper.removeClass('active');
-            if (backdrop) backdrop.removeClass('active');
-
-            $('.category-professional').removeClass('open');
-            $('.subcategory-professional').removeClass('open');
-
-            for (let key in hoverTimeouts) {
-                clearTimeout(hoverTimeouts[key]);
-            }
-            hoverTimeouts = {};
-        }
-
-        function loadProductCategories() {
-            $.ajax({
+                function loadProductCategories() {
+                $.ajax({
                 url: '/Product/GetCategories',
                 type: 'POST',
                 success: function (response) {
-                    if (response.success && response.data) {
-                        categoriesData = response.data;
-                        renderCategoryGrid();
-                    } else {
-                        $('#productCategoriesContainer').html('<div class="error-state">Failed to load categories</div>');
-                    }
+                if (response.success && response.data) {
+                categoriesData = response.data;
+                renderCategoryGrid();
+                } else {
+                $('#productCategoriesContainer').html('<div class="error-state">Failed to load categories</div>');
+                }
                 },
                 error: function () {
-                    $('#productCategoriesContainer').html('<div class="error-state">Failed to load categories</div>');
+                $('#productCategoriesContainer').html('<div class="error-state">Failed to load categories</div>');
                 }
-            });
-        }
+                });
+                }
 
-        function renderCategoryGrid() {
-            const container = $('#productCategoriesContainer');
-            container.empty();
-
-            if (!categoriesData || categoriesData.length === 0) {
+                function renderCategoryGrid() {
+                const container = $('#productCategoriesContainer');
+                container.empty();
+                if (!categoriesData || categoriesData.length === 0) {
                 container.html('<div class="empty-state">No categories available</div>');
                 return;
-            }
-
-            const grid = $('<div>').addClass('mega-menu-grid');
-
-            categoriesData.forEach(function (category) {
+                }
+                const grid = $('<div>').addClass('mega-menu-grid');
+                categoriesData.forEach(function (category) {
                 const categoryCard = createCategoryCard(category);
                 grid.append(categoryCard);
-            });
+                });
+                container.append(grid);
+                }
 
-            container.append(grid);
-        }
-
-        function createCategoryCard(category) {
-            const card = $('<div>').addClass('category-professional');
-            const imageUrl = getCategoryImage(category.name);
-            const categoryRoute = getCategoryRoute(category.name);
-
-            let imageHtml = '';
-            if (imageUrl) {
+                function createCategoryCard(category) {
+                const card = $('<div>').addClass('category-professional');
+                const imageUrl = getCategoryImage(category.name);
+                const categoryRoute = getCategoryRoute(category.name);
+                let imageHtml = '';
+                if (imageUrl) {
                 imageHtml = `<div class="category-image" style="background-image: url('${imageUrl}')"></div>`;
-            } else {
+                } else {
                 imageHtml = `<div class="category-image category-image-default"><i class="fas fa-tools"></i></div>`;
-            }
-
-            $.ajax({
+                }
+                $.ajax({
                 url: '/Product/GetSubCategories1',
                 type: 'POST',
                 data: { categoryId: category.id },
                 async: false,
                 success: function (response) {
-                    const hasSubCategories = response.success && response.data && response.data.length > 0;
-
-                    const cardHeader = $('<div>')
-                        .addClass('category-header-pro')
-                        .attr('data-category-id', category.id)
-                        .attr('data-category-route', categoryRoute)
-                        .html(`
-                            ${imageHtml}
-                            <div class="category-info">
-                                <h4 class="category-name">${category.name}</h4>
-                                ${hasSubCategories ? '<i class="fas fa-chevron-right category-arrow"></i>' : ''}
-                            </div>
-                        `);
-
-                    if (hasSubCategories) {
-                        cardHeader.on('click', function (e) {
-                            e.preventDefault();
-                            if (categoryRoute) {
-                                window.location.href = `/Product/Category/${categoryRoute}`;
-                            }
-                        })
-                        .on('mouseenter', function () {
-                            handleCategoryHover(category.id, card);
-                        })
-                        .on('mouseleave', function () {
-                            handleCategoryLeave(category.id);
-                        });
-
-                        const subList = $('<div>')
-                            .addClass('subcategory-list-pro')
-                            .attr('id', `subcategory-list-${category.id}`)
-                            .on('mouseenter', function () {
-                                clearTimeout(hoverTimeouts[`category-${category.id}`]);
-                            })
-                            .on('mouseleave', function () {
-                                handleCategoryLeave(category.id);
-                            });
-
-                        card.append(cardHeader, subList);
-                    } else {
-                        cardHeader.on('click', function (e) {
-                            e.preventDefault();
-                            if (categoryRoute) {
-                                window.location.href = `/Product/Category/${categoryRoute}`;
-                            }
-                        });
-                        card.append(cardHeader);
-                    }
+                const hasSubCategories = response.success && response.data && response.data.length > 0;
+                const cardHeader = $('<div>')
+                .addClass('category-header-pro')
+                .attr('data-category-id', category.id)
+                .attr('data-category-route', categoryRoute)
+                .html(`${imageHtml}<div class="category-info"><h4 class="category-name">${category.name}</h4>${hasSubCategories ? '<i class="fas fa-chevron-right category-arrow"></i>' : ''}</div>`);
+                if (hasSubCategories) {
+                cardHeader.on('click', function (e) {
+                e.preventDefault();
+                if (categoryRoute) { window.location.href = `/Product/Category/${categoryRoute}`; }
+                }).on('mouseenter', function () {
+                handleCategoryHover(category.id, card);
+                }).on('mouseleave', function () {
+                handleCategoryLeave(category.id);
+                });
+                const subList = $('<div>').addClass('subcategory-list-pro').attr('id', `subcategory-list-${category.id}`)
+                .on('mouseenter', function () { clearTimeout(hoverTimeouts[`category-${category.id}`]); })
+                .on('mouseleave', function () { handleCategoryLeave(category.id); });
+                card.append(cardHeader, subList);
+                } else {
+                cardHeader.on('click', function (e) {
+                e.preventDefault();
+                if (categoryRoute) { window.location.href = `/Product/Category/${categoryRoute}`; }
+                });
+                card.append(cardHeader);
                 }
-            });
+                }
+                });
+                return card;
+                }
 
-            return card;
-        }
-
-        function handleCategoryHover(categoryId, categoryCard) {
-            clearTimeout(hoverTimeouts[`category-${categoryId}`]);
-            hoverTimeouts[`category-${categoryId}-open`] = setTimeout(function () {
+                function handleCategoryHover(categoryId, categoryCard) {
+                clearTimeout(hoverTimeouts[`category-${categoryId}`]);
+                hoverTimeouts[`category-${categoryId}-open`] = setTimeout(function () {
                 const subcategoryList = $(`#subcategory-list-${categoryId}`);
                 categoryCard.addClass('open');
-                if (subcategoryList.children().length === 0) {
-                    loadSubCategories1(categoryId, subcategoryList);
+                if (subcategoryList.children().length === 0) { loadSubCategories1(categoryId, subcategoryList); }
+                }, 200);
                 }
-            }, 200);
-        }
 
-        function handleCategoryLeave(categoryId) {
-            clearTimeout(hoverTimeouts[`category-${categoryId}-open`]);
-            hoverTimeouts[`category-${categoryId}`] = setTimeout(function () {
-                $(`.category-header-pro[data-category-id="${categoryId}"]`)
-                    .closest('.category-professional')
-                    .removeClass('open');
-            }, 300);
-        }
+                function handleCategoryLeave(categoryId) {
+                clearTimeout(hoverTimeouts[`category-${categoryId}-open`]);
+                hoverTimeouts[`category-${categoryId}`] = setTimeout(function () {
+                $(`.category-header-pro[data-category-id="${categoryId}"]`).closest('.category-professional').removeClass('open');
+                }, 300);
+                }
 
-        function loadSubCategories1(categoryId, container) {
-            container.html('<div class="loading-state-small"><i class="fas fa-spinner fa-spin"></i></div>');
-
-            const categoryHeader = $(`.category-header-pro[data-category-id="${categoryId}"]`);
-            const categoryRoute = categoryHeader.attr('data-category-route');
-
-            $.ajax({
+                function loadSubCategories1(categoryId, container) {
+                container.html('<div class="loading-state-small"><i class="fas fa-spinner fa-spin"></i></div>');
+                const categoryHeader = $(`.category-header-pro[data-category-id="${categoryId}"]`);
+                const categoryRoute = categoryHeader.attr('data-category-route');
+                $.ajax({
                 url: '/Product/GetSubCategories1',
                 type: 'POST',
                 data: { categoryId: categoryId },
                 success: function (response) {
-                    container.empty();
-                    if (response.success && response.data && response.data.length > 0) {
-                        response.data.forEach(function (subCat1) {
-                            const subItem = createSubCategory1Item(subCat1, categoryId, categoryRoute);
-                            container.append(subItem);
-                        });
-                    }
-                },
-                error: function () {
-                    container.html('<div class="error-state-small">Failed to load</div>');
+                container.empty();
+                if (response.success && response.data && response.data.length > 0) {
+                response.data.forEach(function (subCat1) {
+                const subItem = createSubCategory1Item(subCat1, categoryId, categoryRoute);
+                container.append(subItem);
+                });
                 }
-            });
-        }
+                },
+                error: function () { container.html('<div class="error-state-small">Failed to load</div>'); }
+                });
+                }
 
-        function createSubCategory1Item(subCat1, categoryId, categoryRoute) {
-            const subDiv = $('<div>').addClass('subcategory-professional');
-
-            $.ajax({
+                function createSubCategory1Item(subCat1, categoryId, categoryRoute) {
+                const subDiv = $('<div>').addClass('subcategory-professional');
+                $.ajax({
                 url: '/Product/GetSubCategories2',
                 type: 'POST',
                 data: { subCategory1Id: subCat1.id },
                 async: false,
                 success: function (response) {
-                    const hasSubCategory2 = response.success && response.data && response.data.length > 0;
-
-                    const subHeader = $('<div>')
-                        .addClass('subcategory-header-pro')
-                        .attr('data-subcategory1-id', subCat1.id)
-                        .html(`
-                            <span class="subcategory-name">${subCat1.name}</span>
-                            ${hasSubCategory2 ? '<i class="fas fa-chevron-right subcategory-arrow"></i>' : ''}
-                        `);
-
-                    if (hasSubCategory2) {
-                        subHeader.on('click', function (e) {
-                            e.preventDefault();
-                            if (categoryRoute) {
-                                window.location.href = `/Product/Category/${categoryRoute}/${encodeURIComponent(subCat1.name)}`;
-                            }
-                        })
-                        .on('mouseenter', function () {
-                            handleSubCategory1Hover(subCat1.id, categoryId, categoryRoute, subCat1.name, subDiv);
-                        })
-                        .on('mouseleave', function () {
-                            handleSubCategory1Leave(subCat1.id);
-                        });
-
-                        const subList2 = $('<div>')
-                            .addClass('subcategory2-list-pro')
-                            .attr('id', `subcategory2-list-${subCat1.id}`)
-                            .on('mouseenter', function () {
-                                clearTimeout(hoverTimeouts[`subcategory1-${subCat1.id}`]);
-                            })
-                            .on('mouseleave', function () {
-                                handleSubCategory1Leave(subCat1.id);
-                            });
-
-                        subDiv.append(subHeader, subList2);
-                    } else {
-                        subHeader.on('click', function (e) {
-                            e.preventDefault();
-                            if (categoryRoute) {
-                                window.location.href = `/Product/Category/${categoryRoute}/${encodeURIComponent(subCat1.name)}`;
-                            }
-                        });
-                        subDiv.append(subHeader);
-                    }
+                const hasSubCategory2 = response.success && response.data && response.data.length > 0;
+                const subHeader = $('<div>').addClass('subcategory-header-pro').attr('data-subcategory1-id', subCat1.id)
+                .html(`<span class="subcategory-name">${subCat1.name}</span>${hasSubCategory2 ? '<i class="fas fa-chevron-right subcategory-arrow"></i>' : ''}`);
+                if (hasSubCategory2) {
+                subHeader.on('click', function (e) {
+                e.preventDefault();
+                if (categoryRoute) { window.location.href = `/Product/Category/${categoryRoute}/${encodeURIComponent(subCat1.name)}`; }
+                }).on('mouseenter', function () {
+                handleSubCategory1Hover(subCat1.id, categoryId, categoryRoute, subCat1.name, subDiv);
+                }).on('mouseleave', function () { handleSubCategory1Leave(subCat1.id); });
+                const subList2 = $('<div>').addClass('subcategory2-list-pro').attr('id', `subcategory2-list-${subCat1.id}`)
+                .on('mouseenter', function () { clearTimeout(hoverTimeouts[`subcategory1-${subCat1.id}`]); })
+                .on('mouseleave', function () { handleSubCategory1Leave(subCat1.id); });
+                subDiv.append(subHeader, subList2);
+                } else {
+                subHeader.on('click', function (e) {
+                e.preventDefault();
+                if (categoryRoute) { window.location.href = `/Product/Category/${categoryRoute}/${encodeURIComponent(subCat1.name)}`; }
+                });
+                subDiv.append(subHeader);
                 }
-            });
+                }
+                });
+                return subDiv;
+                }
 
-            return subDiv;
-        }
-
-        function handleSubCategory1Hover(subCategory1Id, categoryId, categoryRoute, brandName, subItem) {
-            clearTimeout(hoverTimeouts[`subcategory1-${subCategory1Id}`]);
-            hoverTimeouts[`subcategory1-${subCategory1Id}-open`] = setTimeout(function () {
+                function handleSubCategory1Hover(subCategory1Id, categoryId, categoryRoute, brandName, subItem) {
+                clearTimeout(hoverTimeouts[`subcategory1-${subCategory1Id}`]);
+                hoverTimeouts[`subcategory1-${subCategory1Id}-open`] = setTimeout(function () {
                 const subList2 = $(`#subcategory2-list-${subCategory1Id}`);
                 subItem.addClass('open');
-                if (subList2.children().length === 0) {
-                    loadSubCategories2(subCategory1Id, categoryId, categoryRoute, brandName, subList2);
+                if (subList2.children().length === 0) { loadSubCategories2(subCategory1Id, categoryId, categoryRoute, brandName, subList2); }
+                }, 200);
                 }
-            }, 200);
-        }
 
-        function handleSubCategory1Leave(subCategory1Id) {
-            clearTimeout(hoverTimeouts[`subcategory1-${subCategory1Id}-open`]);
-            hoverTimeouts[`subcategory1-${subCategory1Id}`] = setTimeout(function () {
-                $(`.subcategory-header-pro[data-subcategory1-id="${subCategory1Id}"]`)
-                    .closest('.subcategory-professional')
-                    .removeClass('open');
-            }, 300);
-        }
+                function handleSubCategory1Leave(subCategory1Id) {
+                clearTimeout(hoverTimeouts[`subcategory1-${subCategory1Id}-open`]);
+                hoverTimeouts[`subcategory1-${subCategory1Id}`] = setTimeout(function () {
+                $(`.subcategory-header-pro[data-subcategory1-id="${subCategory1Id}"]`).closest('.subcategory-professional').removeClass('open');
+                }, 300);
+                }
 
-        function loadSubCategories2(subCategory1Id, categoryId, categoryRoute, brandName, container) {
-            container.html('<div class="loading-state-small"><i class="fas fa-spinner fa-spin"></i></div>');
-
-            $.ajax({
+                function loadSubCategories2(subCategory1Id, categoryId, categoryRoute, brandName, container) {
+                container.html('<div class="loading-state-small"><i class="fas fa-spinner fa-spin"></i></div>');
+                $.ajax({
                 url: '/Product/GetSubCategories2',
                 type: 'POST',
                 data: { subCategory1Id: subCategory1Id },
                 success: function (response) {
-                    container.empty();
-                    if (response.success && response.data && response.data.length > 0) {
-                        response.data.forEach(function (subCat2) {
-                            let subCat2Url = categoryRoute
-                                ? `/Product/Category/${categoryRoute}/${encodeURIComponent(brandName)}?subCategory2Id=${subCat2.id}`
-                                : `/Product/Index?categoryId=${categoryId}&subCategory1Id=${subCategory1Id}&subCategory2Id=${subCat2.id}`;
-
-                            const link = $('<a>')
-                                .addClass('subcategory2-link-pro')
-                                .attr('href', subCat2Url)
-                                .html(`<span>${subCat2.name}</span>`)
-                                .on('click', function () {
-                                    closeMegaMenu();
-                                });
-                            container.append(link);
-                        });
-                    }
+                container.empty();
+                if (response.success && response.data && response.data.length > 0) {
+                response.data.forEach(function (subCat2) {
+                let subCat2Url = categoryRoute
+                ? `/Product/Category/${categoryRoute}/${encodeURIComponent(brandName)}?subCategory2Id=${subCat2.id}`
+                : `/Product/Index?categoryId=${categoryId}&subCategory1Id=${subCategory1Id}&subCategory2Id=${subCat2.id}`;
+                const link = $('<a>').addClass('subcategory2-link-pro').attr('href', subCat2Url)
+                .html(`<span>${subCat2.name}</span>`).on('click', function () { closeMegaMenu(); });
+                container.append(link);
+                });
+                }
                 },
-                error: function () {
-                    container.html('<div class="error-state-small">Failed to load</div>');
+                error: function () { container.html('<div class="error-state-small">Failed to load</div>'); }
+                });
                 }
-            });
-        }
 
-        function handleTopBarScroll() {
-            $(window).on('scroll', function () {
+                function handleTopBarScroll() {
+                $(window).on('scroll', function () {
                 if ($(this).scrollTop() > 50) {
-                    $('.navbar-professional').addClass('scrolled');
-                    $('body').addClass('top-bar-hidden');
+                $('.navbar-professional').addClass('scrolled');
+                $('body').addClass('top-bar-hidden');
                 } else {
-                    $('.navbar-professional').removeClass('scrolled');
-                    $('body').removeClass('top-bar-hidden');
+                $('.navbar-professional').removeClass('scrolled');
+                $('body').removeClass('top-bar-hidden');
                 }
-            });
-        }
+                });
+                }
 
-        // Mobile menu close function
-        function closeMobileNav() {
-            const navbarCollapse = document.getElementById('navbarNav');
-            const navbarToggler = document.querySelector('.navbar-toggler-professional');
-            const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
-                toggle: false
-            });
-            bsCollapse.hide();
-
-            if (navbarToggler) {
+                function closeMobileNav() {
+                const navbarCollapse = document.getElementById('navbarNav');
+                const navbarToggler = document.querySelector('.navbar-toggler-professional');
+                const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
+                bsCollapse.hide();
+                if (navbarToggler) {
                 navbarToggler.classList.add('collapsed');
                 navbarToggler.setAttribute('aria-expanded', 'false');
-            }
-        }
-
-        // Mobile menu handling
-        document.addEventListener('DOMContentLoaded', function () {
-            const navbarCollapse = document.getElementById('navbarNav');
-            const navbarToggler = document.querySelector('.navbar-toggler-professional');
-
-            if (navbarCollapse && navbarToggler) {
-                navbarCollapse.addEventListener('show.bs.collapse', function () {
-                    navbarToggler.classList.remove('collapsed');
-                    navbarToggler.setAttribute('aria-expanded', 'true');
-                });
-
-                navbarCollapse.addEventListener('hidden.bs.collapse', function () {
-                    navbarToggler.classList.add('collapsed');
-                    navbarToggler.setAttribute('aria-expanded', 'false');
-                });
-
-                // Close mobile menu when clicking on nav links (except Products)
-                if (window.innerWidth <= 991) {
-                    const navLinks = navbarCollapse.querySelectorAll('.nav-link-professional');
-                    navLinks.forEach(link => {
-                        link.addEventListener('click', function () {
-                            if (!this.classList.contains('products-nav-trigger')) {
-                                closeMobileNav();
-                            }
-                        });
-                    });
                 }
-            }
+                }
 
-            handleTopBarScroll();
-
-            // AOS initialization
-            if (typeof AOS !== 'undefined') {
-                AOS.init({
-                    duration: 800,
-                    once: true,
-                    offset: 100
+                document.addEventListener('DOMContentLoaded', function () {
+                const navbarCollapse = document.getElementById('navbarNav');
+                const navbarToggler = document.querySelector('.navbar-toggler-professional');
+                if (navbarCollapse && navbarToggler) {
+                navbarCollapse.addEventListener('show.bs.collapse', function () {
+                navbarToggler.classList.remove('collapsed');
+                navbarToggler.setAttribute('aria-expanded', 'true');
                 });
-            }
-        });
+                navbarCollapse.addEventListener('hidden.bs.collapse', function () {
+                navbarToggler.classList.add('collapsed');
+                navbarToggler.setAttribute('aria-expanded', 'false');
+                });
+                if (window.innerWidth <= 991) {
+                const navLinks = navbarCollapse.querySelectorAll('.nav-link-professional');
+                navLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                if (!this.classList.contains('products-nav-trigger')) { closeMobileNav(); }
+                });
+                });
+                }
+                }
+                handleTopBarScroll();
+                if (typeof AOS !== 'undefined') {
+                AOS.init({ duration: 800, once: true, offset: 100 });
+                }
+                });
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function (event) {
-            const wrapper = document.querySelector('.products-nav-item');
-            if (wrapper && !wrapper.contains(event.target)) {
-                closeMegaMenu();
-            }
-        });
+                document.addEventListener('click', function (event) {
+                const wrapper = document.querySelector('.products-nav-item');
+                if (wrapper && !wrapper.contains(event.target)) { closeMegaMenu(); }
+                });
 
-        // ESC key to close
-        document.addEventListener('keydown', function (event) {
-            if (event.key === 'Escape') {
-                closeMegaMenu();
-                closeMobileNav();
-            }
-        });
+                document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') { closeMegaMenu(); closeMobileNav(); }
+                });
 
-        // Modal validation functions
-        function showModalValidationMessage(fieldId, message) {
-            const field = document.getElementById(fieldId);
-            const feedback = field.nextElementSibling;
-            field.classList.add('is-invalid');
-            feedback.textContent = message;
-            feedback.style.display = 'block';
-        }
+                function showModalValidationMessage(fieldId, message) {
+                const field = document.getElementById(fieldId);
+                const feedback = field.nextElementSibling;
+                field.classList.add('is-invalid');
+                feedback.textContent = message;
+                feedback.style.display = 'block';
+                }
 
-        function clearModalValidationMessage(fieldId) {
-            const field = document.getElementById(fieldId);
-            const feedback = field.nextElementSibling;
-            field.classList.remove('is-invalid');
-            feedback.textContent = '';
-            feedback.style.display = 'none';
-        }
+                function clearModalValidationMessage(fieldId) {
+                const field = document.getElementById(fieldId);
+                const feedback = field.nextElementSibling;
+                field.classList.remove('is-invalid');
+                feedback.textContent = '';
+                feedback.style.display = 'none';
+                }
 
-        function validateModalFullName() {
-            const fullName = document.getElementById('modalFullName').value.trim();
-            if (!fullName) {
-                showModalValidationMessage('modalFullName', 'Full Name is required');
-                return false;
-            }
-            if (fullName.length < 2) {
-                showModalValidationMessage('modalFullName', 'Full Name must be at least 2 characters long');
-                return false;
-            }
-            if (fullName.length > 100) {
-                showModalValidationMessage('modalFullName', 'Full Name cannot exceed 100 characters');
-                return false;
-            }
-            clearModalValidationMessage('modalFullName');
-            return true;
-        }
+                function validateModalFullName() {
+                const fullName = document.getElementById('modalFullName').value.trim();
+                if (!fullName) { showModalValidationMessage('modalFullName', 'Full Name is required'); return false; }
+                if (fullName.length < 2) { showModalValidationMessage('modalFullName', 'Full Name must be at least 2 characters long'); return false; }
+                if (fullName.length > 100) { showModalValidationMessage('modalFullName', 'Full Name cannot exceed 100 characters'); return false; }
+                clearModalValidationMessage('modalFullName'); return true;
+                }
 
-        function validateModalEmail() {
-            const email = document.getElementById('modalEmail').value.trim();
-            if (!email) {
-                showModalValidationMessage('modalEmail', 'Email is required');
-                return false;
-            }
-            const emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
-            if (!emailRegex.test(email)) {
-                showModalValidationMessage('modalEmail', 'Please enter a valid email address');
-                return false;
-            }
-            if (email.length > 255) {
-                showModalValidationMessage('modalEmail', 'Email cannot exceed 255 characters');
-                return false;
-            }
-            clearModalValidationMessage('modalEmail');
-            return true;
-        }
+                function validateModalEmail() {
+                const email = document.getElementById('modalEmail').value.trim();
+                if (!email) { showModalValidationMessage('modalEmail', 'Email is required'); return false; }
+                const emailRegex = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+                if (!emailRegex.test(email)) { showModalValidationMessage('modalEmail', 'Please enter a valid email address'); return false; }
+                if (email.length > 255) { showModalValidationMessage('modalEmail', 'Email cannot exceed 255 characters'); return false; }
+                clearModalValidationMessage('modalEmail'); return true;
+                }
 
-        function validateModalPhoneNumber() {
-            const phone = document.getElementById('modalPhoneNumber').value.trim();
-            if (!phone) {
-                showModalValidationMessage('modalPhoneNumber', 'Phone Number is required');
-                return false;
-            }
-            const cleanPhone = phone.replace(/[\s\-\(\)\+]/g, '');
-            if (cleanPhone.length < 10) {
-                showModalValidationMessage('modalPhoneNumber', 'Phone number must be at least 10 digits');
-                return false;
-            }
-            if (cleanPhone.length > 20) {
-                showModalValidationMessage('modalPhoneNumber', 'Phone Number cannot exceed 20 characters');
-                return false;
-            }
-            if (!/^\d+$/.test(cleanPhone)) {
-                showModalValidationMessage('modalPhoneNumber', 'Please enter a valid phone number');
-                return false;
-            }
-            clearModalValidationMessage('modalPhoneNumber');
-            return true;
-        }
+                function validateModalPhoneNumber() {
+                const phone = document.getElementById('modalPhoneNumber').value.trim();
+                if (!phone) { showModalValidationMessage('modalPhoneNumber', 'Phone Number is required'); return false; }
+                const cleanPhone = phone.replace(/[\s\-\(\)\+]/g, '');
+                if (cleanPhone.length < 10) { showModalValidationMessage('modalPhoneNumber', 'Phone number must be at least 10 digits'); return false; }
+                if (cleanPhone.length > 20) { showModalValidationMessage('modalPhoneNumber', 'Phone Number cannot exceed 20 characters'); return false; }
+                if (!/^\d+$/.test(cleanPhone)) { showModalValidationMessage('modalPhoneNumber', 'Please enter a valid phone number'); return false; }
+                clearModalValidationMessage('modalPhoneNumber'); return true;
+                }
 
-        function validateModalCompany() {
-            const company = document.getElementById('modalCompany').value.trim();
-            if (company && company.length > 100) {
-                showModalValidationMessage('modalCompany', 'Company name cannot exceed 100 characters');
-                return false;
-            }
-            clearModalValidationMessage('modalCompany');
-            return true;
-        }
+                function validateModalCompany() {
+                const company = document.getElementById('modalCompany').value.trim();
+                if (company && company.length > 100) { showModalValidationMessage('modalCompany', 'Company name cannot exceed 100 characters'); return false; }
+                clearModalValidationMessage('modalCompany'); return true;
+                }
 
-        function validateModalSubject() {
-            const subject = document.getElementById('modalSubject').value.trim();
-            if (!subject) {
-                showModalValidationMessage('modalSubject', 'Subject is required');
-                return false;
-            }
-            if (subject.length > 200) {
-                showModalValidationMessage('modalSubject', 'Subject cannot exceed 200 characters');
-                return false;
-            }
-            clearModalValidationMessage('modalSubject');
-            return true;
-        }
+                function validateModalSubject() {
+                const subject = document.getElementById('modalSubject').value.trim();
+                if (!subject) { showModalValidationMessage('modalSubject', 'Subject is required'); return false; }
+                if (subject.length > 200) { showModalValidationMessage('modalSubject', 'Subject cannot exceed 200 characters'); return false; }
+                clearModalValidationMessage('modalSubject'); return true;
+                }
 
-        function validateModalMessage() {
-            const message = document.getElementById('modalMessage').value.trim();
-            if (!message) {
-                showModalValidationMessage('modalMessage', 'Message is required');
-                return false;
-            }
-            if (message.length < 10) {
-                showModalValidationMessage('modalMessage', 'Message must be at least 10 characters long');
-                return false;
-            }
-            if (message.length > 2000) {
-                showModalValidationMessage('modalMessage', 'Message cannot exceed 2000 characters');
-                return false;
-            }
-            clearModalValidationMessage('modalMessage');
-            return true;
-        }
+                function validateModalMessage() {
+                const message = document.getElementById('modalMessage').value.trim();
+                if (!message) { showModalValidationMessage('modalMessage', 'Message is required'); return false; }
+                if (message.length < 10) { showModalValidationMessage('modalMessage', 'Message must be at least 10 characters long'); return false; }
+                if (message.length > 2000) { showModalValidationMessage('modalMessage', 'Message cannot exceed 2000 characters'); return false; }
+                clearModalValidationMessage('modalMessage'); return true;
+                }
 
-        function validateModalForm() {
-            const validations = [
-                validateModalFullName(),
-                validateModalEmail(),
-                validateModalPhoneNumber(),
-                validateModalCompany(),
-                validateModalSubject(),
-                validateModalMessage()
-            ];
-            return validations.every(validation => validation === true);
-        }
+                function validateModalForm() {
+                const validations = [validateModalFullName(), validateModalEmail(), validateModalPhoneNumber(), validateModalCompany(), validateModalSubject(), validateModalMessage()];
+                return validations.every(validation => validation === true);
+                }
 
-        function initializeModalValidation() {
-            document.getElementById('modalFullName').addEventListener('blur', validateModalFullName);
-            document.getElementById('modalFullName').addEventListener('input', function () {
-                if (this.value.trim().length > 0) validateModalFullName();
-                else clearModalValidationMessage('modalFullName');
-            });
+                function initializeModalValidation() {
+                document.getElementById('modalFullName').addEventListener('blur', validateModalFullName);
+                document.getElementById('modalFullName').addEventListener('input', function () {
+                if (this.value.trim().length > 0) validateModalFullName(); else clearModalValidationMessage('modalFullName');
+                });
+                document.getElementById('modalEmail').addEventListener('blur', validateModalEmail);
+                document.getElementById('modalEmail').addEventListener('input', function () {
+                if (this.value.trim().length > 0) validateModalEmail(); else clearModalValidationMessage('modalEmail');
+                });
+                document.getElementById('modalPhoneNumber').addEventListener('blur', validateModalPhoneNumber);
+                document.getElementById('modalPhoneNumber').addEventListener('input', function () {
+                if (this.value.trim().length > 0) validateModalPhoneNumber(); else clearModalValidationMessage('modalPhoneNumber');
+                });
+                document.getElementById('modalCompany').addEventListener('blur', validateModalCompany);
+                document.getElementById('modalCompany').addEventListener('input', validateModalCompany);
+                document.getElementById('modalSubject').addEventListener('change', validateModalSubject);
+                document.getElementById('modalSubject').addEventListener('blur', validateModalSubject);
+                document.getElementById('modalMessage').addEventListener('blur', validateModalMessage);
+                document.getElementById('modalMessage').addEventListener('input', function () {
+                if (this.value.trim().length > 0) validateModalMessage(); else clearModalValidationMessage('modalMessage');
+                });
+                }
 
-            document.getElementById('modalEmail').addEventListener('blur', validateModalEmail);
-            document.getElementById('modalEmail').addEventListener('input', function () {
-                if (this.value.trim().length > 0) validateModalEmail();
-                else clearModalValidationMessage('modalEmail');
-            });
-
-            document.getElementById('modalPhoneNumber').addEventListener('blur', validateModalPhoneNumber);
-            document.getElementById('modalPhoneNumber').addEventListener('input', function () {
-                if (this.value.trim().length > 0) validateModalPhoneNumber();
-                else clearModalValidationMessage('modalPhoneNumber');
-            });
-
-            document.getElementById('modalCompany').addEventListener('blur', validateModalCompany);
-            document.getElementById('modalCompany').addEventListener('input', validateModalCompany);
-
-            document.getElementById('modalSubject').addEventListener('change', validateModalSubject);
-            document.getElementById('modalSubject').addEventListener('blur', validateModalSubject);
-
-            document.getElementById('modalMessage').addEventListener('blur', validateModalMessage);
-            document.getElementById('modalMessage').addEventListener('input', function () {
-                if (this.value.trim().length > 0) validateModalMessage();
-                else clearModalValidationMessage('modalMessage');
-            });
-        }
-
-        function sendModalContactEmail() {
-            if (!validateModalForm()) {
+                function sendModalContactEmail() {
+                if (!validateModalForm()) {
                 alert('Please correct the validation errors before submitting.');
                 const firstInvalidField = document.querySelector('#contactModal .is-invalid');
                 if (firstInvalidField) firstInvalidField.focus();
                 return;
-            }
-
-            var btn = document.getElementById('modalSubmitBtn');
-            if (btn.disabled) return;
-
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
-
-            var contactData = {
+                }
+                var btn = document.getElementById('modalSubmitBtn');
+                if (btn.disabled) return;
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+                var contactData = {
                 FullName: document.getElementById('modalFullName').value.trim(),
                 Email: document.getElementById('modalEmail').value.trim(),
                 PhoneNumber: document.getElementById('modalPhoneNumber').value.trim(),
                 Company: document.getElementById('modalCompany').value.trim(),
                 Subject: document.getElementById('modalSubject').value.trim(),
                 Message: document.getElementById('modalMessage').value.trim()
-            };
-
-            $.ajax({
+                };
+                $.ajax({
                 url: '/Home/SendMail',
                 type: 'POST',
                 data: { model: contactData },
                 success: function (response) {
-                    btn.disabled = false;
-                    btn.innerHTML = '<span>Send Message</span><i class="fas fa-arrow-right"></i>';
-
-                    if (response.success) {
-                        alert('Message sent successfully!');
-                        location.reload();
-                    } else {
-                        alert('Error: ' + (response.message || 'Failed to send message'));
-                    }
+                btn.disabled = false;
+                btn.innerHTML = '<span>Send Message</span><i class="fas fa-arrow-right"></i>';
+                if (response.success) { alert('Message sent successfully!'); location.reload(); }
+                else { alert('Error: ' + (response.message || 'Failed to send message')); }
                 },
                 error: function (xhr, status, error) {
-                    btn.disabled = false;
-                    btn.innerHTML = '<span>Send Message</span><i class="fas fa-arrow-right"></i>';
-                    let errorMessage = 'Error sending message. Please try again.';
-                    if (xhr.responseJSON && xhr.responseJSON.message) {
-                        errorMessage = xhr.responseJSON.message;
-                    } else if (xhr.responseText) {
-                        errorMessage = xhr.responseText;
-                    }
-                    alert(errorMessage);
+                btn.disabled = false;
+                btn.innerHTML = '<span>Send Message</span><i class="fas fa-arrow-right"></i>';
+                let errorMessage = 'Error sending message. Please try again.';
+                if (xhr.responseJSON && xhr.responseJSON.message) { errorMessage = xhr.responseJSON.message; }
+                else if (xhr.responseText) { errorMessage = xhr.responseText; }
+                alert(errorMessage);
                 }
-            });
-        }
-    </script>
-</body>
-</html>
+                });
+                }
+            </script>
+        </body>
+    </html>

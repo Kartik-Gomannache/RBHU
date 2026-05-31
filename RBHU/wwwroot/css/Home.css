@@ -866,6 +866,463 @@
         }
 }
 
+
+/* ===========================================
+   DEALERSHIP CERTIFICATES SECTION
+   =========================================== */
+.certificates-section {
+    padding: 100px 0;
+    background: #f8f9fa;
+    position: relative;
+}
+
+    .certificates-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent 0%, rgba(0, 102, 179, 0.2) 50%, transparent 100%);
+    }
+
+.certificates-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+/* ---- Card (entire <a> tag) ---- */
+.certificate-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none !important;
+    color: inherit !important;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.35s ease;
+}
+
+    .certificate-card:hover {
+        border-color: #3385c3;
+        transform: translateY(-6px);
+        box-shadow: 0 16px 40px rgba(0, 102, 179, 0.15);
+        text-decoration: none !important;
+        color: inherit !important;
+    }
+
+    .certificate-card:focus-visible {
+        outline: 2px solid #ff9800;
+        outline-offset: 2px;
+    }
+
+/* ---- Award badge (top-right corner) ---- */
+.cert-card-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #0066B3 0%, #004F8C 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    box-shadow: 0 4px 12px rgba(0, 102, 179, 0.35);
+    pointer-events: none;
+}
+
+    .cert-card-badge i {
+        color: #fff;
+        font-size: 1rem;
+    }
+
+/* ---- Desktop PDF preview (<object>) ---- */
+.cert-card-preview {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background: #f1f5f9;
+    display: block;
+}
+
+    .cert-card-preview object {
+        width: 100%;
+        height: 100%;
+        border: none;
+        pointer-events: none;
+        display: block;
+    }
+
+/* Fallback inside <object> when PDF can't render */
+.cert-card-fallback {
+    width: 100%;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(145deg, #eef6ff 0%, #dce9f7 100%);
+}
+
+    .cert-card-fallback i {
+        font-size: 2.5rem;
+        color: #0066B3;
+    }
+
+    .cert-card-fallback span {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.85rem;
+        color: #64748b;
+        font-weight: 500;
+    }
+
+/* Hover overlay on preview */
+.cert-card-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 79, 140, 0.70);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+    .cert-card-hover i {
+        color: #fff;
+        font-size: 1.8rem;
+    }
+
+    .cert-card-hover span {
+        color: #fff;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+.certificate-card:hover .cert-card-hover {
+    opacity: 1;
+}
+
+/* ---- Mobile placeholder (hidden on desktop) ---- */
+.cert-card-mobile-preview {
+    display: none;
+}
+
+/* ---- Card body (brand + type + footer) ---- */
+.cert-card-body {
+    padding: 18px 20px 20px;
+    border-top: 1px solid #e2e8f0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.cert-card-brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 2px;
+    line-height: 1.3;
+}
+
+.cert-card-type {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    color: #64748b;
+    margin: 0 0 14px;
+    font-weight: 500;
+}
+
+.cert-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+.cert-card-validity {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 13px;
+    background: #eef6ff;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    color: #0066B3;
+}
+
+    .cert-card-validity i {
+        font-size: 0.8rem;
+        color: #2e7d32;
+    }
+
+.cert-card-link-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+    .cert-card-link-icon i {
+        font-size: 0.8rem;
+        color: #94a3b8;
+        transition: color 0.3s ease;
+    }
+
+.certificate-card:hover .cert-card-link-icon {
+    background: #0066B3;
+}
+
+    .certificate-card:hover .cert-card-link-icon i {
+        color: #fff;
+    }
+
+
+/* ===========================================
+   CERTIFICATES — RESPONSIVE
+   =========================================== */
+
+/* ---- ≤1199px ---- */
+@media (max-width: 1199px) {
+    .certificates-grid {
+        gap: 24px;
+    }
+
+    .cert-card-preview {
+        height: 240px;
+    }
+
+    .cert-card-fallback {
+        height: 240px;
+    }
+}
+
+/* ---- ≤991px — 2 columns ---- */
+@media (max-width: 991px) {
+    .certificates-section {
+        padding: 80px 0;
+    }
+
+    .certificates-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 22px;
+    }
+
+    .cert-card-preview {
+        height: 220px;
+    }
+
+    .cert-card-fallback {
+        height: 220px;
+    }
+}
+
+/* ---- ≤767px — hide PDF object, show mobile placeholder ---- */
+@media (max-width: 767px) {
+    .certificates-section {
+        padding: 60px 0;
+    }
+
+    .certificates-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+
+    /* Hide desktop preview */
+    .cert-card-preview {
+        display: none !important;
+    }
+
+    /* Show mobile placeholder */
+    .cert-card-mobile-preview {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        height: 160px;
+        background: linear-gradient(145deg, #eef6ff 0%, #dce9f7 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+        .cert-card-mobile-preview::before {
+            content: '';
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: rgba(0, 102, 179, 0.06);
+            top: -35px;
+            right: -35px;
+        }
+
+        .cert-card-mobile-preview::after {
+            content: '';
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: rgba(0, 102, 179, 0.04);
+            bottom: -20px;
+            left: -20px;
+        }
+
+    .cert-card-mobile-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #0066B3 0%, #004F8C 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 18px rgba(0, 102, 179, 0.3);
+        position: relative;
+        z-index: 1;
+    }
+
+        .cert-card-mobile-icon i {
+            color: #fff;
+            font-size: 1.4rem;
+        }
+
+    .cert-card-mobile-label {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #0066B3;
+        position: relative;
+        z-index: 1;
+    }
+
+    .cert-card-badge {
+        width: 34px;
+        height: 34px;
+        top: 10px;
+        right: 10px;
+    }
+
+        .cert-card-badge i {
+            font-size: 0.9rem;
+        }
+
+    .cert-card-body {
+        padding: 14px 14px 16px;
+    }
+
+    .cert-card-brand {
+        font-size: 1rem;
+    }
+
+    .cert-card-type {
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+    }
+
+    .cert-card-validity {
+        font-size: 0.72rem;
+        padding: 4px 10px;
+    }
+
+    .cert-card-link-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+        .cert-card-link-icon i {
+            font-size: 0.7rem;
+        }
+
+    /* Tap feedback */
+    .certificate-card:active .cert-card-mobile-icon {
+        transform: scale(0.92);
+        transition: transform 0.15s ease;
+    }
+}
+
+/* ---- ≤575px — single column ---- */
+@media (max-width: 575px) {
+    .certificates-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .cert-card-mobile-preview {
+        height: 170px;
+    }
+
+    .cert-card-body {
+        padding: 16px;
+    }
+
+    .cert-card-brand {
+        font-size: 1.05rem;
+    }
+
+    .cert-card-type {
+        font-size: 0.85rem;
+    }
+}
+
+/* ---- ≤375px ---- */
+@media (max-width: 375px) {
+    .certificates-section {
+        padding: 50px 0;
+    }
+
+    .cert-card-mobile-preview {
+        height: 150px;
+    }
+
+    .cert-card-mobile-icon {
+        width: 46px;
+        height: 46px;
+    }
+
+        .cert-card-mobile-icon i {
+            font-size: 1.2rem;
+        }
+
+    .cert-card-mobile-label {
+        font-size: 0.78rem;
+    }
+
+    .cert-card-body {
+        padding: 12px 14px 14px;
+    }
+
+    .cert-card-brand {
+        font-size: 0.95rem;
+    }
+
+    .cert-card-validity {
+        font-size: 0.68rem;
+        padding: 4px 8px;
+        gap: 5px;
+    }
+}
+
 /* ========== STATS SECTION ========== */
 .stats-section {
     position: relative;
@@ -1887,3 +2344,125 @@ html {
         background-size: 100% auto !important;
     }
 }
+
+
+/* ===== FAQ SECTION ===== */
+.faq-section {
+    padding: 100px 0;
+    background: #f8f9fa;
+}
+
+.faq-accordion {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.faq-item {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+    .faq-item:has(.faq-question[aria-expanded="true"]) {
+        border-color: #0066B3;
+        box-shadow: 0 4px 16px rgba(0, 102, 179, 0.1);
+    }
+
+.faq-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.5;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+    .faq-question:hover {
+        background: #f0f7ff;
+        color: #0066B3;
+    }
+
+    .faq-question[aria-expanded="true"] {
+        background: #f0f7ff;
+        color: #0066B3;
+    }
+
+.faq-icon {
+    flex-shrink: 0;
+    font-size: 0.85rem;
+    color: #0066B3;
+    transition: transform 0.3s ease;
+}
+
+.faq-answer {
+    padding: 0 24px 22px;
+    border-top: 1px solid #e2e8f0;
+}
+
+    .faq-answer p {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.97rem;
+        color: #4a5568;
+        line-height: 1.75;
+        margin: 16px 0 0;
+    }
+
+    .faq-answer a {
+        color: #0066B3;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .faq-answer a:hover {
+            text-decoration: underline;
+        }
+
+@media (max-width: 767px) {
+    .faq-section {
+        padding: 60px 0;
+    }
+
+    .faq-question {
+        padding: 16px 18px;
+        font-size: 0.93rem;
+    }
+
+    .faq-answer {
+        padding: 0 18px 18px;
+    }
+
+        .faq-answer p {
+            font-size: 0.9rem;
+        }
+}
+
+@media (max-width: 575px) {
+    .faq-section {
+        padding: 50px 0;
+    }
+
+    .faq-question {
+        padding: 14px 16px;
+        font-size: 0.88rem;
+    }
+
+    .faq-answer {
+        padding: 0 16px 16px;
+    }
+}
+

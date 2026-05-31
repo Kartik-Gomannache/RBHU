@@ -7,19 +7,19 @@
 	<!-- Home Page (Highest Priority) -->
 	<url>
 		<loc>https://rbhu.co.in/</loc>
-		<lastmod>2026-02-07</lastmod>
+		<lastmod>2026-05-31</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>1.0</priority>
 		<image:image>
 			<image:loc>https://rbhu.co.in/images/RBHU-logo.png</image:loc>
-			<image:title>RBHU Solutions LLP - Industrial Engineering Solutions</image:title>
+			<image:title>RBHU Solutions LLP - Industrial Engineering Solutions Goa</image:title>
 		</image:image>
 	</url>
 
 	<!-- About Us Page -->
 	<url>
 		<loc>https://rbhu.co.in/Home/About</loc>
-		<lastmod>2026-02-07</lastmod>
+		<lastmod>2026-05-31</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.8</priority>
 	</url>
@@ -27,7 +27,7 @@
 	<!-- Products Overview Page -->
 	<url>
 		<loc>https://rbhu.co.in/Home/Products</loc>
-		<lastmod>2026-02-07</lastmod>
+		<lastmod>2026-05-31</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.9</priority>
 	</url>
@@ -35,7 +35,7 @@
 	<!-- Special Offers Page -->
 	<url>
 		<loc>https://rbhu.co.in/Home/Offers</loc>
-		<lastmod>2026-02-07</lastmod>
+		<lastmod>2026-05-31</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.7</priority>
 	</url>
@@ -43,77 +43,76 @@
 	<!-- Contact Page -->
 	<url>
 		<loc>https://rbhu.co.in/Home/Contact</loc>
-		<lastmod>2026-02-07</lastmod>
+		<lastmod>2026-05-31</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.8</priority>
 	</url>
 
-	<!-- ==================== CATEGORY PAGES (SEO CRITICAL) ==================== -->
-
+	<!-- ==================== CATEGORY PAGES ==================== -->
 	<!-- 1. Safety Products Category -->
 	<url>
-		<loc>https://rbhu.co.in/Product/SafetyProducts</loc>
-		<lastmod>2026-02-07</lastmod>
+		<loc>https://rbhu.co.in/Product/Category/SafetyProducts</loc>
+		<lastmod>2026-05-31</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.9</priority>
 		<image:image>
 			<image:loc>https://rbhu.co.in/images/products/Safety_general.jpg</image:loc>
-			<image:title>Safewell Safety Products PPE - Helmets Gloves Equipment Goa</image:title>
+			<image:title>Safewell PPE Safety Equipment - Helmets Gloves Safety Shoes Goa</image:title>
 		</image:image>
 		<image:image>
 			<image:loc>https://rbhu.co.in/images/Product_Brands/Safewell.jpg</image:loc>
-			<image:title>Safewell Safety Products Brand</image:title>
+			<image:title>Safewell - Authorised Dealer in Goa</image:title>
 		</image:image>
 	</url>
-	
+
 	<!-- 2. Abrasives Category -->
 	<url>
-		<loc>https://rbhu.co.in/Product/Abrasives</loc>
-		<lastmod>2026-02-07</lastmod>
+		<loc>https://rbhu.co.in/Product/Category/Abrasives</loc>
+		<lastmod>2026-05-31</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.9</priority>
 		<image:image>
 			<image:loc>https://rbhu.co.in/images/products/Abrasive_general.jpg</image:loc>
-			<image:title>Bosch Klingspor Abrasives - Grinding Wheels Sandpaper Goa</image:title>
-		</image:image>
-		<image:image>
-			<image:loc>https://rbhu.co.in/images/Product_Brands/Bosch.jpg</image:loc>
-			<image:title>Bosch Abrasives Brand</image:title>
+			<image:title>Klingspor Kovax Abrasives - Grinding Wheels Cutting Discs Sandpaper Goa</image:title>
 		</image:image>
 		<image:image>
 			<image:loc>https://rbhu.co.in/images/Product_Brands/klingspor.jpg</image:loc>
-			<image:title>Klingspor Abrasives Brand</image:title>
+			<image:title>Klingspor Abrasives - Authorised Dealer in Goa</image:title>
+		</image:image>
+		<image:image>
+			<image:loc>https://rbhu.co.in/images/Product_Brands/Kovax.jpg</image:loc>
+			<image:title>Kovax Abrasives - Authorised Dealer in Goa</image:title>
 		</image:image>
 	</url>
 
 	<!-- 3. Pneumatic Tools Category -->
 	<url>
-		<loc>https://rbhu.co.in/Product/Pneumatic</loc>
-		<lastmod>2026-02-07</lastmod>
+		<loc>https://rbhu.co.in/Product/Category/Pneumatic</loc>
+		<lastmod>2026-05-31</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.9</priority>
 		<image:image>
 			<image:loc>https://rbhu.co.in/images/products/Pneumatic_general.png</image:loc>
-			<image:title>Chicago Pneumatic Fuji IMI Norgren Tools Goa</image:title>
+			<image:title>Chicago Pneumatic Fuji IMI Norgren Pneumatic Tools Goa</image:title>
 		</image:image>
 		<image:image>
 			<image:loc>https://rbhu.co.in/images/Product_Brands/CP.jpg</image:loc>
-			<image:title>Chicago Pneumatic CP Brand</image:title>
+			<image:title>Chicago Pneumatic - Authorised Distributor in Goa</image:title>
 		</image:image>
 		<image:image>
 			<image:loc>https://rbhu.co.in/images/Product_Brands/FUJI.jpg</image:loc>
-			<image:title>Fuji Pneumatic Tools Brand</image:title>
+			<image:title>Fuji Pneumatic Tools - Authorised Dealer in Goa</image:title>
 		</image:image>
 		<image:image>
 			<image:loc>https://rbhu.co.in/images/Product_Brands/IMI.jpg</image:loc>
-			<image:title>IMI Norgren Brand</image:title>
+			<image:title>IMI Norgren Pneumatic Systems - Goa</image:title>
 		</image:image>
 	</url>
 
 	<!-- 4. Power Tools Category -->
 	<url>
-		<loc>https://rbhu.co.in/Product/PowerTools</loc>
-		<lastmod>2026-02-07</lastmod>
+		<loc>https://rbhu.co.in/Product/Category/PowerTools</loc>
+		<lastmod>2026-05-31</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.9</priority>
 		<image:image>
@@ -121,19 +120,19 @@
 			<image:title>Bosch Makita Power Tools - Drills Grinders Saws Goa</image:title>
 		</image:image>
 		<image:image>
-			<image:loc>https://rbhu.co.in/images/Product_Brands/Bosch.jpg</image:loc>
-			<image:title>Bosch Power Tools Brand</image:title>
+			<image:loc>https://rbhu.co.in/images/Product_Brands/Bosch.png</image:loc>
+			<image:title>Bosch Power Tools - Authorised Dealer in Goa</image:title>
 		</image:image>
 		<image:image>
-			<image:loc>https://rbhu.co.in/images/Product_Brands/Makita.jpg</image:loc>
-			<image:title>Makita Power Tools Brand</image:title>
+			<image:loc>https://rbhu.co.in/images/Product_Brands/Makita.png</image:loc>
+			<image:title>Makita Power Tools - Authorised Dealer in Goa</image:title>
 		</image:image>
 	</url>
 
 	<!-- 5. Hoses Category -->
 	<url>
-		<loc>https://rbhu.co.in/Product/Hoses</loc>
-		<lastmod>2026-02-07</lastmod>
+		<loc>https://rbhu.co.in/Product/Category/Hoses</loc>
+		<lastmod>2026-05-31</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.9</priority>
 		<image:image>
@@ -141,32 +140,32 @@
 			<image:title>Parker Polyhose Industrial Hoses - Hydraulic Air Hoses Goa</image:title>
 		</image:image>
 		<image:image>
-			<image:loc>https://rbhu.co.in/images/Product_Brands/Parker.jpg</image:loc>
-			<image:title>Parker Hoses Brand</image:title>
+			<image:loc>https://rbhu.co.in/images/Product_Brands/Parker.png</image:loc>
+			<image:title>Parker Hoses - Authorised Dealer in Goa</image:title>
 		</image:image>
 		<image:image>
 			<image:loc>https://rbhu.co.in/images/Product_Brands/Polyhose.jpg</image:loc>
-			<image:title>Polyhose Brand</image:title>
+			<image:title>Polyhose Industrial Hoses - Authorised Dealer in Goa</image:title>
 		</image:image>
 	</url>
-	
+
 	<!-- 6. Belts Category -->
 	<url>
-		<loc>https://rbhu.co.in/Product/Belts</loc>
-		<lastmod>2026-02-07</lastmod>
+		<loc>https://rbhu.co.in/Product/Category/Belts</loc>
+		<lastmod>2026-05-31</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.9</priority>
 		<image:image>
 			<image:loc>https://rbhu.co.in/images/products/Belts_general.jpg</image:loc>
-			<image:title>Megadyne Gates Power Transmission Belts Goa</image:title>
+			<image:title>Megadyne Gates Power Transmission Belts V-Belts Timing Belts Goa</image:title>
 		</image:image>
 		<image:image>
-			<image:loc>https://rbhu.co.in/images/Product_Brands/Megadyne.jpg</image:loc>
-			<image:title>Megadyne Belts Brand</image:title>
+			<image:loc>https://rbhu.co.in/images/Product_Brands/Megadyne.png</image:loc>
+			<image:title>Megadyne Belts - Authorised Dealer in Goa</image:title>
 		</image:image>
 		<image:image>
-			<image:loc>https://rbhu.co.in/images/Product_Brands/Gates.jpg</image:loc>
-			<image:title>Gates Belts Brand</image:title>
+			<image:loc>https://rbhu.co.in/images/Product_Brands/Gates.png</image:loc>
+			<image:title>Gates Belts - Authorised Dealer in Goa</image:title>
 		</image:image>
 	</url>
 

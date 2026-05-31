@@ -38,7 +38,7 @@ namespace RBHU.Controllers
 
         public IActionResult Home()
         {
-            ViewData["Title"] = "Industrial Tools & Equipment Goa | RBHU Solutions LLP";
+            ViewData["Title"] = "Home";
             ViewData["Description"] = "Premium industrial tools and engineering solutions in Goa. Authorized distributor of Makita, Bosch, Chicago Pneumatic, Klingspor. PPE safety equipment, power tools, pneumatic systems, abrasives. Expert service across South Goa.";
             return View();
         }
@@ -128,7 +128,7 @@ namespace RBHU.Controllers
                                 </p>
                             </div>
                             <div style='margin-top: 30px; padding-top: 20px; border-top: 1px solid #dee2e6; font-size: 12px; color: #6c757d;'>
-                                <p>This email was sent from the Aniket Sales Agencies contact form on {DateTime.Now:yyyy-MM-dd HH:mm:ss}</p>
+                                <p>This email was sent from the RBHU Solutions LLP contact form on {DateTime.Now:yyyy-MM-dd HH:mm:ss}</p>
                             </div>
                         </div>",
                     TextBody = $@"New Contact Form Submission

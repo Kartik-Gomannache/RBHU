@@ -680,3 +680,333 @@ a:focus-visible {
         transition-duration: 0.01ms !important;
     }
 }
+/* ========== AUTHORISED BRANDS SECTION ========== */
+.rbhu-brands-section {
+    padding: 100px 0;
+    background: #fff;
+}
+
+.rbhu-brands-intro {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #495057;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.rbhu-brand-auth-card {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+    .rbhu-brand-auth-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0, 102, 179, 0.12);
+        border-color: #0066B3;
+    }
+
+.rbhu-brand-auth-logo {
+    background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+    padding: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #f0f0f0;
+    min-height: 130px;
+}
+
+    .rbhu-brand-auth-logo img {
+        max-height: 80px;
+        max-width: 160px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+    }
+
+.rbhu-brand-auth-info {
+    padding: 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+    .rbhu-brand-auth-info h3 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 4px;
+    }
+
+.rbhu-brand-category {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #0066B3;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 12px;
+}
+
+.rbhu-brand-auth-info p {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: #495057;
+    flex: 1;
+    margin-bottom: 16px;
+}
+
+.rbhu-brand-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #0066B3;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: gap 0.2s ease;
+    margin-top: auto;
+}
+
+    .rbhu-brand-link:hover {
+        color: #004F8C;
+        gap: 8px;
+    }
+
+/* ========== CERTIFICATES SECTION ========== */
+.rbhu-certificates-section {
+    padding: 100px 0;
+    background: #f8f9fa;
+}
+
+.rbhu-cert-card {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+    position: relative;
+}
+
+    .rbhu-cert-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #0066B3, #3385C3);
+    }
+
+    .rbhu-cert-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 28px rgba(0, 102, 179, 0.14);
+        border-color: #0066B3;
+    }
+
+.rbhu-cert-brand-header {
+    background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
+    padding: 28px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #e9ecef;
+    min-height: 120px;
+}
+
+.rbhu-cert-brand-logo {
+    max-height: 70px;
+    max-width: 150px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.rbhu-cert-body {
+    padding: 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.rbhu-cert-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+}
+
+.rbhu-cert-issuer {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin-bottom: 12px;
+}
+
+    .rbhu-cert-issuer strong {
+        color: #374151;
+    }
+
+.rbhu-cert-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: #495057;
+    flex: 1;
+    margin-bottom: 16px;
+}
+
+.rbhu-cert-meta {
+    margin-bottom: 18px;
+}
+
+.rbhu-cert-valid {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(16, 185, 129, 0.1);
+    color: #065f46;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+    .rbhu-cert-valid i {
+        color: #10b981;
+    }
+
+.rbhu-cert-download {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0066B3 0%, #004F8C 100%);
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 11px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-top: auto;
+    width: 100%;
+    gap: 8px;
+}
+
+    .rbhu-cert-download:hover {
+        background: linear-gradient(135deg, #004F8C 0%, #003870 100%);
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 102, 179, 0.3);
+    }
+
+    .rbhu-cert-download i {
+        font-size: 1rem;
+        color: #ff6b6b;
+    }
+
+.rbhu-cert-footer-note {
+    margin-top: 40px;
+    padding: 16px 24px;
+    background: rgba(0, 102, 179, 0.04);
+    border: 1px solid rgba(0, 102, 179, 0.12);
+    border-left: 4px solid #0066B3;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    color: #374151;
+    text-align: center;
+}
+
+    .rbhu-cert-footer-note i {
+        color: #0066B3;
+    }
+
+    .rbhu-cert-footer-note a {
+        color: #0066B3;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+        .rbhu-cert-footer-note a:hover {
+            text-decoration: underline;
+        }
+
+/* Responsive */
+@@media (max-width: 991px) {
+    .rbhu-brands-section {
+        padding: 80px 0;
+    }
+
+    .rbhu-certificates-section {
+        padding: 80px 0;
+    }
+}
+
+@@media (max-width: 767px) {
+    .rbhu-brands-section {
+        padding: 60px 0;
+    }
+
+    .rbhu-certificates-section {
+        padding: 60px 0;
+    }
+
+    .rbhu-brand-auth-logo {
+        min-height: 110px;
+        padding: 20px;
+    }
+
+    .rbhu-brand-auth-info {
+        padding: 20px;
+    }
+
+    .rbhu-cert-body {
+        padding: 20px;
+    }
+
+    .rbhu-cert-footer-note {
+        font-size: 0.82rem;
+        padding: 14px 16px;
+    }
+}
+
+@@media (max-width: 575px) {
+    .rbhu-brands-section {
+        padding: 50px 0;
+    }
+
+    .rbhu-certificates-section {
+        padding: 50px 0;
+    }
+
+    .rbhu-brand-auth-logo {
+        min-height: 100px;
+    }
+
+    .rbhu-brand-auth-info h3 {
+        font-size: 1rem;
+    }
+
+    .rbhu-cert-title {
+        font-size: 1.05rem;
+    }
+}

@@ -1,7 +1,36 @@
 ﻿@model RBHU_DbServices.ViewModel.CategoryViewModel
 @{
-    ViewData["Title"] = "Power Tools - Bosch Makita Drills Grinders Saws | RBHU Solutions LLP";
+    ViewData["Title"] = "Power Tools in Goa | Authorised Bosch & Makita Dealer | RBHU Solutions LLP";
+    ViewData["Description"] = "Authorised dealer of Bosch and Makita power tools in Goa. Electric drills, angle grinders, circular saws, impact drivers, and accessories for industrial and construction use. Serving industries across South Goa and North Goa.";
 }
+
+<!-- BreadcrumbList schema -->
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://rbhu.co.in"
+    },
+    {
+      "@@type": "ListItem",
+      "position": 2,
+      "name": "Products",
+      "item": "https://rbhu.co.in/Home/Products"
+    },
+    {
+      "@@type": "ListItem",
+      "position": 3,
+      "name": "Power Tools and Accessories",
+      "item": "https://rbhu.co.in/Product/Category/PowerTools"
+    }
+  ]
+}
+</script>
 
 <div class="page-content">
     <section class="section-padding" style="margin-top: 80px;">
@@ -9,14 +38,16 @@
             <!-- Header Section -->
             <div class="row mb-4">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-title" data-aos="fade-up">@Model.CategoryName</h2>
+                    <!-- CHANGE: H1 with geo-targeted keyword -->
+                    <h1 class="section-title" data-aos="fade-up">Power Tools &amp; Accessories Supplier in Goa</h1>
+                    <!-- CHANGE: One-line intro paragraph -->
                     <p class="lead text-muted" data-aos="fade-up" data-aos-delay="100">
-                        Professional power tools for heavy-duty industrial applications
+                        RBHU Solutions LLP is the authorised dealer of Bosch and Makita power tools in Goa, supplying professional-grade equipment to industries and contractors across Goa.
                     </p>
                 </div>
             </div>
 
-            <!-- Featured Brands Section - Centered at Top -->
+            <!-- Featured Brands Section -->
             <div class="row mb-4">
                 <div class="col-12">
                     <div class="brands-section">
@@ -28,7 +59,7 @@
                             <div class="brand-card-modern" data-brand="Bosch" onclick="filterByBrand('Bosch')">
                                 <div class="brand-image-wrapper">
                                     <img src="~/images/Product_Brands/Bosch.png"
-                                         alt="Bosch Power Tools - Drills, Grinders, Saws by RBHU Solutions Goa"
+                                         alt="Bosch Power Tools - Authorised Dealer in Goa, Drills and Angle Grinders"
                                          loading="lazy">
                                 </div>
                                 <div class="brand-label">Bosch</div>
@@ -41,7 +72,7 @@
                             <div class="brand-card-modern" data-brand="Makita" onclick="filterByBrand('Makita')">
                                 <div class="brand-image-wrapper">
                                     <img src="~/images/Product_Brands/Makita.png"
-                                         alt="Makita Power Tools - Cordless Drills, Impact Drivers, Circular Saws Goa"
+                                         alt="Makita Power Tools - Authorised Dealer in Goa, Cordless Drills and Impact Drivers"
                                          loading="lazy">
                                 </div>
                                 <div class="brand-label">Makita</div>
@@ -54,9 +85,9 @@
                 </div>
             </div>
 
-            <!-- Modern Filter Section - Sidebar Layout -->
+            <!-- Filter + Products Layout -->
             <div class="row">
-                <!-- Sidebar Filter Section -->
+                <!-- Sidebar Filter -->
                 <div class="col-lg-3 col-md-4 mb-4">
                     <div class="filter-sidebar">
                         <div class="filter-header">
@@ -68,7 +99,6 @@
                             </button>
                         </div>
 
-                        <!-- Quick Actions -->
                         <div class="filter-section">
                             <button class="filter-btn-full" onclick="showAllProducts()">
                                 <i class="fas fa-th me-2"></i>All Products
@@ -78,7 +108,6 @@
                             </a>
                         </div>
 
-                        <!-- Brand Filter Section -->
                         <div class="filter-section" id="brandFilterSection">
                             <div class="filter-section-header">
                                 <i class="fas fa-star me-2"></i>Brands
@@ -135,7 +164,6 @@
 
                 <!-- Products Section -->
                 <div class="col-lg-9 col-md-8">
-                    <!-- Active Filter Badge -->
                     <div id="activeFilters" class="mb-3" style="display: @(Model.SelectedSubCategory1Id.HasValue || Model.SelectedSubCategory2Id.HasValue ? "block" : "none")">
                         <div class="active-filter-badge">
                             <i class="fas fa-filter me-2"></i>
@@ -161,7 +189,6 @@
                         </div>
                     </div>
 
-                    <!-- Products Count -->
                     <div class="mb-3">
                         <div class="product-count-badge" id="productCount">
                             <i class="fas fa-box me-1"></i>
@@ -169,7 +196,6 @@
                         </div>
                     </div>
 
-                    <!-- Loading Indicator -->
                     <div id="loadingIndicator" class="text-center py-5" style="display: none;">
                         <div class="spinner-border text-primary" role="status">
                             <span class="visually-hidden">Loading...</span>
@@ -177,17 +203,13 @@
                         <p class="mt-3 text-muted">Loading products...</p>
                     </div>
 
-                    <!-- Sample Products Grid -->
                     <div id="sampleProductsContainer" style="display: none;">
                         <h5 class="mb-4 section-title" id="sampleProductsTitle">
                             <i class="fas fa-th me-2"></i>Select a Collection
                         </h5>
-                        <div id="sampleProductsGrid" class="row">
-                            <!-- Sample products dynamically inserted -->
-                        </div>
+                        <div id="sampleProductsGrid" class="row"></div>
                     </div>
 
-                    <!-- Products Grid -->
                     <div id="productsGrid" class="row">
                         @if (Model.Products != null && Model.Products.Any())
                         {
@@ -209,21 +231,20 @@
                                                     <i class="fas fa-image"></i>
                                                 </div>
                                             }
+                                        </div>
+                                        <div class="product-info">
+                                            <h6 class="product-name">@product.Name</h6>
+                                            <p class="product-desc">
+                                                @(string.IsNullOrEmpty(product.Description) ? "Professional power tool for demanding applications." :
+                                                    (product.Description.Length > 60 ? product.Description.Substring(0, 60) + "..." : product.Description))
+                                            </p>
+                                            <a asp-controller="Home" asp-action="Contact" class="product-btn">
+                                                <i class="fas fa-phone me-1"></i>Enquire Now
+                                            </a>
+                                        </div>
                                     </div>
-
-                                    <div class="product-info">
-                                        <h6 class="product-name">@product.Name</h6>
-                                        <p class="product-desc">
-                                            @(string.IsNullOrEmpty(product.Description) ? "Professional power tool for demanding applications." :
-                                                                                    (product.Description.Length > 60 ? product.Description.Substring(0, 60) + "..." : product.Description))
-                                    </p>
-                                    <a asp-controller="Home" asp-action="Contact" class="product-btn">
-                                        <i class="fas fa-phone me-1"></i>Enquire Now
-                                    </a>
                                 </div>
-                            </div>
-                        </div>
-                                                }
+                            }
                         }
                         else
                         {
@@ -242,56 +263,91 @@
                 </div>
             </div>
 
-            <!-- Features Section -->
+            <!-- CHANGE: Why Choose section with H3 + geo sentence -->
             <div class="row mt-5 pt-4 border-top">
                 <div class="col-lg-12">
-                    <h4 class="text-center mb-4">Why Choose Our Power Tools?</h4>
+                    <h3 class="text-center mb-2 powertools-faq-heading">Why Choose Our Power Tools?</h3>
+                    <p class="text-center text-muted mb-4 powertools-faq-sub">RBHU Solutions LLP is the authorised dealer of Bosch and Makita power tools in Goa, serving construction, manufacturing, and maintenance industries across the state.</p>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="text-center">
-                        <i class="fas fa-battery-full fa-2x text-secondary mb-3"></i>
+                    <div class="text-center powertools-feature">
+                        <i class="fas fa-battery-full fa-2x mb-3"></i>
                         <h6>Long Battery Life</h6>
                         <p class="small text-muted">Extended runtime with advanced lithium-ion technology.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="text-center">
-                        <i class="fas fa-tachometer-alt fa-2x text-secondary mb-3"></i>
+                    <div class="text-center powertools-feature">
+                        <i class="fas fa-tachometer-alt fa-2x mb-3"></i>
                         <h6>High Performance</h6>
                         <p class="small text-muted">Powerful motors deliver exceptional cutting and drilling performance.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="text-center">
-                        <i class="fas fa-shield-alt fa-2x text-secondary mb-3"></i>
+                    <div class="text-center powertools-feature">
+                        <i class="fas fa-shield-alt fa-2x mb-3"></i>
                         <h6>Built to Last</h6>
                         <p class="small text-muted">Rugged construction withstands demanding jobsite conditions.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="text-center">
-                        <i class="fas fa-wrench fa-2x text-secondary mb-3"></i>
+                    <div class="text-center powertools-feature">
+                        <i class="fas fa-wrench fa-2x mb-3"></i>
                         <h6>Easy Maintenance</h6>
                         <p class="small text-muted">User-serviceable parts and readily available accessories.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- CTA Section -->
-            <div class="row mt-4">
-                <div class="col-lg-12 text-center">
-                    <div class="bg-light p-4 rounded border">
-                        <h5>Looking for the Right Power Tool?</h5>
-                        <p class="text-muted mb-3">Our team can help you select the best tool for your specific needs.</p>
-                        <a asp-controller="Home" asp-action="Contact" class="btn btn-secondary me-2">
-                            <i class="fas fa-phone me-2"></i>Contact Us
-                        </a>
-                        <a asp-controller="Home" asp-action="Products" class="btn btn-outline-secondary">
-                            <i class="fas fa-arrow-left me-2"></i>Go Back
-                        </a>
+            <!-- CHANGE: FAQ accordion replacing CTA box -->
+            <div class="row mt-2 mb-5">
+                <div class="col-lg-10 mx-auto">
+                    <div class="powertools-faq-accordion">
+
+                        <div class="powertools-faq-item">
+                            <button class="powertools-faq-question" aria-expanded="false" aria-controls="ptfaq1">
+                                <span>Is RBHU Solutions the authorised Bosch power tools dealer in Goa?</span>
+                                <i class="fas fa-chevron-down powertools-faq-icon"></i>
+                            </button>
+                            <div class="powertools-faq-answer" id="ptfaq1" hidden>
+                                <p>Yes, RBHU Solutions LLP is an authorised dealer of Bosch power tools in Goa. We supply Bosch electric drills, angle grinders, circular saws, rotary hammers, and accessories to industries, contractors, and fabrication units across South Goa and North Goa.</p>
+                            </div>
+                        </div>
+
+                        <div class="powertools-faq-item">
+                            <button class="powertools-faq-question" aria-expanded="false" aria-controls="ptfaq2">
+                                <span>Do you supply Makita cordless tools and accessories in Goa?</span>
+                                <i class="fas fa-chevron-down powertools-faq-icon"></i>
+                            </button>
+                            <div class="powertools-faq-answer" id="ptfaq2" hidden>
+                                <p>Yes, RBHU Solutions LLP is an authorised Makita dealer in Goa. We stock Makita cordless drills, impact drivers, reciprocating saws, and the full range of Makita accessories and replacement batteries. Contact us at <a href="tel:+919968068454">+91 9968068454</a> for availability.</p>
+                            </div>
+                        </div>
+
+                        <div class="powertools-faq-item">
+                            <button class="powertools-faq-question" aria-expanded="false" aria-controls="ptfaq3">
+                                <span>What industries in Goa use Bosch and Makita power tools?</span>
+                                <i class="fas fa-chevron-down powertools-faq-icon"></i>
+                            </button>
+                            <div class="powertools-faq-answer" id="ptfaq3" hidden>
+                                <p>Our power tools are used across Goa's shipbuilding, aerospace, furniture manufacturing, pharma, and construction sectors. We supply to clients including Goa Shipyard, IFB Industries, Kineco, and Chowgule Shipbuilding, as well as contractors and maintenance teams across the state.</p>
+                            </div>
+                        </div>
+
+                        <div class="powertools-faq-item">
+                            <button class="powertools-faq-question" aria-expanded="false" aria-controls="ptfaq4">
+                                <span>How can I get a quotation for Bosch or Makita tools in Goa?</span>
+                                <i class="fas fa-chevron-down powertools-faq-icon"></i>
+                            </button>
+                            <div class="powertools-faq-answer" id="ptfaq4" hidden>
+                                <p>Call or WhatsApp RBHU Solutions LLP at <a href="tel:+919968068454">+91 9968068454</a> or email <a href="mailto:rbhugoa@gmail.com">rbhugoa@gmail.com</a>. We are based in Margao, South Goa, and serve clients for both individual purchases and bulk industrial orders across Goa.</p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 </div>
@@ -308,42 +364,28 @@
         let currentBrand = '';
         let showingSampleProducts = false;
 
-        function GoToContact() {
-            window.location.href = '/Home/Contact';
-        }
+        function GoToContact() { window.location.href = '/Home/Contact'; }
 
         $(document).ready(function () {
-            console.log('=== Page Load - Auto-Detection ===');
-            console.log('Current SubCat1 ID from Model:', currentSubCategory1Id);
-            console.log('Current SubCat2 ID from Model:', currentSubCategory2Id);
-
             if (currentSubCategory1Id > 0) {
                 const filterItem = $('[data-subcategory1-id="' + currentSubCategory1Id + '"]').closest('.brand-filter-item');
-
                 if (filterItem.length > 0) {
                     const filterBtn = filterItem.find('.brand-filter-btn');
                     const arrow = filterItem.find('.brand-arrow');
                     const subcategoryList = filterItem.find('.brand-subcategory-list');
-
                     let brandName = filterBtn.data('brand-name');
-
                     arrow.addClass('rotated');
                     subcategoryList.slideDown(300);
                     filterBtn.addClass('active');
-
                     currentBrand = brandName;
-
                     highlightBrand(brandName);
                     showOnlyBrand(brandName);
-
                     const hasSubCat2 = filterBtn.data('has-subcat2') === 'true' || filterBtn.data('has-subcat2') === true;
-
                     if (hasSubCat2) {
                         if (currentSubCategory2Id > 0) {
                             $('#sampleProductsContainer').hide();
                             $('#productsGrid').show();
                             loadProducts(categoryId, currentSubCategory1Id, currentSubCategory2Id);
-
                             $('[data-subcategory2-id="' + currentSubCategory2Id + '"]').addClass('active');
                             const subCat2Text = $('[data-subcategory2-id="' + currentSubCategory2Id + '"] span').text().trim();
                             updateActiveFilter(brandName, subCat2Text);
@@ -356,23 +398,36 @@
                         loadProducts(categoryId, currentSubCategory1Id, null);
                         updateActiveFilter(brandName, null);
                     }
-
                     $('#activeFilters').show();
-
-                    setTimeout(() => {
-                        $('html, body').animate({
-                            scrollTop: $('#brandShowcase').offset().top - 100
-                        }, 500);
-                    }, 300);
+                    setTimeout(() => { $('html, body').animate({ scrollTop: $('#brandShowcase').offset().top - 100 }, 500); }, 300);
                 }
             }
+
+            // FAQ accordion
+            document.querySelectorAll('.powertools-faq-question').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const expanded = this.getAttribute('aria-expanded') === 'true';
+                    const answerId = this.getAttribute('aria-controls');
+                    const answer = document.getElementById(answerId);
+                    document.querySelectorAll('.powertools-faq-question').forEach(function(other) {
+                        other.setAttribute('aria-expanded', 'false');
+                        const icon = other.querySelector('.powertools-faq-icon');
+                        if (icon) icon.style.transform = 'rotate(0deg)';
+                        const otherAnswer = document.getElementById(other.getAttribute('aria-controls'));
+                        if (otherAnswer) otherAnswer.hidden = true;
+                    });
+                    if (!expanded) {
+                        this.setAttribute('aria-expanded', 'true');
+                        const icon = this.querySelector('.powertools-faq-icon');
+                        if (icon) icon.style.transform = 'rotate(180deg)';
+                        answer.hidden = false;
+                    }
+                });
+            });
         });
 
         function filterByBrand(brandName) {
-            console.log('=== Brand Button Clicked:', brandName);
-
             const filterBtn = $('[data-brand-name="' + brandName + '"]');
-
             if (filterBtn.length) {
                 const subCat1Id = filterBtn.data('subcategory1-id');
                 const hasSubCat2Data = filterBtn.data('has-subcat2');
@@ -380,73 +435,53 @@
                 const filterItem = filterBtn.closest('.brand-filter-item');
                 const arrow = filterItem.find('.brand-arrow');
                 const subcategoryList = filterItem.find('.brand-subcategory-list');
-
-                console.log('SubCat1 ID:', subCat1Id, 'Has SubCat2:', hasSubCat2);
-
                 $('.brand-filter-item').not(filterItem).each(function () {
                     $(this).find('.brand-filter-btn').removeClass('active');
                     $(this).find('.brand-arrow').removeClass('rotated');
                     $(this).find('.brand-subcategory-list').hide();
                 });
-
                 arrow.addClass('rotated');
                 subcategoryList.slideDown(300);
                 filterBtn.addClass('active');
-
                 currentSubCategory1Id = subCat1Id;
                 currentSubCategory2Id = 0;
                 currentBrand = brandName;
-
                 $('.brand-subcategory-item').removeClass('active');
-
                 highlightBrand(brandName);
                 showOnlyBrand(brandName);
-
                 if (hasSubCat2) {
-                    console.log('Has SubCategory2 - showing sample products');
                     showingSampleProducts = true;
                     showSampleProducts(subCat1Id, brandName);
                 } else {
-                    console.log('No SubCategory2 - loading ALL products');
                     showingSampleProducts = false;
                     $('#sampleProductsContainer').hide();
                     $('#productsGrid').show();
                     updateActiveFilter(brandName, null);
                     loadProducts(categoryId, subCat1Id, null);
                 }
-
                 $('#activeFilters').show();
             }
         }
 
         function highlightBrand(brandName) {
             $('.brand-card-modern').removeClass('active');
-            if (brandName) {
-                $('.brand-card-modern[data-brand="' + brandName + '"]').addClass('active');
-            }
+            if (brandName) { $('.brand-card-modern[data-brand="' + brandName + '"]').addClass('active'); }
         }
 
         function showOnlyBrand(brandName) {
             const $brandCards = $('.brand-card-modern');
-
             if (!brandName || brandName === '') {
                 $brandCards.show();
                 $('.brand-card-modern').removeClass('active');
             } else {
                 $brandCards.each(function () {
                     const cardBrand = $(this).data('brand');
-                    if (cardBrand === brandName) {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
+                    if (cardBrand === brandName) { $(this).show(); } else { $(this).hide(); }
                 });
             }
         }
 
         function toggleSubCategory1(subCat1Id, subCat1Name) {
-            console.log('=== toggleSubCategory1:', subCat1Id, subCat1Name);
-
             const filterItem = $(event.currentTarget).closest('.brand-filter-item');
             const filterBtn = filterItem.find('.brand-filter-btn');
             const arrow = filterItem.find('.brand-arrow');
@@ -454,37 +489,26 @@
             const hasSubCat2Data = filterBtn.data('has-subcat2');
             const hasSubCat2 = hasSubCat2Data === 'true' || hasSubCat2Data === true;
             const isExpanded = filterBtn.hasClass('active');
-
-            console.log('Has SubCat2:', hasSubCat2, 'Is Expanded:', isExpanded);
-
             $('.brand-filter-item').not(filterItem).each(function () {
                 $(this).find('.brand-filter-btn').removeClass('active');
                 $(this).find('.brand-arrow').removeClass('rotated');
                 $(this).find('.brand-subcategory-list').slideUp(300);
             });
-
             $('.brand-subcategory-item').removeClass('active');
-
             if (!isExpanded) {
                 arrow.addClass('rotated');
                 subcategoryList.slideDown(300);
                 filterBtn.addClass('active');
-
                 currentSubCategory1Id = subCat1Id;
                 currentSubCategory2Id = 0;
                 currentBrand = subCat1Name;
-
                 highlightBrand(subCat1Name);
                 showOnlyBrand(subCat1Name);
-
                 $('#activeFilters').show();
-
                 if (hasSubCat2) {
-                    console.log('Has SubCategory2 - showing sample products');
                     showingSampleProducts = true;
                     showSampleProducts(subCat1Id, subCat1Name);
                 } else {
-                    console.log('No SubCategory2 - loading ALL products');
                     showingSampleProducts = false;
                     updateActiveFilter(subCat1Name, null);
                     $('#sampleProductsContainer').hide();
@@ -495,15 +519,12 @@
                 arrow.removeClass('rotated');
                 subcategoryList.slideUp(300);
                 filterBtn.removeClass('active');
-
                 currentSubCategory1Id = 0;
                 currentSubCategory2Id = 0;
                 currentBrand = '';
                 showingSampleProducts = false;
-
                 highlightBrand('');
                 showOnlyBrand('');
-
                 $('#activeFilters').hide();
                 $('#sampleProductsContainer').hide();
                 $('#productsGrid').show();
@@ -512,244 +533,118 @@
         }
 
         function showSampleProducts(subCat1Id, subCat1Name) {
-            console.log('=== Loading Sample Products ===');
-            console.log('SubCat1 ID:', subCat1Id, 'SubCat1 Name:', subCat1Name);
-
             $('#productsGrid').hide();
             $('#sampleProductsContainer').show();
             $('#sampleProductsTitle').html('<i class="fas fa-th me-2"></i>' + subCat1Name + ' Collections');
-
             const $grid = $('#sampleProductsGrid');
-            $grid.html(`
-                <div class="col-12 text-center py-5">
-                    <div class="spinner-border text-secondary" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                    <p class="mt-3 text-muted">Loading collections...</p>
-                </div>
-            `);
-
+            $grid.html('<div class="col-12 text-center py-5"><div class="spinner-border text-secondary" role="status"><span class="visually-hidden">Loading...</span></div><p class="mt-3 text-muted">Loading collections...</p></div>');
             $.ajax({
                 url: '/Product/GetSampleProductsForSubCategories2',
                 type: 'GET',
                 data: { subCategory1Id: subCat1Id },
                 success: function (response) {
-                    console.log('Sample Products Response:', response);
-
                     $grid.empty();
-
                     if (response && response.length > 0) {
                         response.forEach(function (item) {
-                            if (!item.product) {
-                                console.warn('No product for SubCategory2:', item.subCategory2Name);
-                                return;
-                            }
-
+                            if (!item.product) return;
                             const productImageHtml = item.product.imageUrl
-                                ? `<img src="${item.product.imageUrl}"
-                                       alt="${item.product.name} - ${item.subCategory2Name} Power Tool by RBHU Solutions Goa"
-                                       loading="lazy">`
+                                ? `<img src="${item.product.imageUrl}" alt="${item.product.name} - ${item.subCategory2Name} Power Tool by RBHU Solutions Goa" loading="lazy">`
                                 : `<div class="no-image"><i class="fas fa-image"></i></div>`;
-
                             const productDescription = item.product.description
-                                ? (item.product.description.length > 60
-                                    ? item.product.description.substring(0, 60) + '...'
-                                    : item.product.description)
+                                ? (item.product.description.length > 60 ? item.product.description.substring(0, 60) + '...' : item.product.description)
                                 : 'Professional power tool for demanding applications.';
-
-                            const cardHtml = `
-                                <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
-                                    <div class="product-card-modern sample-product-card h-100">
-                                        <div class="product-image-box">
-                                            ${productImageHtml}
-                                        </div>
-                                        <div class="product-info">
-                                            <div class="category-badge mb-2">
-                                                <span class="badge bg-info">${item.subCategory2Name}</span>
-                                            </div>
-                                            <h6 class="product-name">${item.product.name}</h6>
-                                            <p class="product-desc">
-                                                ${productDescription}
-                                            </p>
-                                            <button class="product-btn w-100" onclick="exploreSubCategory(${subCat1Id}, ${item.subCategory2Id}, '${subCat1Name.replace(/'/g, "\\'")}', '${item.subCategory2Name.replace(/'/g, "\\'")}')">
-                                                <i class="fas fa-arrow-right me-2"></i>Explore More
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
+                            const cardHtml = `<div class="col-lg-4 col-md-6 col-sm-6 mb-4"><div class="product-card-modern sample-product-card h-100"><div class="product-image-box">${productImageHtml}</div><div class="product-info"><div class="category-badge mb-2"><span class="badge bg-info">${item.subCategory2Name}</span></div><h6 class="product-name">${item.product.name}</h6><p class="product-desc">${productDescription}</p><button class="product-btn w-100" onclick="exploreSubCategory(${subCat1Id}, ${item.subCategory2Id}, '${subCat1Name.replace(/'/g, "\\'")}', '${item.subCategory2Name.replace(/'/g, "\\'")}')"><i class="fas fa-arrow-right me-2"></i>Explore More</button></div></div></div>`;
                             $grid.append(cardHtml);
                         });
-
                         updateActiveFilter(subCat1Name, null);
                         updateProductCount(response.length);
                     } else {
-                        $grid.html(`
-                            <div class="col-12">
-                                <div class="empty-state">
-                                    <i class="fas fa-inbox"></i>
-                                    <h4>No Collections Available</h4>
-                                    <p>No product collections found for this category.</p>
-                                </div>
-                            </div>
-                        `);
+                        $grid.html('<div class="col-12"><div class="empty-state"><i class="fas fa-inbox"></i><h4>No Collections Available</h4><p>No product collections found for this category.</p></div></div>');
                         updateProductCount(0);
                     }
-
                     showingSampleProducts = true;
                 },
-                error: function (error) {
-                    console.error('Error loading sample products:', error);
-                    $grid.html(`
-                        <div class="col-12">
-                            <div class="empty-state">
-                                <i class="fas fa-exclamation-triangle" style="color: #f56565;"></i>
-                                <h4>Error Loading Collections</h4>
-                                <p>Please try again later.</p>
-                            </div>
-                        </div>
-                    `);
+                error: function () {
+                    $grid.html('<div class="col-12"><div class="empty-state"><i class="fas fa-exclamation-triangle" style="color:#f56565;"></i><h4>Error Loading Collections</h4><p>Please try again later.</p></div></div>');
                 }
             });
         }
 
         function exploreSubCategory(subCat1Id, subCat2Id, subCat1Name, subCat2Name) {
-            console.log('=== Exploring SubCategory ===');
-            console.log('SubCat1 ID:', subCat1Id, 'SubCat2 ID:', subCat2Id);
-            console.log('SubCat1 Name:', subCat1Name, 'SubCat2 Name:', subCat2Name);
-
             currentSubCategory1Id = subCat1Id;
             currentSubCategory2Id = subCat2Id;
             currentBrand = subCat1Name;
             showingSampleProducts = false;
-
             $('#sampleProductsContainer').hide();
             $('#productsGrid').show();
-
             updateActiveFilter(subCat1Name, subCat2Name);
-
             loadProducts(categoryId, subCat1Id, subCat2Id);
-
             $('.brand-subcategory-item').removeClass('active');
             $('[data-subcategory2-id="' + subCat2Id + '"]').addClass('active');
-
             highlightBrand(subCat1Name);
             showOnlyBrand(subCat1Name);
-
-            setTimeout(() => {
-                $('html, body').animate({
-                    scrollTop: $('#productsGrid').offset().top - 100
-                }, 500);
-            }, 300);
+            setTimeout(() => { $('html, body').animate({ scrollTop: $('#productsGrid').offset().top - 100 }, 500); }, 300);
         }
 
         function filterBySubCategory2(subCat1Id, subCat2Id, subCat1Name, subCat2Name) {
-            console.log('=== filterBySubCategory2:', subCat2Id);
-
             currentSubCategory1Id = subCat1Id;
             currentSubCategory2Id = subCat2Id;
             currentBrand = subCat1Name;
             showingSampleProducts = false;
-
             $('.brand-subcategory-item').removeClass('active');
             $(event.currentTarget).addClass('active');
-
             $('#sampleProductsContainer').hide();
             $('#productsGrid').show();
-
             updateActiveFilter(subCat1Name, subCat2Name);
             loadProducts(categoryId, subCat1Id, subCat2Id);
-
             highlightBrand(subCat1Name);
             showOnlyBrand(subCat1Name);
         }
 
         function showAllProducts() {
-            console.log('=== Show All Products ===');
-
             currentSubCategory1Id = 0;
             currentSubCategory2Id = 0;
             currentBrand = '';
             showingSampleProducts = false;
-
             $('.brand-filter-item').each(function () {
                 $(this).find('.brand-filter-btn').removeClass('active');
                 $(this).find('.brand-arrow').removeClass('rotated');
                 $(this).find('.brand-subcategory-list').slideUp(300);
             });
-
             $('.brand-subcategory-item').removeClass('active');
-
             highlightBrand('');
             showOnlyBrand('');
-
             $('#activeFilters').hide();
             $('#sampleProductsContainer').hide();
             $('#productsGrid').show();
-
             loadProducts(categoryId, null, null);
         }
 
         function loadProducts(catId, subCat1Id, subCat2Id) {
-            console.log('=== Loading Products ===');
-            console.log('Category ID:', catId, 'SubCat1:', subCat1Id, 'SubCat2:', subCat2Id);
-
             const $productsGrid = $('#productsGrid');
             const $loadingIndicator = $('#loadingIndicator');
-
             $productsGrid.hide();
             $loadingIndicator.show();
-
             $.ajax({
                 url: '/Product/GetProductsByFilter',
                 type: 'POST',
-                data: {
-                    categoryId: catId,
-                    subCategory1Id: subCat1Id,
-                    subCategory2Id: subCat2Id
-                },
+                data: { categoryId: catId, subCategory1Id: subCat1Id, subCategory2Id: subCat2Id },
                 success: function (response) {
-                    console.log('Products loaded:', response.data ? response.data.length : 0);
-
                     $loadingIndicator.hide();
                     $('#sampleProductsContainer').hide();
                     $productsGrid.show();
-
                     if (response.success && response.data && response.data.length > 0) {
                         renderProducts(response.data);
                         updateProductCount(response.data.length);
                     } else {
-                        $productsGrid.html(`
-                            <div class="col-12">
-                                <div class="empty-state">
-                                    <i class="fas fa-inbox"></i>
-                                    <h4>No Products Found</h4>
-                                    <p>No products available for the selected filter.</p>
-                                    <button class="btn-contact-us" onclick="clearFilters()">
-                                        <i class="fas fa-redo me-2"></i>Show All Products
-                                    </button>
-                                </div>
-                            </div>
-                        `);
+                        $productsGrid.html('<div class="col-12"><div class="empty-state"><i class="fas fa-inbox"></i><h4>No Products Found</h4><p>No products available for the selected filter.</p><button class="btn-contact-us" onclick="clearFilters()"><i class="fas fa-redo me-2"></i>Show All Products</button></div></div>');
                         updateProductCount(0);
                     }
                 },
-                error: function (xhr, status, error) {
-                    console.error('Error loading products:', error);
+                error: function () {
                     $loadingIndicator.hide();
                     $productsGrid.show();
-                    $productsGrid.html(`
-                        <div class="col-12">
-                            <div class="empty-state">
-                                <i class="fas fa-exclamation-triangle" style="color: #f56565;"></i>
-                                <h4>Error Loading Products</h4>
-                                <p>Please try again later.</p>
-                                <button class="btn-contact-us" onclick="loadProducts(${catId}, ${subCat1Id}, ${subCat2Id})">
-                                    <i class="fas fa-redo me-2"></i>Retry
-                                </button>
-                            </div>
-                        </div>
-                    `);
+                    $productsGrid.html('<div class="col-12"><div class="empty-state"><i class="fas fa-exclamation-triangle" style="color:#f56565;"></i><h4>Error Loading Products</h4><p>Please try again later.</p></div></div>');
                 }
             });
         }
@@ -757,34 +652,12 @@
         function renderProducts(products) {
             const $grid = $('#productsGrid');
             $grid.empty();
-
             products.forEach(function (product) {
                 const hasImage = product.imageUrl && product.imageUrl.trim() !== '';
-
                 let imageHtml = hasImage
-                    ? `<img src="${product.imageUrl}"
-                           alt="${product.name} - Professional Power Tool Goa"
-                           onclick="GoToContact()"
-                           loading="lazy">`
+                    ? `<img src="${product.imageUrl}" alt="${product.name} - ${product.subCategory1Name || 'Power'} Tool by RBHU Solutions Goa" onclick="GoToContact()" loading="lazy">`
                     : `<div class="no-image"><i class="fas fa-image"></i></div>`;
-
-                const productHtml = `
-                    <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
-                        <div class="product-card-modern">
-                            <div class="product-image-box">
-                                ${imageHtml}
-                            </div>
-                            <div class="product-info">
-                                <h6 class="product-name">${product.name}</h6>
-                                <p class="product-desc">${product.description ? (product.description.length > 60 ? product.description.substring(0, 60) + '...' : product.description) : 'Professional power tool for demanding applications.'}</p>
-                                <a href="/Home/Contact" class="product-btn">
-                                    <i class="fas fa-phone me-1"></i>Enquire Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
+                const productHtml = `<div class="col-lg-4 col-md-6 col-sm-6 mb-4"><div class="product-card-modern"><div class="product-image-box">${imageHtml}</div><div class="product-info"><h6 class="product-name">${product.name}</h6><p class="product-desc">${product.description ? (product.description.length > 60 ? product.description.substring(0, 60) + '...' : product.description) : 'Professional power tool for demanding applications.'}</p><a href="/Home/Contact" class="product-btn"><i class="fas fa-phone me-1"></i>Enquire Now</a></div></div></div>`;
                 $grid.append(productHtml);
             });
         }
@@ -795,734 +668,147 @@
 
         function updateActiveFilter(subCat1Name, subCat2Name) {
             let filterText = subCat1Name;
-            if (subCat2Name) {
-                filterText += ' → ' + subCat2Name;
-            }
+            if (subCat2Name) { filterText += ' → ' + subCat2Name; }
             $('#filterText').text(filterText);
             $('#activeFilters').show();
         }
 
-        function clearFilters() {
-            showAllProducts();
-        }
+        function clearFilters() { showAllProducts(); }
     </script>
 
     <style>
-        .page-content {
-            background: #ffffff;
-        }
+        .page-content { background: #ffffff; }
+        .brands-section { margin-bottom: 40px; padding: 30px 0; }
+        .brands-title { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #111827; margin-bottom: 28px; display: flex; align-items: center; justify-content: center; text-align: center; }
+        .brands-title i { color: var(--bosch-red); font-size: 1.3rem; }
+        .brands-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 900px; margin: 0 auto; }
+        .brand-card-modern { background: #ffffff; border: 2px solid #e5e7eb; border-radius: 12px; overflow: hidden; cursor: pointer; transition: all 0.3s ease; position: relative; }
+        .brand-card-modern:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); border-color: var(--bosch-red); }
+        .brand-card-modern:hover .brand-overlay { opacity: 1; }
+        .brand-card-modern:hover .brand-image-wrapper img { transform: scale(1.08); }
+        .brand-card-modern.active { border-color: var(--bosch-red); box-shadow: 0 0 0 3px rgba(0,102,179,0.15); }
+        .brand-image-wrapper { height: 200px; display: flex; align-items: center; justify-content: center; padding: 30px; background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%); overflow: hidden; position: relative; }
+        .brand-image-wrapper img { max-width: 180px; max-height: 120px; width: auto; height: auto; object-fit: contain; transition: transform 0.4s ease; }
+        .brand-label { padding: 16px; text-align: center; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.125rem; color: #374151; background: #ffffff; border-top: 2px solid #f3f4f6; }
+        .brand-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,102,179,0.9); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; }
+        .brand-overlay i { color: #ffffff; font-size: 2.5rem; }
+        .filter-sidebar { background: #ffffff; border-radius: 12px; border: 2px solid #e5e7eb; overflow: hidden; position: sticky; top: 20px; }
+        .filter-header { background: #f9fafb; padding: 20px; border-bottom: 2px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .filter-title-sidebar { font-family: 'Poppins', sans-serif; font-size: 1.125rem; font-weight: 700; color: #111827; margin: 0; display: flex; align-items: center; }
+        .filter-title-sidebar i { color: var(--bosch-red); }
+        .btn-reset-sidebar { background: #ffffff; border: 2px solid #d1d5db; color: #374151; padding: 8px 16px; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .btn-reset-sidebar:hover { background: var(--bosch-red); border-color: var(--bosch-red); color: #ffffff; }
+        .filter-section { padding: 20px; border-bottom: 1px solid #e5e7eb; }
+        .filter-section:last-child { border-bottom: none; }
+        .filter-section-header { font-family: 'Poppins', sans-serif; font-size: 0.9375rem; font-weight: 700; color: #111827; margin-bottom: 16px; display: flex; align-items: center; }
+        .filter-section-header i { color: var(--bosch-red); }
+        .filter-btn-full { width: 100%; background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%); color: #ffffff; border: none; padding: 12px 16px; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+        .filter-btn-full:last-child { margin-bottom: 0; }
+        .filter-btn-full:hover { background: linear-gradient(135deg, var(--bosch-red-dark) 0%, var(--bosch-red) 100%); color: #ffffff; transform: translateY(-2px); }
+        .filter-btn-full.filter-btn-outline { background: #ffffff; border: 2px solid var(--bosch-red); color: var(--bosch-red); }
+        .filter-btn-full.filter-btn-outline:hover { background: var(--bosch-red); color: #ffffff; }
+        .brand-filter-item { margin-bottom: 8px; }
+        .brand-filter-item:last-child { margin-bottom: 0; }
+        .brand-filter-btn { width: 100%; background: #f9fafb; border: 2px solid #e5e7eb; color: #374151; padding: 12px 16px; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; text-align: left; }
+        .brand-filter-btn:hover { background: #f3f4f6; border-color: var(--bosch-red); }
+        .brand-filter-btn.active { background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%); border-color: var(--bosch-red); color: #ffffff; }
+        .brand-filter-btn.active i { color: #ffffff; }
+        .brand-filter-btn i.fas.fa-folder { color: #9ca3af; font-size: 0.875rem; }
+        .brand-filter-btn.active i.fas.fa-folder { color: #ffffff; }
+        .brand-arrow { margin-left: auto; transition: transform 0.3s ease; font-size: 0.75rem; }
+        .brand-arrow.rotated { transform: rotate(180deg); }
+        .brand-subcategory-list { margin-top: 8px; margin-left: 16px; padding-left: 16px; border-left: 2px solid #e5e7eb; }
+        .brand-subcategory-item { padding: 10px 14px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; color: #374151; font-family: 'Inter', sans-serif; font-size: 0.875rem; font-weight: 500; display: flex; align-items: center; margin-bottom: 4px; }
+        .brand-subcategory-item:hover { background: #f9fafb; color: var(--bosch-red); padding-left: 18px; }
+        .brand-subcategory-item.active { background: var(--bosch-red); color: #ffffff; }
+        .brand-subcategory-item.active i { color: #ffffff; }
+        .brand-subcategory-item i { font-size: 0.75rem; color: #9ca3af; }
+        .no-categories-sidebar { color: #9ca3af; font-family: 'Inter', sans-serif; font-size: 0.875rem; padding: 10px 0; }
+        .active-filter-badge { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%); color: #ffffff; padding: 10px 18px; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 0.9375rem; font-weight: 600; box-shadow: 0 2px 8px rgba(0,102,179,0.3); }
+        .filter-value { font-weight: 600; }
+        .filter-close { background: rgba(255,255,255,0.2); border: none; color: #ffffff; width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; margin-left: 6px; }
+        .filter-close:hover { background: rgba(255,255,255,0.35); transform: rotate(90deg); }
+        .product-count-badge { display: inline-flex; align-items: center; background: #f9fafb; color: #374151; padding: 10px 18px; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 0.9375rem; font-weight: 600; border: 2px solid #e5e7eb; }
+        .product-card-modern { background: #ffffff; border: 2px solid #e5e7eb; border-radius: 12px; overflow: hidden; transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; }
+        .product-card-modern:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); border-color: var(--bosch-red); }
+        .product-image-box { height: 220px; display: flex; align-items: center; justify-content: center; padding: 20px; background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%); overflow: hidden; }
+        .product-image-box img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.4s ease; cursor: pointer; }
+        .product-card-modern:hover .product-image-box img { transform: scale(1.08); }
+        .no-image { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #d1d5db; font-size: 3rem; }
+        .product-info { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+        .product-name { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 700; color: #111827; margin-bottom: 10px; line-height: 1.4; height: 44px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        .product-desc { color: #6b7280; font-family: 'Inter', sans-serif; font-size: 0.875rem; line-height: 1.6; margin-bottom: 18px; height: 44px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; flex: 1; }
+        .product-btn { background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%); color: #ffffff; border: none; padding: 12px 20px; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 0.9375rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; width: 100%; }
+        .product-btn:hover { background: linear-gradient(135deg, var(--bosch-red-dark) 0%, var(--bosch-red) 100%); color: #ffffff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,102,179,0.3); }
+        .sample-product-card { border: 2px solid var(--bosch-red); }
+        .sample-product-card:hover { border-color: var(--bosch-red-dark); }
+        .category-badge { margin-bottom: 10px; }
+        .category-badge .badge { font-size: 0.75rem; padding: 6px 12px; font-weight: 600; }
+        .empty-state { text-align: center; padding: 70px 30px; background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%); border-radius: 12px; border: 2px solid #e5e7eb; }
+        .empty-state i { font-size: 4rem; color: #d1d5db; margin-bottom: 20px; }
+        .empty-state h4 { color: #111827; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 10px; font-size: 1.25rem; }
+        .empty-state p { color: #6b7280; font-family: 'Inter', sans-serif; margin-bottom: 24px; font-size: 1rem; }
+        .btn-contact-us { background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%); color: #ffffff; border: none; padding: 12px 28px; border-radius: 8px; font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; font-size: 1rem; }
+        .btn-contact-us:hover { background: linear-gradient(135deg, var(--bosch-red-dark) 0%, var(--bosch-red) 100%); color: #ffffff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,102,179,0.3); }
+        .section-title { font-family: 'Poppins', sans-serif; font-weight: 700; color: #111827; }
+
+        /* FAQ */
+        .powertools-faq-heading { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 700; color: #111827; }
+        .powertools-faq-sub { font-family: 'Inter', sans-serif; font-size: 0.97rem; }
+        .powertools-feature i { color: var(--bosch-red); }
+        .powertools-faq-accordion { display: flex; flex-direction: column; gap: 10px; }
+        .powertools-faq-item { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; transition: border-color 0.25s ease, box-shadow 0.25s ease; }
+        .powertools-faq-item:has(.powertools-faq-question[aria-expanded="true"]) { border-color: #0066B3; box-shadow: 0 4px 16px rgba(0,102,179,0.1); }
+        .powertools-faq-question { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; background: transparent; border: none; cursor: pointer; text-align: left; font-family: 'Poppins', sans-serif; font-size: 0.97rem; font-weight: 600; color: #1a1a1a; line-height: 1.5; transition: background 0.2s ease, color 0.2s ease; }
+        .powertools-faq-question:hover { background: #f0f7ff; color: #0066B3; }
+        .powertools-faq-question[aria-expanded="true"] { background: #f0f7ff; color: #0066B3; }
+        .powertools-faq-icon { flex-shrink: 0; font-size: 0.85rem; color: #0066B3; transition: transform 0.3s ease; }
+        .powertools-faq-answer { padding: 0 22px 18px; border-top: 1px solid #e2e8f0; }
+        .powertools-faq-answer p { font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #4a5568; line-height: 1.75; margin: 14px 0 0; }
+        .powertools-faq-answer a { color: #0066B3; text-decoration: none; font-weight: 500; }
+        .powertools-faq-answer a:hover { text-decoration: underline; }
 
-        /* FEATURED BRANDS */
-        .brands-section {
-            margin-bottom: 40px;
-            padding: 30px 0;
-        }
-
-        .brands-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #111827;
-            margin-bottom: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-
-            .brands-title i {
-                color: var(--bosch-red);
-                font-size: 1.3rem;
-            }
-
-        .brands-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .brand-card-modern {
-            background: #ffffff;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-            .brand-card-modern:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-                border-color: var(--bosch-red);
-            }
-
-                .brand-card-modern:hover .brand-overlay {
-                    opacity: 1;
-                }
-
-                .brand-card-modern:hover .brand-image-wrapper img {
-                    transform: scale(1.08);
-                }
-
-            .brand-card-modern.active {
-                border-color: var(--bosch-red);
-                box-shadow: 0 0 0 3px rgba(0, 102, 179, 0.15);
-            }
-
-        .brand-image-wrapper {
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 30px;
-            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
-            overflow: hidden;
-            position: relative;
-        }
-
-            .brand-image-wrapper img {
-                max-width: 180px;
-                max-height: 120px;
-                width: auto;
-                height: auto;
-                object-fit: contain;
-                transition: transform 0.4s ease;
-            }
-
-        .brand-label {
-            padding: 16px;
-            text-align: center;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 1.125rem;
-            color: #374151;
-            background: #ffffff;
-            border-top: 2px solid #f3f4f6;
-        }
-
-        .brand-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 102, 179, 0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-            .brand-overlay i {
-                color: #ffffff;
-                font-size: 2.5rem;
-            }
-
-        /* FILTER SIDEBAR */
-        .filter-sidebar {
-            background: #ffffff;
-            border-radius: 12px;
-            border: 2px solid #e5e7eb;
-            overflow: hidden;
-            position: sticky;
-            top: 20px;
-        }
-
-        .filter-header {
-            background: #f9fafb;
-            padding: 20px;
-            border-bottom: 2px solid #e5e7eb;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .filter-title-sidebar {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.125rem;
-            font-weight: 700;
-            color: #111827;
-            margin: 0;
-            display: flex;
-            align-items: center;
-        }
-
-            .filter-title-sidebar i {
-                color: var(--bosch-red);
-            }
-
-        .btn-reset-sidebar {
-            background: #ffffff;
-            border: 2px solid #d1d5db;
-            color: #374151;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-            .btn-reset-sidebar:hover {
-                background: var(--bosch-red);
-                border-color: var(--bosch-red);
-                color: #ffffff;
-            }
-
-        .filter-section {
-            padding: 20px;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-            .filter-section:last-child {
-                border-bottom: none;
-            }
-
-        .filter-section-header {
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.9375rem;
-            font-weight: 700;
-            color: #111827;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-        }
-
-            .filter-section-header i {
-                color: var(--bosch-red);
-            }
-
-        .filter-btn-full {
-            width: 100%;
-            background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-            color: #ffffff;
-            border: none;
-            padding: 12px 16px;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 12px;
-        }
-
-            .filter-btn-full:last-child {
-                margin-bottom: 0;
-            }
-
-            .filter-btn-full:hover {
-                background: linear-gradient(135deg, var(--bosch-red-dark) 0%, var(--bosch-red) 100%);
-                color: #ffffff;
-                transform: translateY(-2px);
-            }
-
-            .filter-btn-full.filter-btn-outline {
-                background: #ffffff;
-                border: 2px solid var(--bosch-red);
-                color: var(--bosch-red);
-            }
-
-                .filter-btn-full.filter-btn-outline:hover {
-                    background: var(--bosch-red);
-                    color: #ffffff;
-                }
-
-        .brand-filter-item {
-            margin-bottom: 8px;
-        }
-
-            .brand-filter-item:last-child {
-                margin-bottom: 0;
-            }
-
-        .brand-filter-btn {
-            width: 100%;
-            background: #f9fafb;
-            border: 2px solid #e5e7eb;
-            color: #374151;
-            padding: 12px 16px;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            text-align: left;
-        }
-
-            .brand-filter-btn:hover {
-                background: #f3f4f6;
-                border-color: var(--bosch-red);
-            }
-
-            .brand-filter-btn.active {
-                background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-                border-color: var(--bosch-red);
-                color: #ffffff;
-            }
-
-                .brand-filter-btn.active i {
-                    color: #ffffff;
-                }
-
-            .brand-filter-btn i.fas.fa-folder {
-                color: #9ca3af;
-                font-size: 0.875rem;
-            }
-
-            .brand-filter-btn.active i.fas.fa-folder {
-                color: #ffffff;
-            }
-
-        .brand-arrow {
-            margin-left: auto;
-            transition: transform 0.3s ease;
-            font-size: 0.75rem;
-        }
-
-            .brand-arrow.rotated {
-                transform: rotate(180deg);
-            }
-
-        .brand-subcategory-list {
-            margin-top: 8px;
-            margin-left: 16px;
-            padding-left: 16px;
-            border-left: 2px solid #e5e7eb;
-        }
-
-        .brand-subcategory-item {
-            padding: 10px 14px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: #374151;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.875rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            margin-bottom: 4px;
-        }
-
-            .brand-subcategory-item:hover {
-                background: #f9fafb;
-                color: var(--bosch-red);
-                padding-left: 18px;
-            }
-
-            .brand-subcategory-item.active {
-                background: var(--bosch-red);
-                color: #ffffff;
-            }
-
-                .brand-subcategory-item.active i {
-                    color: #ffffff;
-                }
-
-            .brand-subcategory-item i {
-                font-size: 0.75rem;
-                color: #9ca3af;
-            }
-
-        .no-categories-sidebar {
-            color: #9ca3af;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.875rem;
-            padding: 10px 0;
-        }
-
-        /* FILTER BADGES */
-        .active-filter-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-            color: #ffffff;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9375rem;
-            font-weight: 600;
-            box-shadow: 0 2px 8px rgba(0, 102, 179, 0.3);
-        }
-
-        .filter-value {
-            font-weight: 600;
-        }
-
-        .filter-close {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: #ffffff;
-            width: 24px;
-            height: 24px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-left: 6px;
-        }
-
-            .filter-close:hover {
-                background: rgba(255, 255, 255, 0.35);
-                transform: rotate(90deg);
-            }
-
-        .product-count-badge {
-            display: inline-flex;
-            align-items: center;
-            background: #f9fafb;
-            color: #374151;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9375rem;
-            font-weight: 600;
-            border: 2px solid #e5e7eb;
-        }
-
-        /* PRODUCT CARDS */
-        .product-card-modern {
-            background: #ffffff;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-            .product-card-modern:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-                border-color: var(--bosch-red);
-            }
-
-        .product-image-box {
-            height: 220px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
-            overflow: hidden;
-        }
-
-            .product-image-box img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-                transition: transform 0.4s ease;
-                cursor: pointer;
-            }
-
-        .product-card-modern:hover .product-image-box img {
-            transform: scale(1.08);
-        }
-
-        .no-image {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #d1d5db;
-            font-size: 3rem;
-        }
-
-        .product-info {
-            padding: 20px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .product-name {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #111827;
-            margin-bottom: 10px;
-            line-height: 1.4;
-            height: 44px;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-        }
-
-        .product-desc {
-            color: #6b7280;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.875rem;
-            line-height: 1.6;
-            margin-bottom: 18px;
-            height: 44px;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            flex: 1;
-        }
-
-        .product-btn {
-            background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-            color: #ffffff;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9375rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
-
-            .product-btn:hover {
-                background: linear-gradient(135deg, var(--bosch-red-dark) 0%, var(--bosch-red) 100%);
-                color: #ffffff;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(0, 102, 179, 0.3);
-            }
-
-        .sample-product-card {
-            border: 2px solid var(--bosch-red);
-        }
-
-            .sample-product-card:hover {
-                border-color: var(--bosch-red-dark);
-            }
-
-        .category-badge {
-            margin-bottom: 10px;
-        }
-
-            .category-badge .badge {
-                font-size: 0.75rem;
-                padding: 6px 12px;
-                font-weight: 600;
-            }
-
-        /* EMPTY STATE */
-        .empty-state {
-            text-align: center;
-            padding: 70px 30px;
-            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
-            border-radius: 12px;
-            border: 2px solid #e5e7eb;
-        }
-
-            .empty-state i {
-                font-size: 4rem;
-                color: #d1d5db;
-                margin-bottom: 20px;
-            }
-
-            .empty-state h4 {
-                color: #111827;
-                font-family: 'Poppins', sans-serif;
-                font-weight: 700;
-                margin-bottom: 10px;
-                font-size: 1.25rem;
-            }
-
-            .empty-state p {
-                color: #6b7280;
-                font-family: 'Inter', sans-serif;
-                margin-bottom: 24px;
-                font-size: 1rem;
-            }
-
-        .btn-contact-us {
-            background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%);
-            color: #ffffff;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            font-size: 1rem;
-        }
-
-            .btn-contact-us:hover {
-                background: linear-gradient(135deg, var(--bosch-red-dark) 0%, var(--bosch-red) 100%);
-                color: #ffffff;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(0, 102, 179, 0.3);
-            }
-
-        .section-title {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            color: #111827;
-        }
-
-        /* RESPONSIVE */
         @@media (max-width: 991px) {
-            .filter-sidebar
-
-        {
-            position: relative;
-            top: 0;
-            margin-bottom: 24px;
-        }
-
-        .brands-grid {
-            grid-template-columns: repeat(2, 1fr);
-            max-width: 100%;
-        }
-
+            .filter-sidebar { position: relative; top: 0; margin-bottom: 24px; }
+            .brands-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
+            .powertools-faq-heading { font-size: 1.3rem; }
         }
         @@media (max-width: 768px) {
-            .filter-header
-
-        {
-            padding: 16px;
-        }
-
-        .filter-title-sidebar {
-            font-size: 1rem;
-        }
-
-        .filter-section {
-            padding: 16px;
-        }
-
-        .brands-title {
-            font-size: 1.375rem;
-        }
-
-        .brand-image-wrapper {
-            height: 180px;
-            padding: 25px;
-        }
-
-            .brand-image-wrapper img {
-                max-width: 160px;
-                max-height: 100px;
-            }
-
-        .brand-label {
-            font-size: 1.0625rem;
-            padding: 14px;
-        }
-
-        .product-image-box {
-            height: 200px;
-        }
-
+            .filter-header { padding: 16px; }
+            .filter-title-sidebar { font-size: 1rem; }
+            .filter-section { padding: 16px; }
+            .brands-title { font-size: 1.375rem; }
+            .brand-image-wrapper { height: 180px; padding: 25px; }
+            .brand-image-wrapper img { max-width: 160px; max-height: 100px; }
+            .brand-label { font-size: 1.0625rem; padding: 14px; }
+            .product-image-box { height: 200px; }
+            .powertools-faq-question { padding: 15px 16px; font-size: 0.9rem; }
+            .powertools-faq-answer { padding: 0 16px 16px; }
+            .powertools-faq-answer p { font-size: 0.88rem; }
         }
         @@media (max-width: 576px) {
-            .filter-header
-
-        {
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        .btn-reset-sidebar {
-            width: 100%;
-            justify-content: center;
-        }
-
-        .brands-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .brand-image-wrapper {
-            height: 200px;
-            padding: 30px;
-        }
-
-            .brand-image-wrapper img {
-                max-width: 200px;
-                max-height: 120px;
-            }
-
-        .brand-label {
-            font-size: 1.125rem;
-        }
-
-        .product-image-box {
-            height: 180px;
-        }
-
-        .product-info {
-            padding: 18px;
-        }
-
-        .empty-state {
-            padding: 50px 20px;
-        }
-
+            .filter-header { flex-direction: column; align-items: stretch; }
+            .btn-reset-sidebar { width: 100%; justify-content: center; }
+            .brands-grid { grid-template-columns: 1fr; }
+            .brand-image-wrapper { height: 200px; padding: 30px; }
+            .brand-image-wrapper img { max-width: 200px; max-height: 120px; }
+            .brand-label { font-size: 1.125rem; }
+            .product-image-box { height: 180px; }
+            .product-info { padding: 18px; }
+            .empty-state { padding: 50px 20px; }
+            .powertools-faq-heading { font-size: 1.15rem; }
+            .powertools-faq-question { padding: 13px 14px; font-size: 0.85rem; gap: 10px; }
+            .powertools-faq-answer { padding: 0 14px 14px; }
         }
         @@media (max-width: 375px) {
-            .brands-title
-
-        {
-            font-size: 1.25rem;
-        }
-
-        .filter-title-sidebar {
-            font-size: 0.9375rem;
-        }
-
-        .brand-image-wrapper {
-            height: 180px;
-            padding: 25px;
-        }
-
-            .brand-image-wrapper img {
-                max-width: 180px;
-                max-height: 110px;
-            }
-
-        .product-image-box {
-            height: 160px;
-            padding: 16px;
-        }
-
-        .product-name {
-            font-size: 0.9375rem;
-        }
-
-        .product-desc {
-            font-size: 0.8125rem;
-        }
-
-        .product-btn {
-            font-size: 0.875rem;
-            padding: 10px 16px;
-        }
-
+            .brands-title { font-size: 1.25rem; }
+            .filter-title-sidebar { font-size: 0.9375rem; }
+            .brand-image-wrapper { height: 180px; padding: 25px; }
+            .brand-image-wrapper img { max-width: 180px; max-height: 110px; }
+            .product-image-box { height: 160px; padding: 16px; }
+            .product-name { font-size: 0.9375rem; }
+            .product-desc { font-size: 0.8125rem; }
+            .product-btn { font-size: 0.875rem; padding: 10px 16px; }
         }
     </style>
 }

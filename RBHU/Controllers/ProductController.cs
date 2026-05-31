@@ -366,7 +366,7 @@ namespace RBHU.Controllers
             });
         }
 
-        
+
         public JsonResult GetSubCategories1(int categoryId)
         {
             var subCategories = categoryId > 0 ?
@@ -380,7 +380,7 @@ namespace RBHU.Controllers
             });
         }
 
-       
+
         public JsonResult GetSubCategories2(int subCategory1Id)
         {
             var subCategories = subCategory1Id > 0 ?
@@ -394,7 +394,7 @@ namespace RBHU.Controllers
             });
         }
 
-      
+
         public JsonResult GetProductsByCategory(int categoryId)
         {
             var products = categoryId > 0 ?
@@ -702,90 +702,105 @@ namespace RBHU.Controllers
             return result;
         }
 
-        // GET: /Product/Pneumatic/CP
-        // GET: /Product/CuttingTools/Bipico
-        // GET: /Product/Abrasives/Norton
-        // GET: /Product/PowerTools/Makita
+        // ===== 301 REDIRECTS: old URL format → new /Category/ route =====
+        [HttpGet, Route("Product/SafetyProducts")]
+        public IActionResult OldSafetyProducts() => RedirectPermanent("/Product/Category/SafetyProducts");
+
+        [HttpGet, Route("Product/Pneumatic")]
+        public IActionResult OldPneumatic() => RedirectPermanent("/Product/Category/Pneumatic");
+
+        [HttpGet, Route("Product/Abrasives")]
+        public IActionResult OldAbrasives() => RedirectPermanent("/Product/Category/Abrasives");
+
+        [HttpGet, Route("Product/PowerTools")]
+        public IActionResult OldPowerTools() => RedirectPermanent("/Product/Category/PowerTools");
+
+        [HttpGet, Route("Product/Hoses")]
+        public IActionResult OldHoses() => RedirectPermanent("/Product/Category/Hoses");
+
+        [HttpGet, Route("Product/Belts")]
+        public IActionResult OldBelts() => RedirectPermanent("/Product/Category/Belts");
+
+        [HttpGet, Route("Product/CuttingTools")]
+        public IActionResult OldCuttingTools() => RedirectPermanent("/Home/Products");
+        // ===== END REDIRECTS =====
+
+        // GET: /Product/Category/{categoryName}/{brandName?}
         [HttpGet]
         [Route("Product/Category/{categoryName}/{brandName?}")]
         public IActionResult CategoryByBrand(string categoryName, string brandName = null)
         {
-            
-                try
-                {
-                // Map category names to IDs (as per DB screenshot)
+            try
+            {
+                // Map category names to IDs (as per DB)
                 var categoryMap = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "Abrasives", 3 },
                     { "Belts", 7 },
-                    { "CuttingTools", 5 },
                     { "Hoses", 6 },
                     { "Pneumatic", 1 },
                     { "PowerTools", 2 },
                     { "SafetyProducts", 4 }
                 };
 
-
                 if (!categoryMap.TryGetValue(categoryName, out int categoryId))
+                {
+                    return NotFound("Category not found");
+                }
+
+                // Get the category
+                var category = _productService.GetCategoryById(categoryId);
+                if (category == null)
+                {
+                    return NotFound("Category not found");
+                }
+
+                // Get all SubCategories1 for this category
+                var subCategories1 = _productService.GetSubCategories1ByCategory(categoryId);
+
+                // Find the selected brand (SubCategory1)
+                int? selectedSubCategory1Id = null;
+                if (!string.IsNullOrEmpty(brandName))
+                {
+                    var selectedBrand = subCategories1.FirstOrDefault(s =>
+                        s.Name.Equals(brandName, StringComparison.OrdinalIgnoreCase));
+
+                    if (selectedBrand != null)
                     {
-                        return NotFound("Category not found");
+                        selectedSubCategory1Id = selectedBrand.Id;
                     }
+                }
 
-                    // Get the category
-                    var category = _productService.GetCategoryById(categoryId);
-                    if (category == null)
-                    {
-                        return NotFound("Category not found");
-                    }
+                // Get SubCategories2 Map
+                var subCategories2Map = new Dictionary<int, List<SubCategory2>>();
+                foreach (var subCat1 in subCategories1)
+                {
+                    var subCat2List = _productService.GetSubCategories2BySubCategory1(subCat1.Id);
+                    subCategories2Map[subCat1.Id] = subCat2List;
+                }
 
-                    // Get all SubCategories1 for this category
-                    var subCategories1 = _productService.GetSubCategories1ByCategory(categoryId);
+                // Get products based on selection
+                List<Product> products;
+                if (selectedSubCategory1Id.HasValue)
+                {
+                    products = _productService.GetProductsBySubCategory1(selectedSubCategory1Id.Value);
+                }
+                else
+                {
+                    products = _productService.GetProductsByCategory(categoryId);
+                }
 
-                    // Find the selected brand (SubCategory1)
-                    int? selectedSubCategory1Id = null;
-                    if (!string.IsNullOrEmpty(brandName))
-                    {
-                        var selectedBrand = subCategories1.FirstOrDefault(s =>
-                            s.Name.Equals(brandName, StringComparison.OrdinalIgnoreCase));
-
-                        if (selectedBrand != null)
-                        {
-                            selectedSubCategory1Id = selectedBrand.Id;
-                        }
-                    }
-
-                    // Get SubCategories2 Map
-                    var subCategories2Map = new Dictionary<int, List<SubCategory2>>();
-                    foreach (var subCat1 in subCategories1)
-                    {
-                        var subCat2List = _productService.GetSubCategories2BySubCategory1(subCat1.Id);
-                        subCategories2Map[subCat1.Id] = subCat2List;
-                    }
-
-                    // Get products based on selection
-                    List<Product> products;
-                    if (selectedSubCategory1Id.HasValue)
-                    {
-                        // Get products for selected brand
-                        products = _productService.GetProductsBySubCategory1(selectedSubCategory1Id.Value);
-                    }
-                    else
-                    {
-                        // Get all products for this category
-                        products = _productService.GetProductsByCategory(categoryId);
-                    }
-
-                    // Create ViewModel
-                    var viewModel = new CategoryViewModel
-                    {
-                        CategoryId = categoryId,
-                        CategoryName = category.Name,
-                        SubCategories1 = subCategories1,
-                        SubCategories2Map = subCategories2Map,
-                        Products = products,
-                        SelectedSubCategory1Id = selectedSubCategory1Id,
-                        SelectedSubCategory2Id = null
-                    };
+                // Create ViewModel
+                var viewModel = new CategoryViewModel
+                {
+                    CategoryId = categoryId,
+                    CategoryName = category.Name,
+                    SubCategories1 = subCategories1,
+                    SubCategories2Map = subCategories2Map,
+                    Products = products,
+                    SelectedSubCategory1Id = selectedSubCategory1Id,
+                    SelectedSubCategory2Id = null
+                };
 
                 string viewName = category.Name switch
                 {
@@ -796,10 +811,10 @@ namespace RBHU.Controllers
                     "PPE & Safety Equipments" => "SafetyProducts",
                     "Hoses" => "Hoses",
                     "Belts" => "Belts",
-                    _ => "Category" // fallback
+                    _ => "Category"
                 };
-                return View(viewName, viewModel);
 
+                return View(viewName, viewModel);
             }
             catch (Exception ex)
             {
@@ -824,10 +839,8 @@ namespace RBHU.Controllers
         [HttpGet]
         public JsonResult GetSampleProductsForSubCategories2(int subCategory1Id)
         {
-           var subCategories2 = _productService.GetSampleProductsForSubCategories2(subCategory1Id);
-
+            var subCategories2 = _productService.GetSampleProductsForSubCategories2(subCategory1Id);
             return Json(subCategories2);
         }
-
     }
 }

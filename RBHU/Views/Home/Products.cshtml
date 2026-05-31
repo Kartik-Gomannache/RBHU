@@ -1,6 +1,6 @@
 ﻿@{
-    ViewData["Title"] = "Industrial Products | Tools, PPE Equipment & Pneumatic Systems Goa";
-    ViewData["Description"] = "Browse 500+ industrial products in Goa. Premium power tools, PPE safety equipment, pneumatic systems, abrasives, Bosch, Chicago Pneumatic. Authorized dealer with warranty coverage.";
+    ViewData["Title"] = "Industrial Products | PPE, Pneumatic & Power Tools Supplier in Goa | RBHU Solutions LLP";
+    ViewData["Description"] = "Browse 500+ industrial products in Goa. Authorised dealer for Safewell PPE, Chicago Pneumatic, Klingspor abrasives, Bosch and Makita power tools. Serving industries across South Goa and North Goa.";
 }
 
 <!-- Products Page with Professional Industrial Theme -->
@@ -12,12 +12,16 @@
         <div class="container">
             <div class="hero-content-wrapper" data-aos="fade-up">
                 <div class="hero-badge">Our Product Range</div>
+
+                <!-- CHANGE: H1 now geo-targeted with Goa keyword -->
                 <h1 class="hero-main-title">
-                    Professional Industrial
-                    <span class="title-highlight">Tools & Equipment</span>
+                    Authorised Industrial Tools &amp; Equipment Supplier in
+                    <span class="title-highlight">Goa</span>
                 </h1>
+
+                <!-- CHANGE: One-line introductory paragraph for indexing -->
                 <p class="hero-subtitle">
-                    Comprehensive range of premium industrial solutions from world-leading manufacturers
+                    RBHU Solutions LLP is an authorised dealer of premium industrial tools, PPE safety equipment, pneumatic systems, and abrasives, serving manufacturing industries across Goa since 2022.
                 </p>
             </div>
         </div>
@@ -33,7 +37,7 @@
                         <a href="/Product/Category/SafetyProducts/Safewell" class="category-card-link">
                             <div class="category-image1-wrapper">
                                 <img src="~/images/products/safety_general.jpg"
-                                     alt="PPE Safety Equipment - Helmets, Gloves, Protective Eyewear by RBHU Solutions Goa"
+                                     alt="PPE Safety Equipment - Safewell Helmets, Gloves, Protective Gear by RBHU Solutions Goa"
                                      class="category-image1"
                                      loading="lazy">
                                <div class="category-image1-gradient"></div>
@@ -69,7 +73,7 @@
                         <a href="/Product/Category/Abrasives" class="category-card-link">
                             <div class="category-image1-wrapper">
                                 <img src="~/images/products/abrasive_general.jpg"
-                                     alt="Industrial Abrasives - Grinding Wheels, Sanding Discs, Wire Brushes Goa"
+                                     alt="Industrial Abrasives - Klingspor Grinding Wheels, Sanding Discs, Wire Brushes Goa"
                                      class="category-image1"
                                      loading="lazy">
                                 <div class="category-image1-gradient"></div>
@@ -105,7 +109,7 @@
                         <a href="/Product/Category/Pneumatic" class="category-card-link">
                             <div class="category-image1-wrapper">
                                 <img src="~/images/products/pneumatic_general.png"
-                                     alt="Pneumatic Tools Systems - Air Compressors, Impact Wrenches, Chicago Pneumatic Goa"
+                                     alt="Pneumatic Tools Systems - Chicago Pneumatic Impact Wrenches, Air Tools Goa"
                                      class="category-image1"
                                      loading="lazy">
                                 <div class="category-image1-gradient"></div>
@@ -141,7 +145,7 @@
                         <a href="/Product/Category/PowerTools" class="category-card-link">
                             <div class="category-image1-wrapper">
                                 <img src="~/images/products/power_general2.jpg"
-                                     alt="Power Tools Accessories - Electric Drills, Angle Grinders, Makita Bosch Goa"
+                                     alt="Power Tools Accessories - Makita and Bosch Electric Drills, Angle Grinders Goa"
                                      class="category-image1"
                                      loading="lazy">
                                 <div class="category-image1-gradient"></div>
@@ -242,43 +246,6 @@
                         </div>
                     </div>
                 </div>
-
-                @* <!-- Cutting Tools -->
-                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="700">
-                    <div class="product-category-card">
-                        <a href="/Product/Category/CuttingTools" class="category-card-link">
-                            <div class="category-image1-wrapper">
-                                <img src="~/images/products/cutting_general.jpg"
-                                     alt="Precision Cutting Tools - Carbide End Mills, HSS Drill Bits, Saw Blades Goa"
-                                     class="category-image1"
-                                     loading="lazy">
-                                <div class="category-image1-gradient"></div>
-                            </div>
-                        </a>
-                        <div class="category-card-body">
-                            <div class="category-icon-wrapper">
-                                <i class="fas fa-cut"></i>
-                            </div>
-                            <h3 class="category-card-title">
-                                <a asp-controller="Product" asp-action="CuttingTools">Cutting Tools</a>
-                            </h3>
-                            <p class="category-card-description">
-                                Precision cutting tools and blades for metal, wood, and composite materials. Built for accuracy and longevity.
-                            </p>
-                            <ul class="category-feature-list">
-                                <li>Carbide End Mills</li>
-                                <li>HSS Drill Bits</li>
-                                <li>Saw Blades</li>
-                                <li>Router Bits</li>
-                            </ul>
-                            <div class="category-status-badges">
-                                <span class="status-badge badge-professional">Precision</span>
-                                <span class="status-badge badge-available">In Stock</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
- *@
             </div>
         </div>
     </section>
@@ -366,13 +333,83 @@
                 </div>
             </div>
         </div>
-    </section> 
+    </section>
 </div>
+
+<!-- CHANGE: CollectionPage + ItemList schema for this products listing page -->
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@@type": "CollectionPage",
+  "name": "Industrial Products — RBHU Solutions LLP, Goa",
+  "description": "Authorised dealer of industrial tools, PPE safety equipment, pneumatic systems, abrasives, power tools, hoses, and belts serving industries across Goa.",
+  "url": "https://rbhu.co.in/Home/Products",
+  "provider": {
+    "@@type": "LocalBusiness",
+    "name": "RBHU Solutions LLP",
+    "address": {
+      "@@type": "PostalAddress",
+      "addressLocality": "Margao",
+      "addressRegion": "Goa",
+      "addressCountry": "IN"
+    }
+  },
+  "hasPart": [
+    {
+      "@@type": "ItemList",
+      "name": "Product Categories",
+      "itemListElement": [
+        {
+          "@@type": "ListItem",
+          "position": 1,
+          "name": "PPE and Safety Equipment",
+          "description": "Authorised Safewell PPE dealer in Goa — safety helmets, gloves, protective eyewear, safety harnesses.",
+          "url": "https://rbhu.co.in/Product/Category/SafetyProducts"
+        },
+        {
+          "@@type": "ListItem",
+          "position": 2,
+          "name": "Abrasives",
+          "description": "Authorised Klingspor and Kovax abrasives dealer in Goa — grinding wheels, sanding discs, wire brushes.",
+          "url": "https://rbhu.co.in/Product/Category/Abrasives"
+        },
+        {
+          "@@type": "ListItem",
+          "position": 3,
+          "name": "Pneumatic Tools and Systems",
+          "description": "Authorised Chicago Pneumatic, Fuji, and UFLOW pneumatic tools dealer in Goa — air impact wrenches, pneumatic drills, air compressors.",
+          "url": "https://rbhu.co.in/Product/Category/Pneumatic"
+        },
+        {
+          "@@type": "ListItem",
+          "position": 4,
+          "name": "Power Tools and Accessories",
+          "description": "Authorised Makita and Bosch power tools dealer in Goa — electric drills, angle grinders, circular saws.",
+          "url": "https://rbhu.co.in/Product/Category/PowerTools"
+        },
+        {
+          "@@type": "ListItem",
+          "position": 5,
+          "name": "Hoses",
+          "description": "Industrial hoses supplier in Goa — hydraulic hoses, air hoses, high-pressure hoses and fittings.",
+          "url": "https://rbhu.co.in/Product/Category/Hoses"
+        },
+        {
+          "@@type": "ListItem",
+          "position": 6,
+          "name": "Belts",
+          "description": "Power transmission belts supplier in Goa — V-belts, timing belts, flat belts for industrial applications.",
+          "url": "https://rbhu.co.in/Product/Category/Belts"
+        }
+      ]
+    }
+  ]
+}
+</script>
 
 <style>
     /* ==========================================
        PRODUCTS PAGE - PROFESSIONAL STYLING
-       Clean, Modern, Industrial B2B Design
        ========================================== */
 
     .products-page-wrapper {
@@ -380,6 +417,7 @@
         width: 100%;
         overflow-x: hidden;
     }
+
     /* ========== HERO SECTION ========== */
     .products-hero {
         position: relative;
@@ -435,7 +473,6 @@
     .hero-badge {
         display: inline-block;
         padding: 10px 24px;
-        /* background: linear-gradient(135deg, var(--bosch-red) 0%, var(--bosch-red-light) 100%); */
         color: var(--white);
         font-family: 'Inter', sans-serif;
         font-size: 0.875rem;
@@ -470,7 +507,7 @@
         font-size: 1.125rem;
         line-height: 1.7;
         color: rgba(255, 255, 255, 0.9);
-        max-width: 650px;
+        max-width: 700px;
         margin: 0 auto;
     }
 
@@ -480,7 +517,6 @@
         background: var(--white);
     }
 
-    /* Product Category Cards */
     .product-category-card {
         background: var(--white);
         border-radius: 8px;
@@ -548,7 +584,6 @@
         pointer-events: none;
     }
 
-    /* Category Card Body */
     .category-card-body {
         padding: 28px 24px 24px;
         flex: 1;
@@ -635,7 +670,6 @@
                 font-size: 16px;
             }
 
-    /* Category Status Badges */
     .category-status-badges {
         margin-top: auto;
         padding-top: 18px;
@@ -794,7 +828,7 @@
         margin: 0;
     }
 
-    /* ========== CALL TO ACTION SECTION - NEW DESIGN ========== */
+    /* ========== CTA SECTION ========== */
     .products-cta-section {
         position: relative;
         padding: 120px 0;
@@ -808,7 +842,6 @@
         left: 0;
         width: 100%;
         height: 100%;
-        /* //background-image: url('/images/cargoship.jpg'); */
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -959,228 +992,45 @@
             z-index: 1;
         }
 
-
-    /* ========== RESPONSIVE DESIGN FOR CTA ========== */
-
-    /* Tablets */
+    /* ========== RESPONSIVE ========== */
     @@media (max-width: 991px) {
-        .products-cta-section
-
-    {
-        padding: 100px 0;
+        .products-hero { padding: 100px 0 60px; }
+        .products-catalog-section, .value-proposition-section { padding: 60px 0; }
+        .products-cta-section { padding: 80px 0; }
+        .category-image1-wrapper { height: 200px; }
     }
 
-    .cta-main-title {
-        font-size: clamp(1.75rem, 4.5vw, 3rem);
-    }
-
-    .cta-subtitle {
-        font-size: 1.125rem;
-    }
-
-    }
-
-    /* Mobile */
     @@media (max-width: 767px) {
-        .products-cta-section
-
-    {
-        padding: 80px 0;
+        .products-hero { padding: 80px 0 50px; }
+        .hero-badge { font-size: 0.75rem; padding: 8px 18px; }
+        .products-catalog-section, .value-proposition-section { padding: 50px 0; }
+        .products-cta-section { padding: 60px 0; }
+        .category-image1-wrapper { height: 180px; }
+        .category-card-body { padding: 24px 20px 20px; }
+        .category-card-title { font-size: 1.0625rem; min-height: 50px; }
+        .category-card-description { font-size: 0.875rem; min-height: 75px; }
+        .category-feature-list { min-height: 90px; }
+        .category-feature-list li { font-size: 0.8125rem; }
+        .cta-action-buttons { flex-direction: column; width: 100%; max-width: 400px; margin: 0 auto; }
+        .cta-btn { width: 100%; justify-content: center; }
     }
 
-    .cta-main-title {
-        font-size: clamp(1.5rem, 4vw, 2.5rem);
-        margin-bottom: 20px;
-    }
-
-    .cta-subtitle {
-        font-size: 1rem;
-        margin-bottom: 36px;
-    }
-
-    .cta-action-buttons {
-        flex-direction: column;
-        width: 100%;
-        max-width: 400px;
-        margin: 0 auto;
-        gap: 16px;
-    }
-
-    .cta-btn {
-        width: 100%;
-        justify-content: center;
-        padding: 16px 32px;
-    }
-
-    }
-
-    /* Small Mobile */
     @@media (max-width: 575px) {
-        .products-cta-section
-
-    {
-        padding: 60px 0;
+        .products-hero { padding: 70px 0 40px; }
+        .hero-subtitle { font-size: 0.95rem; }
+        .category-image1-wrapper { height: 160px; }
+        .category-card-body { padding: 20px 16px 16px; }
+        .category-icon-wrapper { width: 52px; height: 52px; font-size: 24px; margin-bottom: 16px; }
+        .category-card-title { font-size: 1rem; min-height: 48px; }
+        .category-card-description { font-size: 0.8125rem; min-height: 70px; }
+        .category-feature-list { min-height: 85px; padding: 12px 16px; margin-bottom: 16px; }
+        .category-feature-list li { font-size: 0.75rem; padding: 5px 0 5px 24px; }
+        .status-badge { font-size: 0.625rem; padding: 6px 12px; }
+        .value-icon-container { width: 70px; height: 70px; font-size: 32px; }
+        .cta-btn { padding: 14px 28px; font-size: 0.9375rem; }
     }
 
-    .cta-btn {
-        padding: 14px 28px;
-        font-size: 0.9375rem;
-    }
-
-    }
-
-    /* ========== RESPONSIVE DESIGN ========== */
-
-    /* Tablets (max-width: 991px) */
-    @@media (max-width: 991px) {
-        .products-hero
-
-    {
-        padding: 100px 0 60px;
-    }
-
-    .products-catalog-section,
-    .value-proposition-section {
-        padding: 60px 0;
-    }
-
-    .products-cta-section {
-        padding: 80px 0;
-    }
-
-    .category-image1-wrapper {
-        height: 200px;
-    }
-
-    }
-
-    /* Mobile (max-width: 767px) */
-    @@media (max-width: 767px) {
-        .products-hero
-
-    {
-        padding: 80px 0 50px;
-    }
-
-    .hero-badge {
-        font-size: 0.75rem;
-        padding: 8px 18px;
-    }
-
-    .products-catalog-section,
-    .value-proposition-section {
-        padding: 50px 0;
-    }
-
-    .products-cta-section {
-        padding: 60px 0;
-    }
-
-    .category-image1-wrapper {
-        height: 180px;
-    }
-
-    .category-card-body {
-        padding: 24px 20px 20px;
-    }
-
-    .category-card-title {
-        font-size: 1.0625rem;
-        min-height: 50px;
-    }
-
-    .category-card-description {
-        font-size: 0.875rem;
-        min-height: 75px;
-    }
-
-    .category-feature-list {
-        min-height: 90px;
-    }
-
-        .category-feature-list li {
-            font-size: 0.8125rem;
-        }
-
-    .cta-action-buttons {
-        flex-direction: column;
-        width: 100%;
-        max-width: 400px;
-        margin: 0 auto;
-    }
-
-    .cta-btn {
-        width: 100%;
-        justify-content: center;
-    }
-
-    }
-
-    /* Small Mobile (max-width: 575px) */
-    @@media (max-width: 575px) {
-        .products-hero
-
-    {
-        padding: 70px 0 40px;
-    }
-
-    .category-image1-wrapper {
-        height: 160px;
-    }
-
-    .category-card-body {
-        padding: 20px 16px 16px;
-    }
-
-    .category-icon-wrapper {
-        width: 52px;
-        height: 52px;
-        font-size: 24px;
-        margin-bottom: 16px;
-    }
-
-    .category-card-title {
-        font-size: 1rem;
-        min-height: 48px;
-    }
-
-    .category-card-description {
-        font-size: 0.8125rem;
-        min-height: 70px;
-    }
-
-    .category-feature-list {
-        min-height: 85px;
-        padding: 12px 16px;
-        margin-bottom: 16px;
-    }
-
-        .category-feature-list li {
-            font-size: 0.75rem;
-            padding: 5px 0 5px 24px;
-        }
-
-    .status-badge {
-        font-size: 0.625rem;
-        padding: 6px 12px;
-    }
-
-    .value-icon-container {
-        width: 70px;
-        height: 70px;
-        font-size: 32px;
-    }
-
-    }
-
-    /* Focus Styles for Accessibility */
-    .product-category-card:focus-within {
-        outline: 2px solid var(--bosch-red);
-        outline-offset: 2px;
-    }
-
-    a:focus-visible,
-    button:focus-visible {
+    a:focus-visible, button:focus-visible {
         outline: 2px solid var(--bosch-red);
         outline-offset: 3px;
         box-shadow: 0 0 0 4px rgba(0, 102, 179, 0.2);
